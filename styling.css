@@ -1,0 +1,126 @@
+html{
+    font-family: Arial;
+}
+
+body{
+    margin: 50px 0;
+    padding: 0;
+    text-align: center;
+}
+
+form{
+    display: inline-block;
+}
+
+h1{
+    display: inline;
+    font-size: 4.3em;
+}
+
+#logoText2{
+    color: #017EFC;
+}
+
+h2{
+    color: #017EFC;
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+label,input{
+    display: block;
+    width: 250px;
+    float: left;
+    margin-bottom: 10px;
+}
+
+label{
+    text-align: left;
+    font-size: 0.9em;
+    width: auto;
+    font-weight: bold;
+    color: #017EFC;
+}
+
+input[type="text"],[type="email"],[type="password"],[type="date"]{
+    padding: 10px;
+    border: 1px solid #828282;
+    border-radius: 8px;
+    opacity: 0.5;
+}
+
+#gender{
+    margin-bottom: 10px;
+}
+
+#lang{
+    margin-bottom: 10px;
+}
+
+select{
+    padding: 10px;
+    border: 1px solid #828282;
+    border-radius: 8px;
+    opacity: 0.5;
+    width: 100%;
+}
+
+.line{
+    margin: 3px;
+    display: inline-block;
+    width: 130px;
+    height: 6px;
+    border-radius: 8px;
+}
+
+#line1{
+    background: #017EFC;
+}
+
+#line2{
+    background: #ababab;
+    opacity: 0.5;
+}
+
+#tandc{
+    color: #017EFC;
+    margin: 0 70px 0 70px;
+    text-align: center;
+    font-size: 0.9em;
+    width: auto;
+    display: block;
+    float: left;
+}
+
+#tandcLink{
+    color: black;
+}
+
+input[type="submit"]{
+    background: #017EFC;
+    padding: 10px;
+    margin-top: 100px;
+    width: 100%;
+    border: 1px solid #017EFC;
+    border-radius: 15px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: white;
+}
+
+#submit:hover{
+    color: black;
+}
+
+#back{
+    color: #017EFC;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.9em;
+    text-decoration: none;
+}
+
+#back:hover{
+    color: black;
+}
+
