@@ -9,6 +9,3 @@ CREATE TABLE IF NOT EXISTS users (
     user_email varchar(128) not null unique,
     user_password varchar(128) not null 
 );
-
-DELETE FROM users WHERE user_email = 'test@hotmail.com';
-INSERT INTO users (user_email, user_password) VALUES ('test@hotmail.com', 'password');
