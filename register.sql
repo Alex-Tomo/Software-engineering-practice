@@ -6,7 +6,7 @@
 
 CREATE TABLE IF NOT EXISTS users (
     user_id int not null auto_increment unique primary key,
-    user_email varchar(128) not null unique
+    user_email varchar(128) not null unique,
     user_password varchar(128) not null 
 );
 

@@ -1,14 +1,17 @@
 <?php
-    $server = 'localhost';
-    $username = 'root';
-    $password = '';
-    $dbname = 'software_engineering';
+    function getConnection() {
+        $serverName = 'localhost';
+        $username = 'root';
+        $password = '';
+        $databaseName = 'software_engineering';
 
-    $conn = new mysqli($server, $username, $password, $dbname);
-
-    if($conn->connect_error) {
-        echo 'Could not connect: ' . $conn->connect_error;
-    } else {
-        echo 'Connected';
+        try {
+            $conn = new PDO("mysql:host=$serverName;dbname=$databaseName",
+                $username, $password);
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            return $conn;
+        } catch(PDOException $ex) {
+            echo 'Connection failed: ' . $ex->getMessage();
+        }
     }
 ?>
