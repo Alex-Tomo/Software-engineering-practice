@@ -7,7 +7,7 @@
     $conn = getConnection();
 
     list($vals, $errs) = verifyLogin($conn);
-    if($errs) echo failedLogin($errs);
+    if($errs) failedLogin($errs);
     else header('Location: ../home.php');
 
     function verifyLogin($connection) {
@@ -43,39 +43,25 @@
     }
 
     function failedLogin($errors) {
-        $login = "<!DOCTYPE html>
-        <html lang='en'>
-        <head>
-            <meta charset='utf-8'>
-            <meta name='viewport' content='width=device-width, initial-scale=1'>
-            <link rel='stylesheet' href='../css/formStyling.css'>
-            <link rel='stylesheet' href='../css/footerStyling.css'>
-            <link rel='stylesheet' href='../css/headerStyling.css'>
-            <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
-        
-            <title>Sign In</title>
-        </head>
-        <body>
-        <header>
-            <h1>skip</h1><h1 id='logoText2'>CV</h1>
-            <h2>Login</h2>
-        </header>";
-
-        foreach($errors as $error) { $login .= $error; }
-
-        $login .= "<div id='registerForm'>
-            <form action='./signin_handler.php' method='POST'>
-                <label for='email'>Email</label><br>
+        include ('../../pageTemplate.php');
+        $page = new pageTemplate('Sign In');
+        $page->addCSS('../css/formStyling.css');
+        $page->addCSS('../css/footerStyling.css');
+        $page->addCSS('../css/headerStyling.css');
+        $page->addJavaScript('../js/navbar.js');
+        $page->addPageBodyItem("<div id='registerForm'>
+            <form action='./signin_handler.php' method='POST'>");
+        foreach($errors as $error) {
+            $page->addPageBodyItem($error);
+        }
+        $page->addPageBodyItem("<label for='email'>Email</label><br>
                 <input type='email' id='email' name='email' placeholder='Enter your email'><br>
                 <label for='password'>Password</label><br>
                 <input type='password'  id='password' name='password' placeholder='Enter your password'><br>
                 <input type='submit' value='Login'>
             </form>
-        </div>
-        </body>
-        </html>";
-        
-        return $login;
+        </div>");
+        $page->displayPage();
     }
 
 ?>

@@ -3,7 +3,7 @@
     $conn = getConnection();
 
     list($vals, $err) = verifyRegistration($conn);
-    if($err) echo failedRegistration($err);
+    if($err) failedRegistration($err);
     else successfulRegistration($vals, $conn);
 
     function verifyRegistration($connection) {
@@ -30,7 +30,7 @@
             array_push($errors, "<p style='color: red;'>Passwords do not match</p>");
         }
 
-        $stmt = $connection->prepare("SELECT user_email FROM users WHERE user_email = ?");
+        $stmt = $connection->prepare('SELECT user_email FROM users WHERE user_email = ?');
         $stmt->bindParam(1, $values['email'], PDO::PARAM_STR);
         $stmt->execute();
         $row = $stmt->rowCount();
@@ -42,28 +42,17 @@
     }
 
     function failedRegistration($errors) {
-        $registerForm = "<!DOCTYPE html>
-        <html lang='en'>
-        <head>
-            <meta charset='utf-8'>
-            <meta name='viewport' content='width=device-width, initial-scale=1'>
-            <link rel='stylesheet' href='../css/formStyling.css'>                
-            <link rel='stylesheet' href='../css/footerStyling.css'>
-            <link rel='stylesheet' href='../css/headerStyling.css'>
-            <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
-            <title>Register</title>
-        </head>
-        <body> 
-        
-        <header>
-            <h1>skip</h1><h1 id='logoText2'>CV</h1>
-            <h2>Registration</h2>
-        </header>";
-
-        foreach($errors as $error) { $registerForm .= $error; }
-
-        $registerForm .= "<form action='./register_handler.php' method='POST'>
-                <label for='email'>Email</label><br>
+        include ('../../pageTemplate.php');
+        $page = new pageTemplate('Register');
+        $page->addCSS('../css/formStyling.css');
+        $page->addCSS('../css/footerStyling.css');
+        $page->addCSS('../css/headerStyling.css');
+        $page->addJavaScript('../js/navbar.js');
+        $page->addPageBodyItem("<form action='./register_handler.php' method='POST'>");
+        foreach($errors as $error) {
+            $page->addPageBodyItem($error);
+        }
+        $page->addPageBodyItem("<label for='email'>Email</label><br>
                 <input type='email' id='email' name='email' placeholder='Your email'><br>
                 <label for='password'>Password</label><br>
                 <input type='password'  id='password' name='password' placeholder='Create password'><br>
@@ -71,12 +60,8 @@
                 <input type='password' id='password2' name='password2' placeholder='Repeat password'><br>
                 <input type='submit' value='Sign Up'>
             </form>
-        </div>
-
-        </body>
-        </html>";
-        
-        return $registerForm;
+        </div>");
+        $page->displayPage();
     }
 
     function successfulRegistration($values, $connection) {
