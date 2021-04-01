@@ -1,0 +1,42 @@
+/*Footer*/
+footer{
+    padding-top: 35px;
+    width: 100%;
+    color: white;
+    text-align: center;
+}
+
+footer h3{
+    margin: 20px 0 20px 0;
+}
+
+footer ul{
+    list-style-type: none;
+    /*margin: 0;*/
+    padding: 0;
+}
+
+footer li{
+    margin-bottom: 20px;
+}
+
+footer a{
+    color: white;
+    text-decoration: none;
+}
+
+footer div{
+    margin-top: 50px;
+}
+
+footer h1{
+    display: inline;
+}
+
+#logoText1{
+    color: black;
+}
+
+footer p{
+    margin: 20px 30px 30px 30px;
+}
