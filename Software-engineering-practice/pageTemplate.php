@@ -67,7 +67,7 @@ class pageTemplate {
     }
 
     public function addJavaScript($jsPath) {
-        return array_push($this->js, "<script src=\"{$jsPath}\"></script>");
+        return array_push($this->js, $jsPath);
     }
 
     public function displayPage() {
