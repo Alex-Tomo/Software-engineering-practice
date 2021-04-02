@@ -47,7 +47,7 @@
         $page->addCSS('../css/formStyling.css');
         $page->addCSS('../css/footerStyling.css');
         $page->addCSS('../css/headerStyling.css');
-        $page->addJavaScript('../js/navbar.js');
+        $page->addJavaScript("<script src=\"../js/navBar.js\"></script>");
         $page->addPageBodyItem("<form action='./register_handler.php' method='POST'>");
         foreach($errors as $error) {
             $page->addPageBodyItem($error);
