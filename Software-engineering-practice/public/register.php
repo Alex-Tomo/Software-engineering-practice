@@ -5,7 +5,7 @@
     $page->addCSS('./css/formStyling.css');
     $page->addCSS('./css/footerStyling.css');
     $page->addCSS('./css/headerStyling.css');
-    $page->addJavaScript('./js/form.js');
+    $page->addJavaScript("<script src=\"./js/navBar.js\"></script>");
     $page->addPageBodyItem("<form action='./handlers/register_handler.php' method='POST'>
         <h2>Register</h2>
         <label for='email'>Email</label><br>

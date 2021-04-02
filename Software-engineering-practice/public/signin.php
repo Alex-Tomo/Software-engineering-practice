@@ -4,7 +4,7 @@
     $page->addCSS('./css/formStyling.css');
     $page->addCSS('./css/footerStyling.css');
     $page->addCSS('./css/headerStyling.css');
-    
+    $page->addJavaScript("<script src=\"./js/navbar.js\"></script>");
     $page->addPageBodyItem("<div id='registerForm'>
         <form action='./handlers/signin_handler.php' method='POST'>
             <h2>Login</h2>
