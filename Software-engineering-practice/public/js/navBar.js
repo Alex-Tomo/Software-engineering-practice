@@ -12,11 +12,11 @@ function signUpPage(){
     let signinPath = '';
     for(let i = 0; i < path.length; i++) {
         signinPath += path[i]+'/';
-        if(path[i] === 'Software-engineering-practice') {
+        if(path[i] === 'public') {
             break;
         }
     }
-    window.location.href = signinPath + "/public/signin.php";
+    window.location.href = signinPath + "signin.php";
 }
 
 function registerPage(){
@@ -24,9 +24,9 @@ function registerPage(){
     let registerPath = '';
     for(let i = 0; i < path.length; i++) {
         registerPath += path[i]+'/';
-        if(path[i] === 'Software-engineering-practice') {
+        if(path[i] === 'public') {
             break;
         }
     }
-    window.location.href = registerPath + "/public/register.php";
+    window.location.href = registerPath + "register.php";
 }
