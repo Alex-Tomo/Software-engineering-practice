@@ -36,7 +36,7 @@ window.onload = () => {
         lname = document.getElementById('lname').value;
         gender = document.getElementById('gender').value;
         lang = document.getElementById('lang').value;
-        region = document.getElementById('region').value;
+        region = document.getElementById('reg').value;
 
         if((fname !== '') && (lname !== '') && (gender !== null) &&
             (lang !== null) && (region !== null)) {

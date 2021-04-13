@@ -62,7 +62,7 @@
                 <input type='submit' value='Sign Up'><p class='para'>Creating the account you agree with our</p>
                 <a id='tandc' href='#'>Terms & Conditions</a>
                 <p class='para'>Already have an account?</p>
-                <a onclick='signUpPage()' id='login' style='text-decoration: underline; cursor: pointer;'>Login</a>             
+                <a onclick='openPage(`signin.php`)' style='text-decoration: underline; cursor: pointer;'>Login</a>             
             </form>
         </div>");
         $page->displayPage();

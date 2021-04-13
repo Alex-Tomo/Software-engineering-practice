@@ -29,12 +29,46 @@
                     <label for='lang'>Preferred language</label><br>
                     <select id='lang' name='lang'>
                         <option value='0'>Choose your language</option>
+                        <option value='en'>English</option>
+                        <option value='fr'>French</option>
+                        <option value='de'>German</option>
+                        <option value='da'>Danish</option>
+                        <option value='es'>Spanish</option>
+                        <option value='it'>Italian</option>
+                        <option value='fi'>Finnish</option>
+                        <option value='no'>Norwegian</option>
+                        <option value='sv'>Swedish</option>
+                        <option value='zh'>Chinese</option>
+                        <option value='ja'>Japanese</option>
+                        <option value='ar'>Arabic</option>
+                        <option value='el'>Greek</option>
+                        <option value='lt'>Lithuanian</option>
+                        <option value='pl'>Polish</option>
+                        <option value='ru'>Russian</option>
+                        
                     </select>
                     <label for='reg'>Region</label><br>
                     <select id='reg' name='reg'>
                         <option value='0'>Choose your region</option>
+                        <option value='uk'>United Kingdom</option>
+                        <option value='france'>France</option>
+                        <option value='germany'>Germany</option>
+                        <option value='denmark'>Denmark</option>
+                        <option value='spain'>Spain</option>
+                        <option value='italy'>Italy</option>
+                        <option value='finland'>Finland</option>
+                        <option value='norway'>Norway</option>
+                        <option value='sweden'>Sweden</option>
+                        <option value='china'>China</option>
+                        <option value='japan'>Japan</option>
+                        <option value='uae'>United Arab Emirates</option>
+                        <option value='usa'>United States</option>
+                        <option value='greece'>Greece</option>
+                        <option value='lithuania'>Lithuania</option>
+                        <option value='poland'>Poland</option>
+                        <option value='russia'>Russia</option>
                     </select>
-                    <button type='button' id='nextBtn1'>Next</button>
+                    <button type='button' id='nextBtn1'>Next</button>               
                 </div>
   
                 <div id='tab2'>

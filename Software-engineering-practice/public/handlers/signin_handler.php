@@ -62,7 +62,7 @@
                 <input type='password'  id='password' name='password' placeholder='Enter your password'><br>
                 <input type='submit' value='Login'>
                 <p class='para'>Don't have an account?</p>
-                <a onclick='registerPage()' id='login' style='text-decoration: underline; cursor: pointer;'>Create one!</a>
+                <a onclick='openPage(`register.php`)' style='text-decoration: underline; cursor: pointer;'>Create one!</a>
             </form>
         </div>");
         $page->displayPage();
