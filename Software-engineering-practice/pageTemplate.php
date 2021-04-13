@@ -47,8 +47,8 @@ class pageTemplate {
         return $this->head;
     }
 
-    public function addCSS($cssPath) {
-        return array_push($this->css, "<link rel=\"stylesheet\" href=\"{$cssPath}\">");
+    public function addCSS($cssLinkTag) {
+        return array_push($this->css, $cssLinkTag);
     }
 
     private function pageHeader() {

@@ -2,9 +2,9 @@
 
     include ('../pageTemplate.php');
     $page = new pageTemplate('Register');
-    $page->addCSS('./css/formStyling.css');
-    $page->addCSS('./css/footerStyling.css');
-    $page->addCSS('./css/headerStyling.css');
+    $page->addCSS("<link rel=\"stylesheet\" href=\"./css/formStyling.css\">");
+    $page->addCSS("<link rel=\"stylesheet\" href=\"./css/footerStyling.css\">");
+    $page->addCSS("<link rel=\"stylesheet\" href=\"./css/headerStyling.css\">");
     $page->addJavaScript("<script src=\"./js/navBar.js\"></script>");
     $page->addPageBodyItem("<form action='./handlers/register_handler.php' method='POST'>
         <h2>Register</h2>

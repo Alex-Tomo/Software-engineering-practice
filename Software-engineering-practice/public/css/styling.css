@@ -8,7 +8,7 @@ body{
     background: #017EFC;
 }
 
-.clickable {
+.clickable:hover {
     cursor: pointer;
 }
 

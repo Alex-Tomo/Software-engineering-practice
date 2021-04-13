@@ -1,7 +1,4 @@
 <?php
-    // POST Variables
-    // email
-    // password
 
     require('../../db_connector.php');
     $conn = getConnection();
@@ -46,9 +43,9 @@
     function failedLogin($errors) {
         include ('../../pageTemplate.php');
         $page = new pageTemplate('Sign In');
-        $page->addCSS('../css/formStyling.css');
-        $page->addCSS('../css/footerStyling.css');
-        $page->addCSS('../css/headerStyling.css');
+        $page->addCSS("<link rel=\"stylesheet\" href=\"../css/formStyling.css\">");
+        $page->addCSS("<link rel=\"stylesheet\" href=\"../css/footerStyling.css\">");
+        $page->addCSS("<link rel=\"stylesheet\" href=\"../css/headerStyling.css\">");
         $page->addJavaScript("<script src=\"../js/navBar.js\"></script>");
         $page->addPageBodyItem("<div id='registerForm'>
             <form action='./signin_handler.php' method='POST'>

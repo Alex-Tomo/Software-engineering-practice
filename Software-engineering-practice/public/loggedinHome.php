@@ -1,9 +1,9 @@
 <?php
     include('../pageTemplate.php');
     $page = new pageTemplate('Logged In Home');
-    $page->addCSS('./css/styling.css');
-    $page->addCSS('./css/footerStyling.css');
-    $page->addCSS('./css/headerStyling.css');
+    $page->addCSS("<link rel=\"stylesheet\" href=\"./css/styling.css\">");
+    $page->addCSS("<link rel=\"stylesheet\" href=\"./css/footerStyling.css\">");
+    $page->addCSS("<link rel=\"stylesheet\" href=\"./css/headerStyling.css\">");
     $page->addJavaScript("<script src=\"./js/navBar.js\"></script>");
     $page->addJavaScript("<script src=\"./js/popupForm.js\"></script>");
 
