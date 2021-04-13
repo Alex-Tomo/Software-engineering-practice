@@ -1,0 +1,33 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!--<link rel="stylesheet" href="headerStyling.css">-->
+<!--<script src="../js/navBar.js"></script>-->
+<header>
+    <div id="mobile_container">
+        <div id="topnav">
+            <h1>skip</h1><h1 id="logoText2">CV</h1>
+            <div id="myLinks">
+                <a id="topLink" class="mobLinks" href="home.php">Home</a>
+                <a class="mobLinks" href="#">Features</a>
+                <a class="mobLinks" href="#">Testimonials</a>
+                <button onclick="openPage('register.php')" id="signUpMob">Sign Up</a></button><br>
+                <button onclick="openPage('signin.php')" id="loginMob">Login</a></button>
+            </div>
+            <a href="javascript:void(0);" class="icon" onclick="hambgrMenu()">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>
+    </div>
+
+    <div id="desktop_container">
+        <h1>skip</h1><h1 id="logoText2">CV</h1>
+        <nav>
+            <button onclick="openPage('register.php')" id="signUp"><a>Sign Up</a></button>
+            <button onclick="openPage('signin.php')" id="login"><a class="links">Login</a></button>
+            <ul>
+                <li><a class="links" href="">Testimonials</a></li>
+                <li><a class="links" href="#">Features</a></li>
+                <li><a class="links" href="home.php">Home</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
