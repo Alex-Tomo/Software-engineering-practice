@@ -59,7 +59,8 @@
                 <input type='password'  id='password' name='password' placeholder='Create password'><br>
                 <label for='password2'>Repeat password</label><br>
                 <input type='password' id='password2' name='password2' placeholder='Repeat password'><br>
-                <input type='submit' value='Sign Up'><p class='para'>Creating the account you agree with our</p>
+                <input class='clickable' type='submit' value='Sign Up'>
+                <p class='para'>Creating the account you agree with our</p>
                 <a id='tandc' href='#'>Terms & Conditions</a>
                 <p class='para'>Already have an account?</p>
                 <a onclick='openPage(`signin.php`)' style='text-decoration: underline; cursor: pointer;'>Login</a>             

@@ -8,6 +8,10 @@ body{
     background: #017EFC;
 }
 
+.clickable {
+    cursor: pointer;
+}
+
 
 
 

@@ -4,13 +4,13 @@
 <header>
     <div id="mobile_container">
         <div id="topnav">
-            <h1>skip</h1><h1 id="logoText2">CV</h1>
+            <h1 class="clickable" onclick="openPage('home.php')">skip</h1><h1 class="clickable" id="logoText2" onclick="openPage('home.php')">CV</h1>
             <div id="myLinks">
-                <a id="topLink" class="mobLinks" onclick="openPage('home.php')">Home</a>
-                <a class="mobLinks" href="#">Features</a>
-                <a class="mobLinks" href="#">Testimonials</a>
-                <button onclick="openPage('register.php')" id="signUpMob">Sign Up</a></button><br>
-                <button onclick="openPage('signin.php')" id="loginMob">Login</a></button>
+                <a id="topLink" class="mobLinks clickable" onclick="openPage('home.php')">Home</a>
+                <a class="mobLinks clickable" href="#">Features</a>
+                <a class="mobLinks clickable" href="#">Testimonials</a>
+                <button class="clickable" onclick="openPage('register.php')" id="signUpMob">Sign Up</button><br>
+                <button class="clickable" onclick="openPage('signin.php')" id="loginMob">Login</button>
             </div>
             <a href="javascript:void(0);" class="icon" onclick="hambgrMenu()">
                 <i class="fa fa-bars"></i>
@@ -19,14 +19,14 @@
     </div>
 
     <div id="desktop_container">
-        <h1>skip</h1><h1 id="logoText2">CV</h1>
+        <h1 class="clickable" onclick="openPage('home.php')">skip</h1><h1 class="clickable" id="logoText2" onclick="openPage('home.php')">CV</h1>
         <nav>
-            <button onclick="openPage('register.php')" id="signUp"><a>Sign Up</a></button>
-            <button onclick="openPage('signin.php')" id="login"><a class="links">Login</a></button>
+            <button class="clickable" onclick="openPage('register.php')" id="signUp">Sign Up</button>
+            <button class="clickable" onclick="openPage('signin.php')" id="login"><a class="links">Login</a></button>
             <ul>
-                <li><a class="links" href="">Testimonials</a></li>
-                <li><a class="links" href="#">Features</a></li>
-                <li><a class="links" onclick="openPage('home.php')">Home</a></li>
+                <li><a class="links clickable" href="">Testimonials</a></li>
+                <li><a class="links clickable" href="#">Features</a></li>
+                <li><a class="links clickable" onclick="openPage('home.php')">Home</a></li>
             </ul>
         </nav>
     </div>

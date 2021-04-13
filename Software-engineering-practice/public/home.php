@@ -12,7 +12,7 @@
             <div id='header2'>
                 <h2>Find the right </h2><h2 id='textChange'>specialist</h2><h2> just when you need it!</h2>
                 <p>This platform helps you to skipCV and find the right job on the right time!</p>
-                <button>Get started!</button>
+                <button class='clickable' onclick='openPage(`register.php`)'>Get started!</button>
             </div>
             <div id='topImage'>
                 <img id='mobileImg' src='assets/discuss_talent_requirements_mob.svg' alt='Talent requirements'>

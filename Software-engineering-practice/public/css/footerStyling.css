@@ -1,4 +1,8 @@
 /*Footer*/
+.clickable {
+    cursor: pointer;
+}
+
 footer{
     padding-top: 35px;
     width: 100%;

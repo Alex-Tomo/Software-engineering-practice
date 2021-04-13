@@ -12,7 +12,7 @@
             <input type='email' id='email' name='email' placeholder='Enter your email'><br>
             <label for='password'>Password</label><br>
             <input type='password' id='password' name='password' placeholder='Enter your password'><br>
-            <input type='submit' value='Login'>
+            <input class='clickable' type='submit' value='Login'>
             <p class='para'>Don't have an account?</p>
             <a href='./register.php'>Create one!</a>
         </form>
