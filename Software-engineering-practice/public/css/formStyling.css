@@ -1,0 +1,114 @@
+html{
+    font-family: Arial;
+}
+
+body{
+    margin: 20px 0;
+    padding: 0;
+    text-align: center;
+    background-color: #017EFC;
+    width: 100%;
+}
+
+form{
+    display: inline-block;
+    background-color: white;
+    border-radius: 10px;
+    margin: 30px 20px 0 20px;
+    padding: 10px 30px 30px 30px;
+}
+
+h2{
+    color: #017EFC;
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+label,input{
+    display: block;
+    margin-bottom: 10px;
+}
+
+label{
+    text-align: left;
+    font-size: 0.9em;
+    width: auto;
+    float: left;
+    font-weight: bold;
+    color: #017EFC;
+}
+
+input[type="text"],[type="email"],[type="password"],[type="date"]{
+    padding: 10px;
+    border: 1px solid #828282;
+    border-radius: 8px;
+    opacity: 0.5;
+    float: left;
+    width: 250px;
+}
+
+/*#tandc{*/
+/*    color: #017EFC;*/
+/*    margin: 0 70px 0 70px;*/
+/*    text-align: center;*/
+/*    font-size: 0.9em;*/
+/*    width: auto;*/
+/*    display: block;*/
+/*    float: left;*/
+/*}*/
+
+/*#tandcLink{*/
+/*    color: black;*/
+/*}*/
+
+#password{
+    margin-bottom: 30px;
+}
+
+#password2{
+    margin-bottom: 30px;
+}
+
+input[type="submit"]{
+    background: #017EFC;
+    padding: 15px;
+    width: 70%;
+    margin: 0 auto;
+    border: 1px solid #017EFC;
+    border-radius: 5px;
+    font-weight: bold;
+    color: white;
+    font-size: 1.2em;
+}
+
+#submit:hover{
+    color: black;
+}
+
+.para{
+    font-size: 0.9em;
+    width: 100%;
+    text-align: center;
+    display: block;
+    color: #017EFC;
+    margin-bottom: 0;
+}
+
+#tandc{
+    color: black;
+    text-decoration: underline;
+}
+
+form a{
+    color: #017EFC;
+    font-weight: bold;
+}
+
+
+/*LANDING PAGE*/
+/*#landingPageHeader{*/
+/*    font-size: 1em;*/
+/*}*/
+
+
+

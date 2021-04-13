@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1920px" height="168px" viewBox="0 0 1920 168" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Oval</title>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="1920" height="168"></rect>
+    </defs>
+    <g id="Desktop-/-Mobile" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Service_Inner_employer" transform="translate(0.000000, -113.000000)">
+            <g id="Oval" transform="translate(0.000000, 113.000000)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="Mask" fill="#1D6CBC" xlink:href="#path-1"></use>
+                <circle fill="#1EA5B1" mask="url(#mask-2)" cx="183" cy="36" r="282"></circle>
+                <circle id="Oval-Copy-4" fill="#004387" mask="url(#mask-2)" cx="1992" cy="319" r="282"></circle>
+                <circle id="Oval-Copy-5" fill="#00254A" mask="url(#mask-2)" cx="1638" cy="319" r="282"></circle>
+                <circle id="Oval-Copy" fill="#1EA5B1" mask="url(#mask-2)" cx="843.5" cy="152.5" r="116.5"></circle>
+                <circle id="Oval-Copy-3" fill="#BBC3B4" mask="url(#mask-2)" cx="1280.5" cy="-50.5" r="116.5"></circle>
+                <ellipse id="Oval-Copy-2" fill="#CFD3C3" mask="url(#mask-2)" cx="901.5" cy="66.5" rx="30.5" ry="30"></ellipse>
+            </g>
+        </g>
+    </g>
+</svg>

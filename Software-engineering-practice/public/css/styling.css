@@ -1,0 +1,968 @@
+html{
+    font-family: Arial;
+}
+
+body{
+    margin: 20px 0;
+    padding: 0;
+    background: #017EFC;
+}
+
+
+
+
+/*Top Section*/
+#top{
+    text-align: center;
+    display: inline-block;
+    background: #017EFC;
+    width: 100%;
+}
+
+#header2{
+    margin: 30px 20px 0 20px;
+    /*color: white;*/
+}
+
+#header2 h2{
+    color: white;
+    display: inline;
+    font-size: 1.65em;
+}
+
+#textChange{
+    color: #191D20;
+}
+
+#top p{
+    color: white;
+    text-align: center;
+    /*float: left;*/
+    font-size: 1.1em;
+    margin: 20px 20px 30px 20px;
+}
+
+#top button{
+    height: auto;
+    width: 200px;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    background: #191D20;
+    font-size: 1.25em;
+    border: 3px solid #191D20;
+    border-radius: 5px;
+    margin-bottom: 35px;
+}
+
+#mobileImg{
+    width: 100%;
+    height: auto;
+    margin-bottom: 0;
+}
+
+#desktopImg{
+    display: none;
+}
+
+
+
+/*Info Section*/
+#infoSec{
+    background: white;
+    margin-top: 0;
+    padding: 30px 30px 5px 30px;
+}
+
+#infoSec img{
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+#infoSec h3{
+    color: #017EFC;
+    margin: 0;
+    width: 90%;
+}
+
+#infoSec p{
+    margin: 10px 0 35px 0;
+    font-weight: bold;
+}
+
+#startupLith{
+    height: 100px;
+    background: #017EFC;
+}
+
+
+
+
+/*Benefits Section*/
+#container{
+    background-color: white;
+}
+
+#benefitsSec{
+    background: white;
+    padding: 20px 30px 0 30px;
+    margin-bottom: 50px;
+}
+
+#benefitsSec h3{
+    color: #805DF6;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 5px;
+    font-size: 1em;
+}
+
+#benefitsSec h4{
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 5px;
+    color: #017EFC;
+    font-size: 1.3em;
+}
+
+#benefitsSec p{
+    color: #191D20;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 0.85em;
+}
+
+#downIcons{
+    width: 80%;
+    height: auto;
+    display: block;
+    margin: 20px auto 20px auto;
+}
+
+#clipCalc{
+    width: 50%;
+    height: auto;
+    display: block;
+    margin: 20px auto 20px auto;
+}
+
+#clipDone{
+    display: none;
+}
+
+
+
+
+/*Swipe Section Mobile*/
+#swipeSecMob{
+    background-color: #FAFAFA;
+    padding: 30px;
+}
+
+#swipeSecMob img{
+    background-color: #017EFC;
+    border-radius: 35%;
+    height: 50px;
+    width: 50px;
+    padding: 15px;
+    display: block;
+    margin: 0 auto 12px auto;
+}
+
+#swipeSecMob h4{
+    color: #017EFC;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+#swipeSecMob p{
+    margin: 5px 0 30px 0;
+    text-align: center;
+}
+
+
+
+
+/*Swipe Section Desktop*/
+#swipeSecDes{
+    display: none;
+}
+
+#swipeSecDes{
+    background-color: #FAFAFA;
+    padding: 30px;
+}
+
+#swipeSecDes h4{
+    color: #017EFC;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+#swipeSecDes img{
+    background-color: #017EFC;
+    border-radius: 35%;
+    height: 50px;
+    width: 50px;
+    padding: 15px;
+    display: block;
+    margin: 0 auto 12px auto;
+}
+
+#swipeSecMob p{
+    margin: 5px 0 30px 0;
+    text-align: center;
+}
+
+
+
+
+
+
+/*Review Section*/
+/* Slideshow container */
+.slideshow-container {
+    position: relative;
+    background: #f1f1f1f1;
+}
+
+/* Slides */
+.mySlides {
+    display: none;
+    padding: 80px;
+    text-align: center;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -30px;
+    padding: 16px;
+    color: #888;
+    font-weight: bold;
+    font-size: 20px;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+    position: absolute;
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+    background-color: rgba(0,0,0,0.8);
+    color: white;
+}
+
+/* The dot/bullet/indicator container */
+.dot-container {
+    text-align: center;
+    padding: 20px;
+    background: #ddd;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+/* Add a background color to the active dot/circle */
+.active, .dot:hover {
+    background-color: #717171;
+}
+
+/* Add an italic font style to all quotes */
+q {font-style: italic;}
+
+/* Add a blue color to the author */
+.author {color: cornflowerblue;}
+
+
+
+
+
+/*Logged in Homepage*/
+#pageContainer{
+    background-color: #FFFFFF;
+    padding-top: 20px;
+}
+
+#refineContainer{
+    margin: 20px;
+}
+
+.refineChild{
+    background: white;
+    padding: 10px 15px 10px 15px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    box-shadow: 4px 4px 6px 6px rgba(0, 0, 0, 0.05);
+}
+
+.refineChild label{
+    text-transform: uppercase;
+    color: #9F9F9F;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+.refineChild input[type="text"], select{
+    padding: 10px 10px 10px 0;
+    border: none;
+    font-size: 1.1em;
+    color: #017EFC;
+    font-weight: bold;
+}
+
+.refineChild select{
+    width: 100%;
+}
+
+#magGlass{
+    margin-right: 10px;
+}
+
+#refineContainer button{
+    background-color: #017EFC;
+    color: white;
+    text-transform: uppercase;
+    width: 100%;
+    padding: 15px;
+    text-align: center;
+    border: none;
+    margin-bottom: 30px;
+    border-radius: 5px;
+}
+
+
+
+
+
+/*Results*/
+#pageContainer h1{
+    font-size: 1.3em;
+    color: #017EFC;
+}
+
+#resultContainer{
+    margin: 15px;
+}
+
+.checked {
+    color: orange;
+}
+
+.resultChild{
+    background: white;
+    padding: 10px 15px 25px 15px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    box-shadow: 4px 4px 6px 6px rgba(0, 0, 0, 0.05);
+}
+
+.resultChild h2{
+    font-size: 1em;
+    padding-top: 25px;
+    margin-bottom: 25px;
+}
+
+.resultChild h3{
+    font-size: 1em;
+}
+
+.price{
+    float: right;
+    color: #099239;
+}
+
+.resultChild p{
+    margin-top: 0;
+}
+
+.resultChild img{
+    height: auto;
+    width: 25%;
+    float: left;
+    margin-right: 5px;
+}
+
+
+
+
+
+/*Categories*/
+#categories{
+    margin: 15px;
+}
+
+#categories button{
+    background-color: #0062C4;
+    color: white;
+    padding: 10px 20px 10px 20px;
+    text-align: center;
+    border: none;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+
+
+
+/*Recently Viewed*/
+#recViewedParent{
+    margin: 15px;
+    padding-bottom: 25px;
+}
+
+#replaceWithImg{
+    background-color: #D8D8D8;
+    height: 70px;
+    width: 90px;
+    float: left;
+    margin-right: 5px;
+}
+
+#recViewedParent h4{
+    font-size: 0.8em;
+    padding-top: 10px;
+    margin-right: 60px;
+    margin-bottom: 9px;
+}
+
+#recViewedChild p{
+    color: #099239;
+    font-size: 1em;
+    margin-top: 0;
+}
+
+
+
+
+
+
+
+/*Registration*/
+.popup .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+}
+
+form{
+    margin: 0 15px 15px 15px;
+    padding: 15px;
+    position: absolute;
+    top: 25%;
+    background-color: white;
+    width: auto;
+    height: auto;
+    z-index: 2;
+    text-align: center;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
+form p{
+    color: #017EFC;
+    font-weight: bold;
+}
+
+label,input{
+    display: block;
+    margin-bottom: 10px;
+}
+
+label{
+    text-align: left;
+    font-size: 0.9em;
+    width: 200px;
+    float: left;
+    font-weight: bold;
+    color: #017EFC;
+}
+
+form input[type="text"],[type="email"],[type="password"],[type="date"],[type="search"]{
+    padding: 10px;
+    border: 1px solid #828282;
+    border-radius: 8px;
+    opacity: 0.5;
+    float: left;
+    width: 240px;
+}
+
+form select{
+    padding: 10px;
+    border: 1px solid #828282;
+    border-radius: 8px;
+    opacity: 0.5;
+    font-weight: lighter;
+    margin-bottom: 10px;
+    color: black;
+    font-size: 0.8em;
+    float: left;
+    width: 260px;
+}
+
+.box{
+    height:210px;
+    border-radius: 5px;
+    color: white;
+    margin-bottom: 20px;
+}
+
+#topBox{
+    background-color: #8BC5FF;
+}
+
+#btmBox{
+    background-color: #017EFC;
+}
+
+.box img{
+    padding-top: 20px;
+}
+
+form button{
+    background: #017EFC;
+    padding: 10px;
+    width: 70%;
+    margin: 0 auto;
+    border: 1px solid #017EFC;
+    border-radius: 5px;
+    font-weight: bold;
+    color: white;
+    font-size: 1.2em;
+}
+
+#prevBtn{
+    border: 2px solid #017EFC;
+    background-color: white;
+    color: #017EFC;
+    margin-top: 10px;
+}
+
+#submit:hover{
+    color: black;
+}
+
+/*.tab{*/
+/*    display: none;*/
+/*}*/
+
+
+/*.content {*/
+/*    margin: 15px;*/
+/*    position:absolute;*/
+/*    top:25%;*/
+/*    !*left:50%;*!*/
+/*    !*transform:translate(-50%,-50%) scale(0);*!*/
+/*    background:#fff;*/
+/*    width: auto;*/
+/*    height:250px;*/
+/*    z-index:2;*/
+/*    text-align:center;*/
+/*    !*padding:20px;*!*/
+/*    box-sizing:border-box;*/
+/*    font-family:"Open Sans",sans-serif;*/
+/*}*/
+
+/*form{*/
+/*    background-color: white;*/
+/*    border-radius: 10px;*/
+/*    margin: 30px 20px 0 20px;*/
+/*    padding: 10px 30px 30px 30px;*/
+/*}*/
+
+/*.para{*/
+/*    font-size: 0.9em;*/
+/*    width: 100%;*/
+/*    text-align: center;*/
+/*    display: block;*/
+/*    color: #017EFC;*/
+/*    margin-bottom: 0;*/
+/*}*/
+
+/*#tandc{*/
+/*    color: black;*/
+/*    text-decoration: underline;*/
+/*}*/
+
+/*.content form{*/
+/*    display: block;*/
+/*    margin: 0;*/
+/*    padding: 20px;*/
+/*}*/
+
+
+
+
+/*Media queries*/
+@media only screen and (min-width: 768px) {
+    #infoSec{
+        padding: 20px 90px 20px 90px;
+    }
+
+    #infoSec > p:nth-of-type(1){
+        margin-bottom: 25px;
+    }
+
+    #infoSec > p:nth-of-type(2){
+        margin-bottom: 0;
+    }
+
+    #benefitsSec{
+        padding: 30px 90px 700px 90px;
+    }
+
+    #benefitsSec p{
+        font-size: 0.85em;
+    }
+
+    #text{
+        width: 50%;
+        float: left;
+        margin-bottom: 100px;
+    }
+
+    #text h3{
+        text-align: left;
+    }
+
+    #text h4{
+        text-align: left;
+    }
+
+    #text p{
+        text-align: left;
+    }
+
+    #downIcons{
+        margin: 0;
+        width: 30%;
+        float: right;
+    }
+
+    #text2{
+        float: right;
+        width: 50%;
+        margin-bottom: 100px;
+    }
+
+    #text2 h3{
+        text-align: left;
+        margin-top: 95px;
+    }
+
+    #text2 h4{
+        text-align: left;
+    }
+
+    #text2 p{
+        text-align: left;
+    }
+
+    #clipCalc{
+        margin: 0;
+        width: 25%;
+        float: left;
+    }
+
+    #text3{
+        width: 50%;
+        float: left;
+        margin: 50px 0 0 0;
+    }
+
+    #text3 h3{
+        text-align: left;
+    }
+
+    #text3 h4{
+        text-align: left;
+    }
+
+    #text3 p{
+        text-align: left;
+    }
+
+    #clipDone{
+        display: block;
+        width: 30%;
+        float: right;
+    }
+}
+
+@media only screen and (min-width: 874px) {
+    #benefitsSec{
+        padding-bottom: 750px;
+    }
+}
+
+@media only screen and (min-width: 922px) {
+    #benefitsSec{
+        padding-bottom: 850px;
+    }
+
+    #text{
+        margin-bottom: 150px;
+    }
+
+    #text2{
+        margin-bottom: 150px;
+    }
+}
+
+@media only screen and (min-width: 961px) {
+    #text2{
+        margin-bottom: 150px;
+    }
+
+    #text3{
+        margin-top: 100px;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    /*Top Section*/
+    #top{
+        text-align: left;
+        width: 100%;
+    }
+
+    #header2{
+        margin: 130px 0 0 120px;
+        float: left;
+        width: 30%;
+    }
+
+    h2{
+        float: left;
+        color: white;
+        margin: 0;
+        font-size: 1.6em;
+    }
+
+    #textChange{
+        color: #191D20;
+        margin-left: 10px;
+    }
+
+    #top p{
+        color: white;
+        float: left;
+        width: 100%;
+        text-align: justify;
+        font-size: 1.1em;
+        margin: 20px 0 20px 0;
+    }
+
+    #top button{
+        height: auto;
+        width: 200px;
+        color: #ffffff;
+        text-align: center;
+        padding: 15px;
+        background: #191D20;
+        font-size: 1.25em;
+        border: 3px solid #191D20;
+        border-radius: 5px;
+        margin-bottom: 35px;
+    }
+
+    #desktopImg{
+        display: block;
+        margin-top: 40px;
+        float: right;
+        width: 50%;
+        height: auto;
+    }
+
+    #mobileImg{
+        display: none;
+    }
+
+    #infoSec{
+       padding-left: 120px;
+       padding-right: 120px;
+    }
+
+    #benefitsSec h4{
+        font-size: 1.6em;
+    }
+
+    #benefitsSec{
+        padding-left: 120px;
+        padding-right: 120px;
+    }
+
+    #swipeSecDes{
+        display: block;
+        padding: 30px 120px 190px 120px;
+    }
+
+    #swipeSecMob{
+        display: none;
+    }
+
+    #swipeSecDes h4{
+        margin-bottom: 5px;
+        text-align: center;
+    }
+
+    #swipeSecDes p{
+        font-size: 0.9em;
+        margin: 5px 10px 30px 10px;
+        text-align: center;
+    }
+
+    #swipeChild{
+        width: 33%;
+        float: left;
+    }
+
+    #swipeChild2{
+        width: 33%;
+        float: left;
+    }
+
+    #swipeChild3{
+        width: 33%;
+        float: left;
+    }
+}
+
+@media only screen and (min-width: 1093px) {
+    #text{
+        margin-bottom: 180px;
+    }
+
+    #benefitsSec{
+        padding-bottom: 950px;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    h2{
+        font-size: 1.9em;
+    }
+
+    #header2{
+        margin: 170px 0 0 150px;
+    }
+
+    #text{
+        margin-bottom: 150px;
+        width: 56%;
+    }
+
+    #text2{
+        width: 56%;
+        margin-bottom: 100px;
+    }
+
+    #text3{
+        width: 56%;
+    }
+
+    #infoSec{
+        padding-left: 150px;
+        padding-right: 150px;
+    }
+
+    #benefitsSec{
+        padding-left: 150px;
+        padding-right: 150px;
+        padding-bottom: 950px;
+    }
+}
+
+@media only screen and (min-width: 1222px) {
+    #text{
+        margin-bottom: 200px;
+        width: 50%;
+    }
+
+    #text2{
+        margin-top: 60px;
+        margin-bottom: 200px;
+        width: 50%;
+    }
+
+    #text2{
+        width: 50%;
+    }
+
+    #benefitsSec{
+        padding-bottom: 1150px;
+    }
+}
+
+@media only screen and (min-width: 1333px) {
+    #text{
+        margin-bottom: 250px;
+    }
+}
+
+@media only screen and (min-width: 1440px) {
+    #header2{
+        margin: 170px 0 0 200px;
+    }
+
+    h2{
+        font-size: 2em;
+    }
+
+    #infoSec {
+        padding: 50px 200px 150px 200px;
+    }
+
+    #infoSecAbout{
+        float: left;
+        width: 45%;
+        padding-right: 50px;
+    }
+
+    #infoSecFor{
+        float: left;
+        width: 45%;
+        padding-left: 50px;
+    }
+
+    #benefitsSec{
+        padding-right: 250px;
+        padding-left: 250px;
+    }
+
+    #text{
+        width: 45%;
+        margin-bottom: 200px;
+    }
+
+    #text2{
+        /*margin-top: 350px;*/
+        width: 45%;
+    }
+
+    #text3{
+        width: 45%;
+    }
+
+}

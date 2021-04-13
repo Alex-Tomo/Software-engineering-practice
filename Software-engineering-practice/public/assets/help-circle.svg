@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="26px" height="26px" viewBox="0 0 26 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>help-circle copy</title>
+    <g id="Desktop-/-Mobile" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Landing-Page-/-Mobile" transform="translate(-38.000000, -895.000000)" stroke="#017EFC" stroke-width="2">
+            <g id="help-circle-copy" transform="translate(39.000000, 896.000000)">
+                <circle id="Oval" cx="12" cy="12" r="12"></circle>
+                <path d="M9,7.67088745 C9.58285697,5.83240283 11.2757595,4.72842638 13.0068989,5.05790646 C14.7380384,5.38738655 16.0026127,7.05424641 16,9.00316559 C16,11.6677219 12.3979397,13 12.3979397,13" id="Path"></path>
+                <line x1="12.495" y1="17.5" x2="12.505" y2="17.5" id="Path"></line>
+            </g>
+        </g>
+    </g>
+</svg>

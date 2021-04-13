@@ -1,0 +1,191 @@
+header{
+    margin: 30px 30px 10px 30px;
+    text-align: center;
+}
+
+header h1{
+    float: left;
+    margin-top: 30px;
+    font-size: 2.1em;
+}
+
+#logoText2{
+    color: white;
+}
+
+#desktop_container{
+    display: none;
+}
+
+#mobile_container {
+    width: auto;
+    background-color: white;
+    color: black;
+}
+
+#topnav {
+    overflow: hidden;
+    background-color: #017EFC;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+#topnav #myLinks {
+    display: none;
+}
+
+#topLink{
+    margin-top: 100px;
+}
+
+.mobLinks{
+    color: white;
+    margin-bottom: 20px;
+    text-decoration: none;
+    font-size: 1em;
+    display: block;
+}
+
+#signUpMob{
+    background: white;
+    width: 35%;
+    font-size: 1em;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid white;
+    border-radius: 5px;
+    color: #017EFC;
+}
+
+#loginMob{
+    background-color: #017EFC;
+    color: white;
+    padding: 10px;
+    font-size: 1em;
+    width: 35%;
+    border: 1px solid white;
+    border-radius: 5px;
+}
+
+.icon{
+    color: white;
+    margin-top: 30px;
+    text-decoration: none;
+    font-size: 30px;
+    display: block;
+}
+
+#topnav a.icon {
+    background-color: #017EFC;
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+#topnav a:hover {
+    background-color: #017EFC;
+    color: black;
+}
+
+.active {
+    background-color: #4CAF50;
+    color: black;
+}
+
+@media only screen and (min-width: 768px){
+    header {
+        margin: 0 90px 0 90px;
+    }
+
+    #mobile_container{
+        display: none;
+    }
+
+    #desktop_container{
+        display: inline;
+    }
+
+    nav li{
+        margin-top: 30px;
+        margin-right: 5px;
+        float: right;
+        width: 13%;
+        padding: 5px;
+    }
+
+    nav a{
+        text-decoration: none;
+    }
+
+    nav ul{
+        list-style-type: none;
+        text-decoration: none;
+    }
+
+    .links{
+        color: #ffffff;
+    }
+
+    #signUp{
+        margin-top: 25px;
+        padding: 10px;
+        font-size: 1em;
+        float: right;
+        background: white;
+        width: 14%;
+        border: 1px solid white;
+        border-radius: 5px;
+        color: #017EFC;
+    }
+
+    #login{
+        background-color: #017EFC;
+        font-size: 1em;
+        margin: 25px 10px 0 20px;
+        padding: 10px;
+        float: right;
+        width: 14%;
+        border: 1px solid white;
+        border-radius: 5px;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    header{
+        margin: 0 120px 0 120px;
+    }
+
+    #logoText2{
+        color: white;
+    }
+
+    nav li{
+        width: 10%;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    header{
+        margin: 0 150px 0 150px;
+    }
+}
+
+@media only screen and (min-width: 1440px) {
+    header{
+        margin: 0 200px 0 200px;
+    }
+
+    #signUp{
+        width: 10%;
+    }
+
+    #login{
+        width: 10%;
+    }
+
+    nav li{
+        width: 8%;
+    }
+}
+
