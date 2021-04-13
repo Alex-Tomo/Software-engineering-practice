@@ -466,13 +466,13 @@ q {font-style: italic;}
     background: rgba(0,0,0,0.7);
 }
 
-form{
-    margin: 0 15px 15px 15px;
+form {
+    margin: 0 5% 15px 5%;
     padding: 15px;
     position: absolute;
     top: 25%;
     background-color: white;
-    width: auto;
+    width: 90%;
     height: auto;
     z-index: 2;
     text-align: center;

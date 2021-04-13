@@ -5,14 +5,14 @@
     $page->addCSS('./css/footerStyling.css');
     $page->addCSS('./css/headerStyling.css');
     $page->addJavaScript("<script src=\"./js/navBar.js\"></script>");
-    $page->addJavaScript("<script src=\"./js/form.js\"></script>");
+    $page->addJavaScript("<script src=\"./js/popupForm.js\"></script>");
 
     $page->addPageBodyItem("
 <div id='pageContainer'>
     <div class='popup' id='popup-1'>
         <div class='overlay'></div>
             <form id='regForm' action='/action_page.php'>
-                <div class='tab'>
+                <div id='tab1'>
                     <p>Tell us about yourself</p>
                     <h1>General information</h1>
                     <label for='fname'>First name</label><br>
@@ -34,10 +34,10 @@
                     <select id='reg' name='reg'>
                         <option value='0'>Choose your region</option>
                     </select>
-                    <button type='button' id='nextBtn'>Next</button>
+                    <button type='button' id='nextBtn1'>Next</button>
                 </div>
   
-                <div class='tab'>
+                <div id='tab2'>
                     <p>Tell us about yourself</p>
                     <h1>Which one are you?</h1>
                     <div class='box' id='topBox'>
@@ -48,26 +48,26 @@
                         <img src='assets/file_searching.svg'> 
                         <h2>Searching for a job</h2> 
                     </div>                   
-                    <button type='button' id='nextBtn'>Next</button>
-                    <button type='button' id='prevBtn'>Back</button>
+                    <button type='button' id='nextBtn2'>Next</button>
+                    <button type='button' id='prevBtn2'>Back</button>
                 </div>
                 
-                <div class='tab'>
+                <div id='tab3'>
                     <p>Tell us about yourself</p>
                     <h1>What job are you searching for?</h1>
                     <label>Category (you may choose a few)</label>
                     <input type='search' placeholder='Search for category'>                 
-                    <button type='button' id='nextBtn'>Next</button>
-                    <button type='button' id='prevBtn'>Back</button>
+                    <button type='button' id='nextBtn3'>Next</button>
+                    <button type='button' id='prevBtn3'>Back</button>
                 </div>
                 
-                <div class='tab'>
+                <div id='tab4'>
                     <p>Tell us about yourself</p>
                     <h1>How much do you charge?</h1>
                     <label>Your hourly rate</label>
                     <input type='text' placeholder='e.g. £12.00/h'>                 
-                    <button type='button' id='nextBtn'>Next</button>
-                    <button type='button' id='prevBtn'>Back</button>
+                    <button type='button' id='nextBtn4'>Submit</button>
+                    <button type='button' id='prevBtn4'>Back</button>
                 </div>
             </form>
         </div>
