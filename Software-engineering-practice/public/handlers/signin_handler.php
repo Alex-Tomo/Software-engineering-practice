@@ -22,7 +22,7 @@
             array_push($errors, "<p style='color: red;'>Password field cannot be empty</p>");
         }
 
-        $stmt = $connection->query("SELECT user_password FROM users WHERE user_email = '{$values['email']}'");
+        $stmt = $connection->query("SELECT user_password FROM sep_users WHERE user_email = '{$values['email']}'");
         $row = $stmt->rowCount();
         if($row == 1) {
             $data = $stmt->fetch();

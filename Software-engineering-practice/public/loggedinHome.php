@@ -33,7 +33,7 @@
                     <label for='lang'>Preferred language</label><br>
                     <select id='lang' name='lang'>
                         <option value='0'>Choose your language</option>");
-                        $languageResult = $conn->query("SELECT * FROM languages ORDER BY language_name");
+                        $languageResult = $conn->query("SELECT * FROM sep_languages ORDER BY language_name");
                         if($languageResult) {
                             while($row = $languageResult->fetchObject()) {
                                 $page->addPageBodyItem("<option value='$row->language_code'>$row->language_name</option>");
@@ -43,7 +43,7 @@
                     <label for='reg'>Region</label><br>
                     <select id='reg' name='reg'>
                         <option value='0'>Choose your region</option>");
-                        $regionResult = $conn->query("SELECT * FROM regions ORDER BY region_name");
+                        $regionResult = $conn->query("SELECT * FROM sep_regions ORDER BY region_name");
                         if($regionResult) {
                             while($row = $regionResult->fetchObject()) {
                                 $page->addPageBodyItem("<option value='$row->region_code'>$row->region_name</option>");

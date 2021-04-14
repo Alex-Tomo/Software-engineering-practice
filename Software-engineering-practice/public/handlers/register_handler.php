@@ -30,7 +30,7 @@
             array_push($errors, "<p style='color: red;'>Passwords do not match</p>");
         }
 
-        $stmt = $connection->prepare('SELECT user_email FROM users WHERE user_email = ?');
+        $stmt = $connection->prepare('SELECT user_email FROM sep_users WHERE user_email = ?');
         $stmt->bindParam(1, $values['email'], PDO::PARAM_STR);
         $stmt->execute();
         $row = $stmt->rowCount();
@@ -71,7 +71,7 @@
 
     function successfulRegistration($values, $connection) {
         $hashedPassword = password_hash($values['password'], PASSWORD_DEFAULT);
-        $sql = "INSERT INTO users (user_email, user_password) VALUES ('{$values['email']}', '{$hashedPassword}')";
+        $sql = "INSERT INTO sep_users (user_email, user_password) VALUES ('{$values['email']}', '{$hashedPassword}')";
         $connection->query($sql);
         header('Location: ../signin.php');
     }
