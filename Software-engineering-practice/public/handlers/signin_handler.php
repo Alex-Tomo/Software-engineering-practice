@@ -29,6 +29,7 @@
             if(password_verify($values['password'], $data['user_password'])) {
                 include ('../../pageTemplate.php');
                 $page = new pageTemplate('Sign In');
+                $page->setSession('email', $values['email']);
                 $page->setSession('loggedin', true);
             } else {
                 array_push($errors, "<p style='color: red;'>Incorrect email or password</p>");

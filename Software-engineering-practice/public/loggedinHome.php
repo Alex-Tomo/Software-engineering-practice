@@ -1,4 +1,7 @@
 <?php
+    require('../db_connector.php');
+    $conn = getConnection();
+
     include('../pageTemplate.php');
     $page = new pageTemplate('Logged In Home');
     $page->addCSS("<link rel=\"stylesheet\" href=\"./css/styling.css\">");
@@ -15,6 +18,7 @@
                 <div id='tab1'>
                     <p>Tell us about yourself</p>
                     <h1>General information</h1>
+                    <input type='text' id='email' value='{$_SESSION['email']}' style='display: none'>
                     <label for='fname'>First name</label><br>
                     <input type='text' id='fname' name='fname' placeholder='Your name'><br>
                     <label for='lname'>Last name</label><br>
@@ -28,46 +32,24 @@
                     </select>
                     <label for='lang'>Preferred language</label><br>
                     <select id='lang' name='lang'>
-                        <option value='0'>Choose your language</option>
-                        <option value='en'>English</option>
-                        <option value='fr'>French</option>
-                        <option value='de'>German</option>
-                        <option value='da'>Danish</option>
-                        <option value='es'>Spanish</option>
-                        <option value='it'>Italian</option>
-                        <option value='fi'>Finnish</option>
-                        <option value='no'>Norwegian</option>
-                        <option value='sv'>Swedish</option>
-                        <option value='zh'>Chinese</option>
-                        <option value='ja'>Japanese</option>
-                        <option value='ar'>Arabic</option>
-                        <option value='el'>Greek</option>
-                        <option value='lt'>Lithuanian</option>
-                        <option value='pl'>Polish</option>
-                        <option value='ru'>Russian</option>
-                        
-                    </select>
+                        <option value='0'>Choose your language</option>");
+                        $languageResult = $conn->query("SELECT * FROM languages ORDER BY language_name");
+                        if($languageResult) {
+                            while($row = $languageResult->fetchObject()) {
+                                $page->addPageBodyItem("<option value='$row->language_code'>$row->language_name</option>");
+                            }
+                        }
+                    $page->addPageBodyItem("</select>
                     <label for='reg'>Region</label><br>
                     <select id='reg' name='reg'>
-                        <option value='0'>Choose your region</option>
-                        <option value='uk'>United Kingdom</option>
-                        <option value='france'>France</option>
-                        <option value='germany'>Germany</option>
-                        <option value='denmark'>Denmark</option>
-                        <option value='spain'>Spain</option>
-                        <option value='italy'>Italy</option>
-                        <option value='finland'>Finland</option>
-                        <option value='norway'>Norway</option>
-                        <option value='sweden'>Sweden</option>
-                        <option value='china'>China</option>
-                        <option value='japan'>Japan</option>
-                        <option value='uae'>United Arab Emirates</option>
-                        <option value='usa'>United States</option>
-                        <option value='greece'>Greece</option>
-                        <option value='lithuania'>Lithuania</option>
-                        <option value='poland'>Poland</option>
-                        <option value='russia'>Russia</option>
-                    </select>
+                        <option value='0'>Choose your region</option>");
+                        $regionResult = $conn->query("SELECT * FROM regions ORDER BY region_name");
+                        if($regionResult) {
+                            while($row = $regionResult->fetchObject()) {
+                                $page->addPageBodyItem("<option value='$row->region_code'>$row->region_name</option>");
+                            }
+                        }
+                    $page->addPageBodyItem("</select>
                     <button type='button' id='nextBtn1'>Next</button>               
                 </div>
   

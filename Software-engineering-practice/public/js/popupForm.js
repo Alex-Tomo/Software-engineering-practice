@@ -32,6 +32,7 @@ window.onload = () => {
 
     nextButtonTab1.addEventListener('click', () => {
         // Get tab 1 info
+
         fname = document.getElementById('fname').value;
         lname = document.getElementById('lname').value;
         gender = document.getElementById('gender').value;
@@ -43,7 +44,7 @@ window.onload = () => {
             tab1.style.display = 'none';
             tab2.style.display = 'inherit';
         } else {
-            console.log("Missing info");
+            alert("All fields are requied");
         }
     });
 
@@ -66,6 +67,20 @@ window.onload = () => {
 
         tab4.style.display = 'none';
         popup1.style.display = 'none';
+
+        let email = document.getElementById('email').value;
+        $.ajax({
+            url: "./handlers/userinfo_handler.php",
+            method: "POST",
+            data: {
+                email: email,
+                firstname: fname,
+                lastname: lname,
+                gender: gender,
+                language: lang,
+                region: region
+            }
+        });
     });
 
     prevButtonTab2.addEventListener('click', () => {
