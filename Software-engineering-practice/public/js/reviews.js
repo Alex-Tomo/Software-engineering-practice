@@ -6,16 +6,12 @@ window.onload = function() {
     let slideIndex = 1;
     showSlides(slideIndex);
 
-    // Added by alex, removed the home.php onclicks for these instead.
+    // Added by alex, removed the home.php onclicks, use these instead (more dynamic).
     nextSlideAnchor[0].addEventListener("click", function() { plusSlides(1); });
     prevSlideAnchor[0].addEventListener("click", function() { plusSlides(-1); });
 
     function plusSlides(n) {
         showSlides(slideIndex += n);
-    }
-
-    function currentSlide(n) {
-        showSlides(slideIndex = n);
     }
 
     function showSlides(n) {

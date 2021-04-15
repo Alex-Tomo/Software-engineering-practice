@@ -3,12 +3,18 @@
     $conn = getConnection();
 
     include('../pageTemplate.php');
+
+    if(!$_SESSION['loggedin']) {
+        header('Location: signin.php');
+    }
+
     $page = new pageTemplate('Logged In Home');
     $page->addCSS("<link rel=\"stylesheet\" href=\"./css/styling.css\">");
     $page->addCSS("<link rel=\"stylesheet\" href=\"./css/footerStyling.css\">");
     $page->addCSS("<link rel=\"stylesheet\" href=\"./css/headerStyling.css\">");
     $page->addJavaScript("<script src=\"./js/navBar.js\"></script>");
     $page->addJavaScript("<script src=\"./js/popupForm.js\"></script>");
+    $page->addJavaScript("<script src=\"./js/selectJobsList.js\"></script>");
 
     $page->addPageBodyItem("
 <div id='pageContainer'>
@@ -36,7 +42,9 @@
                         $languageResult = $conn->query("SELECT * FROM sep_languages ORDER BY language_name");
                         if($languageResult) {
                             while($row = $languageResult->fetchObject()) {
-                                $page->addPageBodyItem("<option value='$row->language_code'>$row->language_name</option>");
+                                $language_code = filter_var($row->language_code, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+                                $language_name = filter_var($row->language_name, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+                                $page->addPageBodyItem("<option value='$language_code'>$language_name</option>");
                             }
                         }
                     $page->addPageBodyItem("</select>
@@ -46,7 +54,9 @@
                         $regionResult = $conn->query("SELECT * FROM sep_regions ORDER BY region_name");
                         if($regionResult) {
                             while($row = $regionResult->fetchObject()) {
-                                $page->addPageBodyItem("<option value='$row->region_code'>$row->region_name</option>");
+                                $region_code = filter_var($row->region_code, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+                                $region_name = filter_var($row->region_name, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+                                $page->addPageBodyItem("<option value='$region_code'>$region_name</option>");
                             }
                         }
                     $page->addPageBodyItem("</select>
@@ -70,9 +80,19 @@
                 
                 <div id='tab3'>
                     <p>Tell us about yourself</p>
-                    <h1>What job are you searching for?</h1>
-                    <label>Category (you may choose a few)</label>
-                    <input type='search' placeholder='Search for category'>                 
+                    <h1>What job(s) are you interested in?</h1>
+                    <label>(you may choose a few)</label>
+                    <input id='jobsListInput' type='text' placeholder='Search for jobs...' onkeyup='filterJobsList()'>       
+                    <ul id='searchJobsList'>");
+                        $jobsResult = $conn->query("SELECT * FROM sep_jobs_list ORDER BY job_name");
+                        if($jobsResult) {
+                            while($row = $jobsResult->fetchObject()) {
+                                $job_code = filter_var($row->job_code, FILTER_SANITIZE_NUMBER_INT);
+                                $job_name = filter_var($row->job_name, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+                                $page->addPageBodyItem("<li id='$job_code' onclick='selectJob(`{$job_code}`)'>$job_name</li>");
+                            }
+                        }
+                    $page->addPageBodyItem("</ul>        
                     <button type='button' id='nextBtn3'>Next</button>
                     <button type='button' id='prevBtn3'>Back</button>
                 </div>

@@ -460,7 +460,7 @@ q {font-style: italic;}
 
 
 
-/*Registration*/
+/* Registration / popup form */
 .popup .overlay {
     position: fixed;
     top: 0;
@@ -501,6 +501,26 @@ label{
     float: left;
     font-weight: bold;
     color: #017EFC;
+}
+
+#searchJobsList {
+    width: 90%;
+    height: 300px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-align:justify;
+    padding: 0;
+    margin: 10px auto;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+}
+
+#searchJobsList li {
+    padding: 10px 0;
+    list-style: none;
+    border: 1px solid black;
+    text-align: center;
 }
 
 form input[type="text"],[type="email"],[type="password"],[type="date"],[type="search"]{

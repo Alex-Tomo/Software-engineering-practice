@@ -14,18 +14,24 @@
         $values['email'] = isset($_POST['email']) ? trim($_POST['email']) : null;
         $values['password'] = isset($_POST['password']) ? trim($_POST['password']) : null;
 
+        if(!empty($values['email'])) {
+            $values['email'] = filter_var($values['email'], FILTER_SANITIZE_EMAIL);
+        }
+        if(!empty($values['password'])) {
+            $values['password'] = filter_var($values['password'], FILTER_SANITIZE_STRING);
+        }
+
         if(empty($values['email'])) {
             array_push($errors, "<p style='color: red;'>Email field cannot be empty</p>");
         }
-
         if(empty($values['password'])) {
             array_push($errors, "<p style='color: red;'>Password field cannot be empty</p>");
         }
 
-        $stmt = $connection->query("SELECT user_password FROM sep_users WHERE user_email = '{$values['email']}'");
-        $row = $stmt->rowCount();
-        if($row == 1) {
-            $data = $stmt->fetch();
+        $statement = $connection->prepare("SELECT user_password FROM sep_users WHERE user_email = ?");
+        $statement->execute(array($values['email']));
+        if($statement->rowCount() > 0) {
+            $data = $statement->fetch();
             if(password_verify($values['password'], $data['user_password'])) {
                 include ('../../pageTemplate.php');
                 $page = new pageTemplate('Sign In');

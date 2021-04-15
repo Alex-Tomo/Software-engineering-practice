@@ -13,13 +13,20 @@
         $values['email'] = isset($_POST['email']) ? trim($_POST['email']) : null;
         $values['password'] = isset($_POST['password']) ? trim($_POST['password']) : null;
         $values['password2'] = isset($_POST['password2']) ? trim($_POST['password2']) : null;
-    
-        // TODO : Make sure all fields are of the correct type
+
+        if(!empty($values['email'])) {
+            $values['email'] = filter_var($values['email'], FILTER_SANITIZE_EMAIL);
+        }
+        if(!empty($values['password'])) {
+            $values['password'] = filter_var($values['password'], FILTER_SANITIZE_STRING);
+        }
+        if(!empty($values['password2'])) {
+            $values['password2'] = filter_var($values['password2'], FILTER_SANITIZE_STRING);
+        }
 
         if(empty($values['email'])) {
             array_push($errors, "<p style='color: red;'>Email field cannot be empty</p>");
-        } 
-
+        }
         if(empty($values['password'])) {
             array_push($errors, "<p style='color: red;'>Password field cannot be empty</p>");
         } else if(strlen($values['password']) < 8) {
@@ -30,10 +37,10 @@
             array_push($errors, "<p style='color: red;'>Passwords do not match</p>");
         }
 
-        $stmt = $connection->prepare('SELECT user_email FROM sep_users WHERE user_email = ?');
-        $stmt->bindParam(1, $values['email'], PDO::PARAM_STR);
-        $stmt->execute();
-        $row = $stmt->rowCount();
+        $statement = $connection->prepare('SELECT user_email FROM sep_users WHERE user_email = ?');
+        $statement->bindParam(1, $values['email'], PDO::PARAM_STR);
+        $statement->execute();
+        $row = $statement->rowCount();
         if($row != 0) {
             array_push($errors, "<p style='color: red;'>Email already exists</p>");
         }
@@ -71,8 +78,10 @@
 
     function successfulRegistration($values, $connection) {
         $hashedPassword = password_hash($values['password'], PASSWORD_DEFAULT);
-        $sql = "INSERT INTO sep_users (user_email, user_password) VALUES ('{$values['email']}', '{$hashedPassword}')";
-        $connection->query($sql);
+        $statement = $connection->prepare("INSERT INTO sep_users (user_email, user_password) VALUES (?, ?)");
+        $statement->bindParam(1, $values['email']);
+        $statement->bindParam(2, $hashedPassword);
+        $statement->execute();
         header('Location: ../signin.php');
     }
     
