@@ -8,6 +8,7 @@
         header('Location: signin.php');
     }
 
+
     $page = new pageTemplate('Logged In Home');
     $page->addCSS("<link rel=\"stylesheet\" href=\"./css/styling.css\">");
     $page->addCSS("<link rel=\"stylesheet\" href=\"./css/footerStyling.css\">");
@@ -62,23 +63,8 @@
                     $page->addPageBodyItem("</select>
                     <button type='button' id='nextBtn1'>Next</button>               
                 </div>
-  
-                <div id='tab2'>
-                    <p>Tell us about yourself</p>
-                    <h1>Which one are you?</h1>
-                    <div class='box' id='topBox'>
-                        <img src='assets/people_searching.svg'>  
-                        <h2>Offering a job</h2> 
-                    </div>
-                    <div class='box' id='btmBox'>
-                        <img src='assets/file_searching.svg'> 
-                        <h2>Searching for a job</h2> 
-                    </div>                   
-                    <button type='button' id='nextBtn2'>Next</button>
-                    <button type='button' id='prevBtn2'>Back</button>
-                </div>
                 
-                <div id='tab3'>
+                <div id='tab2'>
                     <p>Tell us about yourself</p>
                     <h1>What job(s) are you interested in?</h1>
                     <label>(you may choose a few)</label>
@@ -93,26 +79,16 @@
                             }
                         }
                     $page->addPageBodyItem("</ul>        
-                    <button type='button' id='nextBtn3'>Next</button>
-                    <button type='button' id='prevBtn3'>Back</button>
-                </div>
-                
-                <div id='tab4'>
-                    <p>Tell us about yourself</p>
-                    <h1>How much do you charge?</h1>
-                    <label>Your hourly rate</label>
-                    <input type='text' placeholder='e.g. £12.00/h'>                 
-                    <button type='button' id='nextBtn4'>Submit</button>
-                    <button type='button' id='prevBtn4'>Back</button>
+                    <button type='button' id='nextBtn2'>Submit</button>
+                    <button type='button' id='prevBtn'>Back</button>
                 </div>
             </form>
-        </div>
     </div>       
 
     <div id='refineContainer'>
         <div class='refineChild'>
             <label>Keyword</label><br>
-            <input type='text' name='keyword' value='Search keyword here'>
+            <input type='text' name='keyword' placeholder='Search keyword here'>
         </div>
         
         <div class='refineChild'>
@@ -134,102 +110,134 @@
                 <option value='expert'>Expert</option>
             </select>
         </div>
-            <button type='submit'><i id='magGlass' class='fa fa-search'></i>Search</button>
+            <button class='clickable' onclick='openPage()'><i id='magGlass' class='fa fa-search'></i>Search</button>
     </div>
     
     <div id='resultContainer'>
         <h1>Recommended for you</h1>
         
-        <div class='resultChild'>
-            <img src=''>
-            <div class='resultText'>
-                <img src='assets/photo.svg'>
-                <h2>Potential employer</h2>
-                <h3>A Python developer is needed</h3>
-                <p>Text to write in a job description and Text to write in a job description and Text to write in a job description and</p>
-                <span class='fa fa-star checked'></span>
-                <span class='fa fa-star checked'></span>
-                <span class='fa fa-star checked'></span>
-                <span class='fa fa-star checked'></span>
-                <span class='fa fa-star'></span>
-                <p class='price'>£12.00/h</p>
-            </div>
+        <div class='resultChild clickable' onclick='openPage()'>
+            <div class='replaceWithImg2'></div>
+                <div class='resultText'>
+                    <img src='assets/photo.svg'>
+                    <h2>Potential employer</h2>
+                    <h3>A Python developer is needed</h3>
+                    <p>Text to write in a job description and Text to write in a job description and Text to write in a job description and</p>
+                    <span class='fa fa-star checked'></span>
+                    <span class='fa fa-star checked'></span>
+                    <span class='fa fa-star checked'></span>
+                    <span class='fa fa-star checked'></span>
+                    <span class='fa fa-star'></span>
+                    <p class='price'>£12.00/h</p>
+                </div>
+        </div>
+            
+        <div class='resultChild clickable' onclick='openPage()'>
+            <div class='replaceWithImg2'></div>
+                <div class='resultText'>
+                    <img src='assets/photo.svg'>
+                    <h2>Potential employer</h2>
+                    <h3>A Python developer is needed</h3>
+                    <p>Text to write in a job description and Text to write in a job description and Text to write in a job description and</p>
+                    <span class='fa fa-star checked'></span>
+                    <span class='fa fa-star checked'></span>
+                    <span class='fa fa-star checked'></span>
+                    <span class='fa fa-star checked'></span>
+                    <span class='fa fa-star'></span>
+                    <p class='price'>£12.00/h</p>
+                </div>
+        </div>
+            
+        <div class='resultChild clickable' onclick='openPage()'>
+            <div class='replaceWithImg2'></div>
+                <div class='resultText'>
+                    <img src='assets/photo.svg'>
+                    <h2>Potential employer</h2>
+                    <h3>A Python developer is needed</h3>
+                    <p>Text to write in a job description and Text to write in a job description and Text to write in a job description and</p>
+                    <span class='fa fa-star checked'></span>
+                    <span class='fa fa-star checked'></span>
+                    <span class='fa fa-star checked'></span>
+                    <span class='fa fa-star checked'></span>
+                    <span class='fa fa-star'></span>
+                    <p class='price'>£12.00/h</p>
+                </div>
         </div>
         
-        <div class='resultChild'>
-            <img src='assets/photo.svg'>
-            <div class='resultText'>
-                <img src>
-                <h2>Potential employer</h2>
-                <h3>A Python developer is needed</h3>
-                <p>Text to write in a job description and Text to write in a job description and Text to write in a job description and</p>
-                <span class='fa fa-star checked'></span>
-                <span class='fa fa-star checked'></span>
-                <span class='fa fa-star checked'></span>
-                <span class='fa fa-star checked'></span>
-                <span class='fa fa-star'></span>
-                <p class='price'>£12.00/h</p>
-            </div>
+        <div class='resultChild clickable' onclick='openPage()'>
+            <div class='replaceWithImg2'></div>
+                <div class='resultText'>
+                    <img src='assets/photo.svg'>
+                    <h2>Potential employer</h2>
+                    <h3>A Python developer is needed</h3>
+                    <p>Text to write in a job description and Text to write in a job description and Text to write in a job description and</p>
+                    <span class='fa fa-star checked'></span>
+                    <span class='fa fa-star checked'></span>
+                    <span class='fa fa-star checked'></span>
+                    <span class='fa fa-star checked'></span>
+                    <span class='fa fa-star'></span>
+                    <p class='price'>£12.00/h</p>
+                </div>
         </div>
         
-        <div class='resultChild'>
-            <img src='assets/photo.svg'>
-            <div class='resultText'>
-                <img src>
-                <h2>Potential employer</h2>
-                <h3>A Python developer is needed</h3>
-                <p>Text to write in a job description and Text to write in a job description and Text to write in a job description and</p>
-                <span class='fa fa-star checked'></span>
-                <span class='fa fa-star checked'></span>
-                <span class='fa fa-star checked'></span>
-                <span class='fa fa-star checked'></span>
-                <span class='fa fa-star'></span>
-                <p class='price'>£12.00/h</p>
-            </div>
+        <div class='resultChild clickable' onclick='openPage()'>
+            <div class='replaceWithImg2'></div>
+                <div class='resultText'>
+                    <img src='assets/photo.svg'>
+                    <h2>Potential employer</h2>
+                    <h3>A Python developer is needed</h3>
+                    <p>Text to write in a job description and Text to write in a job description and Text to write in a job description and</p>
+                    <span class='fa fa-star checked'></span>
+                    <span class='fa fa-star checked'></span>
+                    <span class='fa fa-star checked'></span>
+                    <span class='fa fa-star checked'></span>
+                    <span class='fa fa-star'></span>
+                    <p class='price'>£12.00/h</p>
+                </div>
         </div>
-    </div>   
+    </div>      
     
     <div id='categories'>
         <h1>Popular categories</h1>
-        <button type='submit'>Developer</button>
-        <button type='submit'>Bank Accountant</button>
-        <button type='submit'>Bank Accountant</button>        
-        <button type='submit'>Developer</button>
-        <button type='submit'>Developer</button>
-        <button type='submit'>Bank Accountant</button>
-        <button type='submit'>Bank Accountant</button>        
-        <button type='submit'>Developer</button>
-        <button type='submit'>Developer</button>
-        <button type='submit'>Bank Accountant</button>
+        <button class='clickable' type='submit'>Developer</button>
+            <button class='clickable' type='submit'>Bank Accountant</button>
+            <button class='clickable' type='submit'>Bank Accountant</button>        
+            <button class='clickable' type='submit'>Developer</button>
+            <button class='clickable' type='submit'>Developer</button>
+            <button class='clickable' type='submit'>Bank Accountant</button>
+            <button class='clickable' type='submit'>Bank Accountant</button>        
+            <button class='clickable' type='submit'>Developer</button>
+            <button class='clickable' type='submit'>Developer</button>
+            <button class='clickable' type='submit'>Bank Accountant</button>
     </div>  
-    
+   
+        
     <div id='recViewedParent'>
-        <h1>Recently viewed</h1>
-        <div id='recViewedChild'>
-            <div id='replaceWithImg'></div>
+        <h1>Recently viewed</h1>        
+        <div class='recViewedChild clickable' onclick='openPage()'>
+            <div class='replaceWithImg'></div>
             <h4>A Python developer is needed for a project</h4>
             <p>£12.00/h</p>  
         </div>
         
-        <div id='recViewedChild'>
-            <div id='replaceWithImg'></div>
+        <div class='recViewedChild clickable'>
+            <div class='replaceWithImg'></div>
             <h4>A Python developer is needed for a project</h4>
             <p>£12.00/h</p>  
         </div>
         
-        <div id='recViewedChild'>
-            <div id='replaceWithImg'></div>
+        <div class='recViewedChild clickable'>
+            <div class='replaceWithImg'></div>
             <h4>A Python developer is needed for a project</h4>
             <p>£12.00/h</p>  
         </div>
         
-        <div id='recViewedChild'>
-            <div id='replaceWithImg'></div>
+        <div class='recViewedChild clickable'>
+            <div class='replaceWithImg'></div>
             <h4>A Python developer is needed for a project</h4>
             <p>£12.00/h</p>  
         </div>
     </div>
-
 </div>");
 
     $page->displayPage();
