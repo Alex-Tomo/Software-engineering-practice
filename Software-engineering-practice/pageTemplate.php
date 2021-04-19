@@ -52,7 +52,7 @@ class pageTemplate {
     }
 
     private function pageHeader() {
-        return file_get_contents ($this->includePath.'public/include/header.html');
+        return file_get_contents ($this->includePath.'public/include/header.php');
     }
 
     public function addPageBodyItem($item) {
