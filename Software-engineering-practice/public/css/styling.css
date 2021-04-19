@@ -3,7 +3,7 @@ html{
 }
 
 body{
-    margin: 20px 0;
+    margin:  0;
     padding: 0;
     background: #017EFC;
 }
@@ -11,6 +11,7 @@ body{
 .clickable:hover {
     cursor: pointer;
 }
+
 
 
 
@@ -300,167 +301,9 @@ q {font-style: italic;}
 
 
 
-/*Logged in Homepage*/
-#pageContainer{
-    background-color: #FFFFFF;
-    padding-top: 20px;
-}
-
-#refineContainer{
-    margin: 20px;
-}
-
-.refineChild{
-    background: white;
-    padding: 10px 15px 10px 15px;
-    border-radius: 5px;
-    margin-bottom: 15px;
-    box-shadow: 4px 4px 6px 6px rgba(0, 0, 0, 0.05);
-}
-
-.refineChild label{
-    text-transform: uppercase;
-    color: #9F9F9F;
-    font-size: 0.8em;
-    font-weight: bold;
-}
-
-.refineChild input[type="text"], select{
-    padding: 10px 10px 10px 0;
-    border: none;
-    font-size: 1.1em;
-    color: #017EFC;
-    font-weight: bold;
-}
-
-.refineChild select{
-    width: 100%;
-}
-
-#magGlass{
-    margin-right: 10px;
-}
-
-#refineContainer button{
-    background-color: #017EFC;
-    color: white;
-    text-transform: uppercase;
-    width: 100%;
-    padding: 15px;
-    text-align: center;
-    border: none;
-    margin-bottom: 30px;
-    border-radius: 5px;
-}
 
 
-
-
-
-/*Results*/
-#pageContainer h1{
-    font-size: 1.3em;
-    color: #017EFC;
-}
-
-#resultContainer{
-    margin: 15px;
-}
-
-.checked {
-    color: orange;
-}
-
-.resultChild{
-    background: white;
-    padding: 10px 15px 25px 15px;
-    border-radius: 5px;
-    margin-bottom: 15px;
-    box-shadow: 4px 4px 6px 6px rgba(0, 0, 0, 0.05);
-}
-
-.resultChild h2{
-    font-size: 1em;
-    padding-top: 25px;
-    margin-bottom: 25px;
-}
-
-.resultChild h3{
-    font-size: 1em;
-}
-
-.price{
-    float: right;
-    color: #099239;
-}
-
-.resultChild p{
-    margin-top: 0;
-}
-
-.resultChild img{
-    height: auto;
-    width: 25%;
-    float: left;
-    margin-right: 5px;
-}
-
-
-
-
-
-/*Categories*/
-#categories{
-    margin: 15px;
-}
-
-#categories button{
-    background-color: #0062C4;
-    color: white;
-    padding: 10px 20px 10px 20px;
-    text-align: center;
-    border: none;
-    margin: 5px;
-    border-radius: 5px;
-}
-
-
-
-
-/*Recently Viewed*/
-#recViewedParent{
-    margin: 15px;
-    padding-bottom: 25px;
-}
-
-#replaceWithImg{
-    background-color: #D8D8D8;
-    height: 70px;
-    width: 90px;
-    float: left;
-    margin-right: 5px;
-}
-
-#recViewedParent h4{
-    font-size: 0.8em;
-    padding-top: 10px;
-    margin-right: 60px;
-    margin-bottom: 9px;
-}
-
-#recViewedChild p{
-    color: #099239;
-    font-size: 1em;
-    margin-top: 0;
-}
-
-
-
-
-
-
-
-/* Registration / popup form */
+/*Registration*/
 .popup .overlay {
     position: fixed;
     top: 0;
@@ -470,13 +313,13 @@ q {font-style: italic;}
     background: rgba(0,0,0,0.7);
 }
 
-form {
-    margin: 0 5% 15px 5%;
+form{
+    margin: 0 15px 15px 15px;
     padding: 15px;
     position: absolute;
     top: 25%;
     background-color: white;
-    width: 90%;
+    width: auto;
     height: auto;
     z-index: 2;
     text-align: center;
@@ -491,7 +334,6 @@ form p{
 
 label,input{
     display: block;
-    margin-bottom: 10px;
 }
 
 label{
@@ -503,26 +345,6 @@ label{
     color: #017EFC;
 }
 
-#searchJobsList {
-    width: 90%;
-    height: 300px;
-    overflow-x: hidden;
-    overflow-y: auto;
-    text-align:justify;
-    padding: 0;
-    margin: 10px auto;
-    display: flex;
-    flex-direction: column;
-    border: 1px solid black;
-}
-
-#searchJobsList li {
-    padding: 10px 0;
-    list-style: none;
-    border: 1px solid black;
-    text-align: center;
-}
-
 form input[type="text"],[type="email"],[type="password"],[type="date"],[type="search"]{
     padding: 10px;
     border: 1px solid #828282;
@@ -530,6 +352,7 @@ form input[type="text"],[type="email"],[type="password"],[type="date"],[type="se
     opacity: 0.5;
     float: left;
     width: 240px;
+    color: #017EFC;
 }
 
 form select{
@@ -587,9 +410,241 @@ form button{
     color: black;
 }
 
-/*.tab{*/
-/*    display: none;*/
-/*}*/
+.tab{
+    display: none;
+}
+
+.popup{
+    display:none;
+}
+
+.overlay{
+    display: none
+}
+
+
+
+
+
+
+
+/*Logged in Homepage*/
+#pageContainer{
+    background-color: #FFFFFF;
+    padding-top: 20px;
+}
+
+#pageContainer2{
+    background-color: #FFFFFF;
+    padding-top: 20px;
+}
+
+#refineContainer{
+    margin: 20px;
+}
+
+.refineChild{
+    background: white;
+    padding: 10px 15px 10px 15px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    box-shadow: 4px 4px 6px 6px rgba(0, 0, 0, 0.05);
+}
+
+.refineChild label{
+    text-transform: uppercase;
+    color: #9F9F9F;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+.refineChild input[type="text"], select{
+    padding: 10px 10px 10px 0;
+    border: none;
+    font-size: 1.1em;
+    color: #017EFC;
+    background-color: white;
+    font-weight: bold;
+}
+
+.refineChild select{
+    width: 100%;
+}
+
+#magGlass{
+    margin-right: 10px;
+}
+
+#refineContainer button {
+    background-color: #017EFC;
+    color: white;
+    text-transform: uppercase;
+    width: 100%;
+    padding: 15px;
+    text-align: center;
+    border: none;
+    margin-bottom: 30px;
+    border-radius: 5px;
+}
+
+
+
+
+/*Results*/
+#pageContainer h1{
+    font-size: 1.3em;
+    color: #017EFC;
+}
+
+#pageContainer2 h1{
+    font-size: 1.3em;
+    color: #017EFC;
+}
+
+#resultContainer{
+    margin: 15px;
+}
+
+.checked {
+    color: orange;
+}
+
+.resultChild{
+    background: white;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    box-shadow: 4px 4px 6px 6px rgba(0, 0, 0, 0.05);
+}
+
+.resultText{
+    padding: 10px 15px 25px 15px;
+}
+
+.resultChild h2{
+    font-size: 1em;
+    padding-top: 25px;
+    margin-bottom: 25px;
+}
+
+.resultChild h3{
+    font-size: 1em;
+}
+
+.price{
+    float: right;
+    color: #099239;
+}
+
+.resultChild p{
+    margin-top: 0;
+}
+
+.replaceWithImg2{
+    background-color: #D8D8D8;
+    height: 150px;
+    width: 100%;
+    /*float: left;*/
+}
+
+.resultChild img{
+    height: auto;
+    width: 25%;
+    float: left;
+    margin-right: 5px;
+}
+
+
+
+
+
+/*Categories*/
+#categories{
+    margin: 15px;
+}
+
+#categories button{
+    background-color: #0062C4;
+    color: white;
+    padding: 10px 20px 10px 20px;
+    text-align: center;
+    border: none;
+    margin: 5px 10px 5px 0;
+    border-radius: 5px;
+}
+
+
+
+
+/*Recently Viewed*/
+#recViewedParent{
+    margin: 15px;
+    padding-bottom: 25px;
+}
+
+.recViewedChild{
+    display: inline-block;
+}
+
+.replaceWithImg{
+    background-color: #D8D8D8;
+    height: 70px;
+    width: 90px;
+    float: left;
+    margin: 0 5px 20px 0;
+}
+
+#recViewedParent h4{
+    font-size: 0.8em;
+    margin: 8px 60px 9px 0;
+}
+
+#recViewedParent2 h4{
+    font-size: 0.8em;
+    margin: 8px 60px 9px 0;
+}
+
+.recViewedChild p{
+    color: #099239;
+    font-size: 1em;
+    margin-top: 0;
+}
+
+
+
+
+
+
+
+/*Service Inner*/
+#back{
+    color: #A1A1A1;
+    margin-bottom: 20px;
+    display: block;
+    width: 35%;
+}
+
+.applyBtn{
+    text-align: center;
+    background: #017EFC;
+    padding: 10px;
+    width: 100%;
+    border: 1px solid #017EFC;
+    border-radius: 5px;
+    font-weight: bold;
+    color: white;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.resultText a{
+    color: #017EFC;
+    text-align: center;
+    display: block;
+    text-decoration: underline;
+    margin-bottom: 30px;
+}
+
+
 
 
 /*.content {*/
@@ -727,10 +782,48 @@ form button{
         text-align: left;
     }
 
-    #clipDone{
+    #clipDone {
         display: block;
         width: 30%;
         float: right;
+    }
+
+    #refineContainer{
+        text-align: -webkit-center;
+    }
+
+    .refineChild{
+        text-align: -webkit-left;
+        height: auto;
+    }
+
+    .refineChild {
+        width: 50%;
+    }
+
+    #refineContainer button{
+        width: 50%;
+    }
+
+    .resultChild{
+        width: 48.5%;
+        float: left;
+    }
+
+    .resultChild:nth-of-type(odd) {
+        margin-right: 15px;
+    }
+
+    .resultChild img{
+        width: 20%;
+    }
+
+    #categories{
+        padding-top: 1225px;
+    }
+
+    #recViewedParent2{
+        padding-bottom: 150px;
     }
 }
 
@@ -764,32 +857,38 @@ form button{
     }
 }
 
+@media only screen and (min-width: 1012px) {
+    .resultChild img{
+        width: 15%;
+    }
+}
+
 @media only screen and (min-width: 1024px) {
     /*Top Section*/
-    #top{
+    #top {
         text-align: left;
         width: 100%;
     }
 
-    #header2{
+    #header2 {
         margin: 130px 0 0 120px;
         float: left;
         width: 30%;
     }
 
-    h2{
+    #header2 h2 {
         float: left;
         color: white;
         margin: 0;
         font-size: 1.6em;
     }
 
-    #textChange{
+    #textChange {
         color: #191D20;
         margin-left: 10px;
     }
 
-    #top p{
+    #top p {
         color: white;
         float: left;
         width: 100%;
@@ -798,7 +897,7 @@ form button{
         margin: 20px 0 20px 0;
     }
 
-    #top button{
+    #top button {
         height: auto;
         width: 200px;
         color: #ffffff;
@@ -811,7 +910,7 @@ form button{
         margin-bottom: 35px;
     }
 
-    #desktopImg{
+    #desktopImg {
         display: block;
         margin-top: 40px;
         float: right;
@@ -819,57 +918,109 @@ form button{
         height: auto;
     }
 
-    #mobileImg{
+    #mobileImg {
         display: none;
     }
 
-    #infoSec{
-       padding-left: 120px;
-       padding-right: 120px;
-    }
-
-    #benefitsSec h4{
-        font-size: 1.6em;
-    }
-
-    #benefitsSec{
+    #infoSec {
         padding-left: 120px;
         padding-right: 120px;
     }
 
-    #swipeSecDes{
+    #benefitsSec h4 {
+        font-size: 1.6em;
+    }
+
+    #benefitsSec {
+        padding-left: 120px;
+        padding-right: 120px;
+    }
+
+    #swipeSecDes {
         display: block;
         padding: 30px 120px 190px 120px;
     }
 
-    #swipeSecMob{
+    #swipeSecMob {
         display: none;
     }
 
-    #swipeSecDes h4{
+    #swipeSecDes h4 {
         margin-bottom: 5px;
         text-align: center;
     }
 
-    #swipeSecDes p{
+    #swipeSecDes p {
         font-size: 0.9em;
         margin: 5px 10px 30px 10px;
         text-align: center;
     }
 
-    #swipeChild{
+    #swipeChild {
         width: 33%;
         float: left;
     }
 
-    #swipeChild2{
+    #swipeChild2 {
         width: 33%;
         float: left;
     }
 
-    #swipeChild3{
+    #swipeChild3 {
         width: 33%;
         float: left;
+    }
+
+    .refineChild {
+        margin-top: 15px;
+        margin-bottom: 0;
+        width: 25%;
+        float: left;
+        box-shadow: none;
+    }
+
+    .refineChild:nth-of-type(2),
+    .refineChild:nth-of-type(3) {
+        border-left: 1px solid black;
+        border-radius: 0;
+    }
+
+    #refineContainer {
+        padding-bottom: 105px;
+        box-shadow: 4px 4px 6px 6px rgba(0, 0, 0, 0.05);
+        border-radius: 5px;
+    }
+
+    #refineContainer button {
+        width: 15%;
+        float: right;
+        padding: 45px 0 45px 0;
+    }
+
+    #resultContainer{
+        margin-top: 40px;
+        /*padding-bottom: 50px;*/
+    }
+
+    #pageContainer h1{
+        font-size: 1.6em;
+    }
+
+    .resultChild{
+        width: 31%;
+        margin-right: 15px;
+    }
+
+    #categories{
+        padding-top: 800px;
+    }
+
+    #serviceResult{
+        width: 60%;
+    }
+
+    #recViewedParent2{
+        padding-bottom: 130px;
     }
 }
 
@@ -987,6 +1138,81 @@ form button{
 
     #text3{
         width: 45%;
+    }
+
+    #pageContainer{
+        padding-bottom: 370px;
+    }
+
+    #pageContainer2{
+        padding-bottom: 200px;
+    }
+
+    #resultContainer{
+        width: 73%;
+        padding-right: 0;
+        float: left;
+        margin-top: 0;
+        margin-right: 10px;
+    }
+
+    .resultChild{
+        height: 450px
+    }
+
+    .resultChild img{
+        width: 24%;
+    }
+
+    .resultChild h2{
+        margin-top: 0;
+        margin-bottom: 59px;
+    }
+
+    #categories{
+        margin: 0 0 30px 0;
+        padding: 0;
+        width: 25%;
+        float: right;
+    }
+
+    #categories h1{
+        margin-top: 10px;
+        font-size: 1.3em;
+    }
+
+    #recViewedParent{
+        margin: 0;
+        width: 25%;
+        display: inline;
+    }
+
+    .resultText{
+        height: 500px;
+    }
+
+    #recViewedParent h1{
+        margin-top: 10px;
+        font-size: 1.3em;
+    }
+
+    .replaceWithImg2 {
+        height: 180px;
+    }
+
+    #serviceResult{
+        width: 100%;
+        height: 560px;
+    }
+
+    #serviceResult img{
+        width: 17%;
+        margin-right: 20px;
+    }
+
+    #serviceResult h2{
+        font-size: 1.35em;
+        margin: 40px 0 90px 0;
     }
 
 }

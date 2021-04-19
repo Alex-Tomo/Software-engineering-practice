@@ -9,7 +9,7 @@ header{
 
 header h1{
     float: left;
-    margin-top: 30px;
+    margin-top: 15px;
     font-size: 2.1em;
 }
 
@@ -73,7 +73,7 @@ header h1{
 
 .icon{
     color: white;
-    margin-top: 30px;
+    margin-top: 15px;
     text-decoration: none;
     font-size: 30px;
     display: block;
@@ -100,6 +100,7 @@ header h1{
 @media only screen and (min-width: 768px){
     header {
         margin: 0 90px 0 90px;
+        display: inline;
     }
 
     #mobile_container{
@@ -107,11 +108,13 @@ header h1{
     }
 
     #desktop_container{
-        display: inline;
+        display: block;
+        margin: 0 90px 0 90px;
+        height: 63px;
     }
 
     nav li{
-        margin-top: 30px;
+        margin-top: 15px;
         margin-right: 5px;
         float: right;
         width: 13%;
@@ -132,7 +135,7 @@ header h1{
     }
 
     #signUp{
-        margin-top: 25px;
+        margin-top: 10px;
         padding: 10px;
         font-size: 1em;
         float: right;
@@ -146,7 +149,7 @@ header h1{
     #login{
         background-color: #017EFC;
         font-size: 1em;
-        margin: 25px 10px 0 20px;
+        margin: 10px 10px 0 20px;
         padding: 10px;
         float: right;
         width: 14%;
@@ -158,6 +161,7 @@ header h1{
 @media only screen and (min-width: 1024px) {
     header{
         margin: 0 120px 0 120px;
+        display: inline;
     }
 
     #logoText2{
