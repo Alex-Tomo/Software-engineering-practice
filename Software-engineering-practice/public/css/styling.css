@@ -303,7 +303,7 @@ q {font-style: italic;}
 
 
 
-/*Registration*/
+/*Popup Form*/
 .popup .overlay {
     position: fixed;
     top: 0;
@@ -343,6 +343,7 @@ label{
     float: left;
     font-weight: bold;
     color: #017EFC;
+    margin: 13px 0 5px 0;
 }
 
 form input[type="text"],[type="email"],[type="password"],[type="date"],[type="search"]{
@@ -361,7 +362,6 @@ form select{
     border-radius: 8px;
     opacity: 0.5;
     font-weight: lighter;
-    margin-bottom: 10px;
     color: black;
     font-size: 0.8em;
     float: left;
@@ -375,23 +375,11 @@ form select{
     margin-bottom: 20px;
 }
 
-#topBox{
-    background-color: #8BC5FF;
-}
-
-#btmBox{
-    background-color: #017EFC;
-}
-
-.box img{
-    padding-top: 20px;
-}
-
 form button{
     background: #017EFC;
     padding: 10px;
     width: 70%;
-    margin: 0 auto;
+    margin: 15px auto;
     border: 1px solid #017EFC;
     border-radius: 5px;
     font-weight: bold;
@@ -410,17 +398,17 @@ form button{
     color: black;
 }
 
-.tab{
-    /*display: none;*/
-}
+/*.tab{*/
+/*    !*display: none;*!*/
+/*}*/
 
-.popup{
-    /*display:none;*/
-}
+/*.popup{*/
+/*    !*display:none;*!*/
+/*}*/
 
-.overlay{
-    /*display: none*/
-}
+/*.overlay{*/
+/*    !*display: none*!*/
+/*}*/
 
 
 
@@ -429,12 +417,7 @@ form button{
 
 
 /*Logged in Homepage*/
-#pageContainer{
-    background-color: #FFFFFF;
-    padding-top: 20px;
-}
-
-#pageContainer2{
+.pageContainer{
     background-color: #FFFFFF;
     padding-top: 20px;
 }
@@ -491,12 +474,7 @@ form button{
 
 
 /*Results*/
-#pageContainer h1{
-    font-size: 1.3em;
-    color: #017EFC;
-}
-
-#pageContainer2 h1{
+.pageContainer h1{
     font-size: 1.3em;
     color: #017EFC;
 }
@@ -620,7 +598,7 @@ form button{
     color: #A1A1A1;
     margin-bottom: 20px;
     display: block;
-    width: 35%;
+    width: 32%;
 }
 
 .applyBtn{
@@ -825,6 +803,10 @@ form button{
     #recViewedParent2{
         padding-bottom: 150px;
     }
+
+    #back {
+        width: 20%;
+    }
 }
 
 @media only screen and (min-width: 874px) {
@@ -972,7 +954,7 @@ form button{
     }
 
     .refineChild {
-        margin-top: 15px;
+        margin-top: 7px;
         margin-bottom: 0;
         width: 25%;
         float: left;
@@ -1002,7 +984,7 @@ form button{
         /*padding-bottom: 50px;*/
     }
 
-    #pageContainer h1{
+    .pageContainer h1{
         font-size: 1.6em;
     }
 
@@ -1021,6 +1003,10 @@ form button{
 
     #recViewedParent2{
         padding-bottom: 130px;
+    }
+
+    #back {
+        width: 15%;
     }
 }
 
@@ -1140,11 +1126,11 @@ form button{
         width: 45%;
     }
 
-    #pageContainer{
+    .pageContainer{
         padding-bottom: 370px;
     }
 
-    #pageContainer2{
+    #serInnContainer{
         padding-bottom: 200px;
     }
 
@@ -1215,4 +1201,7 @@ form button{
         margin: 40px 0 90px 0;
     }
 
+    #back {
+        width: 10%;
+    }
 }

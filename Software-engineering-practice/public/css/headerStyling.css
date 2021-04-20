@@ -34,21 +34,31 @@ header h1{
     margin-bottom: 10px;
 }
 
-#topnav #myLinks {
-    display: none;
-}
+/*#topnav #myLinks {*/
+/*    display: none;*/
+/*}*/
 
-#topLink{
-    margin-top: 100px;
-}
-
-.mobLinks{
-    color: white;
-    margin-bottom: 20px;
-    text-decoration: none;
-    font-size: 1em;
+#mobHome{
+    margin: 90px 0 20px 0;
     display: block;
+    color: white;
+    font-size: 1em;
 }
+
+#jobLink{
+    display: block;
+    margin-bottom: 20px;
+    color: white;
+    font-size: 1em;
+}
+
+/*.mobLinks{*/
+/*    color: white;*/
+/*    margin-bottom: 20px;*/
+/*    text-decoration: none;*/
+/*    font-size: 1em;*/
+/*    display: block;*/
+/*}*/
 
 #signUpMob{
     background: white;
@@ -62,6 +72,16 @@ header h1{
 }
 
 #loginMob{
+    background-color: #017EFC;
+    color: white;
+    padding: 10px;
+    font-size: 1em;
+    width: 35%;
+    border: 1px solid white;
+    border-radius: 5px;
+}
+
+#logout{
     background-color: #017EFC;
     color: white;
     padding: 10px;
@@ -92,10 +112,11 @@ header h1{
     color: black;
 }
 
-.active {
-    background-color: #4CAF50;
-    color: black;
-}
+/*.active {*/
+/*    background-color: #4CAF50;*/
+/*    color: black;*/
+/*}*/
+
 
 @media only screen and (min-width: 768px){
     header {
@@ -114,11 +135,16 @@ header h1{
     }
 
     nav li{
-        margin-top: 15px;
-        margin-right: 5px;
+        margin: 18px 5px 0 0;
         float: right;
-        width: 13%;
+        width: 15%;
         padding: 5px;
+    }
+
+    nav img{
+        height: 50px;
+        float: right;
+        margin-top: 7px;
     }
 
     nav a{
@@ -133,6 +159,53 @@ header h1{
     .links{
         color: #ffffff;
     }
+
+    .dropdown {
+        float: right;
+        overflow: hidden;
+    }
+
+    .dropdown .dropbtn {
+        font-size: 16px;
+        border: none;
+        outline: none;
+        color: white;
+        padding: 14px 16px;
+        background-color: inherit;
+        font-family: inherit;
+        margin: 0;
+        float: right;
+    }
+
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #017EFC;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        margin-top: 50px;
+    }
+
+    .dropdown-content a {
+        float: none;
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        text-align: left;
+    }
+
+    .dropdown-content a:hover {
+        background-color: #ddd;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+
+
 
     #signUp{
         margin-top: 10px;
