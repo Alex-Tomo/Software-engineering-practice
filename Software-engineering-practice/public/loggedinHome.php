@@ -18,7 +18,7 @@
     $page->addJavaScript("<script src=\"./js/selectJobsList.js\"></script>");
 
     $page->addPageBodyItem("
-<div id='pageContainer'>
+<div class='pageContainer'>
     <div class='popup' id='popup-1'>
         <div class='overlay'></div>
             <form id='regForm' action='/action_page.php'>

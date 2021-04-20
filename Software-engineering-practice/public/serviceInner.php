@@ -17,9 +17,9 @@ $page->addJavaScript("<script src=\"./js/navBar.js\"></script>");
 $page->addJavaScript("<script src=\"./js/popupForm.js\"></script>");
 
 $page->addPageBodyItem("
-<div id='pageContainer2'>
+<div class='pageContainer' id='serInnContainer'>
     <div id='resultContainer'>
-            <a id='back' class='clickable' onclick='openPage()'>< Back to list</a>
+            <a id='back' class='clickable' onclick='openPage(`loggedinHome.php`)'>< Back to list</a>
             <div id='serviceResult' class='resultChild'>
                 <div class='replaceWithImg2'></div>
                     <div class='resultText'>
