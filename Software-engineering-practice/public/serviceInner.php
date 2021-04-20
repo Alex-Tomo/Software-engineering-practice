@@ -3,11 +3,12 @@
 require('../db_connector.php');
 $conn = getConnection();
 
+include('../pageTemplate.php');
+
 if(!$_SESSION['loggedin']) {
     header('Location: signin.php');
 }
 
-include('../pageTemplate.php');
 $page = new pageTemplate('Logged In Home');
 $page->addCSS("<link rel=\"stylesheet\" href=\"./css/styling.css\">");
 $page->addCSS("<link rel=\"stylesheet\" href=\"./css/footerStyling.css\">");
@@ -67,4 +68,5 @@ $page->addPageBodyItem("
 </div>");
 
 $page->displayPage();
+
 

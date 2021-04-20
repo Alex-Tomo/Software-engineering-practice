@@ -411,15 +411,15 @@ form button{
 }
 
 .tab{
-    display: none;
+    /*display: none;*/
 }
 
 .popup{
-    display:none;
+    /*display:none;*/
 }
 
 .overlay{
-    display: none
+    /*display: none*/
 }
 
 

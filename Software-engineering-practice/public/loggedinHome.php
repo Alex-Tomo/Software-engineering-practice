@@ -5,7 +5,7 @@
     include('../pageTemplate.php');
 
     if(!$_SESSION['loggedin']) {
-        header('Location: signin.php');
+        header('Location: home.php');
     }
 
 
@@ -80,7 +80,7 @@
                         }
                     $page->addPageBodyItem("</ul>        
                     <button type='button' id='nextBtn2'>Submit</button>
-                    <button type='button' id='prevBtn'>Back</button>
+                    <button type='button' id='prevBtn2'>Back</button>
                 </div>
             </form>
     </div>       
@@ -116,7 +116,7 @@
     <div id='resultContainer'>
         <h1>Recommended for you</h1>
         
-        <div class='resultChild clickable' onclick='openPage()'>
+        <div class='resultChild clickable' onclick='openPage(`serviceInner.php`)'>
             <div class='replaceWithImg2'></div>
                 <div class='resultText'>
                     <img src='assets/photo.svg'>
@@ -132,7 +132,7 @@
                 </div>
         </div>
             
-        <div class='resultChild clickable' onclick='openPage()'>
+        <div class='resultChild clickable' onclick='openPage(`serviceInner.php`)'>
             <div class='replaceWithImg2'></div>
                 <div class='resultText'>
                     <img src='assets/photo.svg'>
@@ -148,7 +148,7 @@
                 </div>
         </div>
             
-        <div class='resultChild clickable' onclick='openPage()'>
+        <div class='resultChild clickable' onclick='openPage(`serviceInner.php`)'>
             <div class='replaceWithImg2'></div>
                 <div class='resultText'>
                     <img src='assets/photo.svg'>
@@ -164,7 +164,7 @@
                 </div>
         </div>
         
-        <div class='resultChild clickable' onclick='openPage()'>
+        <div class='resultChild clickable' onclick='openPage(`serviceInner.php`)'>
             <div class='replaceWithImg2'></div>
                 <div class='resultText'>
                     <img src='assets/photo.svg'>
@@ -180,7 +180,7 @@
                 </div>
         </div>
         
-        <div class='resultChild clickable' onclick='openPage()'>
+        <div class='resultChild clickable' onclick='openPage(`serviceInner.php`)'>
             <div class='replaceWithImg2'></div>
                 <div class='resultText'>
                     <img src='assets/photo.svg'>

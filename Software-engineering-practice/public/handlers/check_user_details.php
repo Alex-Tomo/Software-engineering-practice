@@ -8,7 +8,7 @@
     }
 
     if(!empty($email)) {
-        $statement = $conn->prepare("SELECT count(*) 
+        $statement = $conn->prepare("SELECT sep_user_info.userinfo_id
               FROM sep_user_info JOIN sep_users
               ON sep_user_info.user_id = sep_users.user_id
               WHERE sep_users.user_email = ?");
