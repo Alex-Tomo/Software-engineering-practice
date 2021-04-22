@@ -1,9 +1,9 @@
 function hambgrMenu() {
-    var x = document.getElementById("myLinks");
-    if (x.style.display === "block") {
-        x.style.display = "none";
+    let hambgr = document.getElementById("myLinks");
+    if (hambgr.style.display === "block") {
+        hambgr.style.display = "none";
     } else {
-        x.style.display = "block";
+        hambgr.style.display = "block";
     }
 }
 
@@ -23,4 +23,21 @@ function openPage(pageToOpen) {
         }
     }
     window.location.href = newPagePath + pageToOpen;
+}
+
+function userDrpdwn() {
+    let content = document.getElementById("dropdown_content");
+    if (content.style.display === "block") {
+        content.style.display = "none";
+    } else {
+        content.style.display = "block";
+    }
+}
+
+
+function hideDrpdwn(){
+    let content = document.getElementById("dropdown_content");
+    if (content.style.display === "block") {
+        content.style.display = "none";
+    }
 }
