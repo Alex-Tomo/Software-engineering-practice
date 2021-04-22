@@ -17,3 +17,12 @@ INSERT INTO sep_jobs_list VALUES (1, 'Software Engineer'),
                                  (17, 'Reviewer'),
                                  (18, 'Influencer'),
                                  (19, 'Ad Specialist');
+
+
+# (10, 'Emma', 'Tall', 'female', 'en', 'uk'),
+# (11, 'Jeffy', 'Kake', 'male', 'en', 'uk'),
+# (12, 'Isaac', 'Walterson', 'male', 'en', 'uk'),
+# (13, 'Bonny', 'Griffin', 'female', 'en', 'uk'),
+# (14, 'Bill', 'NoGates', 'male', 'en', 'uk'),
+# (15, 'Rebecca', 'Village', 'female', 'en', 'uk');
+# (16, 'Jacky', 'Kingsley', 'female', 'en', 'uk');

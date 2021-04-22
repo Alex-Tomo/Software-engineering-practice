@@ -583,13 +583,14 @@ form button{
 
 
 /*Recently Viewed*/
+
 #recViewedParent{
     margin: 15px;
     padding-bottom: 25px;
 }
 
 .recViewedChild{
-    display: inline-block;
+    display: flex;
 }
 
 .replaceWithImg{
@@ -600,9 +601,15 @@ form button{
     margin: 0 5px 20px 0;
 }
 
+.replaceWithImg img {
+    width: auto;
+    height: 100%;
+}
+
 #recViewedParent h4{
     font-size: 0.8em;
-    margin: 8px 60px 9px 0;
+    margin: 8px 0 9px 0;
+
 }
 
 #recViewedParent2 h4{
@@ -616,6 +623,10 @@ form button{
     margin-top: 0;
 }
 
+.recViewedChildChild {
+    display: flex;
+    flex-direction: column;
+}
 
 
 
@@ -651,7 +662,19 @@ form button{
     margin-bottom: 30px;
 }
 
+/* Added by Alex */
+/* Sizes the person.svg image on loggedinHome and serviceInner */
 
+.resultText img {
+    max-width: 50px;
+    max-height: 50px;
+    float: left;
+}
+
+.resultText h2 {
+    margin-left: 15%;
+    padding: 0;
+}
 
 
 /*.content {*/

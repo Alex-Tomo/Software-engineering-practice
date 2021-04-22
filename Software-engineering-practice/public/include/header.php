@@ -2,6 +2,7 @@
 
 function getHeader() {
 
+    include_once '../db_connector.php';
 
     $header = "<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
     
@@ -26,7 +27,7 @@ function getHeader() {
                             }
                     }
                     $header .= "</button>
-                                    <img src='assets/photo.svg'>
+                                    <img src='assets/person.svg'>
                                     <div id='dropdown_content'>
                                         <a class='links clickable' onclick='openPage(`userProfile.php`)'>My Profile</a>
                                         <a class='links clickable' onclick='openPage(`userJobs.php`)'>My Jobs</a>
