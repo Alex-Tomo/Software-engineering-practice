@@ -1,23 +1,23 @@
 <?php
-    require('../db_connector.php');
-    $conn = getConnection();
+require('../db_connector.php');
+$conn = getConnection();
 
-    include('../pageTemplate.php');
+include('../pageTemplate.php');
 
-    if(!$_SESSION['loggedin']) {
-        header('Location: home.php');
-    }
+if(!$_SESSION['loggedin']) {
+    header('Location: home.php');
+}
 
 
-    $page = new pageTemplate('Logged In Home');
-    $page->addCSS("<link rel=\"stylesheet\" href=\"./css/styling.css\">");
-    $page->addCSS("<link rel=\"stylesheet\" href=\"./css/footerStyling.css\">");
-    $page->addCSS("<link rel=\"stylesheet\" href=\"./css/headerStyling.css\">");
-    $page->addJavaScript("<script src=\"./js/navBar.js\"></script>");
-    $page->addJavaScript("<script src=\"./js/popupForm.js\"></script>");
-    $page->addJavaScript("<script src=\"./js/selectJobsList.js\"></script>");
+$page = new pageTemplate('Logged In Home');
+$page->addCSS("<link rel=\"stylesheet\" href=\"./css/styling.css\">");
+$page->addCSS("<link rel=\"stylesheet\" href=\"./css/footerStyling.css\">");
+$page->addCSS("<link rel=\"stylesheet\" href=\"./css/headerStyling.css\">");
+$page->addJavaScript("<script src=\"./js/navBar.js\"></script>");
+$page->addJavaScript("<script src=\"./js/popupForm.js\"></script>");
+$page->addJavaScript("<script src=\"./js/selectJobsList.js\"></script>");
 
-    $page->addPageBodyItem("
+$page->addPageBodyItem("
 <div class='pageContainer'>
     <div class='popup' id='popup-1'>
         <div class='overlay'></div>
@@ -40,45 +40,45 @@
                     <label for='lang'>Preferred language</label><br>
                     <select id='lang' name='lang'>
                         <option value='0'>Choose your language</option>");
-                        $languageResult = $conn->query("SELECT * FROM sep_languages ORDER BY language_name");
-                        if($languageResult) {
-                            while($row = $languageResult->fetchObject()) {
-                                $language_code = filter_var($row->language_code, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-                                $language_name = filter_var($row->language_name, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-                                $page->addPageBodyItem("<option value='$language_code'>$language_name</option>");
-                            }
+                    $languageResult = $conn->query("SELECT * FROM sep_languages ORDER BY language_name");
+                    if($languageResult) {
+                        while($row = $languageResult->fetchObject()) {
+                            $language_code = filter_var($row->language_code, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+                            $language_name = filter_var($row->language_name, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+                            $page->addPageBodyItem("<option value='$language_code'>$language_name</option>");
                         }
+                    }
                     $page->addPageBodyItem("</select>
-                    <label for='reg'>Region</label><br>
-                    <select id='reg' name='reg'>
-                        <option value='0'>Choose your region</option>");
-                        $regionResult = $conn->query("SELECT * FROM sep_regions ORDER BY region_name");
-                        if($regionResult) {
-                            while($row = $regionResult->fetchObject()) {
-                                $region_code = filter_var($row->region_code, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-                                $region_name = filter_var($row->region_name, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-                                $page->addPageBodyItem("<option value='$region_code'>$region_name</option>");
-                            }
+                                        <label for='reg'>Region</label><br>
+                                        <select id='reg' name='reg'>
+                                            <option value='0'>Choose your region</option>");
+                    $regionResult = $conn->query("SELECT * FROM sep_regions ORDER BY region_name");
+                    if($regionResult) {
+                        while($row = $regionResult->fetchObject()) {
+                            $region_code = filter_var($row->region_code, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+                            $region_name = filter_var($row->region_name, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+                            $page->addPageBodyItem("<option value='$region_code'>$region_name</option>");
                         }
+                    }
                     $page->addPageBodyItem("</select>
-                    <button type='button' id='nextBtn1'>Next</button>               
-                </div>
-                
-                <div id='tab2'>
-                    <p>Tell us about yourself</p>
-                    <h1>What job(s) are you interested in?</h1>
-                    <label style='width: 100%; text-align: center;'>(Please choose at least 3)</label>
-                    <input style='width: 75%; margin: auto; text-align: center; padding: 10px; border-radius: 10px; border: 1px #828282 solid; outline: none;' 
-                        id='jobsListInput' list='searchJobsList' placeholder='Search for jobs...' onkeyup='filterJobsList()' onchange='selectJob()'>       
-                    <datalist id='searchJobsList'>");
-                        $jobsResult = $conn->query("SELECT * FROM sep_jobs_list ORDER BY job_name");
-                        if($jobsResult) {
-                            while($row = $jobsResult->fetchObject()) {
-                                $job_code = filter_var($row->job_code, FILTER_SANITIZE_NUMBER_INT);
-                                $job_name = filter_var($row->job_name, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-                                $page->addPageBodyItem("<option value='$job_name' id='$job_name' name='$job_code'>");
-                            }
+                                        <button type='button' id='nextBtn1'>Next</button>               
+                                    </div>
+                                    
+                                    <div id='tab2'>
+                                        <p>Tell us about yourself</p>
+                                        <h1>What job(s) are you interested in?</h1>
+                                        <label style='width: 100%; text-align: center;'>(Please choose at least 3)</label>
+                                        <input style='width: 75%; margin: auto; text-align: center; padding: 10px; border-radius: 10px; border: 1px #828282 solid; outline: none;' 
+                                            id='jobsListInput' list='searchJobsList' placeholder='Search for jobs...' onkeyup='filterJobsList()' onchange='selectJob()'>       
+                                        <datalist id='searchJobsList'>");
+                    $jobsResult = $conn->query("SELECT * FROM sep_jobs_list ORDER BY job_name");
+                    if($jobsResult) {
+                        while($row = $jobsResult->fetchObject()) {
+                            $job_code = filter_var($row->job_code, FILTER_SANITIZE_NUMBER_INT);
+                            $job_name = filter_var($row->job_name, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+                            $page->addPageBodyItem("<option value='$job_name' id='$job_name' name='$job_code'>");
                         }
+                    }
                     $page->addPageBodyItem("</datalist>        
                     <p style='font-weight: normal; font-size: small; margin-top: 5px; width: 75%;'>Can't find one? <strong>Suggest one!</strong></p>
                     <div id='suggestion' style='width: 75%; margin: auto; display: flex; flex-wrap: wrap; justify-content: center; '></div>
@@ -87,7 +87,6 @@
                 </div>
             </form>
     </div>       
-
     <div id='refineContainer'>
         <div class='refineChild'>
             <label>Keyword</label><br>
@@ -243,9 +242,8 @@
     </div>
 </div>");
 
-    $page->displayPage();
+$page->displayPage();
 ?>
 
 <!--    <img src='assets/appStore.svg' alt='App Store'>-->
 <!--    <img src='assets/googlePlay.svg' alt='App Store'>-->
-
