@@ -34,9 +34,9 @@ header h1{
     margin-bottom: 10px;
 }
 
-/*#topnav #myLinks {*/
-/*    display: none;*/
-/*}*/
+#topnav #myLinks {
+    display: none;
+}
 
 #mobHome{
     margin: 90px 0 20px 0;

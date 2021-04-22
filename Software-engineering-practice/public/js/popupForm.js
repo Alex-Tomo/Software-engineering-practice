@@ -35,7 +35,7 @@ window.onload = () => {
                 let fname, lname, gender, lang, region, jobType, category;
 
                 nextButtonTab1.addEventListener('click', () => {
-                    // Get tab 1 info
+                //     // Get tab 1 info
 
                     fname = document.getElementById('fname').value;
                     lname = document.getElementById('lname').value;
@@ -54,27 +54,33 @@ window.onload = () => {
 
                 nextButtonTab2.addEventListener('click', () => {
                     // Get tab 2 info
-
-                    tab2.style.display = 'none';
-                    popup1.style.display = 'none';
-
-                    // Split the chosen jobs into a number array
                     let jobsArray = localStorage.getItem("jobsArray").split(",");
-                    let email = document.getElementById('email').value;
-                    $.ajax({
-                        url: "./handlers/userinfo_handler.php",
-                        method: "POST",
-                        data: {
-                            email: email,
-                            firstname: fname,
-                            lastname: lname,
-                            gender: gender,
-                            language: lang,
-                            region: region,
-                            jobsArray: jobsArray
-                        },
-                        success: (data) => { console.log("error: " + data); }
-                    });
+                    if(jobsArray.length < 3) {
+                        alert('Must choose at least 3!');
+                    } else {
+
+                        tab2.style.display = 'none';
+                        popup1.style.display = 'none';
+
+                        // Split the chosen jobs into a number array
+                        let email = document.getElementById('email').value;
+                        $.ajax({
+                            url: "./handlers/userinfo_handler.php",
+                            method: "POST",
+                            data: {
+                                email: email,
+                                firstname: fname,
+                                lastname: lname,
+                                gender: gender,
+                                language: lang,
+                                region: region,
+                                jobsArray: jobsArray
+                            },
+                            success: (data) => {
+                                console.log("error: " + data);
+                            }
+                        });
+                    }
                 });
 
                 prevButtonTab2.addEventListener('click', () => {

@@ -7,7 +7,7 @@ function getHeader() {
     <header>";
         // Desktop Navbar
         $header .= "<div id='desktop_container'>
-            <h1 class='clickable' onclick='openPage(`loggedinHome.php`)'>skip</h1><h1 class='clickable' id='logoText2' onclick='openPage('home.php')'>CV</h1>
+            <h1 class='clickable' onclick='openPage(`loggedinHome.php`)'>skip</h1><h1 class='clickable' id='logoText2' onclick='openPage('loggedinHome.php')'>CV</h1>
             <nav>";
                 if (!$_SESSION['loggedin']) {
                     $header .= "<button class='clickable' onclick='openPage(`register.php`)' id='signUp'>Sign Up</button >
@@ -31,7 +31,7 @@ function getHeader() {
         // Mobile NavBar
         $header .= "<div id='mobile_container'>
             <div id='topnav'>
-                <h1 class='clickable' onclick='openPage(`home.php`)'>skip</h1><h1 class='clickable' id='logoText2' onclick='openPage('home.php')'>CV</h1>
+                <h1 class='clickable' onclick='openPage(`loggedinHome.php`)'>skip</h1><h1 class='clickable' id='logoText2' onclick='openPage('loggedinHome.php')'>CV</h1>
                 <div id='myLinks'>";
                     if (!$_SESSION['loggedin']) {
                         $header .= "<button class='clickable' onclick='openPage(`register.php`)' id='signUpMob'>Sign Up</button ><br >

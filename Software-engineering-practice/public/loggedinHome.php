@@ -67,18 +67,21 @@
                 <div id='tab2'>
                     <p>Tell us about yourself</p>
                     <h1>What job(s) are you interested in?</h1>
-                    <label>(you may choose a few)</label>
-                    <input id='jobsListInput' type='text' placeholder='Search for jobs...' onkeyup='filterJobsList()'>       
-                    <ul id='searchJobsList'>");
+                    <label style='width: 100%; text-align: center;'>(Please choose at least 3)</label>
+                    <input style='width: 75%; margin: auto; text-align: center; padding: 10px; border-radius: 10px; border: 1px #828282 solid; outline: none;' 
+                        id='jobsListInput' list='searchJobsList' placeholder='Search for jobs...' onkeyup='filterJobsList()' onchange='selectJob()'>       
+                    <datalist id='searchJobsList'>");
                         $jobsResult = $conn->query("SELECT * FROM sep_jobs_list ORDER BY job_name");
                         if($jobsResult) {
                             while($row = $jobsResult->fetchObject()) {
                                 $job_code = filter_var($row->job_code, FILTER_SANITIZE_NUMBER_INT);
                                 $job_name = filter_var($row->job_name, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-                                $page->addPageBodyItem("<li id='$job_code' onclick='selectJob(`{$job_code}`)'>$job_name</li>");
+                                $page->addPageBodyItem("<option value='$job_name' id='$job_name' name='$job_code'>");
                             }
                         }
-                    $page->addPageBodyItem("</ul>        
+                    $page->addPageBodyItem("</datalist>        
+                    <p style='font-weight: normal; font-size: small; margin-top: 5px; width: 75%;'>Can't find one? <strong>Suggest one!</strong></p>
+                    <div id='suggestion' style='width: 75%; margin: auto; display: flex; flex-wrap: wrap; justify-content: center; '></div>
                     <button type='button' id='nextBtn2'>Submit</button>
                     <button type='button' id='prevBtn2'>Back</button>
                 </div>
