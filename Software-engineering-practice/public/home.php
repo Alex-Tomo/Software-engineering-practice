@@ -10,7 +10,7 @@
     $page->addPageBodyItem("
         <div id='top'>
             <div id='header2'>
-                <h2>Find the right </h2><h2 id='textChange'>specialist</h2><h2> just when you need it!</h2>
+                <h2>Find the right </h2><h2 id='textChange'> specialist</h2><h2> just when you need it!</h2>
                 <p>This platform helps you to skipCV and find the right job on the right time!</p>
                 <button class='clickable' onclick='openPage(`register.php`)'>Get started!</button>
             </div>
@@ -76,32 +76,6 @@
                 <p>When you get the message, show the best of yourself!</p>
             </div>
         
-            <div class='slideshow-container'>
-                <div class='mySlides'>
-                    <q>I love you the more in that I believe you had liked me for my own sake and for nothing else</q>
-                    <p class='author'>- John Keats</p>
-                </div>
-                
-                <div class='mySlides'>
-                    <q>But man is not made for defeat. A man can be destroyed but not defeated.</q>
-                    <p class='author'>- Ernest Hemingway</p>
-                </div>
-                
-                <div class='mySlides'>
-                    <q>I have not failed. I've just found 10,000 ways that won't work.</q>
-                    <p class='author'>- Thomas A. Edison</p>
-                </div>
-                
-                <a class='prev'>❮</a>
-                <a class='next'>❯</a>
-            </div>
-                
-            <div class='dot-container'>
-                <span class='dot' onclick='currentSlide(1)'></span> 
-                <span class='dot' onclick='currentSlide(2)'></span> 
-                <span class='dot' onclick='currentSlide(3)'></span> 
-            </div>
-        
             <div id='swipeSecDes'>
                 <div id='swipeChild'>
                     <img src='assets/swipe_left.svg'>
@@ -120,6 +94,36 @@
                     <h4>Message</h4>
                     <p>When you get the message, show the best of yourself!</p>
                 </div>
+            </div>        
+        
+            <div id='slideshow_container'>
+            <h5>Trusted by the world’s most innovative businesses – big and small</h5>
+                <div class='mySlides'>
+                    <q>The best application for fast job all imaginable people needs. Walk dogs, fix cars, find freelancers.</q>
+                    <p class='author'>Viella Malkovich</p>
+                    <p class='jobDes'>Creative Director at Johnson</p>
+                </div>
+                
+                <div class='mySlides'>
+                    <q>Really good application to find or post jobs.</q>
+                    <p class='author'>Jean Hilton</p>
+                    <p class='jobDes'>Programmer</p>
+                </div>
+                
+                <div class='mySlides'>
+                    <q>Best application! Registering is really easy and quick to do.</q>
+                    <p class='author'>John Smith</p>
+                    <p class='jobDes'>Director</p>
+                </div>
+                   
+                <a class='prev'><img src='assets/leftArrow.svg'></a>
+                <a class='next'><img src='assets/rightArrow.svg'></a>
+            </div>
+                
+            <div class='dot-container'>
+                <span class='dot dot1'></span> 
+                <span class='dot dot2'></span> 
+                <span class='dot dot3'></span> 
             </div>
         </div>
     </div>
