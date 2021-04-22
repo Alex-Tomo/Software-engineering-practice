@@ -1,6 +1,9 @@
 // Added by Alex
 let nextSlideAnchor = document.getElementsByClassName('next');
 let prevSlideAnchor = document.getElementsByClassName('prev');
+let dotAnchor1 = document.getElementsByClassName('dot1');
+let dotAnchor2 = document.getElementsByClassName('dot2');
+let dotAnchor3 = document.getElementsByClassName('dot3');
 
 window.onload = function() {
     let slideIndex = 1;
@@ -10,9 +13,17 @@ window.onload = function() {
     // Added by alex, removed the home.php onclicks, use these instead (more dynamic).
     nextSlideAnchor[0].addEventListener("click", function() { plusSlides(1); });
     prevSlideAnchor[0].addEventListener("click", function() { plusSlides(-1); });
+    dotAnchor1[0].addEventListener("click", function() { currentSlide(1); });
+    dotAnchor2[0].addEventListener("click", function() { currentSlide(2); });
+    dotAnchor3[0].addEventListener("click", function() { currentSlide(3); });
+
 
     function plusSlides(n) {
         showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
     }
 
     function showSlides(n) {
