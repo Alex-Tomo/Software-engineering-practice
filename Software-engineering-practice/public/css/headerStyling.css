@@ -15,6 +15,7 @@ header h1{
 
 #logoText2{
     color: white;
+    margin-right: 50%;
 }
 
 #desktop_container{
@@ -109,7 +110,6 @@ header h1{
 
 #topnav a:hover {
     background-color: #017EFC;
-    color: black;
 }
 
 /*.active {*/
@@ -124,6 +124,10 @@ header h1{
         display: inline;
     }
 
+    #logoText2{
+        margin-right: 0;
+    }
+
     #mobile_container{
         display: none;
     }
@@ -135,16 +139,21 @@ header h1{
     }
 
     nav li{
-        margin: 18px 5px 0 0;
+        margin-top: 18px;
         float: right;
-        width: 15%;
+        width: 14%;
         padding: 5px;
     }
 
     nav img{
         height: 50px;
         float: right;
-        margin-top: 7px;
+        margin: 7px 0 0 25px;
+    }
+
+    .navIcon{
+        width: 23px;
+        margin-left: 25px;
     }
 
     nav a{
@@ -160,52 +169,42 @@ header h1{
         color: #ffffff;
     }
 
-    .dropdown {
+    #dropdown {
         float: right;
         overflow: hidden;
     }
 
-    .dropdown .dropbtn {
+    #dropbtn {
         font-size: 16px;
         border: none;
         outline: none;
         color: white;
-        padding: 14px 16px;
+        padding: 23px 0 0 14px;
         background-color: inherit;
         font-family: inherit;
         margin: 0;
         float: right;
     }
 
-
-    .dropdown-content {
+    #dropdown_content {
         display: none;
         position: absolute;
         background-color: #017EFC;
-        min-width: 160px;
-        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-        margin-top: 50px;
+        min-width: 190px;
+        margin-top: 81px;
     }
 
-    .dropdown-content a {
+    #dropdown_content a {
         float: none;
-        color: black;
         padding: 12px 16px;
         text-decoration: none;
         display: block;
         text-align: left;
     }
 
-    .dropdown-content a:hover {
-        background-color: #ddd;
+    #dropdown_content a:hover {
+        background-color: #191D20;
     }
-
-    .dropdown:hover .dropdown-content {
-        display: block;
-    }
-
-
-
 
     #signUp{
         margin-top: 10px;
@@ -232,12 +231,12 @@ header h1{
 }
 
 @media only screen and (min-width: 1024px) {
-    header{
+    header {
         margin: 0 120px 0 120px;
         display: inline;
     }
 
-    #logoText2{
+    #logoText2 {
         color: white;
     }
 
