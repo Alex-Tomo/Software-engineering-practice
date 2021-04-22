@@ -227,76 +227,84 @@ body{
 
 /*Review Section*/
 /* Slideshow container */
-.slideshow-container {
+#slideshow_container{
     position: relative;
-    background: #f1f1f1f1;
+    height: 300px;
+}
+
+#slideshow_container h5{
+    font-size: 1em;
+    text-align: center;
+    margin: 40px 0 0 0;
 }
 
 /* Slides */
-.mySlides {
+.mySlides{
     display: none;
-    padding: 80px;
+    padding: 70px 80px 40px 80px;
     text-align: center;
 }
 
+#slideshow_container img{
+    width: 30px;
+}
+
 /* Next & previous buttons */
-.prev, .next {
+.prev, .next{
     cursor: pointer;
     position: absolute;
     top: 50%;
-    width: auto;
+    height: 20px;
     margin-top: -30px;
-    padding: 16px;
-    color: #888;
-    font-weight: bold;
-    font-size: 20px;
-    border-radius: 0 3px 3px 0;
-    user-select: none;
+    padding: 25px;
 }
 
 /* Position the "next button" to the right */
-.next {
+.next{
     position: absolute;
     right: 0;
     border-radius: 3px 0 0 3px;
 }
 
-/* On hover, add a black background color with a little bit see-through */
-.prev:hover, .next:hover {
-    background-color: rgba(0,0,0,0.8);
-    color: white;
-}
-
 /* The dot/bullet/indicator container */
-.dot-container {
+.dot-container{
     text-align: center;
-    padding: 20px;
-    background: #ddd;
+    padding: 0 20px 20px 20px;
 }
 
 /* The dots/bullets/indicators */
-.dot {
+.dot{
     cursor: pointer;
     height: 15px;
     width: 15px;
-    margin: 0 2px;
-    background-color: #bbb;
+    margin: 0 10px;
     border-radius: 50%;
     display: inline-block;
+    background-color: #2B292D;
+    opacity: 30%;
     transition: background-color 0.6s ease;
 }
 
 /* Add a background color to the active dot/circle */
-.active, .dot:hover {
-    background-color: #717171;
+.active, .dot:hover{
+    background-color: #017EFC;
+    opacity: 100%;
 }
 
 /* Add an italic font style to all quotes */
-q {font-style: italic;}
+q{
+    font-style: italic;
+}
 
 /* Add a blue color to the author */
-.author {color: cornflowerblue;}
+.author{
+    font-weight: bold;
+    margin: 25px 0 10px 0;
+}
 
+.jobDes{
+    margin: 0;
+}
 
 
 
@@ -332,11 +340,11 @@ form p{
     font-weight: bold;
 }
 
-label,input{
+form label,input{
     display: block;
 }
 
-label{
+form label{
     text-align: left;
     font-size: 0.9em;
     width: 200px;
@@ -430,7 +438,7 @@ form button{
     background: white;
     padding: 10px 15px 10px 15px;
     border-radius: 5px;
-    margin-bottom: 15px;
+    margin-top: 15px;
     box-shadow: 4px 4px 6px 6px rgba(0, 0, 0, 0.05);
 }
 
@@ -446,12 +454,29 @@ form button{
     border: none;
     font-size: 1.1em;
     color: #017EFC;
-    background-color: white;
     font-weight: bold;
+    width: 100%;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
 }
 
-.refineChild select{
-    width: 100%;
+::placeholder {
+    color: #017EFC;
+    opacity: 1; /* Firefox */
+}
+
+/*:-ms-input-placeholder {*/
+/*    color: #017EFC;*/
+/*}*/
+
+/*::-ms-input-placeholder {*/
+/*    color: #017EFC;*/
+/*}*/
+
+.refineChild select option {
+    background-color: white;
+    color: #017EFC;
 }
 
 #magGlass{
@@ -466,9 +491,13 @@ form button{
     padding: 15px;
     text-align: center;
     border: none;
-    margin-bottom: 30px;
+    margin: 15px 0 30px 0;
     border-radius: 5px;
 }
+
+
+
+
 
 
 
@@ -807,6 +836,16 @@ form button{
     #back {
         width: 20%;
     }
+
+    #slideshow_container h5{
+        font-size: 1.1em;
+        margin: 50px 170px 0 170px;
+    }
+
+    .mySlides{
+        padding: 80px 0 30px 0;
+        margin: 0 250px;
+    }
 }
 
 @media only screen and (min-width: 874px) {
@@ -855,20 +894,16 @@ form button{
     #header2 {
         margin: 130px 0 0 120px;
         float: left;
-        width: 30%;
+        width: 27%;
     }
 
     #header2 h2 {
-        float: left;
-        color: white;
-        margin: 0;
         font-size: 1.6em;
     }
 
-    #textChange {
-        color: #191D20;
-        margin-left: 10px;
-    }
+    /*#textChange {*/
+    /*    margin-left: 10px;*/
+    /*}*/
 
     #top p {
         color: white;
@@ -954,7 +989,7 @@ form button{
     }
 
     .refineChild {
-        margin-top: 7px;
+        margin-top: 13px;
         margin-bottom: 0;
         width: 25%;
         float: left;
@@ -976,6 +1011,7 @@ form button{
     #refineContainer button {
         width: 15%;
         float: right;
+        margin: 0;
         padding: 45px 0 45px 0;
     }
 
@@ -1007,6 +1043,23 @@ form button{
 
     #back {
         width: 15%;
+    }
+
+    #slideshow_container{
+        margin: 0 90px;
+    }
+
+    #slideshow_container h5{
+        font-size: 1.2em;
+        margin: 40px 190px 0 190px;
+    }
+
+    .mySlides{
+        padding: 90px 0 30px 0;
+    }
+
+    #slideshow_container img{
+        width: 40px;
     }
 }
 
@@ -1087,8 +1140,12 @@ form button{
         margin: 170px 0 0 200px;
     }
 
-    h2{
+    #header2 h2{
         font-size: 2em;
+    }
+
+    #header2 {
+        width: 25%;
     }
 
     #infoSec {
@@ -1204,4 +1261,14 @@ form button{
     #back {
         width: 10%;
     }
+
+    #slideshow_container{
+        margin: 0 120px;
+    }
+
+    #slideshow_container h5{
+        font-size: 1.5em;
+        margin: 40px 370px 0 370px;
+    }
+
 }
