@@ -8,6 +8,7 @@ footer{
     width: 100%;
     color: white;
     text-align: center;
+    display: inline-block;
 }
 
 footer h3{

@@ -83,6 +83,9 @@ input[type="submit"]{
     font-weight: bold;
     color: white;
     font-size: 1.2em;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
 }
 
 #submit:hover{

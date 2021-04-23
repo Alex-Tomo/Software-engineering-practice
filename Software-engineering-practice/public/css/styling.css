@@ -322,29 +322,30 @@ q{
 }
 
 form{
-    margin: 0 15px 15px 15px;
     padding: 15px;
     position: absolute;
     top: 25%;
     background-color: white;
     width: auto;
     height: auto;
-    z-index: 2;
     text-align: center;
     box-sizing: border-box;
     border-radius: 5px;
+    left:20px;
+    right:20px
 }
 
-form p{
+form h2{
     color: #017EFC;
     font-weight: bold;
+    font-size: 1em;
 }
 
-form label,input{
+#tab1 label,input{
     display: block;
 }
 
-form label{
+#tab1 label{
     text-align: left;
     font-size: 0.9em;
     width: 200px;
@@ -354,30 +355,36 @@ form label{
     margin: 13px 0 5px 0;
 }
 
-form input[type="text"],[type="email"],[type="password"],[type="date"],[type="search"]{
-    padding: 10px;
+#tab1 input[type="text"],[type="date"],[type="search"]{
+    padding: 10px 0;
     border: 1px solid #828282;
     border-radius: 8px;
     opacity: 0.5;
     float: left;
-    width: 240px;
+    width: 100%;
     color: #017EFC;
 }
 
-form select{
-    padding: 10px;
+#tab1 input[type="text"]::-webkit-input-placeholder {
+    padding-left: 10px;
+}
+
+
+#tab1 select{
+    padding: 10px 0 10px 10px;
     border: 1px solid #828282;
     border-radius: 8px;
     opacity: 0.5;
+    margin-right: 0;
     font-weight: lighter;
-    color: black;
+    color: #017EFC;
     font-size: 0.8em;
     float: left;
-    width: 260px;
+    width: 100%;
 }
 
 .box{
-    height:210px;
+    height: 210px;
     border-radius: 5px;
     color: white;
     margin-bottom: 20px;
@@ -386,7 +393,7 @@ form select{
 form button{
     background: #017EFC;
     padding: 10px;
-    width: 70%;
+    width: 200px;
     margin: 15px auto;
     border: 1px solid #017EFC;
     border-radius: 5px;
@@ -395,11 +402,45 @@ form button{
     font-size: 1.2em;
 }
 
-#prevBtn{
+#tab2 label{
+    font-size: 0.9em;
+    font-weight: bold;
+    color: #017EFC;
+    margin-bottom: 20px;
+    padding: 0;
+}
+
+#tab2 p{
+    font-size: 0.9em;
+    color: #017EFC;
+    margin: 10px 0;
+    padding: 0;
+}
+
+#tab2 input{
+    width: 75%;
+    margin: auto;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px #828282 solid;
+    outline: none;
+}
+
+
+#suggestion{
+    width: 100%;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#prevBtn2{
     border: 2px solid #017EFC;
     background-color: white;
     color: #017EFC;
     margin-top: 10px;
+
 }
 
 #submit:hover{
@@ -428,10 +469,11 @@ form button{
 .pageContainer{
     background-color: #FFFFFF;
     padding-top: 20px;
+    display: inline-block;
 }
 
 #refineContainer{
-    margin: 20px;
+    margin: 20px 20px 0 20px;
 }
 
 .refineChild{
@@ -505,11 +547,18 @@ form button{
 /*Results*/
 .pageContainer h1{
     font-size: 1.3em;
+    margin-top: 40px;
     color: #017EFC;
 }
 
-#resultContainer{
-    margin: 15px;
+#recommendedContainer{
+    margin: 0 15px;
+    display: inline-block;
+}
+
+#recAddedContainer{
+    margin: 0 15px;
+    display: inline-block;
 }
 
 .checked {
@@ -537,28 +586,41 @@ form button{
     font-size: 1em;
 }
 
+.resultChild p{
+    margin-top: 0;
+}
+
 .price{
     float: right;
     color: #099239;
 }
 
-.resultChild p{
-    margin-top: 0;
+.topImg{
+    overflow: hidden;
+    height: 160px;
 }
 
-.replaceWithImg2{
-    background-color: #D8D8D8;
-    height: 150px;
+.topImg img{
     width: 100%;
-    /*float: left;*/
 }
 
-.resultChild img{
-    height: auto;
-    width: 25%;
-    float: left;
-    margin-right: 5px;
+.personIcon{
+    height: 40px;
+    width: 40px;
+    margin-right: 7px;
 }
+
+/*.replaceWithImg2{*/
+/*    background-color: #D8D8D8;*/
+/*    height: 150px;*/
+/*    width: 100%;*/
+/*    !*float: left;*!*/
+/*}*/
+
+/*.resultChild img{*/
+/*    height: auto;*/
+/*    margin-right: 5px;*/
+/*}*/
 
 
 
@@ -567,6 +629,7 @@ form button{
 /*Categories*/
 #categories{
     margin: 15px;
+    display: inline-block;
 }
 
 #categories button{
@@ -583,39 +646,33 @@ form button{
 
 
 /*Recently Viewed*/
-
 #recViewedParent{
-    margin: 15px;
+    margin: 0 15px;
     padding-bottom: 25px;
+    display: inline-block;
+
 }
 
 .recViewedChild{
     display: flex;
 }
 
-.replaceWithImg{
-    background-color: #D8D8D8;
+.recViewedImg img{
     height: 70px;
     width: 90px;
     float: left;
     margin: 0 5px 20px 0;
 }
 
-.replaceWithImg img {
-    width: auto;
-    height: 100%;
-}
-
 #recViewedParent h4{
     font-size: 0.8em;
     margin: 8px 0 9px 0;
-
 }
 
-#recViewedParent2 h4{
-    font-size: 0.8em;
-    margin: 8px 60px 9px 0;
-}
+/*#recViewedParent2 h4{*/
+/*    font-size: 0.8em;*/
+/*    margin: 8px 60px 9px 0;*/
+/*}*/
 
 .recViewedChild p{
     color: #099239;
@@ -623,7 +680,7 @@ form button{
     margin-top: 0;
 }
 
-.recViewedChildChild {
+.recViewedText {
     display: flex;
     flex-direction: column;
 }
@@ -632,8 +689,11 @@ form button{
 
 
 
-
 /*Service Inner*/
+#resultContainer{
+    margin: 15px;
+}
+
 #back{
     color: #A1A1A1;
     margin-bottom: 20px;
@@ -672,7 +732,6 @@ form button{
 }
 
 .resultText h2 {
-    margin-left: 15%;
     padding: 0;
 }
 
@@ -818,6 +877,18 @@ form button{
         float: right;
     }
 
+    form {
+        padding: 15px 110px;
+    }
+
+    #recommendedContainer{
+        /*margin-bottom: 400px;*/
+    }
+
+    #recAddedContainer{
+        /*margin-bottom: 780px;*/
+    }
+
     #refineContainer{
         text-align: -webkit-center;
     }
@@ -844,17 +915,17 @@ form button{
         margin-right: 15px;
     }
 
-    .resultChild img{
-        width: 20%;
+    #resultContainer{
+        display: inline-block;
     }
 
-    #categories{
-        padding-top: 1225px;
+    #serviceResult{
+        width: 100%;
     }
 
-    #recViewedParent2{
-        padding-bottom: 150px;
-    }
+    /*#recViewedParent2{*/
+    /*    padding-bottom: 150px;*/
+    /*}*/
 
     #back {
         width: 20%;
@@ -898,12 +969,6 @@ form button{
 
     #text3{
         margin-top: 100px;
-    }
-}
-
-@media only screen and (min-width: 1012px) {
-    .resultChild img{
-        width: 15%;
     }
 }
 
@@ -1011,6 +1076,14 @@ form button{
         float: left;
     }
 
+    form {
+        padding: 15px 250px;
+    }
+
+    #recAddedContainer{
+
+    }
+
     .refineChild {
         margin-top: 13px;
         margin-bottom: 0;
@@ -1038,11 +1111,6 @@ form button{
         padding: 45px 0 45px 0;
     }
 
-    #resultContainer{
-        margin-top: 40px;
-        /*padding-bottom: 50px;*/
-    }
-
     .pageContainer h1{
         font-size: 1.6em;
     }
@@ -1052,17 +1120,17 @@ form button{
         margin-right: 15px;
     }
 
-    #categories{
-        padding-top: 800px;
+    #resultContainer{
+        display: block;
     }
 
     #serviceResult{
         width: 60%;
     }
 
-    #recViewedParent2{
-        padding-bottom: 130px;
-    }
+    /*#recViewedParent2{*/
+    /*    padding-bottom: 130px;*/
+    /*}*/
 
     #back {
         width: 15%;
@@ -1206,15 +1274,25 @@ form button{
         width: 45%;
     }
 
+    form{
+        margin: 0 150px;
+        padding: 15px 300px;
+    }
+
     .pageContainer{
-        padding-bottom: 370px;
+        padding-bottom: 50px;
     }
 
-    #serInnContainer{
-        padding-bottom: 200px;
+    .resultChild{
+        height: 450px
     }
 
-    #resultContainer{
+    .topImg{
+        height: 230px;
+    }
+
+    #recommendedContainer{
+        display: block;
         width: 73%;
         padding-right: 0;
         float: left;
@@ -1222,35 +1300,34 @@ form button{
         margin-right: 10px;
     }
 
-    .resultChild{
-        height: 450px
-    }
-
-    .resultChild img{
-        width: 24%;
-    }
-
-    .resultChild h2{
+    #recAddedContainer{
+        float: left;
+        width: 73%;
+        padding-right: 0;
         margin-top: 0;
-        margin-bottom: 59px;
+        margin-right: 10px;
+        display: inline-block;
     }
 
     #categories{
-        margin: 0 0 30px 0;
-        padding: 0;
-        width: 25%;
-        float: right;
+        display: block;
+        padding-top: 25px;
     }
+
+    #recViewedParent{
+        margin-left: 0;
+    }
+
+    /*#categories{*/
+    /*    margin: 0 0 30px 0;*/
+    /*    padding: 0;*/
+    /*    width: 25%;*/
+    /*    float: right;*/
+    /*}*/
 
     #categories h1{
         margin-top: 10px;
         font-size: 1.3em;
-    }
-
-    #recViewedParent{
-        margin: 0;
-        width: 25%;
-        display: inline;
     }
 
     .resultText{
@@ -1258,27 +1335,21 @@ form button{
     }
 
     #recViewedParent h1{
-        margin-top: 10px;
-        font-size: 1.3em;
+        font-size: 1.5em;
     }
 
-    .replaceWithImg2 {
-        height: 180px;
+    #serInnContainer{
+        padding-bottom: 200px;
     }
 
     #serviceResult{
-        width: 100%;
-        height: 560px;
-    }
-
-    #serviceResult img{
-        width: 17%;
-        margin-right: 20px;
+        width: 70%;
+        height: 550px;
     }
 
     #serviceResult h2{
         font-size: 1.35em;
-        margin: 40px 0 90px 0;
+        margin: 10px 0 35px 0;
     }
 
     #back {
