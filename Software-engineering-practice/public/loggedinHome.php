@@ -12,6 +12,7 @@ if(!$_SESSION['loggedin']) {
     header('Location: home.php');
 }
 
+
 $page = new pageTemplate('Logged In Home');
 $page->addCSS("<link rel=\"stylesheet\" href=\"./css/styling.css\">");
 $page->addCSS("<link rel=\"stylesheet\" href=\"./css/footerStyling.css\">");
@@ -23,16 +24,16 @@ $page->addJavaScript("<script src=\"./js/selectImage.js\"></script>");
 
 $page->addPageBodyItem("
 <div class='pageContainer'>
-    <div class='popup' id='popup-1' style='display: none;'>
+     <div class='popup' id='popup-1' style='display: none;'>
         <div class='overlay'></div>
             <form id='regForm' action='/action_page.php'>
                 <div id='tab1'>
-                    <p>Tell us about yourself</p>
+                    <h2>Tell us about yourself</h2>
                     <h1>General information</h1>
                     <input type='text' id='email' value='{$_SESSION['email']}' style='display: none'>
-                    <label for='fname'>First name</label><br>
+                    <label for='fname'>   First name</label><br>
                     <input type='text' id='fname' name='fname' placeholder='Your name'><br>
-                    <label for='lname'>Last name</label><br>
+                    <label for='lname'>   Last name</label><br>
                     <input type='text'  id='lname' name='lname' placeholder='Last name'><br>
                     <label for='gender'>Gender</label>
                     <select id='gender' name='gender'>
@@ -51,9 +52,9 @@ $page->addPageBodyItem("
                         }
 
                     $page->addPageBodyItem("</select>
-                                        <label for='reg'>Region</label><br>
-                                        <select id='reg' name='reg'>
-                                            <option value='0'>Choose your region</option>");
+                                                            <label for='reg'>Region</label><br>
+                                                            <select id='reg' name='reg'>
+                                                                <option value='0'>Choose your region</option>");
 
                         list($region_codes, $region_names) = selectAll($conn, 'region_code', 'region_name', 'sep_regions', 'region_name');
                         for($region_index = 0; $region_index < sizeof($region_codes); $region_index++) {
@@ -61,14 +62,14 @@ $page->addPageBodyItem("
                         }
 
                     $page->addPageBodyItem("</select>
-                                        <button type='button' id='nextBtn1'>Next</button>               
+                                        <button class='clickable' type='button' id='nextBtn1'>Next</button>               
                                     </div>
                                     
                                     <div id='tab2'>
-                                        <p>Tell us about yourself</p>
+                                        <h2>Tell us about yourself</h2>
                                         <h1>What job(s) are you interested in?</h1>
-                                        <label style='width: 100%; text-align: center;'>(Please choose at least 3)</label>
-                                        <input style='width: 75%; margin: auto; text-align: center; padding: 10px; border-radius: 10px; border: 1px #828282 solid; outline: none;' 
+                                        <label>(Please choose at least 3)</label>
+                                        <input
                                             id='jobsListInput' list='searchJobsList' placeholder='Search for jobs...' onkeyup='filterJobsList()' onchange='selectJob()'>       
                                         <datalist id='searchJobsList'>");
 
@@ -76,12 +77,12 @@ $page->addPageBodyItem("
                         for($job_index = 0; $job_index < sizeof($job_codes); $job_index++) {
                             $page->addPageBodyItem("<option value='{$job_names[$job_index]}' id='{$job_names[$job_index]}' name='{$job_codes[$job_index]}'>");
                         }
-
-                    $page->addPageBodyItem("</datalist>        
-                    <p style='font-weight: normal; font-size: small; margin-top: 5px; width: 75%;'>Can't find one? <strong>Suggest one!</strong></p>
-                    <div id='suggestion' style='width: 75%; margin: auto; display: flex; flex-wrap: wrap; justify-content: center;'></div>
-                    <button type='button' id='nextBtn2'>Submit</button>
-                    <button type='button' id='prevBtn2'>Back</button>
+                    $page->addPageBodyItem("</datalist>   
+     
+                    <p>Can't find one? <strong>Suggest one!</strong></p>
+                    <div id='suggestion'></div>
+                    <button class='clickable' type='button' id='nextBtn2'>Submit</button><br>
+                    <button class='clickable' type='button' id='prevBtn2'>Back</button>
                 </div>
             </form>
     </div>       
@@ -113,11 +114,10 @@ $page->addPageBodyItem("
             <button class='clickable' onclick='openPage()'><i id='magGlass' class='fa fa-search'></i>Search</button>
     </div>
     
-    <div id='resultContainer'>
+<div id='recommendedContainer'>
         <h1>Recommended for you</h1>");
-
-        try {
-            $usersChosenCategories = $conn->query("
+try {
+    $usersChosenCategories = $conn->query("
                           SELECT sep_users_interested_jobs.job_code
                           FROM sep_users_interested_jobs
                           JOIN sep_users
@@ -125,20 +125,20 @@ $page->addPageBodyItem("
                           WHERE sep_users.user_email = '{$_SESSION['email']}'
         ");
 
-            $choiceArray = array();
+    $choiceArray = array();
 
-            if($usersChosenCategories) {
-                while($usersChoices = $usersChosenCategories->fetchObject()) {
-                    array_push($choiceArray, $usersChoices->job_code);
-                }
-            }
-        } catch(Exception $e) {
-//            TODO add a body
+    if($usersChosenCategories) {
+        while($usersChoices = $usersChosenCategories->fetchObject()) {
+            array_push($choiceArray, $usersChoices->job_code);
         }
+    }
+} catch(Exception $e) {
+//            TODO add a body
+}
 
-        try {
+try {
 //            TODO Jobs need types adding so this will need changing
-            $recommendedQuery = $conn->query("
+    $recommendedQuery = $conn->query("
                           SELECT sep_user_info.user_id, 
                                  sep_user_info.user_fname, 
                                  sep_user_info.user_lname, 
@@ -159,22 +159,22 @@ $page->addPageBodyItem("
                           LIMIT 3
         ");
 
-            if($recommendedQuery) {
-                while($recommendedRow = $recommendedQuery->fetchObject()) {
-                    $page->addPageBodyItem("
+    if($recommendedQuery) {
+        while($recommendedRow = $recommendedQuery->fetchObject()) {
+            $page->addPageBodyItem("
                     <div class='resultChild clickable' onclick='openPage(`serviceInner.php?id=`+$recommendedRow->job_id)'>
-                        <div class='replaceWithImg2' style='overflow: hidden;'>
-                            <img id='recommendedImage_{$recommendedRow->job_id}' style='width: 100%;'>
+                        <div class='topImg'>
+                            <img id='recommendedImage_{$recommendedRow->job_id}'>
                         </div>
                         <script> getRecommendedImage({$recommendedRow->job_id}); </script>
                             <div class='resultText'>
-                                <img src='assets/person.svg'>
+                                <img class='personIcon' src='assets/person.svg'>
                             <h2>{$recommendedRow->user_fname} {$recommendedRow->user_lname}</h2>
                             <h3>{$recommendedRow->job_title} needed!</h3>
                             <p>{$recommendedRow->job_desc}</p>");
 
-                    $starRatingQuery = $conn->query(
-                        "SELECT (SUM(sep_job_rating.job_rating)/COUNT(*)) as sum, COUNT(sep_job_rating.job_id) as total
+            $starRatingQuery = $conn->query(
+                "SELECT (SUM(sep_job_rating.job_rating)/COUNT(*)) as sum, COUNT(sep_job_rating.job_id) as total
                                                               FROM sep_job_rating
                                                               JOIN sep_available_jobs
                                                               ON sep_job_rating.job_id = sep_available_jobs.job_id
@@ -182,39 +182,39 @@ $page->addPageBodyItem("
                                                               ON sep_job_rating.user_id = sep_users.user_id
                                                               WHERE sep_job_rating.job_id = '{$recommendedRow->job_id}'
                                                               GROUP BY sep_job_rating.job_id"
-                    );
-                    if($starRatingQuery) {
-                        while($starRow = $starRatingQuery->fetchObject()) {
-                            $starSum = round($starRow->sum, 0, PHP_ROUND_HALF_DOWN);
+            );
+            if($starRatingQuery) {
+                while($starRow = $starRatingQuery->fetchObject()) {
+                    $starSum = round($starRow->sum, 0, PHP_ROUND_HALF_DOWN);
 
-                            for($i = 0; $i < 5; $i++) {
-                                if($i < $starSum) {
-                                    $page->addPageBodyItem("<span class='fa fa-star checked'></span>");
-                                } else {
-                                    $page->addPageBodyItem("<span class='fa fa-star'></span>");
-                                }
-                            }
-                            $page->addPageBodyItem("({$starRow->total})");
+                    for($i = 0; $i < 5; $i++) {
+                        if($i < $starSum) {
+                            $page->addPageBodyItem("<span class='fa fa-star checked'></span>");
+                        } else {
+                            $page->addPageBodyItem("<span class='fa fa-star'></span>");
                         }
                     }
-
-                    $page->addPageBodyItem("<p class='price'>£{$recommendedRow->job_price}/h</p>
-                        </div>
-                    </div>");
+                    $page->addPageBodyItem("({$starRow->total})");
                 }
             }
-        } catch(Exception $e) {
-//            TODO add a body
-        }
 
-    $page->addPageBodyItem("</div>
+            $page->addPageBodyItem("<p class='price'>£{$recommendedRow->job_price}/h</p>
+                        </div>
+                    </div>");
+        }
+    }
+} catch(Exception $e) {
+//            TODO add a body
+}
+
+$page->addPageBodyItem("</div>
     
-    <div id='resultContainer'>
+    <div id='recAddedContainer'>
         <h1>Recently Added</h1>");
 
-        try {
-            $availableJobs = $conn->query(
-                "SELECT sep_user_info.user_id, 
+try {
+    $availableJobs = $conn->query(
+        "SELECT sep_user_info.user_id, 
                                  sep_user_info.user_fname, 
                                  sep_user_info.user_lname,
                                  sep_available_jobs.job_id,
@@ -228,28 +228,28 @@ $page->addPageBodyItem("
                           WHERE sep_available_jobs.job_availability = '1'
                           ORDER BY sep_available_jobs.job_date DESC
                           LIMIT 3"
-            );
-            if ($availableJobs) {
-                while ($row = $availableJobs->fetchObject()) {
+    );
+    if ($availableJobs) {
+        while ($row = $availableJobs->fetchObject()) {
 
 
 //              TODO: NEED TO DO FILTERING BEFORE DISPLAYING THESE!!
 
 
-                    $page->addPageBodyItem(
-                        "<div class='resultChild clickable' onclick='openPage(`serviceInner.php?id=`+$row->job_id)'>
-                        <div class='replaceWithImg2' style='overflow: hidden;'>
-                            <img id='image_{$row->job_id}' style='width: 100%;'>
+            $page->addPageBodyItem(
+                "<div class='resultChild clickable' onclick='openPage(`serviceInner.php?id=`+$row->job_id)'>
+                        <div class='topImg'>
+                            <img id='image_{$row->job_id}'>
                         </div>
                         <script> getImage({$row->job_id}); </script>
                             <div class='resultText'>
-                                <img src='assets/person.svg'>
+                                <img class='personIcon' src='assets/person.svg'>
                                 <h2>{$row->user_fname} {$row->user_lname}</h2>
                                 <h3>{$row->job_title} needed!</h3>
                                 <p>{$row->job_desc}</p>");
 
-                    $starRatingQuery = $conn->query(
-                        "SELECT (SUM(sep_job_rating.job_rating)/COUNT(*)) as sum, COUNT(sep_job_rating.job_id) as total
+            $starRatingQuery = $conn->query(
+                "SELECT (SUM(sep_job_rating.job_rating)/COUNT(*)) as sum, COUNT(sep_job_rating.job_id) as total
                                                   FROM sep_job_rating
                                                   JOIN sep_available_jobs
                                                   ON sep_job_rating.job_id = sep_available_jobs.job_id
@@ -257,37 +257,37 @@ $page->addPageBodyItem("
                                                   ON sep_job_rating.user_id = sep_users.user_id
                                                   WHERE sep_job_rating.job_id = '{$row->job_id}'
                                                   GROUP BY sep_job_rating.job_id"
-                    );
-                    if ($starRatingQuery) {
-                        while ($starRow = $starRatingQuery->fetchObject()) {
-                            $starSum = round($starRow->sum, 0, PHP_ROUND_HALF_DOWN);
+            );
+            if ($starRatingQuery) {
+                while ($starRow = $starRatingQuery->fetchObject()) {
+                    $starSum = round($starRow->sum, 0, PHP_ROUND_HALF_DOWN);
 
-                            for ($i = 0; $i < 5; $i++) {
-                                if ($i < $starSum) {
-                                    $page->addPageBodyItem("<span class='fa fa-star checked'></span>");
-                                } else {
-                                    $page->addPageBodyItem("<span class='fa fa-star'></span>");
-                                }
-                            }
-                            $page->addPageBodyItem("({$starRow->total})");
+                    for ($i = 0; $i < 5; $i++) {
+                        if ($i < $starSum) {
+                            $page->addPageBodyItem("<span class='fa fa-star checked'></span>");
+                        } else {
+                            $page->addPageBodyItem("<span class='fa fa-star'></span>");
                         }
                     }
-                    $page->addPageBodyItem("<p class='price'>£{$row->job_price}/h</p>
-                            </div>
-                    </div>");
+                    $page->addPageBodyItem("({$starRow->total})");
                 }
             }
-        } catch(Exception $e) {
-//            TODO add a body
+            $page->addPageBodyItem("<p class='price'>£{$row->job_price}/h</p>
+                            </div>
+                    </div>");
         }
+    }
+} catch(Exception $e) {
+//            TODO add a body
+}
 
-    $page->addPageBodyItem("</div>      
+$page->addPageBodyItem("</div>      
     
     <div id='categories'>
         <h1>Popular categories</h1>");
 
-        try {
-            $popularCategoriesQuery = $conn->query("
+try {
+    $popularCategoriesQuery = $conn->query("
             SELECT COUNT(sep_users_interested_jobs.job_code), sep_jobs_list.job_name
             FROM sep_users_interested_jobs
             JOIN sep_jobs_list
@@ -297,50 +297,50 @@ $page->addPageBodyItem("
             LIMIT 10
         ");
 
-            if ($popularCategoriesQuery) {
-                while ($popularCategoriesRow = $popularCategoriesQuery->fetchObject()) {
-                    $page->addPageBodyItem("<button class='clickable' type='submit'>{$popularCategoriesRow->job_name}</button>");
-                }
-            }
-        } catch(Exception $e) {
-//            TODO add a body
+    if ($popularCategoriesQuery) {
+        while ($popularCategoriesRow = $popularCategoriesQuery->fetchObject()) {
+            $page->addPageBodyItem("<button class='clickable' type='submit'>{$popularCategoriesRow->job_name}</button>");
         }
+    }
+} catch(Exception $e) {
+//            TODO add a body
+}
 
-    $page->addPageBodyItem("</div>  
+$page->addPageBodyItem("</div>  
    
         
     <div id='recViewedParent'>
         <h1>Recently viewed</h1>");
 
-        if(isset($_SESSION['recently_viewed'])) {
-            for($i = 0; $i < sizeof($_SESSION['recently_viewed']); $i++) {
-                if($_SESSION['recently_viewed'][$i] == null || $_SESSION['recently_viewed'][$i] == 0) {
-                    continue;
-                }
-                $recentlyViewedQuery = $conn->query("
+if(isset($_SESSION['recently_viewed'])) {
+    for($i = 0; $i < sizeof($_SESSION['recently_viewed']); $i++) {
+        if($_SESSION['recently_viewed'][$i] == null || $_SESSION['recently_viewed'][$i] == 0) {
+            continue;
+        }
+        $recentlyViewedQuery = $conn->query("
                           SELECT sep_available_jobs.job_title, sep_available_jobs.job_price
                           FROM sep_available_jobs
                           WHERE sep_available_jobs.job_id = '{$_SESSION['recently_viewed'][$i]}'
                 ");
-                if($recentlyViewedQuery) {
-                    $recentRow = $recentlyViewedQuery->fetchObject();
-                    $page->addPageBodyItem("
+        if($recentlyViewedQuery) {
+            $recentRow = $recentlyViewedQuery->fetchObject();
+            $page->addPageBodyItem("
                         <div class='recViewedChild clickable' onclick='openPage(`serviceInner.php?id=`+{$_SESSION['recently_viewed'][$i]})'>
-                            <div class='replaceWithImg'>
-                                <img id='recentlyViewedImage_{$_SESSION['recently_viewed'][$i]}' style='width: 100%;'>
+                            <div class='recViewedImg'>
+                                <img id='recentlyViewedImage_{$_SESSION['recently_viewed'][$i]}'>
                             </div>
                             <script> getRecentlyViewedImage({$_SESSION['recently_viewed'][$i]}); </script>
-                            <div class='recViewedChildChild'>
+                            <div class='recViewedText'>
                                 <h4>{$recentRow->job_title} needed!</h4>
                                 <p>£{$recentRow->job_price}/h</p>  
                             </div>
                         </div>
                     ");
-                }
-            }
         }
+    }
+}
 
-    $page->addPageBodyItem("</div>
+$page->addPageBodyItem("</div>
 </div>");
 
 $page->displayPage();
