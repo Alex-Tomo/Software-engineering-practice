@@ -8,16 +8,12 @@ window.onload = () => {
             email: email
         },
         success: (data) => {
-            if(data) {
-                // if the user has already entered data before then do not show the
-                // popup form
-                let popup1 = document.getElementById('popup-1');
-                popup1.style.display = 'none';
-            } else {
+            if(!data) {
                 // If the user has never entered data before then show the
                 // popup form
 
                 let popup1 = document.getElementById('popup-1');
+                popup1.style.display = 'block';
 
                 // tab1 tab and button(s)
                 let tab1 = document.getElementById('tab1');
@@ -29,6 +25,7 @@ window.onload = () => {
                 let prevButtonTab2 = document.getElementById('prevBtn2');
 
                 // only display tab 1
+                tab1.style.display = 'block';
                 tab2.style.display = 'none';
 
                 // Form info

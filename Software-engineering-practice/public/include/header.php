@@ -2,7 +2,20 @@
 
 function getHeader() {
 
-    include_once '../db_connector.php';
+    // needed a dynamic redirect
+    // TODO make this an external function
+    $path = '';
+    $arr = explode("/", __DIR__);
+    foreach ($arr as $a) {
+        $path .= $a.'/';
+        if ($a == 'Software-engineering-practice') {
+            $path .= 'db_connector.php';
+            break;
+        }
+    }
+
+    include_once $path;
+
 
     $header = "<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
     
