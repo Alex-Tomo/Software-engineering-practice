@@ -36,7 +36,7 @@ class pageTemplate {
             <html lang=\"en\">
             <head>
                 <meta charset=\"utf-8\">
-                <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">
+                <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no\">
                 <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js\"></script>";
 
                 foreach ($this->css as $style) { $this->head .= "\n".$style; }
