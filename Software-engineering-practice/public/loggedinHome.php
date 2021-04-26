@@ -111,7 +111,7 @@ $page->addPageBodyItem("
                 <option value='expert'>Expert</option>
             </select>
         </div>
-            <button class='clickable' onclick='openPage()'><i id='magGlass' class='fa fa-search'></i>Search</button>
+            <button class='clickable' onclick='openPage(`search.php?`)'><i id='magGlass' class='fa fa-search'></i>Search</button>
     </div>
     
 <div id='recommendedContainer'>
