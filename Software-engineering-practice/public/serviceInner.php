@@ -3,7 +3,9 @@
 require('../db_connector.php');
 $conn = getConnection();
 
-include('../pageTemplate.php');
+require('../pageTemplate.php');
+require('../database_functions.php');
+
 
 if(!$_SESSION['loggedin']) {
     header('Location: signin.php');
@@ -44,64 +46,38 @@ $page->addPageBodyItem("
             <a id='back' class='clickable' onclick='openPage(`loggedinHome.php`)'>< Back to list</a>
             <div id='serviceResult' class='resultChild'>");
 
-$availableJobs = $conn->query(
-    "SELECT sep_user_info.user_id,
-                                 sep_user_info.user_fname,
-                                 sep_user_info.user_lname,
-                                 sep_available_jobs.job_title,
-                                 sep_available_jobs.job_desc,
-                                 sep_available_jobs.job_price,
-                                 sep_available_jobs.job_date
-                          FROM sep_user_info
-                          INNER JOIN sep_available_jobs
-                          ON sep_user_info.user_id = sep_available_jobs.user_id
-                          WHERE sep_available_jobs.job_id = '{$job_id}'"
-);
-if($availableJobs) {
-    while($row = $availableJobs->fetchObject()) {
-        $page->addPageBodyItem("
-                        <div class='topImg'>
-                            <img id='image_{$job_id}'>
-                        </div>
-                        <script> getImage({$job_id}); </script>
-                        <div class='resultText'>
-                               <img class='personIcon' src='assets/person.svg'>
-                                <h2>{$row->user_fname} {$row->user_lname}</h2>
-                                <h3>{$row->job_title} needed!</h3>
-                                <p>{$row->job_desc}</p>");
 
-        $starRatingQuery = $conn->query(
-            "SELECT (SUM(sep_job_rating.job_rating)/COUNT(*)) as sum, COUNT(sep_job_rating.job_id) as total
-                                                              FROM sep_job_rating
-                                                              JOIN sep_available_jobs
-                                                              ON sep_job_rating.job_id = sep_available_jobs.job_id
-                                                              JOIN sep_users
-                                                              ON sep_job_rating.user_id = sep_users.user_id
-                                                              WHERE sep_job_rating.job_id = '{$job_id}'
-                                                              GROUP BY sep_job_rating.job_id"
-        );
+$jobs = getJobDetails($conn, $job_id);
 
-        if($starRatingQuery) {
-            while($starRow = $starRatingQuery->fetchObject()) {
-                $starSum = round($starRow->sum, 0, PHP_ROUND_HALF_DOWN);
+foreach ($jobs as $job) {
+    $price = $job['job_price'];
+    $page->addPageBodyItem("
+            <div class='topImg'>
+                <img id='image_{$job['job_id']}'>
+            </div>
+            <script> getImage({$job['job_id']}); </script>
+            <div class='resultText'>
+                   <img class='personIcon' src='assets/person.svg'>
+                    <h2>{$job['user_fname']} {$job['user_lname']}</h2>
+                    <h3>{$job['job_name']} needed!</h3>
+                    <p>{$job['job_desc']}</p>");
 
-                for($i = 0; $i < 5; $i++) {
-                    if($i < $starSum) {
-                        $page->addPageBodyItem("<span class='fa fa-star checked'></span>");
-                    } else {
-                        $page->addPageBodyItem("<span class='fa fa-star'></span>");
-                    }
-                }
-                $page->addPageBodyItem("({$starRow->total})");
-            }
+    list($sum, $total) = getStarRating($conn, $job_id);
+
+    for ($i = 0; $i < 5; $i++) {
+        if ($i < $sum) {
+            $page->addPageBodyItem("<span class='fa fa-star checked'></span>");
+        } else {
+            $page->addPageBodyItem("<span class='fa fa-star'></span>");
         }
+    }
+    $page->addPageBodyItem("({$total})");
 
-        $page->addPageBodyItem("<p class='price'>£{$row->job_price}/h</p>
+    $page->addPageBodyItem("<p class='price'>£{$price}/h</p>
                             <button class='applyBtn clickable' onclick='openPage()'>Enquire</button>
                             <a class='clickable' onclick='openPage()'>Refer a friend</a>
                         </div>
                     </div>");
-    }
 }
 
 $page->addPageBodyItem("</div>
@@ -114,26 +90,19 @@ if(isset($_SESSION['recently_viewed'])) {
         if($_SESSION['recently_viewed'][$i] == null || $_SESSION['recently_viewed'][$i] == 0 || $_SESSION['recently_viewed'][$i] == $_REQUEST['id']) {
             continue;
         }
-        $recentlyViewedQuery = $conn->query("
-                                      SELECT sep_available_jobs.job_title, sep_available_jobs.job_price
-                                      FROM sep_available_jobs
-                                      WHERE sep_available_jobs.job_id = '{$_SESSION['recently_viewed'][$i]}'
-                            ");
-        if($recentlyViewedQuery) {
-            $recentRow = $recentlyViewedQuery->fetchObject();
+        list($job_title, $job_price) = getRecentlyViewed($conn, $_SESSION['recently_viewed'][$i]);
             $page->addPageBodyItem("
-                            <div class='recViewedChild clickable' onclick='openPage(`serviceInner.php?id=`+{$_SESSION['recently_viewed'][$i]})'>
-                                        <div class='recViewedImg'>
-                                            <img id='recentlyViewedImage_{$_SESSION['recently_viewed'][$i]}'>
-                                        </div>
-                                        <script> getRecentlyViewedImage({$_SESSION['recently_viewed'][$i]}); </script>
-                                        <div class='recViewedText'>
-                                            <h4>{$recentRow->job_title} needed!</h4>
-                                            <p>£{$recentRow->job_price}/h</p>  
-                                        </div>
-                                    </div>
+                <div class='recViewedChild clickable' onclick='openPage(`serviceInner.php?id=`+{$_SESSION['recently_viewed'][$i]})'>
+                    <div class='recViewedImg'>
+                        <img id='recentlyViewedImage_{$_SESSION['recently_viewed'][$i]}'>
+                    </div>
+                    <script> getRecentlyViewedImage({$_SESSION['recently_viewed'][$i]}); </script>
+                    <div class='recViewedText'>
+                        <h4>{$job_title} needed!</h4>
+                        <p>£{$job_price}/h</p>  
+                    </div>
+                </div>
 ");
-        }
     }
 }
 

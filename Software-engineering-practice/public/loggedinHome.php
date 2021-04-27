@@ -125,7 +125,7 @@ foreach($recommenders as $recommender) {
                     <div class='resultText'>
                         <img class='personIcon' src='assets/person.svg'>
                     <h2>{$recommender['user_fname']} {$recommender['user_lname']}</h2>
-                    <h3>{$recommender['job_title']} needed!</h3>
+                    <h3>{$recommender['job_code']} needed!</h3>
                     <p>{$recommender['job_desc']}</p>");
 
                 list($sum, $total) = getStarRating($conn, $recommender['job_id']);
@@ -163,7 +163,7 @@ foreach($recents as $recent) {
                     <div class='resultText'>
                         <img class='personIcon' src='assets/person.svg'>
                     <h2>{$recent['user_fname']} {$recent['user_lname']}</h2>
-                    <h3>{$recent['job_title']} needed!</h3>
+                    <h3>{$recent['job_code']} needed!</h3>
                     <p>{$recent['job_desc']}</p>");
 
                 list($sum, $total) = getStarRating($conn, $recent['job_id']);

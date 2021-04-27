@@ -64,7 +64,7 @@
                      sep_user_info.user_fname, 
                      sep_user_info.user_lname, 
                      sep_available_jobs.job_id,
-                     sep_available_jobs.job_title,
+                     sep_jobs_list.job_name,
                      sep_available_jobs.job_desc,
                      sep_available_jobs.job_price,
                      sep_available_jobs.job_date
@@ -73,8 +73,10 @@
               ON sep_user_info.user_id = sep_available_jobs.user_id
               JOIN sep_users_interested_jobs
               ON sep_user_info.user_id = sep_users_interested_jobs.user_id
+              JOIN sep_jobs_list
+              ON sep_jobs_list.job_code = sep_available_jobs.job_code      
               WHERE sep_available_jobs.job_availability = '1'
-              AND sep_users_interested_jobs.job_code IN (" . implode(',', $choicesArray) . ")
+              AND sep_available_jobs.job_code IN (" . implode(',', $choicesArray) . ")
               GROUP BY user_id
               ORDER BY sep_available_jobs.job_date DESC
               LIMIT 3");
@@ -85,7 +87,7 @@
                     $arr[$index]['user_fname'] = sanitizeData($row->user_fname);
                     $arr[$index]['user_lname'] = sanitizeData($row->user_lname);
                     $arr[$index]['job_id'] = sanitizeData($row->job_id);
-                    $arr[$index]['job_title'] = sanitizeData($row->job_title);
+                    $arr[$index]['job_code'] = sanitizeData($row->job_name);
                     $arr[$index]['job_desc'] = sanitizeData($row->job_desc);
                     $arr[$index]['job_price'] = sanitizeData($row->job_price);
                     $arr[$index]['job_date'] = sanitizeData($row->job_date);
@@ -134,13 +136,16 @@
                     sep_user_info.user_fname, 
                     sep_user_info.user_lname,
                     sep_available_jobs.job_id,
-                    sep_available_jobs.job_title,
+                    sep_available_jobs.job_code,
+                    sep_jobs_list.job_name,
                     sep_available_jobs.job_desc,
                     sep_available_jobs.job_price,
                     sep_available_jobs.job_date
                 FROM sep_user_info
-                INNER JOIN sep_available_jobs
+                JOIN sep_available_jobs
                 ON sep_user_info.user_id = sep_available_jobs.user_id
+                JOIN sep_jobs_list
+                ON sep_jobs_list.job_code = sep_available_jobs.job_code
                 WHERE sep_available_jobs.job_availability = '1'
                 ORDER BY sep_available_jobs.job_date DESC
                 LIMIT 3");
@@ -151,7 +156,7 @@
                     $arr[$index]['user_fname'] = sanitizeData($row->user_fname);
                     $arr[$index]['user_lname'] = sanitizeData($row->user_lname);
                     $arr[$index]['job_id'] = sanitizeData($row->job_id);
-                    $arr[$index]['job_title'] = sanitizeData($row->job_title);
+                    $arr[$index]['job_code'] = sanitizeData($row->job_name);
                     $arr[$index]['job_desc'] = sanitizeData($row->job_desc);
                     $arr[$index]['job_price'] = sanitizeData($row->job_price);
                     $arr[$index]['job_date'] = sanitizeData($row->job_date);
@@ -196,17 +201,57 @@
     function getRecentlyViewed($connection, $recentlyViewed)
     {
         $results = $connection->query("
-            SELECT sep_available_jobs.job_title, sep_available_jobs.job_price
+            SELECT sep_jobs_list.job_name, sep_available_jobs.job_price
             FROM sep_available_jobs
+            JOIN sep_jobs_list
+            ON sep_available_jobs.job_code = sep_jobs_list.job_code
             WHERE sep_available_jobs.job_id = '{$recentlyViewed}'");
 
         if ($results) {
             $row = $results->fetchObject();
-            $job_title = sanitizeData($row->job_title);
+            $job_title = sanitizeData($row->job_name);
             $job_price = sanitizeData($row->job_price);
         }
 
         return array($job_title, $job_price);
+    }
+
+    function getJobDetails($connection, $job_id) {
+
+        $arr = array();
+        $index = 0;
+
+        $results = $connection->query("
+            SELECT sep_user_info.user_id, 
+                sep_user_info.user_fname, 
+                sep_user_info.user_lname,
+                sep_available_jobs.job_id,
+                sep_available_jobs.job_code,
+                sep_jobs_list.job_name,
+                sep_available_jobs.job_desc,
+                sep_available_jobs.job_price,
+                sep_available_jobs.job_date
+            FROM sep_user_info
+            JOIN sep_available_jobs
+            ON sep_user_info.user_id = sep_available_jobs.user_id
+            JOIN sep_jobs_list
+            ON sep_jobs_list.job_code = sep_available_jobs.job_code
+            WHERE sep_available_jobs.job_id = '{$job_id}'");
+
+        if($results) {
+            while($row = $results->fetchObject()) {
+                $arr[$index]['user_id'] = sanitizeData($row->user_id);
+                $arr[$index]['user_fname'] = sanitizeData($row->user_fname);
+                $arr[$index]['user_lname'] = sanitizeData($row->user_lname);
+                $arr[$index]['job_id'] = sanitizeData($row->job_id);
+                $arr[$index]['job_name'] = sanitizeData($row->job_name);
+                $arr[$index]['job_desc'] = sanitizeData($row->job_desc);
+                $arr[$index]['job_price'] = sanitizeData($row->job_price);
+                $arr[$index]['job_date'] = sanitizeData($row->job_date);
+                $index++;
+            }
+        }
+        return $arr;
     }
 
 ?>
