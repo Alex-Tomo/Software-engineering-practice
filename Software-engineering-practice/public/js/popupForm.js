@@ -74,7 +74,7 @@ window.onload = () => {
                                 jobsArray: jobsArray
                             },
                             success: (data) => {
-                                console.log("error: " + data);
+                                openPage('loggedinHome.php');
                             }
                         });
                     }
@@ -84,6 +84,8 @@ window.onload = () => {
                     tab2.style.display = 'none';
                     tab1.style.display = 'inherit';
                 });
+            } else {
+                document.getElementById('searchForm').style.display = 'block';
             }
         }
     });

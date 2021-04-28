@@ -750,6 +750,35 @@ form button{
     color: #017EFC;
 }
 
+/* Added by Alex My Profile page */
+
+#passwordTab label,input{
+    display: block;
+}
+
+#passwordTab label{
+    text-align: left;
+    font-size: 0.9em;
+    width: 200px;
+    float: left;
+    font-weight: bold;
+    color: #017EFC;
+    margin: 13px 0 5px 0;
+}
+
+#passwordTab input[type="password"]{
+    padding: 10px 0;
+    border: 1px solid #828282;
+    border-radius: 8px;
+    opacity: 0.5;
+    float: left;
+    width: 100%;
+    color: #017EFC;
+}
+
+#passwordTab input[type="password"]::-webkit-input-placeholder {
+    padding-left: 10px;
+}
 
 /*.content {*/
 /*    margin: 15px;*/

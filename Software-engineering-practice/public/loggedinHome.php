@@ -4,6 +4,8 @@ require('../db_connector.php');
 require('../pageTemplate.php');
 require('../database_functions.php');
 
+// TODO: Add a show all button
+
 if(!$_SESSION['loggedin']) { header('Location: home.php'); }
 $conn = getConnection();
 
@@ -81,7 +83,7 @@ for($job_index = 0; $job_index < sizeof($job_codes); $job_index++) {
             </form>
     </div>       
     <div id='refineContainer'>
-        <form method='get' action='search.php' style='position: relative;'>
+        <form id='searchForm' method='get' action='search.php' style='position: relative; display: none;'>
         <div class='refineChild'>
             <label>Keyword</label><br>
             <input type='text' name='keyword' placeholder='Search keyword here'>
@@ -121,9 +123,10 @@ for($job_index = 0; $job_index < sizeof($job_codes); $job_index++) {
 $choiceArray = selectUsersChosenCategories($conn, $_SESSION['email']);
 $recommenders = getRecommendedJobs($conn, $choiceArray);
 $price = 0;
-foreach($recommenders as $recommender) {
-    $price = $recommender['job_price'];
-    $page->addPageBodyItem("
+if(!empty($recommenders)) {
+    foreach ($recommenders as $recommender) {
+        $price = $recommender['job_price'];
+        $page->addPageBodyItem("
             <div class='resultChild clickable' onclick='openPage(`serviceInner.php?id={$recommender['job_id']}`)'>
                 <div class='topImg'>
                     <img id='recommendedImage_{$recommender['job_id']}'>
@@ -135,21 +138,22 @@ foreach($recommenders as $recommender) {
                     <h3>{$recommender['job_code']} needed!</h3>
                     <p>{$recommender['job_desc']}</p>");
 
-                list($sum, $total) = getStarRating($conn, $recommender['job_id']);
+        list($sum, $total) = getStarRating($conn, $recommender['job_id']);
 
-                for($i = 0; $i < 5; $i++) {
-                    if($i < $sum) {
-                        $page->addPageBodyItem("<span class='fa fa-star checked'></span>");
-                    } else {
-                        $page->addPageBodyItem("<span class='fa fa-star'></span>");
-                    }
-                }
-                $page->addPageBodyItem("({$total})");
+        for ($i = 0; $i < 5; $i++) {
+            if ($i < $sum) {
+                $page->addPageBodyItem("<span class='fa fa-star checked'></span>");
+            } else {
+                $page->addPageBodyItem("<span class='fa fa-star'></span>");
+            }
+        }
+        $page->addPageBodyItem("({$total})");
 
 
-    $page->addPageBodyItem("<p class='price'>£{$price}/h</p>
+        $page->addPageBodyItem("<p class='price'>£{$price}/h</p>
                 </div>
             </div>");
+    }
 }
 
 $page->addPageBodyItem("</div>

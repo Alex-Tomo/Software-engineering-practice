@@ -2,6 +2,10 @@
 require('../db_connector.php');
 $conn = getConnection();
 
+// TODO add the search bar at the top again and add a show more
+//
+// TODO if no results then show recently added
+
 require('../database_functions.php');
 
 require('../pageTemplate.php');

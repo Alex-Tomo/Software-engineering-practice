@@ -34,7 +34,7 @@
             $result = $connection->query("
                 SELECT sep_users_interested_jobs.job_code
                 FROM sep_users_interested_jobs
-                JOIN sep_users
+                INNER JOIN sep_users
                 ON sep_users_interested_jobs.user_id = sep_users.user_id
                 WHERE sep_users.user_email = '{$usersEmail}'");
 
@@ -69,11 +69,11 @@
                      sep_available_jobs.job_price,
                      sep_available_jobs.job_date
               FROM sep_user_info
-              JOIN sep_available_jobs
+              INNER JOIN sep_available_jobs
               ON sep_user_info.user_id = sep_available_jobs.user_id
-              JOIN sep_users_interested_jobs
+              INNER JOIN sep_users_interested_jobs
               ON sep_user_info.user_id = sep_users_interested_jobs.user_id
-              JOIN sep_jobs_list
+              INNER JOIN sep_jobs_list
               ON sep_jobs_list.job_code = sep_available_jobs.job_code      
               WHERE sep_available_jobs.job_availability = '1'
               AND sep_available_jobs.job_code IN (" . implode(',', $choicesArray) . ")
@@ -108,9 +108,9 @@
         $result = $connection->query("
             SELECT (SUM(sep_job_rating.job_rating)/COUNT(*)) as sum, COUNT(sep_job_rating.job_id) as total
             FROM sep_job_rating
-            JOIN sep_available_jobs
+            INNER JOIN sep_available_jobs
             ON sep_job_rating.job_id = sep_available_jobs.job_id
-            JOIN sep_users
+            INNER JOIN sep_users
             ON sep_job_rating.user_id = sep_users.user_id
             WHERE sep_job_rating.job_id = '{$job_id}'
             GROUP BY sep_job_rating.job_id");
@@ -142,9 +142,9 @@
                     sep_available_jobs.job_price,
                     sep_available_jobs.job_date
                 FROM sep_user_info
-                JOIN sep_available_jobs
+                INNER JOIN sep_available_jobs
                 ON sep_user_info.user_id = sep_available_jobs.user_id
-                JOIN sep_jobs_list
+                INNER JOIN sep_jobs_list
                 ON sep_jobs_list.job_code = sep_available_jobs.job_code
                 WHERE sep_available_jobs.job_availability = '1'
                 ORDER BY sep_available_jobs.job_date DESC
@@ -180,7 +180,7 @@
             $result = $connection->query("
                 SELECT COUNT(sep_users_interested_jobs.job_code), sep_jobs_list.job_name
                 FROM sep_users_interested_jobs
-                JOIN sep_jobs_list
+                INNER JOIN sep_jobs_list
                 ON sep_users_interested_jobs.job_code = sep_jobs_list.job_code
                 GROUP BY sep_jobs_list.job_name
                 ORDER BY COUNT(sep_users_interested_jobs.job_code) DESC
@@ -203,7 +203,7 @@
         $results = $connection->query("
             SELECT sep_jobs_list.job_name, sep_available_jobs.job_price
             FROM sep_available_jobs
-            JOIN sep_jobs_list
+            INNER JOIN sep_jobs_list
             ON sep_available_jobs.job_code = sep_jobs_list.job_code
             WHERE sep_available_jobs.job_id = '{$recentlyViewed}'");
 
@@ -237,9 +237,9 @@
                 sep_available_jobs.job_price,
                 sep_available_jobs.job_date
             FROM sep_user_info
-            JOIN sep_available_jobs
+            INNER JOIN sep_available_jobs
             ON sep_user_info.user_id = sep_available_jobs.user_id
-            JOIN sep_jobs_list
+            INNER JOIN sep_jobs_list
             ON sep_jobs_list.job_code = sep_available_jobs.job_code
             WHERE sep_available_jobs.job_id = '{$job_id}'");
 
