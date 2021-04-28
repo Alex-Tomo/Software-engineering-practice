@@ -6,9 +6,19 @@ $conn = getConnection();
 require('../pageTemplate.php');
 require('../database_functions.php');
 
-
 if(!$_SESSION['loggedin']) {
     header('Location: signin.php');
+}
+
+$checkJobExists = $conn->query("SELECT job_id FROM sep_available_jobs WHERE job_availability = TRUE");
+$availableJobIds = array();
+if($checkJobExists) {
+    while($row = $checkJobExists->fetchObject()) {
+        array_push($availableJobIds, $row->job_id);
+    }
+    if(!in_array($_REQUEST['id'], $availableJobIds)) {
+        header('Location: loggedinHome.php');
+    }
 }
 
 if(!isset($_SESSION['recently_viewed'])) {

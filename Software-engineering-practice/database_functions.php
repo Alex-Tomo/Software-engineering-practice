@@ -208,12 +208,17 @@
             WHERE sep_available_jobs.job_id = '{$recentlyViewed}'");
 
         if ($results) {
-            $row = $results->fetchObject();
-            $job_title = sanitizeData($row->job_name);
-            $job_price = sanitizeData($row->job_price);
+            while ($row = $results->fetchObject()) {
+                if(isset($row->job_name) && isset($row->job_price)) {
+                    $job_title = sanitizeData($row->job_name);
+                    $job_price = sanitizeData($row->job_price);
+                }
+            }
+            if(isset($job_title) && isset($job_price)) {
+                return array($job_title, $job_price);
+            }
         }
-
-        return array($job_title, $job_price);
+        return array(null, null);
     }
 
     function getJobDetails($connection, $job_id) {

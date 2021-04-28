@@ -59,7 +59,7 @@ function getHeader() {
     // Mobile NavBar
     $header .= "<div id='mobile_container'>
             <div id='topnav'>
-                <h1 class='clickable' onclick='openPage(`home.php`)'>skip</h1><h1 class='clickable' id='logoText2' onclick='openPage(`home.php`)'>CV</h1>
+                <h1 class='clickable' onclick='openPage(`loggedinHome.php`)'>skip</h1><h1 class='clickable' id='logoText2' onclick='openPage(`loggedinHome.php`)'>CV</h1>
                 <div id='myLinks'>";
     if (!$_SESSION['loggedin']) {
         $header .= "<button class='clickable' onclick='openPage(`register.php`)' id='signUpMob'>Sign Up</button ><br >
@@ -76,10 +76,10 @@ function getHeader() {
         }
         $header .= "<a class='mobLinks clickable' onclick='openPage(`loggedinHome.php`)'>Home</a>
                                     <a class='mobLinks clickable' onclick='openPage(`userProfile.php`)'>My Profile</a>
+                                    <br>
                                     <a class='mobLinks clickable' onclick='openPage(`userJobs.php`)'>My Jobs</a>
                                     <a class='mobLinks clickable' onclick='openPage(`postJob.php`)'>Post a Job</a>
                                     <a class='mobLinks clickable' onclick='openPage(`postJob.php`)'>Messages</a>
-                                    <a class='mobLinks clickable' onclick='openPage(`postJob.php`)'>Testimonials</a>
                                     <button class='clickable' onclick='openPage(`logout.php`)' id='logout'>Logout</button>";
     }
     $header .= "</div>
