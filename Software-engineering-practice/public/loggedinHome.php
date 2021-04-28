@@ -81,6 +81,7 @@ for($job_index = 0; $job_index < sizeof($job_codes); $job_index++) {
             </form>
     </div>       
     <div id='refineContainer'>
+        <form method='get' action='search.php' style='position: relative;'>
         <div class='refineChild'>
             <label>Keyword</label><br>
             <input type='text' name='keyword' placeholder='Search keyword here'>
@@ -89,23 +90,29 @@ for($job_index = 0; $job_index < sizeof($job_codes); $job_index++) {
         <div class='refineChild'>
             <label>Categories</label><br>
             <select name='categories'>
-                <option value='javaprogrammer'>Java Programmer</option>
-                <option value='developer'>Developer</option>
-                <option value='programmer'>Programmer</option>
-            </select>
-        </div>
+                <option value='all'>All Categories</option>");
+
+list($job_codes, $job_names) = selectAll($conn, 'job_code', 'job_name', 'sep_jobs_list', 'job_name');
+for($job_index = 0; $job_index < sizeof($job_codes); $job_index++) {
+    $page->addPageBodyItem("<option id='{$job_names[$job_index]}' name='{$job_codes[$job_index]}'>{$job_names[$job_index]}</option>");
+}
+
+            $page->addPageBodyItem("</select>
+        </div>");
         
-        <div class='refineChild'>
-            <label>Junior</label><br>
-            <select name='skillLevel'>
-                <option value='junior'>Junior</option>
-                <option value='beginner'>Beginner</option>
-                <option value='intermediate'>Intermediate</option>
-                <option value='advanced'>Advanced</option>
-                <option value='expert'>Expert</option>
-            </select>
-        </div>
-            <button class='clickable' onclick='openPage(`search.php?`)'><i id='magGlass' class='fa fa-search'></i>Search</button>
+//        TODO NEED TO ADD THESE TO THE DATABASE
+//        <div class='refineChild'>
+//            <label>Junior</label><br>
+//            <select name='skillLevel'>
+//                <option value='junior'>Junior</option>
+//                <option value='beginner'>Beginner</option>
+//                <option value='intermediate'>Intermediate</option>
+//                <option value='advanced'>Advanced</option>
+//                <option value='expert'>Expert</option>
+//            </select>
+//        </div>
+            $page->addPageBodyItem("<button type='submit' class='clickable'><i id='magGlass' class='fa fa-search'></i>Search</button>
+        </form>
     </div>
     
 <div id='recommendedContainer'>
@@ -157,9 +164,9 @@ foreach($recents as $recent) {
         $page->addPageBodyItem("
             <div class='resultChild clickable' onclick='openPage(`serviceInner.php?id={$recent['job_id']}`)'>
                 <div class='topImg'>
-                    <img id='recommendedImage_{$recent['job_id']}'>
+                    <img id='recentImage_{$recent['job_id']}'>
                 </div>
-                <script> getRecommendedImage({$recent['job_id']}); </script>
+                <script> getRecentImage({$recent['job_id']}); </script>
                     <div class='resultText'>
                         <img class='personIcon' src='assets/person.svg'>
                     <h2>{$recent['user_fname']} {$recent['user_lname']}</h2>
@@ -190,7 +197,7 @@ $page->addPageBodyItem("</div>
 
 $popularCategories = getPopularCategories($conn);
 foreach ($popularCategories as $popularCategory) {
-    $page->addPageBodyItem("<button class='clickable' type='submit'>{$popularCategory}</button>");
+    $page->addPageBodyItem("<button class='clickable' onclick='openPage(`search.php?categories={$popularCategory}`)'>{$popularCategory}</button>");
 }
 
 
@@ -207,7 +214,8 @@ if(isset($_SESSION['recently_viewed'])) {
             continue;
         }
         list($job_title, $job_price) = getRecentlyViewed($conn, $_SESSION['recently_viewed'][$i]);
-        $page->addPageBodyItem("
+        if(isset($job_title) && isset($job_price)) {
+            $page->addPageBodyItem("
             <div class='recViewedChild clickable' onclick='openPage(`serviceInner.php?id=`+{$_SESSION['recently_viewed'][$i]})'>
                 <div class='recViewedImg'>
                     <img id='recentlyViewedImage_{$_SESSION['recently_viewed'][$i]}'>
@@ -218,6 +226,7 @@ if(isset($_SESSION['recently_viewed'])) {
                     <p>£{$job_price}/h</p>  
                 </div>
             </div>");
+        }
     }
 }
 

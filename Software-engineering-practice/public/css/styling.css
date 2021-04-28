@@ -735,6 +735,21 @@ form button{
     padding: 0;
 }
 
+/* Added by Alex for Search page */
+
+.searchPageContainer {
+    background-color: #FFFFFF;
+    padding-top: 20px;
+    display: inline-block;
+    width: 100%;
+}
+
+.searchPageContainer h1 {
+    font-size: 1.3em;
+    margin-top: 40px;
+    color: #017EFC;
+}
+
 
 /*.content {*/
 /*    margin: 15px;*/
