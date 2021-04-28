@@ -160,15 +160,21 @@ $sqlQuery = $conn->query("SELECT * FROM sep_user_info
 if($sqlQuery){
     while($rowObj = $sqlQuery->fetchObject()) {
         $page->addPageBodyItem("
-        <div id='bookContainer'>
-            <h1>My Details</h1>
+            <div id='bookContainer'>
+                <h1>My Details</h1>
                     <div>Email: {$_SESSION['email']}</div>
                     <div>First name: {$rowObj->user_fname}</div>
                     <div id='title'>Last name: {$rowObj->user_lname}</div>
                     <div id='year'>Gender: {$rowObj->user_gender}</div>
                     <div id='description'>Language: {$rowObj->language_name}</div>
-                    <div>Region: {$rowObj->region_name}</div>
-            </div>");
+                    <div>Region: {$rowObj->region_name}</div><br>
+                    <div>Favourite Categories: </div><br>");
+
+                    foreach($chosenJobsName as $jobName) {
+                        $page->addPageBodyItem("<div>{$jobName}</div>");
+                    }
+
+            $page->addPageBodyItem("</div>");
     }
 }
 $page->addPageBodyItem("<button onclick='displayEditProfile();' style='margin: 25px auto;'>Edit Profile</button>

@@ -69,7 +69,7 @@ foreach ($jobs as $job) {
             <div class='resultText'>
                    <img class='personIcon' src='assets/person.svg'>
                     <h2>{$job['user_fname']} {$job['user_lname']}</h2>
-                    <h3>{$job['job_name']} needed!</h3>
+                    <h3>{$job['job_name']}</h3>
                     <p>{$job['job_desc']}</p>");
 
     list($sum, $total) = getStarRating($conn, $job_id);
@@ -108,7 +108,7 @@ if(isset($_SESSION['recently_viewed'])) {
                     </div>
                     <script> getRecentlyViewedImage({$_SESSION['recently_viewed'][$i]}); </script>
                     <div class='recViewedText'>
-                        <h4>{$job_title} needed!</h4>
+                        <h4>{$job_title}</h4>
                         <p>£{$job_price}/h</p>  
                     </div>
                 </div>

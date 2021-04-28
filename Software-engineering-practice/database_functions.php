@@ -64,6 +64,7 @@
                      sep_user_info.user_fname, 
                      sep_user_info.user_lname, 
                      sep_available_jobs.job_id,
+                     sep_available_jobs.job_title,
                      sep_jobs_list.job_name,
                      sep_available_jobs.job_desc,
                      sep_available_jobs.job_price,
@@ -87,7 +88,7 @@
                     $arr[$index]['user_fname'] = sanitizeData($row->user_fname);
                     $arr[$index]['user_lname'] = sanitizeData($row->user_lname);
                     $arr[$index]['job_id'] = sanitizeData($row->job_id);
-                    $arr[$index]['job_code'] = sanitizeData($row->job_name);
+                    $arr[$index]['job_title'] = sanitizeData($row->job_title);
                     $arr[$index]['job_desc'] = sanitizeData($row->job_desc);
                     $arr[$index]['job_price'] = sanitizeData($row->job_price);
                     $arr[$index]['job_date'] = sanitizeData($row->job_date);
@@ -136,7 +137,8 @@
                     sep_user_info.user_fname, 
                     sep_user_info.user_lname,
                     sep_available_jobs.job_id,
-                    sep_available_jobs.job_code,
+                    sep_available_jobs.job_code,                     
+                    sep_available_jobs.job_title,
                     sep_jobs_list.job_name,
                     sep_available_jobs.job_desc,
                     sep_available_jobs.job_price,
@@ -156,7 +158,7 @@
                     $arr[$index]['user_fname'] = sanitizeData($row->user_fname);
                     $arr[$index]['user_lname'] = sanitizeData($row->user_lname);
                     $arr[$index]['job_id'] = sanitizeData($row->job_id);
-                    $arr[$index]['job_code'] = sanitizeData($row->job_name);
+                    $arr[$index]['job_title'] = sanitizeData($row->job_title);
                     $arr[$index]['job_desc'] = sanitizeData($row->job_desc);
                     $arr[$index]['job_price'] = sanitizeData($row->job_price);
                     $arr[$index]['job_date'] = sanitizeData($row->job_date);
@@ -201,7 +203,7 @@
     function getRecentlyViewed($connection, $recentlyViewed)
     {
         $results = $connection->query("
-            SELECT sep_jobs_list.job_name, sep_available_jobs.job_price
+            SELECT sep_available_jobs.job_title, sep_available_jobs.job_price
             FROM sep_available_jobs
             INNER JOIN sep_jobs_list
             ON sep_available_jobs.job_code = sep_jobs_list.job_code
@@ -209,8 +211,8 @@
 
         if ($results) {
             while ($row = $results->fetchObject()) {
-                if(isset($row->job_name) && isset($row->job_price)) {
-                    $job_title = sanitizeData($row->job_name);
+                if(isset($row->job_title) && isset($row->job_price)) {
+                    $job_title = sanitizeData($row->job_title);
                     $job_price = sanitizeData($row->job_price);
                 }
             }
@@ -232,6 +234,7 @@
                 sep_user_info.user_lname,
                 sep_available_jobs.job_id,
                 sep_available_jobs.job_code,
+                sep_available_jobs.job_title,
                 sep_jobs_list.job_name,
                 sep_available_jobs.job_desc,
                 sep_available_jobs.job_price,
@@ -249,7 +252,7 @@
                 $arr[$index]['user_fname'] = sanitizeData($row->user_fname);
                 $arr[$index]['user_lname'] = sanitizeData($row->user_lname);
                 $arr[$index]['job_id'] = sanitizeData($row->job_id);
-                $arr[$index]['job_name'] = sanitizeData($row->job_name);
+                $arr[$index]['job_name'] = sanitizeData($row->job_title);
                 $arr[$index]['job_desc'] = sanitizeData($row->job_desc);
                 $arr[$index]['job_price'] = sanitizeData($row->job_price);
                 $arr[$index]['job_date'] = sanitizeData($row->job_date);

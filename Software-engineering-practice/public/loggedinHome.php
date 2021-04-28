@@ -135,7 +135,7 @@ if(!empty($recommenders)) {
                     <div class='resultText'>
                         <img class='personIcon' src='assets/person.svg'>
                     <h2>{$recommender['user_fname']} {$recommender['user_lname']}</h2>
-                    <h3>{$recommender['job_code']} needed!</h3>
+                    <h3>{$recommender['job_title']}</h3>
                     <p>{$recommender['job_desc']}</p>");
 
         list($sum, $total) = getStarRating($conn, $recommender['job_id']);
@@ -174,7 +174,7 @@ foreach($recents as $recent) {
                     <div class='resultText'>
                         <img class='personIcon' src='assets/person.svg'>
                     <h2>{$recent['user_fname']} {$recent['user_lname']}</h2>
-                    <h3>{$recent['job_code']} needed!</h3>
+                    <h3>{$recent['job_title']}</h3>
                     <p>{$recent['job_desc']}</p>");
 
                 list($sum, $total) = getStarRating($conn, $recent['job_id']);
@@ -226,7 +226,7 @@ if(isset($_SESSION['recently_viewed'])) {
                 </div>
                 <script> getRecentlyViewedImage({$_SESSION['recently_viewed'][$i]}); </script>
                 <div class='recViewedText'>
-                    <h4>{$job_title} needed!</h4>
+                    <h4>{$job_title}</h4>
                     <p>£{$job_price}/h</p>  
                 </div>
             </div>");
