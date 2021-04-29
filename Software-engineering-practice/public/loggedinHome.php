@@ -16,7 +16,6 @@ $page->addCSS("<link rel=\"stylesheet\" href=\"./css/headerStyling.css\">");
 $page->addJavaScript("<script src=\"./js/navBar.js\"></script>");
 $page->addJavaScript("<script src=\"./js/popupForm.js\"></script>");
 $page->addJavaScript("<script src=\"./js/selectJobsList.js\"></script>");
-$page->addJavaScript("<script src=\"./js/selectImage.js\"></script>");
 
 $page->addPageBodyItem("
 <div class='pageContainer'>
@@ -65,8 +64,7 @@ for($region_index = 0; $region_index < sizeof($region_codes); $region_index++) {
                             <h2>Tell us about yourself</h2>
                             <h1>What job(s) are you interested in?</h1>
                             <label>(Please choose at least 3)</label>
-                            <input
-                                id='jobsListInput' list='searchJobsList' placeholder='Search for jobs...' onkeyup='filterJobsList()' onchange='selectJob()'>       
+                            <input id='jobsListInput' list='searchJobsList' placeholder='Search for jobs...' onkeyup='filterJobsList()' onchange='selectJob()'>       
                             <datalist id='searchJobsList'>");
 
 list($job_codes, $job_names) = selectAll($conn, 'job_code', 'job_name', 'sep_jobs_list', 'job_name');
@@ -129,9 +127,8 @@ if(!empty($recommenders)) {
         $page->addPageBodyItem("
             <div class='resultChild clickable' onclick='openPage(`serviceInner.php?id={$recommender['job_id']}`)'>
                 <div class='topImg'>
-                    <img id='recommendedImage_{$recommender['job_id']}'>
+                    <img src='assets/job_images/{$recommender['job_image']}'>
                 </div>
-                <script> getRecommendedImage({$recommender['job_id']}); </script>
                     <div class='resultText'>
                         <img class='personIcon' src='assets/person.svg'>
                     <h2>{$recommender['user_fname']} {$recommender['user_lname']}</h2>
@@ -168,9 +165,8 @@ foreach($recents as $recent) {
         $page->addPageBodyItem("
             <div class='resultChild clickable' onclick='openPage(`serviceInner.php?id={$recent['job_id']}`)'>
                 <div class='topImg'>
-                    <img id='recentImage_{$recent['job_id']}'>
+                    <img src='assets/job_images/{$recent['job_image']}'>
                 </div>
-                <script> getRecentImage({$recent['job_id']}); </script>
                     <div class='resultText'>
                         <img class='personIcon' src='assets/person.svg'>
                     <h2>{$recent['user_fname']} {$recent['user_lname']}</h2>
@@ -217,14 +213,13 @@ if(isset($_SESSION['recently_viewed'])) {
         if($_SESSION['recently_viewed'][$i] == null || $_SESSION['recently_viewed'][$i] == 0) {
             continue;
         }
-        list($job_title, $job_price) = getRecentlyViewed($conn, $_SESSION['recently_viewed'][$i]);
-        if(isset($job_title) && isset($job_price)) {
+        list($job_title, $job_price, $job_image) = getRecentlyViewed($conn, $_SESSION['recently_viewed'][$i]);
+        if(isset($job_title) && isset($job_price) && isset($job_image)) {
             $page->addPageBodyItem("
             <div class='recViewedChild clickable' onclick='openPage(`serviceInner.php?id=`+{$_SESSION['recently_viewed'][$i]})'>
                 <div class='recViewedImg'>
-                    <img id='recentlyViewedImage_{$_SESSION['recently_viewed'][$i]}'>
+                    <img src='assets/job_images/{$job_image}'>
                 </div>
-                <script> getRecentlyViewedImage({$_SESSION['recently_viewed'][$i]}); </script>
                 <div class='recViewedText'>
                     <h4>{$job_title}</h4>
                     <p>£{$job_price}/h</p>  

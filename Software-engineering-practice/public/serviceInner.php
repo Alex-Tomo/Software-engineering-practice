@@ -46,7 +46,6 @@ $page->addCSS("<link rel=\"stylesheet\" href=\"./css/footerStyling.css\">");
 $page->addCSS("<link rel=\"stylesheet\" href=\"./css/headerStyling.css\">");
 $page->addJavaScript("<script src=\"./js/navBar.js\"></script>");
 $page->addJavaScript("<script src=\"./js/popupForm.js\"></script>");
-$page->addJavaScript("<script src=\"./js/selectImage.js\"></script>");
 
 $job_id = $_REQUEST['id'];
 
@@ -63,9 +62,8 @@ foreach ($jobs as $job) {
     $price = $job['job_price'];
     $page->addPageBodyItem("
             <div class='topImg'>
-                <img id='image_{$job['job_id']}'>
+                <img src='assets/job_images/{$job['job_image']}'>
             </div>
-            <script> getImage({$job['job_id']}); </script>
             <div class='resultText'>
                    <img class='personIcon' src='assets/person.svg'>
                     <h2>{$job['user_fname']} {$job['user_lname']}</h2>
@@ -100,11 +98,11 @@ if(isset($_SESSION['recently_viewed'])) {
         if($_SESSION['recently_viewed'][$i] == null || $_SESSION['recently_viewed'][$i] == 0 || $_SESSION['recently_viewed'][$i] == $_REQUEST['id']) {
             continue;
         }
-        list($job_title, $job_price) = getRecentlyViewed($conn, $_SESSION['recently_viewed'][$i]);
+        list($job_title, $job_price, $job_image) = getRecentlyViewed($conn, $_SESSION['recently_viewed'][$i]);
             $page->addPageBodyItem("
                 <div class='recViewedChild clickable' onclick='openPage(`serviceInner.php?id=`+{$_SESSION['recently_viewed'][$i]})'>
                     <div class='recViewedImg'>
-                        <img id='recentlyViewedImage_{$_SESSION['recently_viewed'][$i]}'>
+                        <img src='assets/job_images/{$job_image}'>
                     </div>
                     <script> getRecentlyViewedImage({$_SESSION['recently_viewed'][$i]}); </script>
                     <div class='recViewedText'>

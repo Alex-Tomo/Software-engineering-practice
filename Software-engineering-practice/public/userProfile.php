@@ -106,8 +106,7 @@ for($region_index = 0; $region_index < sizeof($region_codes); $region_index++) {
                             <h2>Tell us about yourself</h2>
                             <h1>What job(s) are you interested in?</h1>
                             <label>(Please choose at least 3)</label>
-                            <input
-                                id='jobsListInput' list='searchJobsList' placeholder='Search for jobs...' onkeyup='filterJobsList()' onchange='selectJob()'>       
+                            <input id='jobsListInput' list='searchJobsList' placeholder='Search for jobs...' onkeyup='filterJobsList()' onchange='selectJob()'>       
                             <datalist id='searchJobsList'>");
 
 list($job_codes, $job_names) = selectAll($conn, 'job_code', 'job_name', 'sep_jobs_list', 'job_name');
