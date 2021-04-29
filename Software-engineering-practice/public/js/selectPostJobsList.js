@@ -27,9 +27,9 @@ const selectJob = () => {
     let job = document.getElementById('jobsListInput').value;
     document.getElementById('jobsListInput').value = '';
 
-    let p = document.createElement('p');
+    let p = document.createElement('input');
     p.className = 'clickable chosenJob';
-    p.innerText = job + ' x';
+    p.value = job + ' x';
     p.style.backgroundColor = '#017EFC';
     p.style.color = '#FFFFFF';
     p.style.fontSize = 'small';
@@ -38,11 +38,18 @@ const selectJob = () => {
     p.style.padding = '10px';
     p.style.margin = '2.5px 5px 2.5px 0';
     p.style.borderRadius = '5px';
+    p.style.textAlign = 'center';
     p.id = document.getElementById(job).getAttribute('name');
     p.setAttribute('name', 'categories[]');
 
-    p.addEventListener('click', () => { removeJob(p.id, job); });
+    let hiddenP = document.createElement('input');
+    hiddenP.value = p.id;
+    hiddenP.style.display = 'none';
+    hiddenP.setAttribute('name', 'categoryIds[]');
+
+    p.addEventListener('click', () => { removeJob(p.id, job, hiddenP); });
     document.getElementById('suggestion').append(p);
+    document.getElementById('suggestion').append(hiddenP);
     let jobsList = document.getElementById('searchJobsList').getElementsByTagName('option');
     for(let i = 0; i < jobsList.length; i++) {
         if(jobsList[i].value === job) {
@@ -70,8 +77,9 @@ const getSelectedJob = () => {
     localStorage.setItem("jobsArray", selectedJobsArray);
 }
 
-const removeJob = (id, job) => {
+const removeJob = (id, job, hiddenP) => {
     document.getElementById(id).remove();
+    hiddenP.remove();
     let jobsList = document.getElementById('searchJobsList').getElementsByTagName('option');
     for(let i = 0; i < jobsList.length; i++) {
         if(jobsList[i].value === job) {

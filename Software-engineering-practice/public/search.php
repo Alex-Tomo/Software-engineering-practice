@@ -42,7 +42,7 @@ if($_REQUEST['categories'] != 'all') {
                 sep_user_info.user_fname, 
                 sep_user_info.user_lname, 
                 sep_available_jobs.job_id,
-                sep_jobs_list.job_name,
+                sep_available_jobs.job_title,
                 sep_available_jobs.job_desc,
                 sep_available_jobs.job_price,
                 sep_available_jobs.job_date,
@@ -51,9 +51,7 @@ if($_REQUEST['categories'] != 'all') {
             JOIN sep_available_jobs
             ON sep_user_info.user_id = sep_available_jobs.user_id
             JOIN sep_users_interested_jobs
-            ON sep_user_info.user_id = sep_users_interested_jobs.user_id
-            JOIN sep_jobs_list
-            ON sep_jobs_list.job_code = sep_available_jobs.job_code    
+            ON sep_user_info.user_id = sep_users_interested_jobs.user_id  
             WHERE sep_available_jobs.job_availability = '1' ";
 
             if($_REQUEST['categories'] != 'all') {
@@ -86,7 +84,7 @@ if($_REQUEST['categories'] != 'all') {
                         <div class='resultText'>
                             <img class='personIcon' src='assets/person.svg'>
                         <h2>{$row->user_fname} {$row->user_lname}</h2>
-                        <h3>{$row->job_name}</h3>
+                        <h3>{$row->job_title}</h3>
                         <p>{$row->job_desc}</p>");
 
                     list($sum, $total) = getStarRating($conn, $row->job_id);

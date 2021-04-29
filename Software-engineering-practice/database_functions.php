@@ -65,7 +65,6 @@
                      sep_user_info.user_lname, 
                      sep_available_jobs.job_id,
                      sep_available_jobs.job_title,
-                     sep_jobs_list.job_name,
                      sep_available_jobs.job_desc,
                      sep_available_jobs.job_price,
                      sep_available_jobs.job_date,
@@ -75,10 +74,8 @@
               ON sep_user_info.user_id = sep_available_jobs.user_id
               INNER JOIN sep_users_interested_jobs
               ON sep_user_info.user_id = sep_users_interested_jobs.user_id
-              INNER JOIN sep_jobs_list
-              ON sep_jobs_list.job_code = sep_available_jobs.job_code      
               WHERE sep_available_jobs.job_availability = '1'
-              AND sep_available_jobs.job_code IN (" . implode(',', $choicesArray) . ")
+              AND sep_available_jobs.job_id IN (" . implode(',', $choicesArray) . ")
               GROUP BY user_id
               ORDER BY sep_available_jobs.job_date DESC
               LIMIT 3");
@@ -139,9 +136,7 @@
                     sep_user_info.user_fname, 
                     sep_user_info.user_lname,
                     sep_available_jobs.job_id,
-                    sep_available_jobs.job_code,                     
                     sep_available_jobs.job_title,
-                    sep_jobs_list.job_name,
                     sep_available_jobs.job_desc,
                     sep_available_jobs.job_price,
                     sep_available_jobs.job_date,
@@ -149,8 +144,6 @@
                 FROM sep_user_info
                 INNER JOIN sep_available_jobs
                 ON sep_user_info.user_id = sep_available_jobs.user_id
-                INNER JOIN sep_jobs_list
-                ON sep_jobs_list.job_code = sep_available_jobs.job_code
                 WHERE sep_available_jobs.job_availability = '1'
                 GROUP BY sep_user_info.user_id
                 ORDER BY sep_available_jobs.job_date DESC
@@ -211,8 +204,6 @@
         $results = $connection->query("
             SELECT sep_available_jobs.job_title, sep_available_jobs.job_price, sep_available_jobs.job_image
             FROM sep_available_jobs
-            INNER JOIN sep_jobs_list
-            ON sep_available_jobs.job_code = sep_jobs_list.job_code
             WHERE sep_available_jobs.job_id = '{$recentlyViewed}'");
 
         if ($results) {
@@ -240,9 +231,7 @@
                 sep_user_info.user_fname, 
                 sep_user_info.user_lname,
                 sep_available_jobs.job_id,
-                sep_available_jobs.job_code,
                 sep_available_jobs.job_title,
-                sep_jobs_list.job_name,
                 sep_available_jobs.job_desc,
                 sep_available_jobs.job_price,
                 sep_available_jobs.job_date,
@@ -250,8 +239,6 @@
             FROM sep_user_info
             INNER JOIN sep_available_jobs
             ON sep_user_info.user_id = sep_available_jobs.user_id
-            INNER JOIN sep_jobs_list
-            ON sep_jobs_list.job_code = sep_available_jobs.job_code
             WHERE sep_available_jobs.job_id = '{$job_id}'");
 
         if($results) {

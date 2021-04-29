@@ -833,6 +833,44 @@ form button{
     margin-top: 10px;
 }
 
+/* Edit jobs */
+
+#updateJobForm {
+    padding: 15px;
+    position: relative;
+    top: 0;
+    background-color: white;
+    width: auto;
+    height: auto;
+    text-align: center;
+    box-sizing: border-box;
+    border-radius: 5px;
+    left: 0;
+    right: 0;
+}
+
+#updateJobForm input[type="text"] {
+    padding: 10px 0;
+    border: 1px solid #828282;
+    border-radius: 8px;
+    opacity: 0.5;
+    float: left;
+    width: 100%;
+    color: #017EFC;
+}
+
+#updateJobForm textarea {
+    resize: none;
+    margin: 10px 0;
+}
+
+#updateJobForm input[type="text"] ::-webkit-input-placeholder {
+    padding-left: 10px;
+}
+
+#updateJobBtn {
+    margin-top: 10px;
+}
 
 /*.content {*/
 /*    margin: 15px;*/

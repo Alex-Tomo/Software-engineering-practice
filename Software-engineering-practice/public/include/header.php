@@ -8,7 +8,8 @@ function getHeader() {
     $arr = explode("/", __DIR__);
     foreach ($arr as $a) {
         $path .= $a.'/';
-        if ($a == 'Software-engineering-practice') {
+        if ($a == 'Software-engineering-practice') { // Alex
+//        if ($a == 'sep') {  // Graham
             $path .= 'db_connector.php';
             break;
         }
