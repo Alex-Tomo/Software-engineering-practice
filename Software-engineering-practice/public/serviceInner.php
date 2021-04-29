@@ -45,7 +45,6 @@ $page->addCSS("<link rel=\"stylesheet\" href=\"./css/styling.css\">");
 $page->addCSS("<link rel=\"stylesheet\" href=\"./css/footerStyling.css\">");
 $page->addCSS("<link rel=\"stylesheet\" href=\"./css/headerStyling.css\">");
 $page->addJavaScript("<script src=\"./js/navBar.js\"></script>");
-$page->addJavaScript("<script src=\"./js/popupForm.js\"></script>");
 
 $job_id = $_REQUEST['id'];
 
@@ -104,7 +103,6 @@ if(isset($_SESSION['recently_viewed'])) {
                     <div class='recViewedImg'>
                         <img src='assets/job_images/{$job_image}'>
                     </div>
-                    <script> getRecentlyViewedImage({$_SESSION['recently_viewed'][$i]}); </script>
                     <div class='recViewedText'>
                         <h4>{$job_title}</h4>
                         <p>£{$job_price}/h</p>  

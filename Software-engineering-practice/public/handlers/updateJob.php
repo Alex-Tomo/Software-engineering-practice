@@ -14,7 +14,7 @@ $job_id = isset($_POST['jobId']) ? $_POST['jobId'] : null;
 
 if(!empty($title) && !empty($desc) && !empty($price) && !empty($categoryIds) && !empty($job_id)) {
 
-    if(!isset($_FILES['image']['name'])) {
+    if(isset($_FILES['image']['name'])) {
         $renamedImage = moveAndRenameImage($conn, $job_id);
         if ($renamedImage) {
             $insertAvailableJobs = $conn->query("UPDATE sep_available_jobs
@@ -58,7 +58,7 @@ function moveAndRenameImage($connection, $job_id) {
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
-    $target_file = $target_dir . $_FILES['image']['name'] = 'image_'.$job_id.'.'.$imageFileType;
+    $target_file = $target_dir . $_FILES['image']['name'] = 'image_'.$job_id;
 
     $check = getimagesize($_FILES['image']['tmp_name']);
     if ($check === false) {
@@ -77,9 +77,14 @@ function moveAndRenameImage($connection, $job_id) {
         // Files not uploaded
         echo "File was not uploaded";
     } else {
-        if(move_uploaded_file($_FILES['image']['tmp_name'], $target_file)) {
+        $newImage = 'image_'.$job_id;
+        for($i = 0; $i < 10; $i++) {
+            $newImage .= rand(1, 9);
+        }
+        $newImage .= '.'.$imageFileType;
+        if(move_uploaded_file($_FILES['image']['tmp_name'], $target_dir.$newImage)) {
             echo "File uploaded";
-            return $_FILES['image']['name'] = 'image_'.$job_id.'.'.$imageFileType;
+            return $_FILES['image']['name'] = $newImage;
         }
     }
 }
