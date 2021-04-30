@@ -3,6 +3,20 @@
 // TODO: make the dynamic redirect an external function
 
 function getHeader() {
+    // need a dynamic redirect
+    $path = '';
+    $arr = explode("/", __DIR__);
+    foreach ($arr as $a) {
+        $path .= $a.'/';
+        if ($a == 'Software-engineering-practice') { // Alex
+            // if ($a == 'sep') {  // Graham
+            $path .= 'db_connector.php';
+            break;
+        }
+    }
+
+    include_once $path;
+
     // Get database connection
     $conn = getConnection();
 
@@ -15,20 +29,6 @@ function getHeader() {
             $name = $row->user_fname;
         }
     }
-
-    // need a dynamic redirect
-    $path = '';
-    $arr = explode("/", __DIR__);
-    foreach ($arr as $a) {
-        $path .= $a.'/';
-        if ($a == 'Software-engineering-practice') { // Alex
-//        if ($a == 'sep') {  // Graham
-            $path .= 'db_connector.php';
-            break;
-        }
-    }
-
-    include_once $path;
 
     $header = "
     <header>";

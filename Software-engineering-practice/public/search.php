@@ -67,7 +67,7 @@ ON sep_user_info.user_id = sep_users_interested_jobs.user_id
 WHERE sep_available_jobs.job_availability = '1' ";
 
 if($_REQUEST['categories'] != 'all') {
-    $query .= "AND sep_available_jobs.jobId IN (" . implode(',', $categoriesCodes) . ") ";
+    $query .= "AND sep_available_jobs.job_id IN (" . implode(',', $categoriesCodes) . ") ";
 }
 
 if(!empty($_REQUEST['keyword'])) {
@@ -78,7 +78,7 @@ if(!empty($_REQUEST['keyword'])) {
     OR sep_available_jobs.job_price LIKE '%{$_REQUEST['keyword']}%') ";
 }
 
-$query .= "GROUP BY userId
+$query .= "GROUP BY user_id
 ORDER BY sep_available_jobs.job_date DESC
 LIMIT 10";
 

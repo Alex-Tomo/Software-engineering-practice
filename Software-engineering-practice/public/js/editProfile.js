@@ -52,6 +52,10 @@ const displayEditProfile = () => {
 
             // Split the chosen jobs into a number array
             let email = document.getElementById('email').value;
+
+            // On form submit the data is sent to updateMyprofile.php
+            // and the database is update with new data. The page is
+            // then refreshed.
             $.ajax({
                 url: "./handlers/updateMyprofile.php",
                 method: "POST",

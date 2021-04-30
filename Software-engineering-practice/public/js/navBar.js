@@ -7,6 +7,23 @@ function hambgrMenu() {
     }
 }
 
+function userDrpdwn() {
+    let content = document.getElementById("dropdown_content");
+    if (content.style.display === "block") {
+        content.style.display = "none";
+    } else {
+        content.style.display = "block";
+    }
+}
+
+
+function hideDrpdwn(){
+    let content = document.getElementById("dropdown_content");
+    if (content.style.display === "block") {
+        content.style.display = "none";
+    }
+}
+
 // Added by Alex - 1 generic method instead of a lot of methods
 // To use it:
 // onclick="openPage('signin.php')" etc.
@@ -23,21 +40,4 @@ function openPage(pageToOpen) {
         }
     }
     window.location.href = newPagePath + pageToOpen;
-}
-
-function userDrpdwn() {
-    let content = document.getElementById("dropdown_content");
-    if (content.style.display === "block") {
-        content.style.display = "none";
-    } else {
-        content.style.display = "block";
-    }
-}
-
-
-function hideDrpdwn(){
-    let content = document.getElementById("dropdown_content");
-    if (content.style.display === "block") {
-        content.style.display = "none";
-    }
 }

@@ -1,5 +1,9 @@
 window.onload = () => {
 
+    // Using the users email address, check the database using AJAX
+    // if the user has details in the database, do not display the popup form
+    // otherwise display the popup form
+
     let email = document.getElementById('email').value;
 
     $.ajax({
@@ -62,6 +66,8 @@ window.onload = () => {
 
                         // Split the chosen jobs into a number array
                         let email = document.getElementById('email').value;
+
+                        // Insert the users data into the database using the userInfoHandler.php file
                         $.ajax({
                             url: "./handlers/userInfoHandler.php",
                             method: "POST",
