@@ -5,12 +5,21 @@
     // Require
     require('../../db_connector.php');
 
-    // Get database connection
-    $conn = getConnection();
+    try {
+        // Get database connection
+        $conn = getConnection();
 
-    list($vals, $errs) = verifyLogin($conn); // verify login details
-    if($errs) failedLogin($errs); // if errors redisplay the login page with errors
-    else header('Location: ../loggedinHome.php'); // Redirect user to loggedin homepage and set Session
+        list($vals, $errs) = verifyLogin($conn); // verify login details
+
+        if ($errs) { // if errors redisplay the login page with errors
+            failedLogin($errs);
+        } else { // Redirect user to loggedin homepage and set Session
+            header('Location: ../loggedinHome.php');
+        }
+
+    } catch(Exception $ex) {
+        logError($ex);
+    }
 
     function verifyLogin($connection) {
         $values = array();

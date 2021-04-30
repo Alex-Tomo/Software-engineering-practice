@@ -1,7 +1,7 @@
 <?php
 
     // TODO: Add a show all button
-    // TODO: Add expertese to the database or scrap it
+    // TODO: Add expertese to the database or scrap it - probably remove it
 
 
     // Requires

@@ -1,7 +1,5 @@
 <?php
 
-    // TODO: remove the sql and put in a separate file
-
     // Requires
     require('../pageTemplate.php');
     require('../db_connector.php');
@@ -55,45 +53,23 @@ for($jobIndex = 0; $jobIndex < sizeof($jobCodes); $jobIndex++) {
             </div>
         </div>");
 
-
-// Get the users ID
-$userId = $conn->query("SELECT user_id FROM sep_users WHERE user_email = '{$_SESSION['email']}'")->fetchColumn();
-
-// Get all the users jobs
-$result = $conn->query("
-                SELECT sep_user_info.user_id, 
-                    sep_user_info.user_fname, 
-                    sep_user_info.user_lname,
-                    sep_available_jobs.job_id,
-                    sep_available_jobs.job_title,
-                    sep_available_jobs.job_desc,
-                    sep_available_jobs.job_price,
-                    sep_available_jobs.job_date,
-                     sep_available_jobs.job_image                       
-                FROM sep_user_info
-                INNER JOIN sep_available_jobs
-                ON sep_user_info.user_id = sep_available_jobs.user_id
-                WHERE sep_available_jobs.job_availability = '1'
-                AND sep_available_jobs.user_id = '{$userId}'
-                ORDER BY sep_available_jobs.job_date DESC");
-
-if($result) {
-    while($row = $result->fetchObject()) {
-        $price = $row->job_price;
+// Gets all the users jobs
+$jobsArray = getUsersJobs($conn, $_SESSION['email']);
+foreach($jobsArray as $job) {
 
         $page->addPageBodyItem("
-        <div class='resultChild clickable' onclick='openPage(`serviceInner.php?id={$row->job_id}`)'>
+        <div class='resultChild clickable' onclick='openPage(`serviceInner.php?id={$job['jobId']}`)'>
             <div class='topImg'>
-                <img src='assets/job_images/{$row->job_image}'>
+                <img src='assets/job_images/{$job['jobImage']}'>
             </div>
             <div class='resultText'>
                 <img class='personIcon' src='assets/person.svg'>
-                <h2>{$row->user_fname} {$row->user_lname}</h2>
-                <h3>{$row->job_title}</h3>
-                <p>{$row->job_desc}</p>");
+                <h2>{$job['userFname']} {$job['userLname']}</h2>
+                <h3>{$job['jobName']}</h3>
+                <p>{$job['jobDesc']}</p>");
 
 // get star rating for each job
-list($sum, $total) = getStarRating($conn, $row->job_id);
+list($sum, $total) = getStarRating($conn, $job['jobId']);
 for($i = 0; $i < 5; $i++) {
 
             if($i < $sum) {
@@ -105,14 +81,13 @@ for($i = 0; $i < 5; $i++) {
 } // end of for loop
 
                 $page->addPageBodyItem("
-                ({$total})<p class='price'>£{$price}/h</p>
+                ({$total})<p class='price'>£{$job['jobPrice']}/h</p>
             </div>
-            <button type='button' id='$row->job_id' class='removeJob'>Delete Job</button>
-            <button type='button' id='$row->job_id' class='editJob'>Edit Job</button>
+            <button type='button' id='{$job['jobId']}' class='removeJob'>Delete Job</button>
+            <button type='button' id='{$job['jobId']}' class='editJob'>Edit Job</button>
         </div>");
 
-    } // end of while loop
-} // end of if($result)
+} // end of foreach loop
 
     $page->addPageBodyItem("
     </div>");

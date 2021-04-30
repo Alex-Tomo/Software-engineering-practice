@@ -25,31 +25,8 @@
     $page->addJavaScript("<script src=\"./js/selectJobsList.js\"></script>");
     $page->addJavaScript("<script src=\"./js/changePasswordForm.js\"></script>");
 
-// Get all user information
-$result = $conn->query("
-    SELECT * FROM sep_user_info 
-    INNER JOIN sep_users ON sep_user_info.user_id = sep_users.user_id
-    INNER JOIN sep_languages ON sep_user_info.user_language = sep_languages.language_code
-    INNER JOIN sep_regions ON sep_user_info.user_region = sep_regions.region_code
-    INNER JOIN sep_users_interested_jobs ON sep_users_interested_jobs.user_id = sep_user_info.user_id
-    INNER JOIN sep_jobs_list ON sep_jobs_list.job_code = sep_users_interested_jobs.job_code
-    WHERE user_email = '{$_SESSION['email']}'");
-
-// Put all of the users details into variables
-if($result){
-    $chosenJobsCode = array();
-    $chosenJobsName = array();
-    while($row = $result->fetchObject()) {
-        if(!isset($fname)) {$fname = $row->user_fname;}
-        if(!isset($lname)) {$lname = $row->user_lname;}
-        if(!isset($gender)) {$gender = $row->user_gender;}
-        if(!isset($language)) {$language = $row->user_language;}
-        if(!isset($region)) {$region = $row->user_region;}
-        array_push($chosenJobsCode, $row->job_code);
-        array_push($chosenJobsName, $row->job_name);
-    }
-}
-
+// Get users details
+list($user, $chosenJobsCode, $chosenJobsName) = getUserDetails($conn, $_SESSION['email']);
 // Dynamically include gender details
 $gendersValue = ['Select', 'Male', 'Female', 'Prefer not to say'];
 $gendersArray = ['0', 'male', 'female', 'pnts'];
@@ -65,15 +42,15 @@ $gendersArray = ['0', 'male', 'female', 'pnts'];
                         <h1>General information</h1>
                         <input type='text' id='email' value='{$_SESSION['email']}' style='display: none'>
                         <label for='fname'>   First name</label><br>
-                        <input type='text' id='fname' name='fname' value='{$fname}' placeholder='Your name'><br>
+                        <input type='text' id='fname' name='fname' value='{$user['fname']}' placeholder='Your name'><br>
                         <label for='lname'>   Last name</label><br>
-                        <input type='text'  id='lname' name='lname' value='{$lname}' placeholder='Last name'><br>
+                        <input type='text'  id='lname' name='lname' value='{$user['lname']}' placeholder='Last name'><br>
                         <label for='gender'>Gender</label>
                         <select id='gender' name='gender'>");
 
 for($i = 0; $i < sizeof($gendersArray); $i++) {
 
-                        if($gender == $gendersArray[$i]) {
+                        if($user['gender'] == $gendersArray[$i]) {
                             $page->addPageBodyItem("<option selected value='{$gendersArray[$i]}'>{$gendersValue[$i]}</option>");
                         } else {
                             $page->addPageBodyItem("<option value='{$gendersArray[$i]}'>{$gendersValue[$i]}</option>");
@@ -91,7 +68,7 @@ for($i = 0; $i < sizeof($gendersArray); $i++) {
 list($languageCodes, $languageNames) = selectAll($conn, 'language_code', 'language_name', 'sep_languages', 'language_name');
 for($languageIndex = 0; $languageIndex < sizeof($languageCodes); $languageIndex++) {
 
-                        if($language == $languageCodes[$languageIndex]) {
+                        if($user['language'] == $languageCodes[$languageIndex]) {
                             $page->addPageBodyItem("<option selected value='{$languageCodes[$languageIndex]}'>{$languageNames[$languageIndex]}</option>");
                         } else {
                             $page->addPageBodyItem("<option value='{$languageCodes[$languageIndex]}'>{$languageNames[$languageIndex]}</option>");
@@ -109,7 +86,7 @@ for($languageIndex = 0; $languageIndex < sizeof($languageCodes); $languageIndex+
 list($regionCodes, $regionNames) = selectAll($conn, 'region_code', 'region_name', 'sep_regions', 'region_name');
 for($regionIndex = 0; $regionIndex < sizeof($regionCodes); $regionIndex++) {
 
-                        if($region == $regionCodes[$regionIndex]) {
+                        if($user['region'] == $regionCodes[$regionIndex]) {
                             $page->addPageBodyItem("<option selected value='{$regionCodes[$regionIndex]}'>{$regionNames[$regionIndex]}</option>");
                         } else {
                             $page->addPageBodyItem("<option value='{$regionCodes[$regionIndex]}'>{$regionNames[$regionIndex]}</option>");
@@ -179,45 +156,27 @@ for($i = 0; $i < sizeof($chosenJobsName); $i++) {
                         <button id='submitPasswordForm' type='button'>Change Password</button>
                     </div>
                 </form>
-            </div>");
+            </div>
 
-
-// Get all the users details
-$sqlQuery = $conn->query("
-    SELECT * FROM sep_user_info 
-    INNER JOIN sep_users ON sep_user_info.user_id = sep_users.user_id
-    INNER JOIN sep_languages ON sep_user_info.user_language = sep_languages.language_code
-    INNER JOIN sep_regions ON sep_user_info.user_region = sep_regions.region_code
-    WHERE user_email = '{$_SESSION['email']}'");
-
-if($sqlQuery){
-    while($rowObj = $sqlQuery->fetchObject()) {
-
-        $page->addPageBodyItem("
-        <div id='bookContainer'>
-            <h1>My Details</h1>
-            <div>Email: {$_SESSION['email']}</div>
-            <div>First name: {$rowObj->user_fname}</div>
-            <div id='title'>Last name: {$rowObj->user_lname}</div>
-            <div id='year'>Gender: {$rowObj->user_gender}</div>
-            <div id='description'>Language: {$rowObj->language_name}</div>
-            <div>Region: {$rowObj->region_name}</div><br>
-            <div>Favourite Categories: </div><br>");
+            <div id='bookContainer'>
+                <h1>My Details</h1>
+                <div>Email: {$_SESSION['email']}</div>
+                <div>First name: {$user['fname']}</div>
+                <div id='title'>Last name: {$user['lname']}</div>
+                <div id='year'>Gender: {$user['gender']}</div>
+                <div id='description'>Language: {$user['language']}</div>
+                <div>Region: {$user['region']}</div><br>
+                <div>Favourite Categories: </div><br>");
 
 foreach($chosenJobsName as $jobName) {
 
-            $page->addPageBodyItem("
-            <div>{$jobName}</div>");
+                $page->addPageBodyItem("
+                <div>{$jobName}</div>");
 
 } // end of foreach loop
 
-        $page->addPageBodyItem("
-        </div>");
-
-    } // end of while loop
-} // end of if($sqlQuery)
-
     $page->addPageBodyItem("
+            </div>
         <button onclick='displayEditProfile();' style='margin: 25px auto;'>Edit Profile</button>
         <button id='showPasswordForm' style='margin: 25px auto;'>Change Password</button>
     </div>");

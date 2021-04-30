@@ -1,6 +1,5 @@
 <?php
 
-    // TODO remove the SQL statement and put into separate file
     // TODO remove the recentlyViewed and put into separate file/method
 
     // Requires
@@ -8,15 +7,18 @@
     require('../db_connector.php');
     require('../database_functions.php');
 
-    // If user is not logged in, redirect to signinpage
-    if(!$_SESSION['loggedin']) { header('Location: signin.php'); }
-
     // Initial Variables, get database connection, get page template class
     // Get the id of the job being displayed
     $conn = getConnection();
     $page = new pageTemplate('Logged In Home');
     $jobId = $_REQUEST['id'];
 
+    // If user is not logged in, redirect to signinpage
+    if(!$_SESSION['loggedin']) { header('Location: signin.php'); }
+
+    // Checks if the jobId actually exists, otherwise redirect to loggedinHome
+    $availableJobIds = checkJobIdExists($conn);
+    if(!in_array($jobId, $availableJobIds)) { header('Location: loggedinHome.php'); }
 
     // Add CSS
     $page->addCSS("<link rel=\"stylesheet\" href=\"./css/styling.css\">");
@@ -26,17 +28,6 @@
     // Add JS
     $page->addJavaScript("<script src=\"./js/navBar.js\"></script>");
 
-// Checks if the jobId actually exists, otherwise redirect to loggedinHome
-$checkJobExists = $conn->query("SELECT job_id FROM sep_available_jobs WHERE job_availability = TRUE");
-$availableJobIds = array();
-if($checkJobExists) {
-    while($row = $checkJobExists->fetchObject()) {
-        array_push($availableJobIds, $row->job_id);
-    }
-    if(!in_array($_REQUEST['id'], $availableJobIds)) {
-        header('Location: loggedinHome.php');
-    }
-}
 
 // Adds the current jobId to the recentlyViewed session
 if(!isset($_SESSION['recentlyViewed'])) {

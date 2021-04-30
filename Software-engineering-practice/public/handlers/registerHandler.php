@@ -5,12 +5,21 @@
     // Require
     require('../../db_connector.php');
 
-    // Get database connection
-    $conn = getConnection();
+    try {
+        // Get database connection
+        $conn = getConnection();
 
-    list($vals, $err) = verifyRegistration($conn); // verify data
-    if($err) failedRegistration($err); // Redisplay the signin page with errors
-    else successfulRegistration($vals, $conn); // Redirect the user to the login page
+        list($vals, $err) = verifyRegistration($conn); // verify data
+
+        if ($err) { // Redisplay the signin page with errors
+            failedRegistration($err);
+        } else { // Redirect the user to the login page
+            successfulRegistration($vals, $conn);
+        }
+
+    } catch(Exception $ex) {
+        logError($ex);
+    }
 
     function verifyRegistration($connection) {
         $values = array();
