@@ -1,11 +1,16 @@
 <?php
 
+    // TODO: Filter the data dynamically
+
+    // Require
     require('../../db_connector.php');
+
+    // Get database connection
     $conn = getConnection();
 
-    list($vals, $errs) = verifyLogin($conn);
-    if($errs) failedLogin($errs);
-    else header('Location: ../loggedinHome.php');
+    list($vals, $errs) = verifyLogin($conn); // verify login details
+    if($errs) failedLogin($errs); // if errors redisplay the login page with errors
+    else header('Location: ../loggedinHome.php'); // Redirect user to loggedin homepage and set Session
 
     function verifyLogin($connection) {
         $values = array();
@@ -55,7 +60,7 @@
         $page->addCSS("<link rel=\"stylesheet\" href=\"../css/headerStyling.css\">");
         $page->addJavaScript("<script src=\"../js/navBar.js\"></script>");
         $page->addPageBodyItem("<div id='registerForm'>
-            <form action='./signin_handler.php' method='POST'>
+            <form action='./signinHandler.php' method='POST'>
             <h2>Login</h2>");
         foreach($errors as $error) {
             $page->addPageBodyItem($error);

@@ -1,8 +1,16 @@
 <?php
 
-    require('../../db_connector.php');
-    $conn = getConnection();
+    // TODO: Put the SQL in a function
 
+    // Require
+    require('../../db_connector.php');
+
+    // Get the database connection, create an empty array for chosen categories
+    $conn = getConnection();
+    $chosenCategories = array();
+
+
+    // Get the jobId when the form is submitted
     $jobId = isset($_POST['jobId']) ? $_POST['jobId'] : null;
 
     $jobDetails = $conn->query("
@@ -20,7 +28,6 @@
         }
     }
 
-    $chosenCategories = array();
     $jobCategories = $conn->query("
         SELECT sep_jobs_categories.job_code
         FROM sep_jobs_categories
@@ -35,6 +42,7 @@
         }
     }
 
+    // return (via AJAX) the data as JSON
     echo json_encode(array($title, $desc, $price, $image, $chosenCategories));
 
 ?>

@@ -1,38 +1,49 @@
 <?php
+
+    // TODO: Error handling and validate the info
+    // TODO: Dynamically get the path of the image
+
+    // Require
     require('../../pageTemplate.php');
     require('../../db_connector.php');
+
+    // Get the database connection
     $conn = getConnection();
 
-    // TODO Error handling and validate the info
-
+    // Get the user info when the form is submitted
     $title = isset($_POST['title']) ? trim($_POST['title']) : null;
     $desc = isset($_POST['desc']) ? trim($_POST['desc']) : null;
     $price = isset($_POST['price']) ? trim($_POST['price']) : null;
     $categoryIds = isset($_POST['categoryIds']) ? $_POST['categoryIds'] : null;
-    $user_id = getUserId($conn);
-    $job_id = getJobId($conn);
+    // Get the user/job IDs
+    $userId = getUserId($conn);
+    $jobId = getJobId($conn);
 
-    if(!empty($title) && !empty($desc) && !empty($price) && !empty($categoryIds) && !empty($user_id) && !empty($job_id)) {
 
-        $renamedImage = moveAndRenameImage($conn, $job_id);
+    if(!empty($title) && !empty($desc) && !empty($price) && !empty($categoryIds) && !empty($userId) && !empty($jobId)) {
+
+
+        $renamedImage = moveAndRenameImage($conn, $jobId);
         if($renamedImage) {
             $insertAvailableJobs = $conn->query("INSERT INTO sep_available_jobs
                   (job_id, user_id, job_title, job_desc, job_price, job_availability, job_date, job_image)
-                  VALUES ('{$job_id}', '{$user_id}', '{$title}', '{$desc}', '{$price}', TRUE, now(), '{$renamedImage}')");
+                  VALUES ('{$jobId}', '{$userId}', '{$title}', '{$desc}', '{$price}', TRUE, now(), '{$renamedImage}')");
 
-            // Get the last id rather than number of rows
+
             $insertSimilarCategoriesQuery = "INSERT INTO sep_jobs_categories VALUES ";
             for ($i = 0; $i < sizeof($categoryIds); $i++) {
                 if ($i == sizeof($categoryIds) - 1) {
-                    $insertSimilarCategoriesQuery .= "('$job_id', '$categoryIds[$i]')";
+                    $insertSimilarCategoriesQuery .= "('$jobId', '$categoryIds[$i]')";
                 } else {
-                    $insertSimilarCategoriesQuery .= "('$job_id', '$categoryIds[$i]'),";
+                    $insertSimilarCategoriesQuery .= "('$jobId', '$categoryIds[$i]'),";
                 }
             }
             $conn->query($insertSimilarCategoriesQuery);
         }
+        // Refresh the page
         header("Location: ../postJob.php");
-    }
+
+    } // End of if statement
 
     function getUserId($connection) {
         $result = $connection->query("SELECT user_id FROM sep_users WHERE user_email = '{$_SESSION['email']}'");
@@ -43,14 +54,14 @@
     }
 
     function getJobId($connection) {
-        $result = $connection->query("SELECT MAX(job_id)+1 AS job_id FROM sep_available_jobs");
+        $result = $connection->query("SELECT MAX(job_id)+1 AS jobId FROM sep_available_jobs");
         if($result) {
             $row = $result->fetchObject();
             return $row->job_id;
         }
     }
 
-    function moveAndRenameImage($connection, $job_id) {
+    function moveAndRenameImage($connection, $jobId) {
         $path = '';
         $arr = explode("/", __DIR__);
         foreach ($arr as $a) {
@@ -60,12 +71,12 @@
             }
         }
 
-        $target_dir = $path."assets/job_images/";
-        $target_file = $target_dir . basename($_FILES['image']['name']);
+        $targetDir = $path."assets/job_images/";
+        $targetFile = $targetDir . basename($_FILES['image']['name']);
         $uploadOk = 1;
-        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+        $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
-        $target_file = $target_dir . $_FILES['image']['name'] = 'image_'.$job_id.'.'.$imageFileType;
+        $targetFile = $targetDir . $_FILES['image']['name'] = 'image_'.$jobId.'.'.$imageFileType;
 
         $check = getimagesize($_FILES['image']['tmp_name']);
         if ($check === false) {
@@ -84,10 +95,12 @@
             // Files not uploaded
             echo "File was not uploaded";
         } else {
-            if(move_uploaded_file($_FILES['image']['tmp_name'], $target_file)) {
+            // If the image was successfully uploaded then return the image name to update the database
+            if(move_uploaded_file($_FILES['image']['tmp_name'], $targetFile)) {
                 echo "File uploaded";
-                return $_FILES['image']['name'] = 'image_'.$job_id.'.'.$imageFileType;
+                return $_FILES['image']['name'] = 'image_'.$jobId.'.'.$imageFileType;
             }
         }
+        return null;
     }
 ?>

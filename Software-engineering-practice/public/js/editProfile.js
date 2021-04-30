@@ -53,7 +53,7 @@ const displayEditProfile = () => {
             // Split the chosen jobs into a number array
             let email = document.getElementById('email').value;
             $.ajax({
-                url: "./handlers/update_myprofile.php",
+                url: "./handlers/updateMyprofile.php",
                 method: "POST",
                 data: {
                     email: email,

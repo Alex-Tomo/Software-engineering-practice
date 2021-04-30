@@ -82,15 +82,15 @@
 
             if ($result) {
                 while ($row = $result->fetchObject()) {
-                    $arr[$index]['user_id'] = sanitizeData($row->user_id);
-                    $arr[$index]['user_fname'] = sanitizeData($row->user_fname);
-                    $arr[$index]['user_lname'] = sanitizeData($row->user_lname);
-                    $arr[$index]['job_id'] = sanitizeData($row->job_id);
-                    $arr[$index]['job_title'] = sanitizeData($row->job_title);
-                    $arr[$index]['job_desc'] = sanitizeData($row->job_desc);
-                    $arr[$index]['job_price'] = sanitizeData($row->job_price);
-                    $arr[$index]['job_date'] = sanitizeData($row->job_date);
-                    $arr[$index]['job_image'] = sanitizeData($row->job_image);
+                    $arr[$index]['userId'] = sanitizeData($row->user_id);
+                    $arr[$index]['userFname'] = sanitizeData($row->user_fname);
+                    $arr[$index]['userLname'] = sanitizeData($row->user_lname);
+                    $arr[$index]['jobId'] = sanitizeData($row->job_id);
+                    $arr[$index]['jobTitle'] = sanitizeData($row->job_title);
+                    $arr[$index]['jobDesc'] = sanitizeData($row->job_desc);
+                    $arr[$index]['jobPrice'] = sanitizeData($row->job_price);
+                    $arr[$index]['jobDate'] = sanitizeData($row->job_date);
+                    $arr[$index]['jobImage'] = sanitizeData($row->job_image);
                     $index++;
                 }
             }
@@ -103,7 +103,7 @@
 
     }
 
-    function getStarRating($connection, $job_id) {
+    function getStarRating($connection, $jobId) {
 
         $result = $connection->query("
             SELECT (SUM(sep_job_rating.job_rating)/COUNT(*)) as sum, COUNT(sep_job_rating.job_id) as total
@@ -112,7 +112,7 @@
             ON sep_job_rating.job_id = sep_available_jobs.job_id
             INNER JOIN sep_users
             ON sep_job_rating.user_id = sep_users.user_id
-            WHERE sep_job_rating.job_id = '{$job_id}'
+            WHERE sep_job_rating.job_id = '{$jobId}'
             GROUP BY sep_job_rating.job_id");
 
         if($result) {
@@ -152,15 +152,15 @@
             if ($result) {
                 while ($row = $result->fetchObject()) {
 
-                    $arr[$index]['user_id'] = sanitizeData($row->user_id);
-                    $arr[$index]['user_fname'] = sanitizeData($row->user_fname);
-                    $arr[$index]['user_lname'] = sanitizeData($row->user_lname);
-                    $arr[$index]['job_id'] = sanitizeData($row->job_id);
-                    $arr[$index]['job_title'] = sanitizeData($row->job_title);
-                    $arr[$index]['job_desc'] = sanitizeData($row->job_desc);
-                    $arr[$index]['job_price'] = sanitizeData($row->job_price);
-                    $arr[$index]['job_date'] = sanitizeData($row->job_date);
-                    $arr[$index]['job_image'] = sanitizeData($row->job_image);
+                    $arr[$index]['userId'] = sanitizeData($row->user_id);
+                    $arr[$index]['userFname'] = sanitizeData($row->user_fname);
+                    $arr[$index]['userLname'] = sanitizeData($row->user_lname);
+                    $arr[$index]['jobId'] = sanitizeData($row->job_id);
+                    $arr[$index]['jobTitle'] = sanitizeData($row->job_title);
+                    $arr[$index]['jobDesc'] = sanitizeData($row->job_desc);
+                    $arr[$index]['jobPrice'] = sanitizeData($row->job_price);
+                    $arr[$index]['jobDate'] = sanitizeData($row->job_date);
+                    $arr[$index]['jobImage'] = sanitizeData($row->job_image);
                     $index++;
                 }
             }
@@ -209,19 +209,19 @@
         if ($results) {
             while ($row = $results->fetchObject()) {
                 if(isset($row->job_title) && isset($row->job_price) && isset($row->job_image)) {
-                    $job_title = sanitizeData($row->job_title);
-                    $job_price = sanitizeData($row->job_price);
-                    $job_image = sanitizeData($row->job_image);
+                    $jobTitle = sanitizeData($row->job_title);
+                    $jobPrice = sanitizeData($row->job_price);
+                    $jobImage = sanitizeData($row->job_image);
                 }
             }
-            if(isset($job_title) && isset($job_price) && isset($job_image)) {
-                return array($job_title, $job_price, $job_image);
+            if(isset($jobTitle) && isset($jobPrice) && isset($jobImage)) {
+                return array($jobTitle, $jobPrice, $jobImage);
             }
         }
         return array(null, null);
     }
 
-    function getJobDetails($connection, $job_id) {
+    function getJobDetails($connection, $jobId) {
 
         $arr = array();
         $index = 0;
@@ -239,19 +239,19 @@
             FROM sep_user_info
             INNER JOIN sep_available_jobs
             ON sep_user_info.user_id = sep_available_jobs.user_id
-            WHERE sep_available_jobs.job_id = '{$job_id}'");
+            WHERE sep_available_jobs.job_id = '{$jobId}'");
 
         if($results) {
             while($row = $results->fetchObject()) {
-                $arr[$index]['user_id'] = sanitizeData($row->user_id);
-                $arr[$index]['user_fname'] = sanitizeData($row->user_fname);
-                $arr[$index]['user_lname'] = sanitizeData($row->user_lname);
-                $arr[$index]['job_id'] = sanitizeData($row->job_id);
-                $arr[$index]['job_name'] = sanitizeData($row->job_title);
-                $arr[$index]['job_desc'] = sanitizeData($row->job_desc);
-                $arr[$index]['job_price'] = sanitizeData($row->job_price);
-                $arr[$index]['job_date'] = sanitizeData($row->job_date);
-                $arr[$index]['job_image'] = sanitizeData($row->job_image);
+                $arr[$index]['userId'] = sanitizeData($row->user_id);
+                $arr[$index]['userFname'] = sanitizeData($row->user_fname);
+                $arr[$index]['userLname'] = sanitizeData($row->user_lname);
+                $arr[$index]['jobId'] = sanitizeData($row->job_id);
+                $arr[$index]['jobName'] = sanitizeData($row->job_title);
+                $arr[$index]['jobDesc'] = sanitizeData($row->job_desc);
+                $arr[$index]['jobPrice'] = sanitizeData($row->job_price);
+                $arr[$index]['jobDate'] = sanitizeData($row->job_date);
+                $arr[$index]['jobImage'] = sanitizeData($row->job_image);
                 $index++;
             }
         }

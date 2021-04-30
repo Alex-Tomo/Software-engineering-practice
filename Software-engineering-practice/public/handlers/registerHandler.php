@@ -1,10 +1,16 @@
 <?php
+
+    // TODO: Dynamically filter the data
+
+    // Require
     require('../../db_connector.php');
+
+    // Get database connection
     $conn = getConnection();
 
-    list($vals, $err) = verifyRegistration($conn);
-    if($err) failedRegistration($err);
-    else successfulRegistration($vals, $conn);
+    list($vals, $err) = verifyRegistration($conn); // verify data
+    if($err) failedRegistration($err); // Redisplay the signin page with errors
+    else successfulRegistration($vals, $conn); // Redirect the user to the login page
 
     function verifyRegistration($connection) {
         $values = array();
@@ -48,6 +54,7 @@
         return array($values, $errors);
     }
 
+
     function failedRegistration($errors) {
         include ('../../pageTemplate.php');
         $page = new pageTemplate('Register');
@@ -55,7 +62,7 @@
         $page->addCSS("<link rel=\"stylesheet\" href=\"../css/footerStyling.css\">");
         $page->addCSS("<link rel=\"stylesheet\" href=\"../css/headerStyling.css\">");
         $page->addJavaScript("<script src=\"../js/navBar.js\"></script>");
-        $page->addPageBodyItem("<form action='./register_handler.php' method='POST'>
+        $page->addPageBodyItem("<form action='./registerHandler.php' method='POST'>
             <h2>Register</h2>");
         foreach($errors as $error) {
             $page->addPageBodyItem($error);

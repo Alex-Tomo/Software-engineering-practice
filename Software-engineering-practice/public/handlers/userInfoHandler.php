@@ -1,8 +1,14 @@
 <?php
 
+    // TODO: use a dynamic function to sanitize the data
+
+    // Requires
     require "../../db_connector.php";
+
+    // get database connection
     $conn = getConnection();
 
+    // Get all the variable when the form is submitted
     $email = isset($_POST['email']) ? trim($_POST['email']) : null;
     $firstname = isset($_POST['firstname']) ? trim($_POST['firstname']) : null;
     $lastname = isset($_POST['lastname']) ? trim($_POST['lastname']) : null;
@@ -12,6 +18,7 @@
     $jobsArray = isset($_POST['jobsArray']) ? $_POST['jobsArray'] : null;
     $userId = null;
 
+    // Sanitize the data
     if(!empty($email)) {
         $email = filter_var($email, FILTER_SANITIZE_EMAIL);
     }
@@ -43,27 +50,16 @@
     }
 
     if(!empty($firstname) && !empty($lastname) && !empty($gender) && !empty($language) && !empty($region)) {
-        $statement = $conn->prepare("UPDATE sep_user_info SET 
-            user_fname = ?, 
-            user_lname = ?, 
-            user_gender = ?,
-            user_language = ?,
-            user_region = ?
-        WHERE user_id = ?");
-        $statement->bindParam(1, $firstname);
-        $statement->bindParam(2, $lastname);
-        $statement->bindParam(3, $gender);
-        $statement->bindParam(4, $language);
-        $statement->bindParam(5, $region);
-        $statement->bindParam(6, $userId, PDO::PARAM_INT);
+        $statement = $conn->prepare("INSERT INTO sep_user_info (user_id, user_fname, user_lname, user_gender, user_language, user_region)
+        VALUES (?, ?, ?, ?, ?, ?)");
+        $statement->bindParam(1, $userId, PDO::PARAM_INT);
+        $statement->bindParam(2, $firstname);
+        $statement->bindParam(3, $lastname);
+        $statement->bindParam(4, $gender);
+        $statement->bindParam(5, $language);
+        $statement->bindParam(6, $region);
         $statement->execute();
     }
-
-    $statement = $conn->prepare("DELETE FROM sep_users_interested_jobs WHERE user_id = ?");
-    $statement->bindParam(1, $userId, PDO::PARAM_INT);
-    $statement->execute();
-
-
 
     if(!empty($jobsArray)) {
         foreach ($jobsArray as $jobCode) {

@@ -1,12 +1,21 @@
 <?php
-    include('../pageTemplate.php');
+    // Requires
+    require('../pageTemplate.php');
+
+    // Initial variables
+    // Get the page template class
     $page = new pageTemplate('Home');
+
+    // Add CSS
     $page->addCSS("<link rel=\"stylesheet\" href=\"./css/styling.css\">");
     $page->addCSS("<link rel=\"stylesheet\" href=\"./css/footerStyling.css\">");
     $page->addCSS("<link rel=\"stylesheet\" href=\"./css/headerStyling.css\">");
+
+    // Add JS
     $page->addJavaScript("<script src=\"./js/navBar.js\"></script>");
     $page->addJavaScript("<script src=\"./js/reviews.js\"></script>");
 
+    // Main content
     $page->addPageBodyItem("
         <div id='top'>
             <div id='header2'>
@@ -97,7 +106,7 @@
             </div>        
         
             <div id='slideshow_container'>
-            <h5>Trusted by the world’s most innovative businesses – big and small</h5>
+                <h5>Trusted by the world’s most innovative businesses – big and small</h5>
                 <div class='mySlides'>
                     <q>The best application for fast job all imaginable people needs. Walk dogs, fix cars, find freelancers.</q>
                     <p class='author'>Viella Malkovich</p>
@@ -125,11 +134,11 @@
                 <span class='dot dot2'></span> 
                 <span class='dot dot3'></span> 
             </div>
-        </div>
-    </div>
-</div>");
+        </div>");
 
+    // Display the page
     $page->displayPage();
+
 ?>
 
 <!--    <img src='assets/appStore.svg' alt='App Store'>-->

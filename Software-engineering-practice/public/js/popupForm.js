@@ -1,8 +1,9 @@
 window.onload = () => {
 
     let email = document.getElementById('email').value;
+
     $.ajax({
-        url: "./handlers/check_user_details.php",
+        url: "./handlers/checkUserDetails.php",
         method: "POST",
         data: {
             email: email
@@ -29,7 +30,7 @@ window.onload = () => {
                 tab2.style.display = 'none';
 
                 // Form info
-                let fname, lname, gender, lang, region, jobType, category;
+                let fname, lname, gender, lang, region;
 
                 nextButtonTab1.addEventListener('click', () => {
                 //     // Get tab 1 info
@@ -62,7 +63,7 @@ window.onload = () => {
                         // Split the chosen jobs into a number array
                         let email = document.getElementById('email').value;
                         $.ajax({
-                            url: "./handlers/userinfo_handler.php",
+                            url: "./handlers/userInfoHandler.php",
                             method: "POST",
                             data: {
                                 email: email,

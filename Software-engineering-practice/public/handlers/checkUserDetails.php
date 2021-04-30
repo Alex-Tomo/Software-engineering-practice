@@ -1,12 +1,20 @@
 <?php
-    require '../../db_connector.php';
+
+    // TODO: Dynamically sanitize the data
+
+    // Require
+    require('../../db_connector.php');
+
+    // Get the database connection
     $conn = getConnection();
 
+    // Get the email when the form is submitted
     $email = isset($_POST['email']) ? trim($_POST['email']) : null;
     if(!empty($email)) {
         $email = filter_var($email, FILTER_SANITIZE_EMAIL);
     }
 
+    // if the user has entered details then return any result
     if(!empty($email)) {
         $statement = $conn->prepare("SELECT sep_user_info.userinfo_id
               FROM sep_user_info JOIN sep_users

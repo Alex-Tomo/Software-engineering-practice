@@ -1,106 +1,129 @@
 <?php
 
-require('../db_connector.php');
-require('../pageTemplate.php');
-require('../database_functions.php');
+    // TODO: Add a show all button
+    // TODO: Add expertese to the database or scrap it
 
-// TODO: Add a show all button
 
-if(!$_SESSION['loggedin']) { header('Location: home.php'); }
-$conn = getConnection();
+    // Requires
+    require('../db_connector.php');
+    require('../pageTemplate.php');
+    require('../database_functions.php');
 
-$page = new pageTemplate('Logged In Home');
-$page->addCSS("<link rel=\"stylesheet\" href=\"./css/styling.css\">");
-$page->addCSS("<link rel=\"stylesheet\" href=\"./css/footerStyling.css\">");
-$page->addCSS("<link rel=\"stylesheet\" href=\"./css/headerStyling.css\">");
-$page->addJavaScript("<script src=\"./js/navBar.js\"></script>");
-$page->addJavaScript("<script src=\"./js/popupForm.js\"></script>");
-$page->addJavaScript("<script src=\"./js/selectJobsList.js\"></script>");
+    // If the user is not logged in, redirect the user to the signin page
+    if(!$_SESSION['loggedin']) { header('Location: signin.php'); }
 
-$page->addPageBodyItem("
-<div class='pageContainer'>
-     <div class='popup' id='popup-1' style='display: none;'>
-        <div class='overlay'></div>
-            <form id='regForm' action='/action_page.php'>
-                <div id='tab1'>
-                    <h2>Tell us about yourself</h2>
-                    <h1>General information</h1>
-                    <input type='text' id='email' value='{$_SESSION['email']}' style='display: none'>
-                    <label for='fname'>   First name</label><br>
-                    <input type='text' id='fname' name='fname' placeholder='Your name'><br>
-                    <label for='lname'>   Last name</label><br>
-                    <input type='text'  id='lname' name='lname' placeholder='Last name'><br>
-                    <label for='gender'>Gender</label>
-                    <select id='gender' name='gender'>
-                        <option value='0'> Select </option>
-                        <option value='male'>Male</option>
-                        <option value='female'>Female</option>
-                        <option value='pnts'>Prefer not to say</option>
-                    </select>
-                    <label for='lang'>Preferred language</label><br>
-                    <select id='lang' name='lang'>
-                        <option value='0'>Choose your language</option>");
+    // Inital variables
+    // Get database connection, Get the page template class
+    $conn = getConnection();
+    $page = new pageTemplate('Logged In Home');
 
-list($language_codes, $language_names) = selectAll($conn, 'language_code', 'language_name', 'sep_languages', 'language_name');
-for($language_index = 0; $language_index < sizeof($language_codes); $language_index++) {
-    $page->addPageBodyItem("<option value='{$language_codes[$language_index]}'>{$language_names[$language_index]}</option>");
+    // Add CSS
+    $page->addCSS("<link rel=\"stylesheet\" href=\"./css/styling.css\">");
+    $page->addCSS("<link rel=\"stylesheet\" href=\"./css/footerStyling.css\">");
+    $page->addCSS("<link rel=\"stylesheet\" href=\"./css/headerStyling.css\">");
+
+    // Add JS
+    $page->addJavaScript("<script src=\"./js/navBar.js\"></script>");
+    $page->addJavaScript("<script src=\"./js/popupForm.js\"></script>");
+    $page->addJavaScript("<script src=\"./js/selectJobsList.js\"></script>");
+
+    // Main content
+    $page->addPageBodyItem("
+        <div class='pageContainer'>
+        
+             <div class='popup' id='popup-1' style='display: none;'>
+                <div class='overlay'></div>        
+                    <form id='regForm' action='/action_page.php'>
+                    
+                        <div id='tab1'>
+                            <h2>Tell us about yourself</h2>
+                            <h1>General information</h1>
+                            <input type='text' id='email' value='{$_SESSION['email']}' style='display: none'>
+                            <label for='fname'>   First name</label><br>
+                            <input type='text' id='fname' name='fname' placeholder='Your name'><br>
+                            <label for='lname'>   Last name</label><br>
+                            <input type='text'  id='lname' name='lname' placeholder='Last name'><br>
+                            <label for='gender'>Gender</label>
+                            <select id='gender' name='gender'>
+                                <option value='0'> Select </option>
+                                <option value='male'>Male</option>
+                                <option value='female'>Female</option>
+                                <option value='pnts'>Prefer not to say</option>
+                            </select>
+                            <label for='lang'>Preferred language</label><br>
+                            <select id='lang' name='lang'>
+                                <option value='0'>Choose your language</option>");
+
+// Get all the available languages from the database
+list($languageCodes, $languageNames) = selectAll($conn, 'language_code', 'language_name', 'sep_languages', 'language_name');
+for($languageIndex = 0; $languageIndex < sizeof($languageCodes); $languageIndex++) {
+    $page->addPageBodyItem("<option value='{$languageCodes[$languageIndex]}'>{$languageNames[$languageIndex]}</option>");
 }
 
-                    $page->addPageBodyItem("</select>
-                        <label for='reg'>Region</label><br>
-                        <select id='reg' name='reg'>
-                            <option value='0'>Choose your region</option>");
+                            $page->addPageBodyItem("
+                            </select>
+                                <label for='reg'>Region</label><br>
+                                <select id='reg' name='reg'>
+                                    <option value='0'>Choose your region</option>");
 
-list($region_codes, $region_names) = selectAll($conn, 'region_code', 'region_name', 'sep_regions', 'region_name');
-for($region_index = 0; $region_index < sizeof($region_codes); $region_index++) {
-    $page->addPageBodyItem("<option value='{$region_codes[$region_index]}'>{$region_names[$region_index]}</option>");
+// Get all the available regions from the database
+list($regionCodes, $regionNames) = selectAll($conn, 'region_code', 'region_name', 'sep_regions', 'region_name');
+for($regionIndex = 0; $regionIndex < sizeof($regionCodes); $regionIndex++) {
+    $page->addPageBodyItem("<option value='{$regionCodes[$regionIndex]}'>{$regionNames[$regionIndex]}</option>");
 }
 
-                    $page->addPageBodyItem("</select>
-                            <button class='clickable' type='button' id='nextBtn1'>Next</button>               
+                                $page->addPageBodyItem("
+                                </select>
+                                    <button class='clickable' type='button' id='nextBtn1'>Next</button>               
+                                </div>
+                                
+                                <div id='tab2'>
+                                    <h2>Tell us about yourself</h2>
+                                    <h1>What job(s) are you interested in?</h1>
+                                    <label>(Please choose at least 3)</label>
+                                    <input id='jobsListInput' list='searchJobsList' placeholder='Search for jobs...' onkeyup='filterJobsList()' onchange='selectJob()'>       
+                                    <datalist id='searchJobsList'>");
+
+// Get all the available job categories from the database
+list($jobCodes, $jobNames) = selectAll($conn, 'job_code', 'job_name', 'sep_jobs_list', 'job_name');
+for($jobIndex = 0; $jobIndex < sizeof($jobCodes); $jobIndex++) {
+    $page->addPageBodyItem("<option value='{$jobNames[$jobIndex]}' id='{$jobNames[$jobIndex]}' name='{$jobCodes[$jobIndex]}'>");
+}
+
+                        $page->addPageBodyItem("
+                        </datalist>   
+                            <p>Can't find one? <strong>Suggest one!</strong></p>
+                            <div id='suggestion'></div>
+                            <button class='clickable' type='button' id='nextBtn2'>Submit</button><br>
+                            <button class='clickable' type='button' id='prevBtn2'>Back</button>
                         </div>
                         
-                        <div id='tab2'>
-                            <h2>Tell us about yourself</h2>
-                            <h1>What job(s) are you interested in?</h1>
-                            <label>(Please choose at least 3)</label>
-                            <input id='jobsListInput' list='searchJobsList' placeholder='Search for jobs...' onkeyup='filterJobsList()' onchange='selectJob()'>       
-                            <datalist id='searchJobsList'>");
-
-list($job_codes, $job_names) = selectAll($conn, 'job_code', 'job_name', 'sep_jobs_list', 'job_name');
-for($job_index = 0; $job_index < sizeof($job_codes); $job_index++) {
-    $page->addPageBodyItem("<option value='{$job_names[$job_index]}' id='{$job_names[$job_index]}' name='{$job_codes[$job_index]}'>");
-}
-
-                $page->addPageBodyItem("</datalist>   
-                    <p>Can't find one? <strong>Suggest one!</strong></p>
-                    <div id='suggestion'></div>
-                    <button class='clickable' type='button' id='nextBtn2'>Submit</button><br>
-                    <button class='clickable' type='button' id='prevBtn2'>Back</button>
+                    </form>
                 </div>
-            </form>
-    </div>       
-    <div id='refineContainer'>
-        <form id='searchForm' method='get' action='search.php' style='position: relative; display: none;'>
-        <div class='refineChild'>
-            <label>Keyword</label><br>
-            <input type='text' name='keyword' placeholder='Search keyword here'>
-        </div>
-        
-        <div class='refineChild'>
-            <label>Categories</label><br>
-            <select name='categories'>
-                <option value='all'>All Categories</option>");
+            </div>
+                       
+            <div id='refineContainer'>
+                <form id='searchForm' method='get' action='search.php' style='position: relative; display: none;'>
+                    <div class='refineChild'>
+                        <label>Keyword</label><br>
+                        <input type='text' name='keyword' placeholder='Search keyword here'>
+                    </div>
+                    
+                    <div class='refineChild'>
+                        <label>Categories</label><br>
+                        <select name='categories'>
+                            <option value='all'>All Categories</option>");
 
-list($job_codes, $job_names) = selectAll($conn, 'job_code', 'job_name', 'sep_jobs_list', 'job_name');
-for($job_index = 0; $job_index < sizeof($job_codes); $job_index++) {
-    $page->addPageBodyItem("<option id='{$job_names[$job_index]}' name='{$job_codes[$job_index]}'>{$job_names[$job_index]}</option>");
+// Get all the available job categories from the database
+list($jobCodes, $jobNames) = selectAll($conn, 'job_code', 'job_name', 'sep_jobs_list', 'job_name');
+for($jobIndex = 0; $jobIndex < sizeof($jobCodes); $jobIndex++) {
+    $page->addPageBodyItem("<option id='{$jobNames[$jobIndex]}' name='{$jobCodes[$jobIndex]}'>{$jobNames[$jobIndex]}</option>");
 }
 
-            $page->addPageBodyItem("</select>
-        </div>");
-        
-//        TODO NEED TO ADD THESE TO THE DATABASE
+                        $page->addPageBodyItem("
+                        </select>
+                    </div>");
+
 //        <div class='refineChild'>
 //            <label>Junior</label><br>
 //            <select name='skillLevel'>
@@ -111,128 +134,143 @@ for($job_index = 0; $job_index < sizeof($job_codes); $job_index++) {
 //                <option value='expert'>Expert</option>
 //            </select>
 //        </div>
-            $page->addPageBodyItem("<button type='submit' class='clickable'><i id='magGlass' class='fa fa-search'></i>Search</button>
-        </form>
-    </div>
-    
-<div id='recommendedContainer'>
-        <h1>Recommended for you</h1>");
 
+                $page->addPageBodyItem("
+                <button type='submit' class='clickable'><i id='magGlass' class='fa fa-search'></i>Search</button>
+                </form>
+            </div>
+            
+            <div id='recommendedContainer'>
+                <h1>Recommended for you</h1>");
+
+// Get the recommended job details from the database
 $choiceArray = selectUsersChosenCategories($conn, $_SESSION['email']);
 $recommenders = getRecommendedJobs($conn, $choiceArray);
 $price = 0;
 if(!empty($recommenders)) {
-    foreach ($recommenders as $recommender) {
-        $price = $recommender['job_price'];
-        $page->addPageBodyItem("
-            <div class='resultChild clickable' onclick='openPage(`serviceInner.php?id={$recommender['job_id']}`)'>
-                <div class='topImg'>
-                    <img src='assets/job_images/{$recommender['job_image']}'>
-                </div>
+    foreach($recommenders as $recommender) {
+        $price = $recommender['jobPrice'];
+
+                $page->addPageBodyItem("
+                <div class='resultChild clickable' onclick='openPage(`serviceInner.php?id={$recommender['jobId']}`)'>
+                    <div class='topImg'>
+                        <img src='assets/job_images/{$recommender['jobImage']}'>
+                    </div>
                     <div class='resultText'>
                         <img class='personIcon' src='assets/person.svg'>
-                    <h2>{$recommender['user_fname']} {$recommender['user_lname']}</h2>
-                    <h3>{$recommender['job_title']}</h3>
-                    <p>{$recommender['job_desc']}</p>");
+                        <h2>{$recommender['userFname']} {$recommender['userLname']}</h2>
+                        <h3>{$recommender['jobTitle']}</h3>
+                        <p>{$recommender['jobDesc']}</p>");
 
-        list($sum, $total) = getStarRating($conn, $recommender['job_id']);
+list($sum, $total) = getStarRating($conn, $recommender['jobId']);
+for($i = 0; $i < 5; $i++) {
 
-        for ($i = 0; $i < 5; $i++) {
-            if ($i < $sum) {
-                $page->addPageBodyItem("<span class='fa fa-star checked'></span>");
-            } else {
-                $page->addPageBodyItem("<span class='fa fa-star'></span>");
-            }
-        }
-        $page->addPageBodyItem("({$total})");
+                    if ($i < $sum) {
+                        $page->addPageBodyItem("<span class='fa fa-star checked'></span>");
+                    } else {
+                        $page->addPageBodyItem("<span class='fa fa-star'></span>");
+                    }
 
+} // End of for loop
 
-        $page->addPageBodyItem("<p class='price'>£{$price}/h</p>
-                </div>
-            </div>");
-    }
-}
+                        $page->addPageBodyItem("
+                        ({$total})<p class='price'>£{$price}/h</p>
+                    </div>
+                </div>");
 
-$page->addPageBodyItem("</div>
-    
-    <div id='recAddedContainer'>
-        <h1>Recently Added</h1>");
+    } // End of foreach($recommenders as $recommender)
+} // end of if(!empty($recommenders))
 
+            $page->addPageBodyItem("
+            </div>
+            
+            <div id='recAddedContainer'>
+                <h1>Recently Added</h1>");
+
+// Get the most recently posted jobs from the database
 $recents = getRecentJobs($conn);
 $price = 0;
 foreach($recents as $recent) {
-    $price = $recent['job_price'];
-        $page->addPageBodyItem("
-            <div class='resultChild clickable' onclick='openPage(`serviceInner.php?id={$recent['job_id']}`)'>
-                <div class='topImg'>
-                    <img src='assets/job_images/{$recent['job_image']}'>
-                </div>
+    $price = $recent['jobPrice'];
+
+                $page->addPageBodyItem("
+                <div class='resultChild clickable' onclick='openPage(`serviceInner.php?id={$recent['jobId']}`)'>
+                    <div class='topImg'>
+                        <img src='assets/job_images/{$recent['jobImage']}'>
+                    </div>
                     <div class='resultText'>
                         <img class='personIcon' src='assets/person.svg'>
-                    <h2>{$recent['user_fname']} {$recent['user_lname']}</h2>
-                    <h3>{$recent['job_title']}</h3>
-                    <p>{$recent['job_desc']}</p>");
+                        <h2>{$recent['userFname']} {$recent['userLname']}</h2>
+                        <h3>{$recent['jobTitle']}</h3>
+                        <p>{$recent['jobDesc']}</p>");
 
-                list($sum, $total) = getStarRating($conn, $recent['job_id']);
+list($sum, $total) = getStarRating($conn, $recent['jobId']);
+for($i = 0; $i < 5; $i++) {
 
-                for($i = 0; $i < 5; $i++) {
                     if($i < $sum) {
                         $page->addPageBodyItem("<span class='fa fa-star checked'></span>");
                     } else {
                         $page->addPageBodyItem("<span class='fa fa-star'></span>");
                     }
-                }
-            $page->addPageBodyItem("({$total})");
 
+} // End of for loop
 
-        $page->addPageBodyItem("<p class='price'>£{$price}/h</p>
-                        </div>
+                        $page->addPageBodyItem("
+                        ({$total})<p class='price'>£{$price}/h</p>
+                    </div>
                 </div>");
-}
 
-$page->addPageBodyItem("</div>      
-    
-    <div id='categories'>
-        <h1>Popular categories</h1>");
+} // End of foreach($recents as $recent)
 
+            $page->addPageBodyItem("
+            </div>      
+            
+            <div id='categories'>
+                <h1>Popular categories</h1>");
+
+// Get the most popular categories from the database
 $popularCategories = getPopularCategories($conn);
 foreach ($popularCategories as $popularCategory) {
     $page->addPageBodyItem("<button class='clickable' onclick='openPage(`search.php?categories={$popularCategory}`)'>{$popularCategory}</button>");
 }
 
+            $page->addPageBodyItem("
+            </div>  
+           
+                
+            <div id='recViewedParent'>
+                <h1>Recently viewed</h1>");
 
-
-$page->addPageBodyItem("</div>  
-   
-        
-    <div id='recViewedParent'>
-        <h1>Recently viewed</h1>");
-
-if(isset($_SESSION['recently_viewed'])) {
-    for($i = 0; $i < sizeof($_SESSION['recently_viewed']); $i++) {
-        if($_SESSION['recently_viewed'][$i] == null || $_SESSION['recently_viewed'][$i] == 0) {
+// If the user has view any jobs previously, get the job details and display them
+if(isset($_SESSION['recentlyViewed'])) {
+    for($i = 0; $i < sizeof($_SESSION['recentlyViewed']); $i++) {
+        if($_SESSION['recentlyViewed'][$i] == null || $_SESSION['recentlyViewed'][$i] == 0) {
             continue;
         }
-        list($job_title, $job_price, $job_image) = getRecentlyViewed($conn, $_SESSION['recently_viewed'][$i]);
-        if(isset($job_title) && isset($job_price) && isset($job_image)) {
+        list($jobTitle, $jobPrice, $jobImage) = getRecentlyViewed($conn, $_SESSION['recentlyViewed'][$i]);
+        if(isset($jobTitle) && isset($jobPrice) && isset($jobImage)) {
+
+                $page->addPageBodyItem("
+                <div class='recViewedChild clickable' onclick='openPage(`serviceInner.php?id=`+{$_SESSION['recentlyViewed'][$i]})'>
+                    <div class='recViewedImg'>
+                        <img src='assets/job_images/{$jobImage}'>
+                    </div>
+                    <div class='recViewedText'>
+                        <h4>{$jobTitle}</h4>
+                        <p>£{$jobPrice}/h</p>  
+                    </div>
+                </div>");
+
+        } // end of if if(isset($jobTitle) && isset($jobPrice) && isset($jobImage))
+    } // End of for loop
+} // End of if(isset($_SESSION['recentlyViewed']))
+
             $page->addPageBodyItem("
-            <div class='recViewedChild clickable' onclick='openPage(`serviceInner.php?id=`+{$_SESSION['recently_viewed'][$i]})'>
-                <div class='recViewedImg'>
-                    <img src='assets/job_images/{$job_image}'>
-                </div>
-                <div class='recViewedText'>
-                    <h4>{$job_title}</h4>
-                    <p>£{$job_price}/h</p>  
-                </div>
-            </div>");
-        }
-    }
-}
+            </div>
+        </div>");
 
-$page->addPageBodyItem("</div>
-</div>");
+    $page->displayPage();
 
-$page->displayPage();
 ?>
 
 <!--    <img src='assets/appStore.svg' alt='App Store'>-->

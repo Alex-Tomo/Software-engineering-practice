@@ -37,7 +37,7 @@ const changePassword = () => {
     } else {
 
         $.ajax({
-            url: "./handlers/change_user_password.php",
+            url: "./handlers/changeUserPassword.php",
             method: "POST",
             data: {
                 email: email,

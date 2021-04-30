@@ -470,6 +470,7 @@ form button{
     background-color: #FFFFFF;
     padding-top: 20px;
     display: inline-block;
+    width: 100%;
 }
 
 #refineContainer{
