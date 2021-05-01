@@ -1,9 +1,9 @@
 <?php
     function getConnection() {
         $serverName = 'localhost';
-        $username = 'root';
-        $password = '';
-        $databaseName = 'software_engineering';
+        $username = 'unn_w19007452';
+        $password = 'Password';
+        $databaseName = 'unn_w19007452';
 
         try {
             $conn = new PDO("mysql:host=$serverName;dbname=$databaseName",
@@ -14,4 +14,5 @@
             echo 'Connection failed: ' . $ex->getMessage();
         }
     }
+
 ?>

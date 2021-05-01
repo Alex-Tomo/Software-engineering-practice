@@ -125,11 +125,13 @@
                 <span class='dot dot2'></span> 
                 <span class='dot dot3'></span> 
             </div>
-        </div>
-    </div>
-</div>");
+        </div>");
 
-    $page->displayPage();
+    try {
+        $page->displayPage();
+    } catch(Exception $e) {
+
+    }
 ?>
 
 <!--    <img src='assets/appStore.svg' alt='App Store'>-->
