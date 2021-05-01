@@ -1,5 +1,7 @@
 <?php
 
+// TODO: make the dynamic redirect an external function
+
 function getHeader() {
 
     // needed a dynamic redirect
@@ -17,9 +19,7 @@ function getHeader() {
 
     include_once $path;
 
-    $header = "<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
-    
-    <header>";
+    $header = "<header>";
     // Desktop Navbar
     $header .= "<div id='desktop_container'>
             <h1 class='clickable' onclick='openPage(`loggedinHome.php`)'>skip</h1><h1 class='clickable' id='logoText2' onclick='openPage(`loggedinHome.php`)'>CV</h1>
