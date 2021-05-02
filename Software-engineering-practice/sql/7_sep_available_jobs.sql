@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS sep_available_jobs (
-    jobId INT PRIMARY KEY AUTO_INCREMENT,
+    job_id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT NOT NULL,
     job_title TEXT NOT NULL,
     job_desc TEXT NOT NULL,

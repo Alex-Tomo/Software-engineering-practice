@@ -1,13 +1,13 @@
 CREATE TABLE IF NOT EXISTS sep_job_rating (
     rating_id INT AUTO_INCREMENT PRIMARY KEY,
-    jobId INT NOT NULL,
+    job_id INT NOT NULL,
     user_id INT NOT NULL,
     job_rating INT(1) NOT NULL,
-    FOREIGN KEY (jobId) REFERENCES sep_available_jobs(jobId),
+    FOREIGN KEY (job_id) REFERENCES sep_available_jobs(job_id),
     FOREIGN KEY (user_id) REFERENCES sep_users(user_id)
 );
 
-INSERT INTO sep_job_rating (jobId, user_id, job_rating) VALUES
+INSERT INTO sep_job_rating (job_id, user_id, job_rating) VALUES
 (1, 2, 5), (1, 3, 5), (1, 4, 5), (1, 5, 5),
 (2, 1, 4), (2, 3, 3), (2, 4, 5), (2, 5, 2),
 (3, 2, 4), (3, 4, 4), (3, 5, 2), (3, 6, 5),

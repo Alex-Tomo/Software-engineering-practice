@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS sep_users_interested_jobs (
-    userId int not null,
+    user_id int not null,
     job_code int(9) not null,
-    FOREIGN KEY (userId) REFERENCES sep_users(userId),
+    FOREIGN KEY (user_id) REFERENCES sep_users(user_id),
     FOREIGN KEY (job_code) REFERENCES sep_jobs_list(job_code)
 );
 

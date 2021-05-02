@@ -1,11 +1,11 @@
 CREATE TABLE IF NOT EXISTS sep_jobs_categories (
-    jobId INT not null,
+    job_id INT not null,
     job_code INT(9) not null,
-    FOREIGN KEY (jobId) REFERENCES sep_available_jobs(jobId),
+    FOREIGN KEY (job_id) REFERENCES sep_available_jobs(job_id),
     FOREIGN KEY (job_code) REFERENCES sep_jobs_list(job_code)
 );
 
-INSERT INTO sep_jobs_categories (jobId, job_code) VALUES
+INSERT INTO sep_jobs_categories (job_id, job_code) VALUES
 (1, 1), (1, 6), (1, 4), (1, 3),
 (2, 1), (2, 15), (2, 4),
 (3, 50), (3, 45), (3, 46),

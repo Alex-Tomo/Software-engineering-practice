@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS sep_user_info (
     userinfo_id int not null auto_increment unique primary key,
-    user_id int not null,
+    user_id int not null unique ,
     user_fname varchar(32) not null,
     user_lname varchar(32) not null,
     user_gender varchar(6) not null,
