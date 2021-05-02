@@ -1,8 +1,13 @@
 window.onload = () => {
 
+    // Using the users email address, check the database using AJAX
+    // if the user has details in the database, do not display the popup form
+    // otherwise display the popup form
+
     let email = document.getElementById('email').value;
+
     $.ajax({
-        url: "./handlers/check_user_details.php",
+        url: "./handlers/checkUserDetails.php",
         method: "POST",
         data: {
             email: email
@@ -29,7 +34,7 @@ window.onload = () => {
                 tab2.style.display = 'none';
 
                 // Form info
-                let fname, lname, gender, lang, region, jobType, category;
+                let fname, lname, gender, lang, region;
 
                 nextButtonTab1.addEventListener('click', () => {
                 //     // Get tab 1 info
@@ -61,8 +66,10 @@ window.onload = () => {
 
                         // Split the chosen jobs into a number array
                         let email = document.getElementById('email').value;
+
+                        // Insert the users data into the database using the userInfoHandler.php file
                         $.ajax({
-                            url: "./handlers/userinfo_handler.php",
+                            url: "./handlers/userInfoHandler.php",
                             method: "POST",
                             data: {
                                 email: email,

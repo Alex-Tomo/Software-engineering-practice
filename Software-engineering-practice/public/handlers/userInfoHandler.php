@@ -1,34 +1,23 @@
 <?php
+
+    // Requires
     require "../../db_connector.php";
+    require('../../database_functions.php');
+
+    // get database connection
     $conn = getConnection();
 
-    $email = isset($_POST['email']) ? trim($_POST['email']) : null;
-    $firstname = isset($_POST['firstname']) ? trim($_POST['firstname']) : null;
-    $lastname = isset($_POST['lastname']) ? trim($_POST['lastname']) : null;
-    $gender = isset($_POST['gender']) ? trim($_POST['gender']) : null;
-    $language = isset($_POST['language']) ? trim($_POST['language']) : null;
-    $region = isset($_POST['region']) ? trim($_POST['region']) : null;
+    // Get all the variable when the form is submitted
+    $email = isset($_POST['email']) ? sanitizeData(trim($_POST['email'])) : null;
+    $firstname = isset($_POST['firstname']) ? sanitizeData(trim($_POST['firstname'])) : null;
+    $lastname = isset($_POST['lastname']) ? sanitizeData(trim($_POST['lastname'])) : null;
+    $gender = isset($_POST['gender']) ? sanitizeData(trim($_POST['gender'])) : null;
+    $language = isset($_POST['language']) ? sanitizeData(trim($_POST['language'])) : null;
+    $region = isset($_POST['region']) ? sanitizeData(trim($_POST['region'])) : null;
     $jobsArray = isset($_POST['jobsArray']) ? $_POST['jobsArray'] : null;
     $userId = null;
 
-    if(!empty($email)) {
-        $email = filter_var($email, FILTER_SANITIZE_EMAIL);
-    }
-    if(!empty($firstname)) {
-        $firstname = filter_var($firstname, FILTER_SANITIZE_STRING);
-    }
-    if(!empty($lastname)) {
-        $lastname = filter_var($lastname, FILTER_SANITIZE_STRING);
-    }
-    if(!empty($gender)) {
-        $gender = filter_var($gender, FILTER_SANITIZE_STRING);
-    }
-    if(!empty($language)) {
-        $language = filter_var($language, FILTER_SANITIZE_STRING);
-    }
-    if(!empty($region)) {
-        $region = filter_var($region, FILTER_SANITIZE_STRING);
-    }
+    // Sanitize the data
     if(!empty($jobsArray)) {
         $jobsArray = filter_var_array($jobsArray, FILTER_SANITIZE_NUMBER_INT);
     }
@@ -38,7 +27,7 @@
         $statement->execute(array($email));
         $userId = $statement->fetchObject();
         $userId = $userId->user_id;
-        $userId = filter_var($userId, FILTER_VALIDATE_INT);
+        $userId = validateData($userId);
     }
 
     if(!empty($firstname) && !empty($lastname) && !empty($gender) && !empty($language) && !empty($region)) {

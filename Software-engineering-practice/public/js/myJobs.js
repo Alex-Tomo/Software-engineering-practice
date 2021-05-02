@@ -1,3 +1,6 @@
+// TODO: use an object for the styling
+// TODO: get a selectPostJobs method to do the AJAX part
+
 selectedJobsArray = [];
 
 window.onload = () => {
@@ -9,6 +12,7 @@ window.onload = () => {
             event.stopPropagation();
         });
     }
+
     let editButtons = document.getElementsByClassName('editJob');
     for (let i = 0; i < editButtons.length; i++) {
         let id = editButtons[i].id;
@@ -17,16 +21,21 @@ window.onload = () => {
             showEditJobDetails(id);
         });
     }
+
     let closePopup = document.getElementById('closePopup');
     closePopup.addEventListener('click', (event) => {
         document.getElementById('popup-3').style.display = 'none';
         event.preventDefault();
     });
+
 }
 
 const showEditJobDetails = (jobId) => {
     document.getElementById('popup-3').style.display = 'block';
     document.getElementById('jobId').value = jobId;
+
+    // Updates the job by updating the database from editJobDetails.php and
+    // displays the new results in the form
     $.ajax({
         url: './handlers/editJobDetails.php',
         method: "POST",
@@ -48,6 +57,7 @@ const showEditJobDetails = (jobId) => {
                     if (result[4][i] == jobsList[j].getAttribute('name')) {
                         jobsList[j].disabled = true;
 
+                        // this is the same as selectPostJobs.js
                         let p = document.createElement('input');
                         p.className = 'clickable chosenJob';
                         p.value = jobsList[j].value + ' x';
@@ -78,6 +88,9 @@ const showEditJobDetails = (jobId) => {
     });
 }
 
+// If the user chooses yes to removing the job, AJAX sends this response
+// to removeJob.php and removes the job from the database (turns the
+// availability to false)
 const deleteJob = (jobId) => {
     let choice = confirm("Are you sure you want to remove this job?");
     if(choice) {
@@ -87,7 +100,7 @@ const deleteJob = (jobId) => {
             data: {
                 jobId: jobId
             },
-            success: (data) => {
+            success: () => {
                 openPage('userJobs.php');
             }
         });

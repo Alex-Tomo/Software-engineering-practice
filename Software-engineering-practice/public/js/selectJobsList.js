@@ -1,3 +1,6 @@
+// TODO: Use an object to make the styles simpler
+// TODO: Integrate this into selectJobsList.js
+
 let selectedJobsArray = [];
 
 // Added by Alex
@@ -43,7 +46,9 @@ const selectJob = () => {
 
     p.addEventListener('click', () => { removeJob(p.id, job); });
     document.getElementById('suggestion').append(p);
+
     let jobsList = document.getElementById('searchJobsList').getElementsByTagName('option');
+
     for(let i = 0; i < jobsList.length; i++) {
         if(jobsList[i].value === job) {
             jobsList[i].disabled = true;
@@ -60,7 +65,9 @@ const selectJob = () => {
 // Remove the option from the suggestion div and enable it in the datalist
 
 const getSelectedJob = () => {
+
     let jobsList = document.getElementById('searchJobsList').getElementsByTagName('option');
+
     for(let i = 0; i < jobsList.length; i++) {
         if (!selectedJobsArray.includes(jobsList[i].getAttribute('name')) && (jobsList[i].disabled)) {
             selectedJobsArray.push(jobsList[i].getAttribute('name'));
@@ -71,8 +78,10 @@ const getSelectedJob = () => {
 }
 
 const removeJob = (id, job) => {
-    document.getElementById(id).remove();
+
     let jobsList = document.getElementById('searchJobsList').getElementsByTagName('option');
+    document.getElementById(id).remove();
+
     for(let i = 0; i < jobsList.length; i++) {
         if(jobsList[i].value === job) {
             jobsList[i].disabled = false;

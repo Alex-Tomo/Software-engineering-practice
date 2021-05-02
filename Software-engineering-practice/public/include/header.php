@@ -1,11 +1,11 @@
 <?php
 
 // TODO: make the dynamic redirect an external function
+// TODO: make the path an external function
 
 function getHeader() {
 
     // needed a dynamic redirect
-    // TODO make this an external function
     $path = '';
     $arr = explode("/", __DIR__);
     foreach ($arr as $a) {

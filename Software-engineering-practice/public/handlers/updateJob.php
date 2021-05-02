@@ -1,49 +1,97 @@
 <?php
-require('../../pageTemplate.php');
-require('../../db_connector.php');
-$conn = getConnection();
 
-// TODO Error handling and validate the info
-// TODO rename and overwrite the image
+    // Requires
+    require('../../pageTemplate.php');
+    require('../../db_connector.php');
+    require('../../database_functions.php');
 
-$title = isset($_POST['title']) ? trim($_POST['title']) : null;
-$desc = isset($_POST['desc']) ? trim($_POST['desc']) : null;
-$price = isset($_POST['price']) ? trim($_POST['price']) : null;
-$categoryIds = isset($_POST['categoryIds']) ? $_POST['categoryIds'] : null;
-$job_id = isset($_POST['jobId']) ? $_POST['jobId'] : null;
+    // Get database connection
+    $conn = getConnection();
 
-if(!empty($title) && !empty($desc) && !empty($price) && !empty($categoryIds) && !empty($job_id)) {
+    // Get all data when the form is submitted
+    $title = isset($_POST['title']) ? sanitizeData(trim($_POST['title'])) : null;
+    $desc = isset($_POST['desc']) ? sanitizeData(trim($_POST['desc'])) : null;
+    $price = isset($_POST['price']) ? sanitizeData(trim($_POST['price'])) : null;
+    $categoryIds = isset($_POST['categoryIds']) ? sanitizeData($_POST['categoryIds']) : null;
+    $jobId = isset($_POST['jobId']) ? sanitizeData($_POST['jobId']) : null;
 
-    if(isset($_FILES['image']['name'])) {
-        $renamedImage = moveAndRenameImage($conn, $job_id);
+if(!empty($title) && !empty($desc) && !empty($price) && !empty($jobId)) {
+
+    //  If the $_FILE is set then process the image and update the database
+    // Otherwise do not update the database with the new image name
+    if(!empty($_FILES['image']['name'])) {
+        $renamedImage = moveAndRenameImage($jobId);
         if ($renamedImage) {
-            $insertAvailableJobs = $conn->query("UPDATE sep_available_jobs
-                  SET job_title = '{$title}', job_desc = '{$desc}', job_price = '{$price}', job_image = '{$renamedImage}'
-                  WHERE job_id = '{$job_id}'");
+            echo "here6";
+
+            $statement = $conn->prepare("
+                UPDATE sep_available_jobs
+                SET job_title = ?, job_desc = ?, job_price = ?, job_image = ?
+                WHERE job_id = ?");
+            $statement->bindParam(1, $title);
+            $statement->bindParam(2, $desc);
+            $statement->bindParam(3, $price);
+            $statement->bindParam(4, $renamedImage);
+            $statement->bindParam(5, $jobId);
+            $statement->execute();
+            echo "here";
+
         }
     } else {
-        $insertAvailableJobs = $conn->query("UPDATE sep_available_jobs
-              SET job_title = '{$title}', job_desc = '{$desc}', job_price = '{$price}'
-              WHERE job_id = '{$job_id}'");
+        echo "here23";
+
+        $statement = $conn->prepare("
+            UPDATE sep_available_jobs
+            SET job_title = ?, job_desc = ?, job_price = ?
+            WHERE job_id = ?");
+        $statement->bindParam(1, $title);
+        $statement->bindParam(2, $desc);
+        $statement->bindParam(3, $price);
+        $statement->bindParam(4, $jobId);
+        $statement->execute();
+        echo "here2";
+
     }
 
-    $deleteSimilarCategories = $conn->query("DELETE FROM sep_jobs_categories WHERE job_id = '{$job_id}'");
+    echo "here";
 
-    // Get the last id rather than number of rows
-    $insertSimilarCategoriesQuery = "INSERT INTO sep_jobs_categories VALUES ";
-    for ($i = 0; $i < sizeof($categoryIds); $i++) {
-        if ($i == sizeof($categoryIds) - 1) {
-            $insertSimilarCategoriesQuery .= "('$job_id', '$categoryIds[$i]')";
-        } else {
-            $insertSimilarCategoriesQuery .= "('$job_id', '$categoryIds[$i]'),";
+
+    if(!empty($categoryIds)) {
+        // Delete all the categories then insert the new categories
+        $deleteSimilarCategories = $conn->prepare("DELETE FROM sep_jobs_categories WHERE job_id = ?");
+        $deleteSimilarCategories->bindParam(1, $jobId);
+        $deleteSimilarCategories->execute();
+
+        $insertSimilarCategoriesQuery = "INSERT INTO sep_jobs_categories VALUES ";
+        for ($i = 0; $i < sizeof($categoryIds); $i++) {
+            if ($i == sizeof($categoryIds) - 1) {
+                $insertSimilarCategoriesQuery .= "('$jobId', '$categoryIds[$i]')";
+            } else {
+                $insertSimilarCategoriesQuery .= "('$jobId', '$categoryIds[$i]'),";
+            }
         }
+
+        $statement = $conn->prepare($insertSimilarCategoriesQuery);
+        $j = 1;
+        for ($i = 1; $i < sizeof($categoryIds); $i++) {
+            $statement->bindParam($j, $jobId);
+            $statement->bindParam(($j + 1), $categoryIds[$i]);
+            $j += 2;
+        }
+        $statement->execute();
     }
-    $conn->query($insertSimilarCategoriesQuery);
+    echo "here";
+
     header("Location: ../userJobs.php");
 
+} else { // End of if statement
+    // When finished refresh the page
+    header("Location: ../userJobs.php");
 }
+header("Location: ../userJobs.php");
 
-function moveAndRenameImage($connection, $job_id) {
+
+function moveAndRenameImage($job_id) {
     $path = '';
     $arr = explode("/", __DIR__);
     foreach ($arr as $a) {
@@ -57,8 +105,6 @@ function moveAndRenameImage($connection, $job_id) {
     $target_file = $target_dir . basename($_FILES['image']['name']);
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-
-    $target_file = $target_dir . $_FILES['image']['name'] = 'image_'.$job_id;
 
     $check = getimagesize($_FILES['image']['tmp_name']);
     if ($check === false) {
@@ -77,15 +123,19 @@ function moveAndRenameImage($connection, $job_id) {
         // Files not uploaded
         echo "File was not uploaded";
     } else {
+        // Randomly rename the image
         $newImage = 'image_'.$job_id;
         for($i = 0; $i < 10; $i++) {
             $newImage .= rand(1, 9);
         }
         $newImage .= '.'.$imageFileType;
+
+        // If the image is successfully moves then return the image name to update the database
         if(move_uploaded_file($_FILES['image']['tmp_name'], $target_dir.$newImage)) {
             echo "File uploaded";
             return $_FILES['image']['name'] = $newImage;
         }
     }
 }
+
 ?>

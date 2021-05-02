@@ -1,4 +1,3 @@
-// Added by Alex
 let nextSlideAnchor = document.getElementsByClassName('next');
 let prevSlideAnchor = document.getElementsByClassName('prev');
 let dotAnchor1 = document.getElementsByClassName('dot1');

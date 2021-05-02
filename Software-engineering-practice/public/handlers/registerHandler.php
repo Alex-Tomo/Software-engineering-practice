@@ -1,28 +1,32 @@
 <?php
-    require('../../db_connector.php');
-    $conn = getConnection();
 
-    list($vals, $err) = verifyRegistration($conn);
-    if($err) failedRegistration($err);
-    else successfulRegistration($vals, $conn);
+    // Require
+    require('../../db_connector.php');
+    require('../../database_functions.php');
+
+    try {
+        // Get database connection
+        $conn = getConnection();
+
+        list($vals, $err) = verifyRegistration($conn); // verify data
+
+        if ($err) { // Redisplay the signin page with errors
+            failedRegistration($err);
+        } else { // Redirect the user to the login page
+            successfulRegistration($vals, $conn);
+        }
+
+    } catch(Exception $ex) {
+        logError($ex);
+    }
 
     function verifyRegistration($connection) {
         $values = array();
         $errors = array();
 
-        $values['email'] = isset($_POST['email']) ? trim($_POST['email']) : null;
-        $values['password'] = isset($_POST['password']) ? trim($_POST['password']) : null;
-        $values['password2'] = isset($_POST['password2']) ? trim($_POST['password2']) : null;
-
-        if(!empty($values['email'])) {
-            $values['email'] = filter_var($values['email'], FILTER_SANITIZE_EMAIL);
-        }
-        if(!empty($values['password'])) {
-            $values['password'] = filter_var($values['password'], FILTER_SANITIZE_STRING);
-        }
-        if(!empty($values['password2'])) {
-            $values['password2'] = filter_var($values['password2'], FILTER_SANITIZE_STRING);
-        }
+        $values['email'] = isset($_POST['email']) ? sanitizeData(trim($_POST['email'])) : null;
+        $values['password'] = isset($_POST['password']) ? sanitizeData(trim($_POST['password'])) : null;
+        $values['password2'] = isset($_POST['password2']) ? sanitizeData(trim($_POST['password2'])) : null;
 
         if(empty($values['email'])) {
             array_push($errors, "<p style='color: red;'>Email field cannot be empty</p>");
@@ -48,6 +52,7 @@
         return array($values, $errors);
     }
 
+
     function failedRegistration($errors) {
         include ('../../pageTemplate.php');
         $page = new pageTemplate('Register');
@@ -55,7 +60,7 @@
         $page->addCSS("<link rel=\"stylesheet\" href=\"../css/footerStyling.css\">");
         $page->addCSS("<link rel=\"stylesheet\" href=\"../css/headerStyling.css\">");
         $page->addJavaScript("<script src=\"../js/navBar.js\"></script>");
-        $page->addPageBodyItem("<form action='./register_handler.php' method='POST'>
+        $page->addPageBodyItem("<form action='./registerHandler.php' method='POST'>
             <h2>Register</h2>");
         foreach($errors as $error) {
             $page->addPageBodyItem($error);

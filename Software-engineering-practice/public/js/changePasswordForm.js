@@ -1,3 +1,5 @@
+// TODO: do better error handling
+
 window.onload = () => {
 
     // Stops the window from closing on enter
@@ -36,8 +38,12 @@ const changePassword = () => {
         alert('Fields cannot be empty');
     } else {
 
+        // Sends the data to changeUserPassword.php and if the response is 'true'
+        // remove the form and alert the user of the password change
+        // Otherwise keep the form open and alert the user that the password
+        // could not be changed
         $.ajax({
-            url: "./handlers/change_user_password.php",
+            url: "./handlers/changeUserPassword.php",
             method: "POST",
             data: {
                 email: email,

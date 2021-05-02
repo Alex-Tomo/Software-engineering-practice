@@ -1,25 +1,33 @@
 <?php
 
+    // Require
     require('../../db_connector.php');
-    $conn = getConnection();
+    require('../../database_functions.php');
 
-    list($vals, $errs) = verifyLogin($conn);
-    if($errs) failedLogin($errs);
-    else header('Location: ../loggedinHome.php');
+    try {
+        // Get database connection
+        $conn = getConnection();
+
+        list($vals, $errs) = verifyLogin($conn); // verify login details
+
+        if ($errs) { // if errors redisplay the login page with errors
+            failedLogin($errs);
+        } else { // Redirect user to loggedin homepage and set Session
+            header('Location: ../loggedinHome.php');
+        }
+
+    } catch(Exception $ex) {
+        logError($ex);
+    }
 
     function verifyLogin($connection) {
         $values = array();
         $errors = array();
 
-        $values['email'] = isset($_POST['email']) ? trim($_POST['email']) : null;
-        $values['password'] = isset($_POST['password']) ? trim($_POST['password']) : null;
-
-        if(!empty($values['email'])) {
-            $values['email'] = filter_var($values['email'], FILTER_SANITIZE_EMAIL);
-        }
-        if(!empty($values['password'])) {
-            $values['password'] = filter_var($values['password'], FILTER_SANITIZE_STRING);
-        }
+        $values['email'] = (isset($_POST['email']) && !empty($_POST['email']))
+            ? sanitizeData(trim($_POST['email'])) : null;
+        $values['password'] = (isset($_POST['password']) && !empty($_POST['password']))
+            ? sanitizeData(trim($_POST['password'])) : null;
 
         if(empty($values['email'])) {
             array_push($errors, "<p style='color: red;'>Email field cannot be empty</p>");
@@ -55,7 +63,7 @@
         $page->addCSS("<link rel=\"stylesheet\" href=\"../css/headerStyling.css\">");
         $page->addJavaScript("<script src=\"../js/navBar.js\"></script>");
         $page->addPageBodyItem("<div id='registerForm'>
-            <form action='./signin_handler.php' method='POST'>
+            <form action='./signinHandler.php' method='POST'>
             <h2>Login</h2>");
         foreach($errors as $error) {
             $page->addPageBodyItem($error);
@@ -69,6 +77,7 @@
                 <a onclick='openPage(`register.php`)' style='text-decoration: underline; cursor: pointer;'>Create one!</a>
             </form>
         </div>");
+
         $page->displayPage();
     }
 

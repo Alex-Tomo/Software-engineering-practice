@@ -1,5 +1,9 @@
 let selectedJobsArray = [];
 
+// TODO: Use an object to make the styles simpler
+// TODO: Integrate this into selectJobsList.js
+
+
 // Added by Alex
 // filterJobsList() checks if the user input is in the li list
 // if not, then the list removes all these results.
@@ -21,12 +25,14 @@ const filterJobsList = () => {
 
 // Added by Alex
 // Set some styling and disable the suggestion from the datalist
-// TODO Maybe use an object instead to make it simpler?
 
 const selectJob = () => {
+    let jobsList = document.getElementById('searchJobsList').getElementsByTagName('option');
+
     let job = document.getElementById('jobsListInput').value;
     document.getElementById('jobsListInput').value = '';
 
+    // Show the user what they have selected
     let p = document.createElement('input');
     p.className = 'clickable chosenJob';
     p.value = job + ' x';
@@ -42,6 +48,7 @@ const selectJob = () => {
     p.id = document.getElementById(job).getAttribute('name');
     p.setAttribute('name', 'categories[]');
 
+    // Hidden value so we can retrieve the id of the job
     let hiddenP = document.createElement('input');
     hiddenP.value = p.id;
     hiddenP.style.display = 'none';
@@ -50,7 +57,8 @@ const selectJob = () => {
     p.addEventListener('click', () => { removeJob(p.id, job, hiddenP); });
     document.getElementById('suggestion').append(p);
     document.getElementById('suggestion').append(hiddenP);
-    let jobsList = document.getElementById('searchJobsList').getElementsByTagName('option');
+
+
     for(let i = 0; i < jobsList.length; i++) {
         if(jobsList[i].value === job) {
             jobsList[i].disabled = true;
