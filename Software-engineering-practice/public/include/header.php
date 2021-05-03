@@ -10,8 +10,8 @@ function getHeader() {
     $arr = explode("/", __DIR__);
     foreach ($arr as $a) {
         $path .= $a.'/';
-        if ($a == 'Software-engineering-practice') { // Alex
-//        if ($a == 'sep') {  // Graham
+//        if ($a == 'Software-engineering-practice') { // Alex
+        if ($a == 'sep') {  // Graham
             $path .= 'db_connector.php';
             break;
         }
@@ -29,7 +29,7 @@ function getHeader() {
                     <button class='clickable' onclick='openPage(`signin.php`)' id ='login'><a class='links'>Login</a ></button>";
     } else {
         $header .= "<div id='dropdown'>
-                    <button id='dropbtn' class='clickable' onclick='userDrpdwn()'>";
+                    <button id='dropbtn'>";
         $conn = getConnection();
         $sqlQuery = $conn->query("SELECT user_fname FROM sep_user_info 
                                   INNER JOIN sep_users ON sep_user_info.user_id = sep_users.user_id 
@@ -51,9 +51,7 @@ function getHeader() {
                                     <a class='links clickable' onclick='openPage(`#`)'><img class='navIcon' src='assets/mail.svg'></a>
                                     <a class='links clickable' onclick='openPage(`#`)'><img class='navIcon' src='assets/bell.svg'></a>
                                     <li><a class='links clickable' onclick='openPage(`postJob.php`)'>Post a Job</a></li>
-                                    <li><a class='links clickable' onclick='openPage(`loggedinHome.php`)'>Home</a></li>
-                    </ul>
-                                    ";}
+                                    </ul>";}
     $header .= "</nav>
         </div>";
 
@@ -75,12 +73,11 @@ function getHeader() {
                 $header .= "<div class='clickable' onclick='openPage(`userProfile.php`)' id='mobName'>Hi, {$name->user_fname}</div>";
             }
         }
-        $header .= "<a class='mobLinks clickable' onclick='openPage(`loggedinHome.php`)'>Home</a>
-                                    <a class='mobLinks clickable' onclick='openPage(`userProfile.php`)'>My Profile</a>
-                                    <br>
+        $header .= "<a class='mobLinks clickable' onclick='openPage(`userProfile.php`)'>My Profile</a><br>
                                     <a class='mobLinks clickable' onclick='openPage(`userJobs.php`)'>My Jobs</a>
                                     <a class='mobLinks clickable' onclick='openPage(`postJob.php`)'>Post a Job</a>
-                                    <a class='mobLinks clickable' onclick='openPage(`postJob.php`)'>Messages</a>
+                                    <a class='mobLinks clickable' onclick='openPage(``)'>Messages</a>
+                                    <a class='mobLinks clickable' onclick='openPage(``)'>Notifications</a>
                                     <button class='clickable' onclick='openPage(`logout.php`)' id='logout'>Logout</button>";
     }
     $header .= "</div>
