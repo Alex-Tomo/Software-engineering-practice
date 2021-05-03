@@ -27,6 +27,7 @@
 
     // Add JS
     $page->addJavaScript("<script src=\"./js/navBar.js\"></script>");
+    $page->addJavaScript("<script src=\"./js/enquireForm.js\"></script>");
 
 
 // Adds the current jobId to the recentlyViewed session
@@ -52,8 +53,8 @@ if(!isset($_SESSION['recentlyViewed'])) {
 // Main content
     $page->addPageBodyItem("
     <div class='pageContainer'>
+        <a id='serviceBack' class='back clickable' onclick='openPage(`loggedinHome.php`)'>< Back to list</a>
         <div id='resultContainer'>
-            <a id='back' class='clickable' onclick='openPage(`loggedinHome.php`)'>< Back to list</a>
             <div id='serviceResult' class='resultChild'>");
 
 
@@ -86,17 +87,49 @@ for ($i = 0; $i < 5; $i++) {
 
                     $page->addPageBodyItem("
                     ({$total})<p class='price'>£{$price}/h</p>
-                    <button class='applyBtn clickable' onclick='openPage()'>Enquire</button>
-                    <a class='clickable' onclick='openPage()'>Refer a friend</a>
+                    <button class='applyBtn clickable' id='enquireBtn' onclick='displayEnquireForm();'>Enquire</button>
+                    <a class='clickable' id='referBtn'>Refer a friend</a>
                 </div>
             </div>");
 }
+
+    //Enquire form popup
+        $page->addPageBodyItem("
+            <div class='popup' id='popup-1'>
+                <div class='overlay'></div>
+                    <form class='popupForm' method='post' action='message.php'>
+                        <div id='tab1'>
+                            <h2>Enquire Form</h2>
+                            <h1>Send a message</h1>
+                            <textarea rows='10' cols='40' name='desc' id='desc' placeholder='Message...'></textarea>
+                            <button class='clickable nextLink' type='button' id='submitBtn'>Submit</button><br>
+                            <button class='clickable backLink' onclick='closeInfoForm()'>Cancel</button>
+                        </div>
+                    </form>
+                </div>
+        ");
+
+    //Refer a friend popup
+        $page->addPageBodyItem("
+            <div class='popup' id='popup-2'>
+                <div class='overlay'></div>        
+                    <form class='popupForm' method='post' action='message.php'>
+                        <div id='tab1'>
+                            <h2>Refer a Friend</h2>
+                            <h1>Send an email</h1>
+                            <input type='text' id='email' placeholder='Email'>
+                            <button class='clickable nextLink' type='button' id='submitBtn'>Submit</button><br>
+                            <button class='clickable backLink' onclick='closeEnquireForm()'>Cancel</button>
+                        </div> 
+                    </form>
+                </div>
+        ");
 
         $page->addPageBodyItem("
         </div>
     
         <div id='recViewedParent'>
-            <h1>Recently viewed</h1>");
+            <h1 id='recViewedHeader'>Recently viewed</h1>");
 
 // Get the most recentlyViewed jobs and display them
 // Does not display the current job
