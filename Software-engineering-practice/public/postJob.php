@@ -24,7 +24,7 @@
     // Main content
     $page->addPageBodyItem("
         <div id='postJobContainer'>
-            <form id='postJobForm' enctype='multipart/form-data' method='post' action='handlers/postJobHandler.php'>
+            <form id='postJobForm' enctype='multipart/form-data' method='post' action='./handlers/postJobHandler.php'>
                 <h1>Post a Job</h1>
                 <label for='title'>Enter the job title</label><br>
                 <input name='title' id='title' type='text' placeholder='Job Title...'>

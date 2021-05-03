@@ -1,37 +1,3 @@
-// $(document).ready(() => {
-//
-//     let dropdown = document.getElementById("dropbtn");
-//     let dropdownContent = document.getElementById('dropdown_content');
-//     let mouseOver = false;
-//
-//     if (dropdown !== null) {
-//         dropdown.addEventListener('mouseover', () => {
-//             mouseOver = true;
-//             document.getElementById('dropdown_content').style.display = 'block';
-//         });
-//
-//         dropdownContent.addEventListener('mouseover', () => {
-//             mouseOver = true;
-//         });
-//
-//         dropdownContent.addEventListener('mouseleave', () => {
-//             mouseOver = false;
-//             document.getElementById('dropdown_content').style.display = 'none';
-//         });
-//
-//         dropdown.addEventListener('mouseleave', () => {
-//             if(!mouseOver) {
-//                 document.getElementById('dropdown_content').style.display = 'none';
-//             }
-//         });
-//     }
-//
-//     document.getElementById('dropdown_content').onmouseenter = () => {
-//         return false;
-//     }
-// });
-//
-
 function hambgrMenu() {
     let hambgr = document.getElementById("myLinks");
     if (hambgr.style.display === "block") {

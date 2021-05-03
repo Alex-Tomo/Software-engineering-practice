@@ -19,10 +19,9 @@ if(!empty($title) && !empty($desc) && !empty($price) && !empty($jobId)) {
 
     //  If the $_FILE is set then process the image and update the database
     // Otherwise do not update the database with the new image name
-    if(!empty($_FILES['image']['name'])) {
+    if (!empty($_FILES['image']['name'])) {
         $renamedImage = moveAndRenameImage($jobId);
         if ($renamedImage) {
-            echo "here6";
 
             $statement = $conn->prepare("
                 UPDATE sep_available_jobs
@@ -34,12 +33,9 @@ if(!empty($title) && !empty($desc) && !empty($price) && !empty($jobId)) {
             $statement->bindParam(4, $renamedImage);
             $statement->bindParam(5, $jobId);
             $statement->execute();
-            echo "here";
 
         }
     } else {
-        echo "here23";
-
         $statement = $conn->prepare("
             UPDATE sep_available_jobs
             SET job_title = ?, job_desc = ?, job_price = ?
@@ -49,45 +45,42 @@ if(!empty($title) && !empty($desc) && !empty($price) && !empty($jobId)) {
         $statement->bindParam(3, $price);
         $statement->bindParam(4, $jobId);
         $statement->execute();
-        echo "here2";
 
     }
 
-    echo "here";
+    if (!empty($categoryIds)) {
+        try {
 
+            print_r($categoryIds);
+            // Delete all the categories then insert the new categories
+            $deleteSimilarCategories = $conn->prepare("DELETE FROM sep_jobs_categories WHERE job_id = ?");
+            $deleteSimilarCategories->bindParam(1, $jobId);
+            $deleteSimilarCategories->execute();
 
-    if(!empty($categoryIds)) {
-        // Delete all the categories then insert the new categories
-        $deleteSimilarCategories = $conn->prepare("DELETE FROM sep_jobs_categories WHERE job_id = ?");
-        $deleteSimilarCategories->bindParam(1, $jobId);
-        $deleteSimilarCategories->execute();
-
-        $insertSimilarCategoriesQuery = "INSERT INTO sep_jobs_categories VALUES ";
-        for ($i = 0; $i < sizeof($categoryIds); $i++) {
-            if ($i == sizeof($categoryIds) - 1) {
-                $insertSimilarCategoriesQuery .= "('$jobId', '$categoryIds[$i]')";
-            } else {
-                $insertSimilarCategoriesQuery .= "('$jobId', '$categoryIds[$i]'),";
+            $insertSimilarCategoriesQuery = "INSERT INTO sep_jobs_categories VALUES ";
+            for ($i = 0; $i < sizeof($categoryIds); $i++) {
+                if ($i == sizeof($categoryIds) - 1) {
+                    $insertSimilarCategoriesQuery .= "(?, ?)";
+                } else {
+                    $insertSimilarCategoriesQuery .= "(?, ?),";
+                }
             }
-        }
-
-        $statement = $conn->prepare($insertSimilarCategoriesQuery);
-        $j = 1;
-        for ($i = 1; $i < sizeof($categoryIds); $i++) {
-            $statement->bindParam($j, $jobId);
-            $statement->bindParam(($j + 1), $categoryIds[$i]);
-            $j += 2;
-        }
-        $statement->execute();
+            echo $insertSimilarCategoriesQuery;
+            $statement = $conn->prepare($insertSimilarCategoriesQuery);
+            $j = 1;
+            for ($i = 1; $i < sizeof($categoryIds)+1; $i++) {
+                echo $categoryIds[$i - 1];
+                $statement->bindParam($j, $jobId);
+                $statement->bindParam(($j + 1), $categoryIds[$i - 1]);
+                $j += 2;
+            }
+            $statement->execute();
+        } catch(Exception $e) { logError($e); }
     }
-    echo "here";
 
-    header("Location: ../userJobs.php");
-
-} else { // End of if statement
-    // When finished refresh the page
     header("Location: ../userJobs.php");
 }
+
 header("Location: ../userJobs.php");
 
 
