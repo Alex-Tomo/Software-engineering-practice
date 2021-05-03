@@ -1,4 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="PhpIncludePathManager">
+    <include_path>
+      <path value="$PROJECT_DIR$/Software-engineering-practice/vendor/guzzlehttp/psr7" />
+      <path value="$PROJECT_DIR$/Software-engineering-practice/vendor/ratchet/rfc6455" />
+      <path value="$PROJECT_DIR$/Software-engineering-practice/vendor/ralouphie/getallheaders" />
+      <path value="$PROJECT_DIR$/Software-engineering-practice/vendor/evenement/evenement" />
+      <path value="$PROJECT_DIR$/Software-engineering-practice/vendor/composer" />
+      <path value="$PROJECT_DIR$/Software-engineering-practice/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/Software-engineering-practice/vendor/react/socket" />
+      <path value="$PROJECT_DIR$/Software-engineering-practice/vendor/react/promise" />
+      <path value="$PROJECT_DIR$/Software-engineering-practice/vendor/react/stream" />
+      <path value="$PROJECT_DIR$/Software-engineering-practice/vendor/symfony/routing" />
+      <path value="$PROJECT_DIR$/Software-engineering-practice/vendor/symfony/polyfill-php80" />
+      <path value="$PROJECT_DIR$/Software-engineering-practice/vendor/symfony/deprecation-contracts" />
+      <path value="$PROJECT_DIR$/Software-engineering-practice/vendor/symfony/http-foundation" />
+      <path value="$PROJECT_DIR$/Software-engineering-practice/vendor/react/cache" />
+      <path value="$PROJECT_DIR$/Software-engineering-practice/vendor/cboden/ratchet" />
+      <path value="$PROJECT_DIR$/Software-engineering-practice/vendor/react/event-loop" />
+      <path value="$PROJECT_DIR$/Software-engineering-practice/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/Software-engineering-practice/vendor/react/dns" />
+      <path value="$PROJECT_DIR$/Software-engineering-practice/vendor/react/promise-timer" />
+    </include_path>
+  </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7" />
 </project>

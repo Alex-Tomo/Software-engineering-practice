@@ -1,7 +1,7 @@
 <?php
 
 //Include session stuff here instead of including it on every page
-ini_set("session.save_path", __DIR__."/sessionData");
+//ini_set("session.save_path", __DIR__."/sessionData");
 session_start();
 
 //Checks if the user is logged in, if not sets the loggedin SESSION to false
