@@ -26,11 +26,9 @@
     // Main content
     $page->addPageBodyItem("
         <div class='pageContainer'>
-        
              <div class='popup' id='popup-1' style='display: none;'>
                 <div class='overlay'></div>        
-                    <form id='regForm' action='/action_page.php'>
-                    
+                    <form class='popupForm' action='/action_page.php'>
                         <div id='tab1'>
                             <h2>Tell us about yourself</h2>
                             <h1>General information</h1>
@@ -70,7 +68,7 @@ for($regionIndex = 0; $regionIndex < sizeof($regionCodes); $regionIndex++) {
 
                                 $page->addPageBodyItem("
                                 </select>
-                                    <button class='clickable' type='button' id='nextBtn1'>Next</button>               
+                                    <button  class='clickable nextLink' type='button' id='nextBtn1'>Next</button>               
                                 </div>
                                 
                                 <div id='tab2'>
@@ -90,16 +88,14 @@ for($jobIndex = 0; $jobIndex < sizeof($jobCodes); $jobIndex++) {
                         </datalist>   
                             <p>Can't find one? <strong>Suggest one!</strong></p>
                             <div id='suggestion'></div>
-                            <button class='clickable' type='button' id='nextBtn2'>Submit</button><br>
-                            <button class='clickable' type='button' id='prevBtn2'>Back</button>
-                        </div>
-                        
+                            <button  class='clickable nextLink' type='button' id='nextBtn2'>Submit</button><br>
+                            <button  class='clickable backLink' type='button' id='prevBtn2'>Back</button>
+                        </div> 
                     </form>
                 </div>
-            </div>
                        
             <div id='refineContainer'>
-                <form id='searchForm' method='get' action='search.php' style='position: relative;'>
+                <form id='searchForm' method='get' action='search.php'>
                     <div class='refineChild'>
                         <label>Keyword</label><br>
                         <input type='text' name='keyword' placeholder='Search keyword here'>
