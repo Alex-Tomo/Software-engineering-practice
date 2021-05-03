@@ -87,7 +87,7 @@ for ($i = 0; $i < 5; $i++) {
 
                     $page->addPageBodyItem("
                     ({$total})<p class='price'>£{$price}/h</p>
-                    <button class='applyBtn clickable' id='enquireBtn' onclick='displayEnquireForm();'>Enquire</button>
+                    <button class='applyBtn clickable' id='enquireBtn'>Enquire</button>
                     <a class='clickable' id='referBtn'>Refer a friend</a>
                 </div>
             </div>");
@@ -95,15 +95,15 @@ for ($i = 0; $i < 5; $i++) {
 
     //Enquire form popup
         $page->addPageBodyItem("
-            <div class='popup' id='popup-1'>
+            <div class='popup' id='popup-1' style='display: none;'>
                 <div class='overlay'></div>
                     <form class='popupForm' method='post' action='message.php'>
                         <div id='tab1'>
                             <h2>Enquire Form</h2>
                             <h1>Send a message</h1>
                             <textarea rows='10' cols='40' name='desc' id='desc' placeholder='Message...'></textarea>
-                            <button class='clickable nextLink' type='button' id='submitBtn'>Submit</button><br>
-                            <button class='clickable backLink' onclick='closeInfoForm()'>Cancel</button>
+                            <button class='clickable nextLink' type='button' id='submitEnquireBtn'>Submit</button><br>
+                            <button class='clickable backLink' id='closeEnquireBtn'>Cancel</button>
                         </div>
                     </form>
                 </div>
@@ -111,15 +111,15 @@ for ($i = 0; $i < 5; $i++) {
 
     //Refer a friend popup
         $page->addPageBodyItem("
-            <div class='popup' id='popup-2'>
+            <div class='popup' id='popup-2' style='display: none;'>
                 <div class='overlay'></div>        
                     <form class='popupForm' method='post' action='message.php'>
                         <div id='tab1'>
                             <h2>Refer a Friend</h2>
                             <h1>Send an email</h1>
                             <input type='text' id='email' placeholder='Email'>
-                            <button class='clickable nextLink' type='button' id='submitBtn'>Submit</button><br>
-                            <button class='clickable backLink' onclick='closeEnquireForm()'>Cancel</button>
+                            <button class='clickable nextLink' type='button' id='submitReferBtn'>Submit</button><br>
+                            <button class='clickable backLink' id='closeReferBtn'>Cancel</button>
                         </div> 
                     </form>
                 </div>

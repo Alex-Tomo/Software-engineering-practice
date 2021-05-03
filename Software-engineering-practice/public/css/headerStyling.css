@@ -178,7 +178,7 @@ header h1{
         border: none;
         outline: none;
         color: white;
-        padding: 23px 0 0 14px;
+        padding: 23px 0 31px 14px;
         background-color: inherit;
         font-family: inherit;
         margin: 0;
@@ -191,6 +191,10 @@ header h1{
         background-color: #017EFC;
         min-width: 190px;
         margin-top: 73px;
+    }
+
+    #dropdown:hover > #dropdown_content {
+        display: block;
     }
 
     #dropdown_content a {

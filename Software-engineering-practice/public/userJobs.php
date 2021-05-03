@@ -1,5 +1,7 @@
 <?php
 
+    // TODO FIX THIS, ITS NOT UPLOADING THE JOB ANYMORE. AGAIN!
+
     // Requires
     require('../pageTemplate.php');
     require('../db_connector.php');

@@ -7,11 +7,11 @@ function getHeader() {
 
     // needed a dynamic redirect
     $path = '';
-    $arr = explode("/", __DIR__);
+    $arr = explode("\\", __DIR__);
     foreach ($arr as $a) {
         $path .= $a.'/';
-//        if ($a == 'Software-engineering-practice') { // Alex
-        if ($a == 'sep') {  // Graham
+        if ($a == 'Software-engineering-practice') { // Alex
+//        if ($a == 'sep') {  // Graham
             $path .= 'db_connector.php';
             break;
         }
@@ -48,7 +48,7 @@ function getHeader() {
                                     </div>
                                  </div>
                                  <ul>
-                                    <a class='links clickable' onclick='openPage(`#`)'><img class='navIcon' src='assets/mail.svg'></a>
+                                    <a class='links clickable' onclick='openPage(`messages.php`)'><img class='navIcon' src='assets/mail.svg'></a>
                                     <a class='links clickable' onclick='openPage(`#`)'><img class='navIcon' src='assets/bell.svg'></a>
                                     <li><a class='links clickable' onclick='openPage(`postJob.php`)'>Post a Job</a></li>
                                     </ul>";}
@@ -76,7 +76,7 @@ function getHeader() {
         $header .= "<a class='mobLinks clickable' onclick='openPage(`userProfile.php`)'>My Profile</a><br>
                                     <a class='mobLinks clickable' onclick='openPage(`userJobs.php`)'>My Jobs</a>
                                     <a class='mobLinks clickable' onclick='openPage(`postJob.php`)'>Post a Job</a>
-                                    <a class='mobLinks clickable' onclick='openPage(``)'>Messages</a>
+                                    <a class='mobLinks clickable' onclick='openPage(`messages.php`)'>Messages</a>
                                     <a class='mobLinks clickable' onclick='openPage(``)'>Notifications</a>
                                     <button class='clickable' onclick='openPage(`logout.php`)' id='logout'>Logout</button>";
     }

@@ -1,19 +1,44 @@
+$(document).ready(() => {
+    let enquireBtn = document.getElementById('enquireBtn');
+    let referBtn = document.getElementById('referBtn');
+
+    enquireBtn.addEventListener('click', () => {
+        displayEnquireForm();
+    });
+
+    referBtn.addEventListener('click', () => {
+        displayReferForm();
+    });
+});
+
 const displayEnquireForm = () => {
 
-    const closeEnquireForm = (e) => {
-        e.stopImmediatePropagation();
+    document.getElementById('popup-1').style.display = 'block';
+
+    document.getElementById('closeEnquireBtn').addEventListener('click', (e) => {
+        e.preventDefault();
         document.getElementById('popup-1').style.display = 'none';
-    }
+    })
 
-    let popup = document.getElementById('popup-1');
-    popup.style.display = 'block';
+    document.getElementById('submitEnquireBtn').addEventListener('click', (e) => {
+        e.preventDefault();
+        document.getElementById('popup-1').style.display = 'none';
+        alert(document.getElementById('desc').value);
+    });
+}
 
-    let tab1 = document.getElementById('tab1');
-    let submit = document.getElementById('submitBtn');
-    let prevButtonTab2 = document.getElementById('prevProfileBtn2');
+const displayReferForm = () => {
 
-    submit.addEventListener('click', () => {
-            tab1.style.display = 'none';
-            popup.style.display = 'none';
+    document.getElementById('popup-2').style.display = 'block';
+
+    document.getElementById('closeReferBtn').addEventListener('click', (e) => {
+        e.preventDefault();
+        document.getElementById('popup-2').style.display = 'none';
+    })
+
+    document.getElementById('submitReferBtn').addEventListener('click', (e) => {
+        e.preventDefault();
+        document.getElementById('popup-2').style.display = 'none';
+        alert(document.getElementById('email').value);
     });
 }
