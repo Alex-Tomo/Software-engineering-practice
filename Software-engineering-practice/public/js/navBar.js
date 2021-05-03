@@ -8,20 +8,10 @@ function hambgrMenu() {
 }
 
 function userDrpdwn() {
-    let content = document.getElementById("dropdown_content");
-    if (content.style.display === "block") {
-        content.style.display = "none";
-    } else {
-        content.style.display = "block";
-    }
-}
-
-
-function hideDrpdwn(){
-    let content = document.getElementById("dropdown_content");
-    if (content.style.display === "block") {
-        content.style.display = "none";
-    }
+    let dropdown = document.getElementById("dropbtn");
+    dropdown.addEventListener('mouseover', () => {
+        document.getElementById('dropdown_content').style.display = 'block';
+    });
 }
 
 // Added by Alex - 1 generic method instead of a lot of methods
