@@ -321,7 +321,7 @@ q{
     background: rgba(0,0,0,0.7);
 }
 
-form{
+.popupForm{
     padding: 15px;
     position: absolute;
     top: 25%;
@@ -335,7 +335,7 @@ form{
     right:20px
 }
 
-form h2{
+.popupForm h2{
     color: #017EFC;
     font-weight: bold;
     font-size: 1em;
@@ -390,7 +390,7 @@ form h2{
     margin-bottom: 20px;
 }
 
-form button{
+#nextBtn1{
     background: #017EFC;
     padding: 10px;
     width: 200px;
@@ -440,23 +440,24 @@ form button{
     background-color: white;
     color: #017EFC;
     margin-top: 10px;
-
 }
 
 #submit:hover{
     color: black;
 }
 
-/*.tab{*/
-/*    !*display: none;*!*/
+
+
+/*#popupForm{*/
+/*    display: none;*/
 /*}*/
 
 /*.popup{*/
-/*    !*display:none;*!*/
+/*    display:none;*/
 /*}*/
 
 /*.overlay{*/
-/*    !*display: none*!*/
+/*    display: none*/
 /*}*/
 
 
@@ -554,12 +555,10 @@ form button{
 
 #recommendedContainer{
     margin: 0 15px;
-    display: inline-block;
 }
 
 #recAddedContainer{
     margin: 0 15px;
-    display: inline-block;
 }
 
 .checked {
@@ -571,6 +570,7 @@ form button{
     border-radius: 5px;
     margin-bottom: 15px;
     box-shadow: 4px 4px 6px 6px rgba(0, 0, 0, 0.05);
+    height: 400px;
 }
 
 .resultText{
@@ -598,7 +598,7 @@ form button{
 
 .topImg{
     overflow: hidden;
-    height: 160px;
+    height: 180px;
 }
 
 .topImg img{
@@ -633,6 +633,10 @@ form button{
     display: inline-block;
 }
 
+#categories h1{
+    font-size: 1.5em;
+}
+
 #categories button{
     background-color: #0062C4;
     color: white;
@@ -646,12 +650,12 @@ form button{
 
 
 
+
 /*Recently Viewed*/
 #recViewedParent{
     margin: 0 15px;
     padding-bottom: 25px;
     display: inline-block;
-
 }
 
 .recViewedChild{
@@ -695,11 +699,21 @@ form button{
     margin: 15px;
 }
 
-#back{
+.back{
     color: #A1A1A1;
+}
+
+#serviceBack{
+    margin-left: 15px;
+}
+
+#resultContainer a{
     margin-bottom: 20px;
-    display: block;
-    width: 32%;
+}
+
+#serviceResult{
+    width: 100%;
+    height: auto;
 }
 
 .applyBtn{
@@ -713,6 +727,17 @@ form button{
     color: white;
     font-size: 1.2em;
     margin-bottom: 10px;
+}
+
+#desc{
+    width: 90%;
+    resize: none;
+    border: 1px solid #828282;
+    border-radius: 8px;
+    opacity: 0.5;
+    color: #017EFC;
+    padding: 5px;
+    font-family: Arial;
 }
 
 .resultText a{
@@ -736,18 +761,19 @@ form button{
     padding: 0;
 }
 
+
+
+
+
 /* Added by Alex for Search page */
 
 .searchPageContainer {
-    background-color: #FFFFFF;
-    padding-top: 20px;
-    display: inline-block;
-    width: 100%;
+    margin: 20px 15px;
 }
 
 .searchPageContainer h1 {
     font-size: 1.3em;
-    margin-top: 40px;
+    margin-top: 20px;
     color: #017EFC;
 }
 
@@ -781,6 +807,57 @@ form button{
     padding-left: 10px;
 }
 
+
+
+
+/*User profile*/
+.backLink{
+    border: 2px solid #017EFC;
+    background-color: white;
+    color: #017EFC;
+    padding: 10px;
+    width: 200px;
+    margin: 15px auto;
+    font-weight: bold;
+    border-radius: 5px;
+    font-size: 1.2em;
+}
+
+.nextLink {
+    background: #017EFC;
+    padding: 10px;
+    width: 200px;
+    margin: 15px auto;
+    border: 1px solid #017EFC;
+    border-radius: 5px;
+    font-weight: bold;
+    color: white;
+    font-size: 1.2em;
+}
+
+.editLinks{
+    background: #017EFC;
+    padding: 10px;
+    width: 200px;
+    margin: 15px auto;
+    border: 1px solid #017EFC;
+    border-radius: 5px;
+    font-weight: bold;
+    color: white;
+    font-size: 1.2em;
+}
+
+#detailsContainer h1{
+    margin: 15px 0 10px 0;
+}
+
+
+
+
+
+
+
+
 /* Post a job */
 
 #postJobContainer {
@@ -794,15 +871,14 @@ form button{
 #postJobContainer h1 {
     color: #017EFC;
     font-weight: bold;
-    font-size: 1em;
+    margin-bottom: 15px;
 }
 
 #postJobForm {
     padding: 15px;
-    position: relative;
-    top: 0;
-    background-color: white;
-    width: auto;
+    box-shadow: 4px 4px 6px 6px rgba(0, 0, 0, 0.05);
+    position: inherit;
+    margin: 0 15px 30px 15px;
     height: auto;
     text-align: center;
     box-sizing: border-box;
@@ -811,19 +887,46 @@ form button{
     right: 0;
 }
 
+#postJobForm label{
+    text-align: left;
+    font-size: 0.9em;
+    width: 100%;
+    float: left;
+    font-weight: bold;
+    color: #017EFC;
+    margin: 20px 0 5px 0;
+}
+
 #postJobForm input[type="text"] {
     padding: 10px 0;
     border: 1px solid #828282;
     border-radius: 8px;
     opacity: 0.5;
-    float: left;
     width: 100%;
     color: #017EFC;
 }
 
 #postJobForm textarea {
     resize: none;
-    margin: 10px 0;
+    width: 100%;
+    border: 1px solid #828282;
+    border-radius: 8px;
+    opacity: 0.5;
+    color: #017EFC;
+    font-family: Arial;
+    padding: 0;
+}
+
+#jobsListInput{
+    padding: 10px 0;
+    border: 1px solid #828282;
+    border-radius: 8px;
+    opacity: 0.5;
+    font-weight: lighter;
+    color: #017EFC;
+    font-size: 0.8em;
+    float: left;
+    width: 100%;
 }
 
 #postJobForm input[type="text"] ::-webkit-input-placeholder {
@@ -831,8 +934,10 @@ form button{
 }
 
 #postJobBtn {
-    margin-top: 10px;
+    margin-top: 20px;
 }
+
+
 
 /* Edit jobs */
 
@@ -919,7 +1024,11 @@ form button{
 
 
 
+
+
+
 /*Media queries*/
+
 @media only screen and (min-width: 768px) {
     #infoSec{
         padding: 20px 90px 20px 90px;
@@ -1014,16 +1123,8 @@ form button{
         float: right;
     }
 
-    form {
+    .popupForm {
         padding: 15px 110px;
-    }
-
-    #recommendedContainer{
-        /*margin-bottom: 400px;*/
-    }
-
-    #recAddedContainer{
-        /*margin-bottom: 780px;*/
     }
 
     #refineContainer{
@@ -1032,7 +1133,6 @@ form button{
 
     .refineChild{
         text-align: -webkit-left;
-        height: auto;
     }
 
     .refineChild {
@@ -1052,20 +1152,8 @@ form button{
         margin-right: 15px;
     }
 
-    #resultContainer{
+    #recAddedContainer{
         display: inline-block;
-    }
-
-    #serviceResult{
-        width: 100%;
-    }
-
-    /*#recViewedParent2{*/
-    /*    padding-bottom: 150px;*/
-    /*}*/
-
-    #back {
-        width: 20%;
     }
 
     #slideshow_container h5{
@@ -1125,10 +1213,6 @@ form button{
     #header2 h2 {
         font-size: 1.6em;
     }
-
-    /*#textChange {*/
-    /*    margin-left: 10px;*/
-    /*}*/
 
     #top p {
         color: white;
@@ -1213,24 +1297,19 @@ form button{
         float: left;
     }
 
-    form {
+    .popupForm {
         padding: 15px 250px;
-    }
-
-    #recAddedContainer{
-
     }
 
     .refineChild {
         margin-top: 13px;
         margin-bottom: 0;
-        width: 25%;
+        width: 40%;
         float: left;
         box-shadow: none;
     }
 
-    .refineChild:nth-of-type(2),
-    .refineChild:nth-of-type(3) {
+    .refineChild:nth-of-type(2){
         border-left: 1px solid black;
         border-radius: 0;
     }
@@ -1242,7 +1321,7 @@ form button{
     }
 
     #refineContainer button {
-        width: 15%;
+        width: 13%;
         float: right;
         margin: 0;
         padding: 45px 0 45px 0;
@@ -1257,20 +1336,12 @@ form button{
         margin-right: 15px;
     }
 
-    #resultContainer{
-        display: block;
+    #recViewedHeader{
+        margin-top: 0;
     }
 
     #serviceResult{
         width: 60%;
-    }
-
-    /*#recViewedParent2{*/
-    /*    padding-bottom: 130px;*/
-    /*}*/
-
-    #back {
-        width: 15%;
     }
 
     #slideshow_container{
@@ -1288,6 +1359,11 @@ form button{
 
     #slideshow_container img{
         width: 40px;
+    }
+
+    #postJobForm {
+        margin: 0 90px 50px 90px;
+        padding: 20px 110px;
     }
 }
 
@@ -1355,6 +1431,11 @@ form button{
     #benefitsSec{
         padding-bottom: 1150px;
     }
+
+    #postJobForm {
+        margin: 0 130px 50px 130px;
+        padding: 20px 150px;
+    }
 }
 
 @media only screen and (min-width: 1333px) {
@@ -1411,7 +1492,7 @@ form button{
         width: 45%;
     }
 
-    form{
+    .popupForm{
         margin: 0 150px;
         padding: 15px 300px;
     }
@@ -1424,9 +1505,9 @@ form button{
         height: 450px
     }
 
-    .topImg{
-        height: 230px;
-    }
+    /*.topImg{*/
+    /*    height: 230px;*/
+    /*}*/
 
     #recommendedContainer{
         display: block;
@@ -1443,7 +1524,6 @@ form button{
         padding-right: 0;
         margin-top: 0;
         margin-right: 10px;
-        display: inline-block;
     }
 
     #categories{
@@ -1464,7 +1544,6 @@ form button{
 
     #categories h1{
         margin-top: 10px;
-        font-size: 1.3em;
     }
 
     .resultText{
@@ -1489,17 +1568,17 @@ form button{
         margin: 10px 0 35px 0;
     }
 
-    #back {
-        width: 10%;
-    }
-
     #slideshow_container{
         margin: 0 120px;
     }
 
     #slideshow_container h5{
         font-size: 1.5em;
-        margin: 40px 370px 0 370px;
+        margin: 40px 450px 0 450px;
     }
 
+    #postJobForm {
+        margin: 0 200px 50px 200px;
+        padding: 20px 220px;
+    }
 }

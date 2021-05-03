@@ -25,12 +25,11 @@ form{
 h2{
     color: #017EFC;
     text-align: center;
-    margin-bottom: 35px;
+    margin-bottom: 20px;
 }
 
 label,input{
     display: block;
-    margin-bottom: 10px;
 }
 
 label{
@@ -49,6 +48,7 @@ input[type="text"],[type="email"],[type="password"],[type="date"]{
     opacity: 0.5;
     float: left;
     width: 250px;
+    margin-bottom: 20px;
 }
 
 /*#tandc{*/
@@ -65,12 +65,14 @@ input[type="text"],[type="email"],[type="password"],[type="date"]{
 /*    color: black;*/
 /*}*/
 
-#password{
-    margin-bottom: 30px;
-}
 
 #password2{
     margin-bottom: 30px;
+}
+
+#loginBtn{
+    margin-top: 20px;
+    display: inline-block;
 }
 
 input[type="submit"]{
