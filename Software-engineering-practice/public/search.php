@@ -22,8 +22,9 @@
 
     // Main content
     $page->addPageBodyItem("
+    <div class='pageContainer'>
     <div id='refineContainer'>
-        <form id='searchForm' method='get' action='search.php' style='position: relative;'>
+        <form id='searchForm' method='get' action='search.php'>
             <div class='refineChild'>
                 <label>Keyword</label><br>
                 <input type='text' name='keyword' placeholder='Search keyword here'>
@@ -47,8 +48,9 @@ for($jobIndex = 0; $jobIndex < sizeof($jobCodes); $jobIndex++) {
         </form>
     </div>
     
-    <div class='searchPageContainer'>
-        <h1>Search Page</h1>");
+    <div class='searchPageContainer'>            
+        <a class='back clickable' onclick='openPage(`loggedinHome.php`)'>< Back to home</a> 
+            <h1>Search Page</h1>");
 
 // Get all the jobs with a specific category
 if($_REQUEST['categories'] != 'all') {
@@ -71,7 +73,7 @@ if($jobInfo != null) {
     foreach ($jobInfo as $job) {
         $items++;
         $page->addPageBodyItem("
-        <div class='clickable' onclick='openPage(`serviceInner.php?id={$job['jobId']}`)'>
+        <div class='resultChild clickable' onclick='openPage(`serviceInner.php?id={$job['jobId']}`)'>
             <div class='topImg'>
                 <img src='assets/job_images/{$job['jobImage']}'>
             </div>
@@ -106,7 +108,8 @@ if($jobInfo != null) {
 
 
     $page->addPageBodyItem("
-    </div>");
+    </div>
+</div>");
 
     $page->displayPage();
 

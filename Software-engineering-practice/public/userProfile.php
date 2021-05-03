@@ -33,9 +33,9 @@
     <div class='pageContainer' style='width: 100%; text-align: center;'> 
         <div class='popup' id='popup-2' style='display: none;'>
             <div class='overlay'></div>
-                <form id='regForm'>
+                <form class='popupForm'>
                     <div id='tab1'>
-                        <button onclick='closeInfoForm()'>Close Window</button>
+                        <button class='clickable backLink' onclick='closeInfoForm()'>Close Window</button>
                         <h2>Tell us about yourself</h2>
                         <h1>General information</h1>
                         <input type='text' id='email' value='{$_SESSION['email']}' style='display: none'>
@@ -94,11 +94,11 @@
 
         $page->addPageBodyItem("
                         </select>
-                        <button class='clickable' type='button' id='nextProfileBtn1'>Next</button>               
+                        <button class='clickable nextLink' type='button' id='nextProfileBtn1'>Next</button>               
                     </div>
                             
                     <div id='tab2'>                    
-                        <button onclick='closeInfoForm()'>Close Window</button>
+                        <button class='clickable backLink' onclick='closeInfoForm()'>Close Window</button>
                         <h2>Tell us about yourself</h2>
                         <h1>What job(s) are you interested in?</h1>
                         <label>(Please choose at least 3)</label>
@@ -135,8 +135,8 @@
         $page->addPageBodyItem("
                         <script> getSelectedJob(); </script>
                         </div>
-                    <button class='clickable' type='button' id='nextProfileBtn2'>Submit</button><br>
-                    <button class='clickable' type='button' id='prevProfileBtn2'>Back</button>
+                    <button class='clickable nextLink' type='button' id='nextProfileBtn2'>Save Changes</button><br>
+                    <button class='clickable backLink' type='button' id='prevProfileBtn2'>Back</button>
                     </div>
                 </form>
             </div>
@@ -156,7 +156,7 @@
                 </form>
             </div>
     
-            <div id='bookContainer'>
+            <div id='detailsContainer'>
                 <h1>My Details</h1>
                 <div>Email: {$_SESSION['email']}</div>
                 <div>First name: {$user['fname']}</div>
@@ -164,7 +164,7 @@
                 <div id='year'>Gender: {$user['gender']}</div>
                 <div id='description'>Language: {$user['language']}</div>
                 <div>Region: {$user['region']}</div><br>
-                <div>Favourite Categories: </div><br>");
+                <h1>Favourite Categories</h1>");
 
         foreach ($chosenJobsName as $jobName) {
 
@@ -175,8 +175,8 @@
 
         $page->addPageBodyItem("
             </div>
-        <button onclick='displayEditProfile();' style='margin: 25px auto;'>Edit Profile</button>
-        <button id='showPasswordForm' style='margin: 25px auto;'>Change Password</button>
+        <button class='clickable editLinks' onclick='displayEditProfile();'>Edit Profile</button>
+        <button class='clickable editLinks' id='showPasswordForm'>Change Password</button>
     </div>");
 
     $page->displayPage();
