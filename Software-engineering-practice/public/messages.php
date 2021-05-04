@@ -32,6 +32,21 @@ $page->addPageBodyItem("
         <script>
             // Create a new WebSocket.
             let socket  = new WebSocket('ws://127.0.0.1:3001');
+            
+            document.getElementById('send').addEventListener('click', () => {
+                let id = 1;
+                let email = '{$_SESSION['email']}';
+                
+                console.log(email);
+                
+                let data = {
+                    id: id,
+                    email: email
+                };
+                
+                socket.send(JSON.stringify(data));
+            });
+                
                     
             document.getElementById('send').addEventListener('click', () => {
                 
