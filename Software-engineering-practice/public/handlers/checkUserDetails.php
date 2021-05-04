@@ -7,7 +7,7 @@
     $conn = getConnection();
 
     // Get the email when the form is submitted
-    $email = isset($_POST['email']) ? sanitizeData(trim($_POST['email'])) : null;
+    $email = isset($_POST['email']) ? (trim($_POST['email'])) : null;
 
     // if the user has entered details then return any result
     if(!empty($email)) {
@@ -19,11 +19,7 @@
         $statement->execute(array($email));
         if($statement->rowCount() > 0) {
             echo 'true';
-        } else {
-            echo 'false';
         }
-    } else {
-        echo 'false';
     }
 
 ?>

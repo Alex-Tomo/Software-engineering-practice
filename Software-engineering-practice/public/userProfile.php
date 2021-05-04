@@ -119,7 +119,6 @@
 
         $page->addPageBodyItem("
                         </datalist>   
-                        <p>Can't find one? <strong>Suggest one!</strong></p>
                         <div id='suggestion'>");
 
     // Add the users chosen jobs

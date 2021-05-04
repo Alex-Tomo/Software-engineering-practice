@@ -86,7 +86,6 @@ for($jobIndex = 0; $jobIndex < sizeof($jobCodes); $jobIndex++) {
 
                         $page->addPageBodyItem("
                         </datalist>   
-                            <p>Can't find one? <strong>Suggest one!</strong></p>
                             <div id='suggestion'></div>
                             <button  class='clickable nextLink' type='button' id='nextBtn2'>Submit</button><br>
                             <button  class='clickable backLink' type='button' id='prevBtn2'>Back</button>
@@ -122,35 +121,35 @@ for($jobIndex = 0; $jobIndex < sizeof($jobCodes); $jobIndex++) {
             <div id='recommendedContainer'>
                 <h1>Recommended for you</h1>");
 
-// Get the recommended job details from the database
-$choiceArray = selectUsersChosenCategories($conn, $_SESSION['email']);
-$recommenders = getRecommendedJobs($conn, $choiceArray);
-$price = 0;
-if(!empty($recommenders)) {
-    foreach($recommenders as $recommender) {
-        $price = $recommender['jobPrice'];
+try{
+    // Get the recommended job details from the database
+    $choiceArray = selectUsersChosenCategories($conn, $_SESSION['email']);
+    $recommenders = getRecommendedJobs($conn, $choiceArray);
+    $price = 0;
+    if(!empty($recommenders)) {
+        foreach($recommenders as $recommender) {
+            $price = $recommender['jobPrice'];
 
-                $page->addPageBodyItem("
-                <div class='resultChild clickable' onclick='openPage(`serviceInner.php?id={$recommender['jobId']}`)'>
-                    <div class='topImg'>
-                        <img src='assets/job_images/{$recommender['jobImage']}'>
-                    </div>
-                    <div class='resultText'>
-                        <img class='personIcon' src='assets/person.svg'>
-                        <h2>{$recommender['userFname']} {$recommender['userLname']}</h2>
-                        <h3>{$recommender['jobTitle']}</h3>
-                        <p>{$recommender['jobDesc']}</p>");
+            $page->addPageBodyItem("
+                    <div class='resultChild clickable' onclick='openPage(`serviceInner.php?id={$recommender['jobId']}`)'>
+                        <div class='topImg'>
+                            <img src='assets/job_images/{$recommender['jobImage']}'>
+                        </div>
+                        <div class='resultText'>
+                            <img class='personIcon' src='assets/person.svg'>
+                            <h2>{$recommender['userFname']} {$recommender['userLname']}</h2>
+                            <h3>{$recommender['jobTitle']}</h3>
+                            <p>{$recommender['jobDesc']}</p>");
 
-list($sum, $total) = getStarRating($conn, $recommender['jobId']);
-for($i = 0; $i < 5; $i++) {
+            list($sum, $total) = getStarRating($conn, $recommender['jobId']);
+            for ($i = 0; $i < 5; $i++) {
 
-                    if ($i < $sum) {
-                        $page->addPageBodyItem("<span class='fa fa-star checked'></span>");
-                    } else {
-                        $page->addPageBodyItem("<span class='fa fa-star'></span>");
-                    }
-
-} // End of for loop
+                if ($i < $sum) {
+                    $page->addPageBodyItem("<span class='fa fa-star checked'></span>");
+                } else {
+                    $page->addPageBodyItem("<span class='fa fa-star'></span>");
+                }
+        } // End of for loop
 
                         $page->addPageBodyItem("
                         ({$total})<p class='price'>£{$price}/h</p>
@@ -159,6 +158,7 @@ for($i = 0; $i < 5; $i++) {
 
     } // End of foreach($recommenders as $recommender)
 } // end of if(!empty($recommenders))
+} catch(Exception $e){ logError($e); }
 
             $page->addPageBodyItem("
             </div>
