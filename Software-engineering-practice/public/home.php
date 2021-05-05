@@ -7,6 +7,10 @@
     // Get the page template class
     $page = new pageTemplate('Home');
 
+    if($_SESSION['loggedin']) {
+        header('Location: loggedinHome.php');
+    }
+
     // Add CSS
     $page->addCSS("<link rel=\"stylesheet\" href=\"./css/styling.css\">");
     $page->addCSS("<link rel=\"stylesheet\" href=\"./css/footerStyling.css\">");

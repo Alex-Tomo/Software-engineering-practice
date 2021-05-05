@@ -36,8 +36,9 @@
 
             if (!empty($categoryIds)) {
                 $insertSimilarCategoriesQuery = "INSERT INTO sep_jobs_categories VALUES ";
-                for ($i = 0; $i < sizeof($categoryIds)-1; $i++) {
-                    if ($i == sizeof($categoryIds) - 2) {
+                echo sizeof($categoryIds);
+                for ($i = 0; $i < sizeof($categoryIds); $i++) {
+                    if ($i == sizeof($categoryIds) - 1) {
                         $insertSimilarCategoriesQuery .= "(?, ?)";
                     } else {
                         $insertSimilarCategoriesQuery .= "(?, ?),";
@@ -46,10 +47,10 @@
                 echo $insertSimilarCategoriesQuery;
                 $statement = $conn->prepare($insertSimilarCategoriesQuery);
                 $j = 1;
-                for ($i = 1; $i < sizeof($categoryIds); $i++) {
-                    echo $categoryIds[$i-1];
+                for ($i = 0; $i < sizeof($categoryIds); $i++) {
+                    echo $categoryIds[$i];
                     $statement->bindParam($j, $jobId);
-                    $statement->bindParam(($j + 1), $categoryIds[$i-1]);
+                    $statement->bindParam(($j + 1), $categoryIds[$i]);
                     $j += 2;
                 }
                 $statement->execute();
