@@ -13,7 +13,7 @@ window.onload = () => {
             email: email
         },
         success: (data) => {
-            if(data.trim() !== '') {
+            if(!data.trim().includes('true')) {
                 console.log(data);
                 // If the user has never entered data before then show the
                 // popup form

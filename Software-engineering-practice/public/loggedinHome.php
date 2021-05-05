@@ -1,5 +1,7 @@
 <?php
 
+    // TODO popup is not showing
+
     // Requires
     require('../db_connector.php');
     require('../pageTemplate.php');
