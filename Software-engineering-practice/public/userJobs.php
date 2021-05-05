@@ -25,8 +25,9 @@
     $page->addJavaScript("<script src=\"./js/selectPostJobsList.js\"></script>");
 
     $page->addPageBodyItem("
-    <div class='pageContainer' style='width: 100%; text-align: center;'>
-        <h1>My Job(s)</h1>
+    <div class='pageContainer'>
+        <h1 id='userJobHeader'>My Job(s)</h1>
+        <div id='resultContainer'>
         <div class='popup' id='popup-3' style='display: none;'>
             <div class='overlay'></div>
                 <form id='updateJobForm' style='position: relative;' enctype='multipart/form-data' method='post' action='./handlers/updateJob.php'>
@@ -50,17 +51,16 @@ for($jobIndex = 0; $jobIndex < sizeof($jobCodes); $jobIndex++) {
                     $page->addPageBodyItem("
                     </datalist>
                     <div id='suggestion'></div>
-                    <button id='updateJobBtn' class='clickable' type='submit'>Update Job</button> 
+                    <button id='updateJobBtn' class='clickable nextLink' type='submit'>Update Job</button> 
                 </form>
-            </div>
-        </div>");
+            </div>");
 
 // Gets all the users jobs
 $jobsArray = getUsersJobs($conn, $_SESSION['email']);
 foreach($jobsArray as $job) {
 
         $page->addPageBodyItem("
-        <div class='resultChild clickable' onclick='openPage(`serviceInner.php?id={$job['jobId']}`)'>
+        <div id='userJob' class='resultChild clickable' onclick='openPage(`serviceInner.php?id={$job['jobId']}`)'>
             <div class='topImg'>
                 <img src='assets/job_images/{$job['jobImage']}'>
             </div>
@@ -84,14 +84,17 @@ for($i = 0; $i < 5; $i++) {
 
                 $page->addPageBodyItem("
                 ({$total})<p class='price'>£{$job['jobPrice']}/h</p>
+                <div id='btnContainer'>
+                <button type='button' id='{$job['jobId']}' class='removeJob jobEditBtn'>Delete Job</button>
+                <button type='button' id='{$job['jobId']}' class='editJob jobEditBtn'>Edit Job</button>
+                </div>
             </div>
-            <button type='button' id='{$job['jobId']}' class='removeJob'>Delete Job</button>
-            <button type='button' id='{$job['jobId']}' class='editJob'>Edit Job</button>
         </div>");
 
 } // end of foreach loop
 
     $page->addPageBodyItem("
+    </div>
     </div>");
 
     $page->displayPage();

@@ -48,7 +48,7 @@
     $page->addPageBodyItem("
                 </datalist>
                 <div id='suggestion'></div>
-                <button id='postJobBtn' class='clickable' type='submit'>Post Job</button> 
+                <button id='postJobBtn' class='clickable nextLink' type='submit'>Post Job</button> 
             </form>
         </div>");
 
