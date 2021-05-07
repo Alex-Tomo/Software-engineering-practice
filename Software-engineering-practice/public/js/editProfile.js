@@ -16,6 +16,9 @@ const displayEditProfile = () => {
     let nextButtonTab2 = document.getElementById('nextProfileBtn2');
     let prevButtonTab2 = document.getElementById('prevProfileBtn2');
 
+    //overlay
+    let closeForm = document.getElementById('overlay-1');
+
     // only display tab 1
     tab1.style.display = 'block';
     tab2.style.display = 'none';
@@ -78,5 +81,9 @@ const displayEditProfile = () => {
     prevButtonTab2.addEventListener('click', () => {
         tab2.style.display = 'none';
         tab1.style.display = 'inherit';
+    });
+
+    closeForm.addEventListener('click', () =>{
+        document.getElementById('popup-2').style.display = 'none';
     });
 }

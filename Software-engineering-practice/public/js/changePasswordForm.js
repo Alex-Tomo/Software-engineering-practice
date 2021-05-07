@@ -12,12 +12,12 @@ window.onload = () => {
 
     document.getElementById('showPasswordForm').addEventListener('click', () => { displayChangePassword(); });
     document.getElementById('closePasswordWindow').addEventListener('click', () => { closeChangePassword(); });
-    document.getElementById('submitPasswordForm').addEventListener('click', () => { changePassword(); });
-
+    document.getElementById('submitPasswordForm').addEventListener('click', () => { changePassword(); })
+    document.getElementById('overlay-2').addEventListener('click', () => { closeChangePassword(); });
 }
 
 const closeChangePassword = () => {
-    document.getElementById('passwordForm').style.display = 'hidden';
+    document.getElementById('passwordForm').style.display = 'none';
 }
 
 const displayChangePassword = () => {

@@ -15,6 +15,11 @@ $(document).ready(() => {
         document.getElementById('popup-1').style.display = 'none';
     })
 
+    document.getElementById('overlay-1').addEventListener('click', (e) => {
+        e.preventDefault();
+        document.getElementById('popup-1').style.display = 'none';
+    })
+
     document.getElementById('submitEnquireBtn').addEventListener('click', (e) => {
         e.preventDefault();
         document.getElementById('popup-1').style.display = 'none';
@@ -42,12 +47,18 @@ $(document).ready(() => {
 });
 
 const displayEnquireForm = () => {
+
     document.getElementById('popup-1').style.display = 'block';
 }
 
 const displayReferForm = () => {
 
     document.getElementById('popup-2').style.display = 'block';
+
+    document.getElementById('overlay-2').addEventListener('click', (e) => {
+        e.preventDefault();
+        document.getElementById('popup-2').style.display = 'none';
+    })
 
     document.getElementById('closeReferBtn').addEventListener('click', (e) => {
         e.preventDefault();
