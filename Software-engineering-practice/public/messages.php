@@ -1,111 +1,111 @@
 <?php
 
-    require('../db_connector.php');
-    require('../pageTemplate.php');
-    require('../database_functions.php');
+require('../db_connector.php');
+require('../pageTemplate.php');
+require('../database_functions.php');
 
 
-    // Initial variables
-    // Get the page template class
-    $page = new pageTemplate('Home');
-    $conn = getConnection();
+// Initial variables
+// Get the page template class
+$page = new pageTemplate('Messages');
+$conn = getConnection();
 
-    if(!$_SESSION['loggedin']) { header('location: signin.php'); }
+if(!$_SESSION['loggedin']) { header('location: signin.php'); }
 
-    // Add CSS
-    $page->addCSS("<link rel=\"stylesheet\" href=\"./css/styling.css\">");
-    $page->addCSS("<link rel=\"stylesheet\" href=\"./css/footerStyling.css\">");
-    $page->addCSS("<link rel=\"stylesheet\" href=\"./css/headerStyling.css\">");
+// Add CSS
+$page->addCSS("<link rel=\"stylesheet\" href=\"./css/styling.css\">");
+$page->addCSS("<link rel=\"stylesheet\" href=\"./css/footerStyling.css\">");
+$page->addCSS("<link rel=\"stylesheet\" href=\"./css/headerStyling.css\">");
 
-    // Add JS
-    $page->addJavaScript("<script src=\"./js/navBar.js\"></script>");
-    $page->addJavaScript("<script src=\"./js/openMessage.js\"></script>");
+// Add JS
+$page->addJavaScript("<script src=\"./js/navBar.js\"></script>");
+$page->addJavaScript("<script src=\"./js/openMessage.js\"></script>");
 
-    // Main content
-    $page->addPageBodyItem("
+// Main content
+$page->addPageBodyItem("
         <input type='text' id='email' value='{$_SESSION['email']}' style='display: none'>
         <div class='pageContainer' style='padding: 0;'>
             <div id='messagesList' style='overflow-y: scroll; height:500px;'>");
 
-    try {
-        // Find the other users name using the job id
-        // find your name using the user id
+try {
+    // Find the other users name using the job id
+    // find your name using the user id
 
-        $statement = $conn->prepare("
+    $statement = $conn->prepare("
             SELECT sep_users.user_id
             FROM sep_users
             WHERE sep_users.user_email = '{$_SESSION['email']}'
         ");
-        $statement->execute();
-        $result = $statement->fetchObject();
-        $userId = $result->user_id;
+    $statement->execute();
+    $result = $statement->fetchObject();
+    $userId = $result->user_id;
 
-        $statement = $conn->prepare("
+    $statement = $conn->prepare("
             SELECT sep_messages.user_id, sep_messages.other_user_id
             FROM sep_messages
             WHERE sep_messages.user_id = {$userId} OR sep_messages.other_user_id = {$userId}
         ");
-        $statement->execute();
-        $chatIds = array();
-        while($result = $statement->fetchObject()) {
-            if(($result->user_id != $userId) && (!in_array($result->user_id, $chatIds))) {
-                array_push($chatIds, $result->user_id);
-            } else if(($result->other_user_id != $userId) && (!in_array($result->other_user_id, $chatIds))) {
-                array_push($chatIds, $result->other_user_id);
-            }
+    $statement->execute();
+    $chatIds = array();
+    while($result = $statement->fetchObject()) {
+        if(($result->user_id != $userId) && (!in_array($result->user_id, $chatIds))) {
+            array_push($chatIds, $result->user_id);
+        } else if(($result->other_user_id != $userId) && (!in_array($result->other_user_id, $chatIds))) {
+            array_push($chatIds, $result->other_user_id);
         }
+    }
 
-        $name = array();
-        foreach($chatIds as $chatId) {
-            $statement = $conn->prepare("
+    $name = array();
+    foreach($chatIds as $chatId) {
+        $statement = $conn->prepare("
                 SELECT sep_user_info.user_fname, sep_user_info.user_lname, sep_users.user_online
                 FROM sep_user_info JOIN sep_users ON sep_user_info.user_id = sep_users.user_id
                 WHERE sep_user_info.user_id = {$chatId}
             ");
-            $statement->execute();
-            $result = $statement->fetchObject();
-            array_push($name, "{$result->user_fname} {$result->user_lname}");
-        }
+        $statement->execute();
+        $result = $statement->fetchObject();
+        array_push($name, "{$result->user_fname} {$result->user_lname}");
+    }
 
-        $i = 0;
-        // userid is who sent the message
-        foreach ($chatIds as $chatId) {
-            $statement = $conn->prepare("
+    $i = 0;
+    // userid is who sent the message
+    foreach ($chatIds as $chatId) {
+        $statement = $conn->prepare("
                 SELECT sep_messages.message, sep_messages.created_on, sep_messages.job_id, sep_messages.user_id
                 FROM sep_messages 
                 WHERE (sep_messages.user_id = {$chatId} OR sep_messages.other_user_id = {$chatId})
                 GROUP BY sep_messages.message_id
                 ORDER BY sep_messages.created_on DESC
             ");
-            $statement->execute();
-            while ($row = $statement->fetchObject()) {
-                $statement = $conn->prepare("
+        $statement->execute();
+        while ($row = $statement->fetchObject()) {
+            $statement = $conn->prepare("
                     SELECT job_title FROM sep_available_jobs WHERE job_id = {$row->job_id}
                 ");
-                $statement->execute();
-                $r = $statement->fetchObject();
+            $statement->execute();
+            $r = $statement->fetchObject();
 
-                $page->addPageBodyItem("<div class='message_users' id='{$row->job_id}' name='$chatId' style='margin: 5px;'>
+            $page->addPageBodyItem("<div class='message_users' id='{$row->job_id}' name='$chatId' style='margin: 5px;'>
                     <h1 style='margin-top: 5px;'>{$name[$i]}<i>- {$r->job_title} position</i></h1><div id='onlineStatusListPage' style='margin-bottom: 5px;'>");
-                if ($result->user_online == true) {
-                    $page->addPageBodyItem("Online");
-                } else {
-                    $page->addPageBodyItem("Offline");
-                }
-                $page->addPageBodyItem("</div>");
-
-                if($userId == $row->user_id) {
-                    $page->addPageBodyItem("<p>You: {$row->message}</p>");
-                } else {
-                    $page->addPageBodyItem("<p>{$result->user_fname}: {$row->message}</p>");
-                }
-                $page->addPageBodyItem("<p>{$row->created_on}</p>
-                </div><hr>");
+            if ($result->user_online == true) {
+                $page->addPageBodyItem("Online");
+            } else {
+                $page->addPageBodyItem("Offline");
             }
-            $i++;
+            $page->addPageBodyItem("</div>");
+
+            if($userId == $row->user_id) {
+                $page->addPageBodyItem("<p>You: {$row->message}</p>");
+            } else {
+                $page->addPageBodyItem("<p>{$result->user_fname}: {$row->message}</p>");
+            }
+            $page->addPageBodyItem("<p>{$row->created_on}</p>
+                </div><hr>");
         }
-    } catch(Exception $e) { logError($e); }
-            $page->addPageBodyItem("</div>
+        $i++;
+    }
+} catch(Exception $e) { logError($e); }
+$page->addPageBodyItem("</div>
             
             <div id='messagesTitle' style='background-color: #EEEEEE; position: absolute; width: 100%; display: none; padding-bottom: 10px'>
                 <a id='backToMessageList' style='margin: 5px; display: block'>--- back to chat</a>
@@ -123,7 +123,7 @@
         </div>
         ");
 
-    $page->addPageBodyItem("
+$page->addPageBodyItem("
             <script>
                 $(document).ready(() => {
                     window.onresize = () => {
@@ -223,7 +223,7 @@
             </script>
             ");
 
-    // Display the page
-    $page->displayPage();
+// Display the page
+$page->displayPage();
 
 ?>

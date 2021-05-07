@@ -10,7 +10,7 @@
 
     // Initial variables, get database connection, get the page template class
     $conn = getConnection();
-    $page = new pageTemplate('Logged In Home');
+    $page = new pageTemplate('My Profile');
 
     // Add CSS
     $page->addCSS("<link rel=\"stylesheet\" href=\"./css/styling.css\">");
@@ -24,17 +24,16 @@
     $page->addJavaScript("<script src=\"./js/changePasswordForm.js\"></script>");
     $page->addJavaScript("<script src=\"./js/notificationServer.js\"></script>");
 
-
-// Get users details
+    // Get users details
     list($user, $chosenJobsCode, $chosenJobsName) = getUserDetails($conn, $_SESSION['email']);
     // Dynamically include gender details
     $gendersValue = ['Select', 'Male', 'Female', 'Prefer not to say'];
     $gendersArray = ['0', 'male', 'female', 'pnts'];
 
     $page->addPageBodyItem("
-    <div class='pageContainer' style='width: 100%; text-align: center;'> 
+    <div id='userProfile' class='pageContainer'> 
         <div class='popup' id='popup-2' style='display: none;'>
-            <div class='overlay'></div>
+            <div id='overlay-1' class='overlay clickable'></div>
                 <form class='popupForm'>
                     <div id='tab1'>
                         <button class='clickable backLink' onclick='closeInfoForm()'>Close Window</button>
@@ -128,8 +127,7 @@
 
             $page->addPageBodyItem("
                                 <p onclick='removeJob(`{$chosenJobsCode[$i]}`, `{$chosenJobsName[$i]}`)' id='{$chosenJobsCode[$i]}' class='clickable chosenJob' 
-                                style='background-color: #017EFC; color: #FFFFFF; font-size: small; font-weight: normal; width: fit-content; padding: 10px; 
-                                margin: 2.5px 5px 2.5px 0; border-radius: 5px;'>{$chosenJobsName[$i]} X</p>");
+                                >{$chosenJobsName[$i]} X</p>");
 
         } // end of for loop
 
@@ -142,17 +140,17 @@
                 </form>
             </div>
             <div class='popup' id='passwordForm' style='display: none;'>
-                <div class='overlay'></div>
-                <form id='passwordForm'>
+                <div id='overlay-2' class='clickable overlay'></div>
+                <form class='popupForm' id='passwordForm'>
                     <div id='passwordTab'>
-                        <button id='closePasswordWindow'>Close Window</button><br>
+                        <button class='clickable backLink' id='closePasswordWindow'>Close Window</button><br>
                         <label for='oldPassword'>Old Password</label><br>
                         <input id='oldPassword' name='oldPassword' type='password'>            
                         <label for='newPassword'>New Password</label><br>      
                         <input id='newPassword' name='newPassword' type='password'>
                         <label for='repeatNewPassword'>Repeat New Password</label><br>
                         <input id='repeatNewPassword' name='repeatNewPassword' type='password'>
-                        <button id='submitPasswordForm' type='button'>Change Password</button>
+                        <button class='clickable nextLink' id='submitPasswordForm' type='button'>Change Password</button>
                     </div>
                 </form>
             </div>
