@@ -19,6 +19,7 @@
 
     // Add JS
     $page->addJavaScript("<script src=\"./js/navBar.js\"></script>");
+    $page->addJavaScript("<script src=\"./js/notificationServer.js\"></script>");
 
     // Main content
     $page->addPageBodyItem("

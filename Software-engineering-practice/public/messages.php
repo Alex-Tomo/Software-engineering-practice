@@ -28,28 +28,97 @@
             <div id='messagesList' style='overflow-y: scroll; height:500px;'>");
 
     try {
+        // Find the other users name using the job id
+        // find your name using the user id
+
         $statement = $conn->prepare("
-                                SELECT user_id, user_fname, user_lname
-                                FROM sep_user_info");
+            SELECT sep_users.user_id
+            FROM sep_users
+            WHERE sep_users.user_email = '{$_SESSION['email']}'
+        ");
         $statement->execute();
-        $i = 1;
-        while($row = $statement->fetchObject()) {
-            $page->addPageBodyItem("<div class='message_users' id='{$row->user_id}' style='margin: 5px;'>
-                    <h1 style='margin-top: 5px;'>{$row->user_fname} {$row->user_lname}</h1>
-                    <p>Last Message</p>
-                    <p>Time</p>
-                    <div style='margin-bottom: 5px;'>Colour</div>
+        $result = $statement->fetchObject();
+        $userId = $result->user_id;
+
+        $statement = $conn->prepare("
+            SELECT sep_messages.user_id, sep_messages.other_user_id
+            FROM sep_messages
+            WHERE sep_messages.user_id = {$userId} OR sep_messages.other_user_id = {$userId}
+        ");
+        $statement->execute();
+        $chatIds = array();
+        while($result = $statement->fetchObject()) {
+            if(($result->user_id != $userId) && (!in_array($result->user_id, $chatIds))) {
+                array_push($chatIds, $result->user_id);
+            } else if(($result->other_user_id != $userId) && (!in_array($result->other_user_id, $chatIds))) {
+                array_push($chatIds, $result->other_user_id);
+            }
+        }
+
+        $name = array();
+        foreach($chatIds as $chatId) {
+            $statement = $conn->prepare("
+                SELECT sep_user_info.user_fname, sep_user_info.user_lname, sep_users.user_online
+                FROM sep_user_info JOIN sep_users ON sep_user_info.user_id = sep_users.user_id
+                WHERE sep_user_info.user_id = {$chatId}
+            ");
+            $statement->execute();
+            $result = $statement->fetchObject();
+            array_push($name, "{$result->user_fname} {$result->user_lname}");
+        }
+
+        $i = 0;
+        // userid is who sent the message
+        foreach ($chatIds as $chatId) {
+            $statement = $conn->prepare("
+                SELECT sep_messages.message, sep_messages.created_on, sep_messages.job_id, sep_messages.user_id
+                FROM sep_messages 
+                WHERE (sep_messages.user_id = {$chatId} OR sep_messages.other_user_id = {$chatId})
+                GROUP BY sep_messages.message_id
+                ORDER BY sep_messages.created_on DESC
+            ");
+            $statement->execute();
+            while ($row = $statement->fetchObject()) {
+                $statement = $conn->prepare("
+                    SELECT job_title FROM sep_available_jobs WHERE job_id = {$row->job_id}
+                ");
+                $statement->execute();
+                $r = $statement->fetchObject();
+
+                $page->addPageBodyItem("<div class='message_users' id='{$row->job_id}' name='$chatId' style='margin: 5px;'>
+                    <h1 style='margin-top: 5px;'>{$name[$i]}<i>- {$r->job_title} position</i></h1><div id='onlineStatusListPage' style='margin-bottom: 5px;'>");
+                if ($result->user_online == true) {
+                    $page->addPageBodyItem("Online");
+                } else {
+                    $page->addPageBodyItem("Offline");
+                }
+                $page->addPageBodyItem("</div>");
+
+                if($userId == $row->user_id) {
+                    $page->addPageBodyItem("<p>You: {$row->message}</p>");
+                } else {
+                    $page->addPageBodyItem("<p>{$result->user_fname}: {$row->message}</p>");
+                }
+                $page->addPageBodyItem("<p>{$row->created_on}</p>
                 </div><hr>");
+            }
+            $i++;
         }
     } catch(Exception $e) { logError($e); }
             $page->addPageBodyItem("</div>
             
-            <div id='messagesTitle' style='position: absolute; width: 100%; display: none;'><a id='backToMessageList' style='margin: 5px;'>--- back to chat</a><h1 id='messagingName' style='margin: 5px;'></h1><hr></div>
-            <div id='messages' style='overflow-y: scroll; height:500px; display: none; margin-top: 58px;'>
+            <div id='messagesTitle' style='background-color: #EEEEEE; position: absolute; width: 100%; display: none; padding-bottom: 10px'>
+                <a id='backToMessageList' style='margin: 5px; display: block'>--- back to chat</a>
+                <h1 id='messagingName' style='margin: 5px; display: inline; width: fit-content;'></h1>
+                <p id='onlineStatus' style='display: inline'></p>
+            </div>
+            <div id='messages' style='overflow-y: scroll; height:500px; display: none;'>
             </div>
             <div id='sendMessages' style='display: none;'>
                 <input id='msg' type='text' placeholder='Type Here...' style='padding: 10px; width: 80%;'>
                 <button id='send' name='' style='width: 20%;'>Send!</button>
+                <input id='jobId' style='display: none;'>
+                <input id='otherUserId' style='display: none;'>
             </div>
         </div>
         ");
@@ -57,6 +126,10 @@
     $page->addPageBodyItem("
             <script>
                 $(document).ready(() => {
+                    window.onresize = () => {
+                        document.getElementById('messages').style.marginTop = document.getElementById('messagesTitle').offsetHeight + 'px';
+                    }
+                    
                     // Create a new WebSocket.
                     let socket  = new WebSocket('ws://127.0.0.1:3001');
                     
@@ -65,21 +138,27 @@
                         
                             let email = '{$_SESSION['email']}';
                             let msg = document.getElementById('msg').value;       
-                            let target_id = document.getElementById('send').getAttribute('name');
+                            let jobId = document.getElementById('jobId').getAttribute('name');
+                            let otherUserId = document.getElementById('otherUserId').getAttribute('name');
+                            
+                            console.log(jobId);
+                            console.log(otherUserId);
                             
                             let data = {
                                 email: email, // for the users id
-                                target_id: target_id, // for the other users id
-                                msg: msg // the actual message
-                                
+                                msg: msg, // the actual message
+                                jobId: jobId,
+                                otherUserId: otherUserId
                             }
                             
                             document.getElementById('msg').value = '';
                             
+                            console.log(data);
+                            
                             socket.send(JSON.stringify(data));                   
                         }
                     }); 
-                    
+                                        
                     socket.onmessage = (e) => {
                         let data = JSON.parse(e.data);
                         
@@ -96,11 +175,11 @@
                             p.style.display = 'block';                            
                             p.style.wordWrap = 'break-word';                            
                             document.getElementById('messages').appendChild(p);
-                            document.getElementById('messages').scrollTo(p.getBoundingClientRect().x, p.getBoundingClientRect().y);
                             
                             let message = data.msg;
-                            let targetId = data.target_id;
-                            let userId = data.user_id;
+                            let otherUserId = data.otherUserId;
+                            let userId = data.userId;
+                            let jobId = data.jobId;
                             let datetime = data.datetime;
                             
                             $.ajax({
@@ -108,11 +187,13 @@
                                 method: 'POST',
                                 data: {
                                     message: message,
-                                    targetId: targetId,
+                                    otherUserId: otherUserId,
                                     userId: userId,
-                                    datetime: datetime
+                                    datetime: datetime,
+                                    jobId: jobId
                                 },
                                 success: (data) => {
+//                                    console.log(data);
                                     if(data.trim().includes('true')) {
                                         console.log('database updated!');
                                     }
@@ -133,9 +214,8 @@
                             p.style.display = 'block';
                             p.style.wordWrap = 'break-word';
                             document.getElementById('messages').appendChild(p);
-                            document.getElementById('messages').scrollTo(p.getBoundingClientRect().x, p.getBoundingClientRect().y);
                         }
-                                  
+                        document.getElementById('messages').scrollTop = document.getElementById('messages').scrollHeight;        
                     }
                 });
                 

@@ -1,7 +1,8 @@
 CREATE TABLE IF NOT EXISTS sep_users (
     user_id int not null auto_increment unique primary key,
     user_email varchar(128) not null unique,
-    user_password varchar(128) not null
+    user_password varchar(128) not null,
+    user_online boolean not null default false
 );
 
 -- $2y$10$4XsPbKCgqTNKMg0EIRlt4efWmOjx9zLLw8G6jRgJBcjlRHzLVP3TG == password

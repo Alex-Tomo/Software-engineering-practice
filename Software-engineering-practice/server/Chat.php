@@ -26,8 +26,9 @@ class Chat implements MessageComponentInterface {
 
         $data = json_decode($msg, true);
         // $data['email']; <- use to get the users id
-        // $data['target_id']; <- the user being messaged
+        // $data['jobId']; <- the user being messaged
         // $data['msg']; <- the message itself
+        // $data['otherUserId']; <- the message itself
 
         $result = $databaseConnection->query("
             SELECT user_fname, user_lname, sep_user_info.user_id FROM sep_user_info
@@ -36,16 +37,17 @@ class Chat implements MessageComponentInterface {
         ");
         $name = $result->fetchObject();
 
-        $d['user_id'] = $name->user_id;
-        $d['target_id'] = $data['target_id'];
-        $d['msg'] = $data['msg'];
+        $d['userId'] = $name->user_id; // emma
+        $d['otherUserId'] = $data['otherUserId'];
+        $d['jobId'] = $data['jobId'];
+        $d['msg'] = $data['msg']; // alex
         $d['datetime'] = date('Y-m-d H:i:s');
 
         foreach($this->clients as $client) {
             if($from == $client) {
                 $d['from'] = 'You';
             } else {
-                $d['from'] = "{$name->user_fname} {$name->user_lname}";
+                $d['from'] = "{$name->user_fname}";
             }
             $client->send(json_encode($d));
         }

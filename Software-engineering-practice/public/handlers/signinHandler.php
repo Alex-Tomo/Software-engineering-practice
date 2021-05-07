@@ -45,6 +45,9 @@
                 $page = new pageTemplate('Sign In');
                 $page->setSession('email', $values['email']);
                 $page->setSession('loggedin', true);
+                $statement = $connection->prepare(
+                    "UPDATE sep_users SET user_online = true WHERE user_email = '{$_SESSION['email']}'");
+                $statement->execute();
             } else {
                 array_push($errors, "<p style='color: red;'>Incorrect email or password</p>");
             }

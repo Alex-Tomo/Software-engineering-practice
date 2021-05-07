@@ -23,8 +23,10 @@
     $page->addJavaScript("<script src=\"./js/navBar.js\"></script>");
     $page->addJavaScript("<script src=\"./js/myJobs.js\"></script>");
     $page->addJavaScript("<script src=\"./js/selectPostJobsList.js\"></script>");
+    $page->addJavaScript("<script src=\"./js/notificationServer.js\"></script>");
 
-    $page->addPageBodyItem("
+
+$page->addPageBodyItem("
     <div class='pageContainer'>
         <h1 id='userJobHeader'>My Job(s)</h1>
         <div id='resultContainer'>

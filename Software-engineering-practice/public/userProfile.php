@@ -22,8 +22,10 @@
     $page->addJavaScript("<script src=\"./js/editProfile.js\"></script>");
     $page->addJavaScript("<script src=\"./js/selectJobsList.js\"></script>");
     $page->addJavaScript("<script src=\"./js/changePasswordForm.js\"></script>");
+    $page->addJavaScript("<script src=\"./js/notificationServer.js\"></script>");
 
-    // Get users details
+
+// Get users details
     list($user, $chosenJobsCode, $chosenJobsName) = getUserDetails($conn, $_SESSION['email']);
     // Dynamically include gender details
     $gendersValue = ['Select', 'Male', 'Female', 'Prefer not to say'];

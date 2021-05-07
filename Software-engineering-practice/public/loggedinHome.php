@@ -24,6 +24,7 @@
     $page->addJavaScript("<script src=\"./js/navBar.js\"></script>");
     $page->addJavaScript("<script src=\"./js/popupForm.js\"></script>");
     $page->addJavaScript("<script src=\"./js/selectJobsList.js\"></script>");
+    $page->addJavaScript("<script src=\"./js/notificationServer.js\"></script>");
 
     // Main content
     $page->addPageBodyItem("

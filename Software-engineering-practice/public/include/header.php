@@ -20,6 +20,11 @@ function getHeader() {
     include_once $path;
 
     $header = "<header>";
+
+    if(isset($_SESSION['email'])) {
+        $header .= "<input type='text' id='usersEmailAddress' name='{$_SESSION['email']}' style='display: none;'>";
+    }
+
     // Desktop Navbar
     $header .= "<div id='desktop_container'>
             <h1 class='clickable' onclick='openPage(`home.php`)'>skip</h1><h1 class='clickable' id='logoText2' onclick='openPage(`home.php`)'>CV</h1>
@@ -49,7 +54,65 @@ function getHeader() {
                                  </div>
                                  <ul>
                                     <a class='links clickable' onclick='openPage(`messages.php`)'><img class='navIcon' src='assets/mail.svg'></a>
-                                    <a class='links clickable' onclick='openPage(`#`)'><img class='navIcon' src='assets/bell.svg'></a>
+                                    <a class='links clickable'>";
+
+$statement = $conn->prepare("
+    SELECT sep_notifications.notification_message, notification_read, sep_notifications.sent_on, sep_available_jobs.job_title, sep_user_info.user_fname, sep_user_info.user_lname
+    FROM sep_notifications JOIN sep_available_jobs
+    ON sep_notifications.job_id = sep_available_jobs.job_id
+    JOIN sep_users
+    ON sep_available_jobs.user_id = sep_users.user_id
+    JOIN sep_user_info
+    ON sep_user_info.user_id = sep_notifications.user_id
+    WHERE sep_users.user_email = '{$_SESSION['email']}'
+    GROUP BY sep_notifications.job_id, sep_notifications.user_id
+    ORDER BY sep_notifications.sent_on DESC
+    LIMIT 5  
+");
+$statement->execute();
+$j = 0;
+$h = '';
+if($statement->rowCount() > 0) {
+    while ($result = $statement->fetchObject()) {
+        if($result->notification_read == FALSE) {
+            $j++;
+        }
+        $message = str_split($result->notification_message);
+        $shortDesc = '';
+        for ($i = 0; $i < sizeof($message); $i++) {
+            if ($i <= 50) {
+                $shortDesc .= $message[$i];
+            } else if ($i > 50) {
+                $shortDesc .= '...';
+                break;
+            }
+        }
+
+        $h .= "<p style='padding:10px;'>{$result->user_fname} {$result->user_lname} sent you a message regarding '{$result->job_title}'<br>{$shortDesc}<br>{$result->sent_on}</p><hr>";
+    }
+    if($j > 0) {
+        $header .= "<p id='numberOfNotifications' style='padding: 2.5px; font-size: 8px; border-radius: 10px; text-align: center; float: right; background-color: #FF0000; margin-top: 10px;'>{$j}</p>
+                        <img class='navIcon' id='notifications' src='assets/bell-red.svg'>
+                        <div id='notificationsDiv' style='position: absolute; display: none; background-color: #017EFC; min-width: 190px;'>";
+        $header .= $h;
+    } else {
+        $header .= "<p id='numberOfNotifications' style='padding: 2.5px; font-size: 8px; border-radius: 10px; text-align: center; float: right; background-color: #FF0000; margin-top: 10px; display:none;'></p>
+                <img class='navIcon' id='notifications' src='assets/bell.svg'>
+                <div id='notificationsDiv' style='position: absolute; display: none; background-color: #017EFC; min-width: 190px;'>";
+        $header .= $h;
+    }
+
+} else {
+    $header .= "<p id='numberOfNotifications' style='padding: 2.5px; font-size: 8px; border-radius: 10px; text-align: center; float: right; background-color: #FF0000; margin-top: 10px; display:none;'></p>
+                <img class='navIcon' id='notifications' src='assets/bell.svg'>
+                <div id='notificationsDiv' style='position: absolute; display: none; background-color: #017EFC; min-width: 190px;'>";
+
+    $header .= "<p id='noNotifications' style='padding:10px;'>No notifications</p>";
+}
+
+
+                                        $header .= "</div>
+                                        </a>
                                     <li><a class='links clickable' onclick='openPage(`postJob.php`)'>Post a Job</a></li>
                                     </ul>";}
     $header .= "</nav>

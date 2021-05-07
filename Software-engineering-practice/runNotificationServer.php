@@ -7,15 +7,14 @@ use MyApp\Chat;
 
 require dirname( __FILE__ ) . '/vendor/autoload.php';
 
-$server = IoServer::factory(
+$notificationServer = IoServer::factory(
     new HttpServer(
         new WsServer(
-            new Chat()
+            new \MyApp\Notification()
         )
     ),
-    3001,
+    3002,
     '127.0.0.1'
 );
 
-$server->run();
-
+$notificationServer->run();

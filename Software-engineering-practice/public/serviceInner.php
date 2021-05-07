@@ -27,8 +27,8 @@
 
     // Add JS
     $page->addJavaScript("<script src=\"./js/navBar.js\"></script>");
+    $page->addJavaScript("<script src=\"./js/notificationServer.js\"></script>");
     $page->addJavaScript("<script src=\"./js/enquireForm.js\"></script>");
-
 
 // Adds the current jobId to the recentlyViewed session
 if(!isset($_SESSION['recentlyViewed'])) {
@@ -52,6 +52,8 @@ if(!isset($_SESSION['recentlyViewed'])) {
 
 // Main content
     $page->addPageBodyItem("
+    <input type='text' id='jobId' name='{$jobId}' style='display: none;'>
+    <input type='text' id='userEmail' name='{$_SESSION['email']}' style='display: none;'>
     <div class='pageContainer'>
         <a id='serviceBack' class='back clickable' onclick='openPage(`loggedinHome.php`)'>< Back to list</a>
         <div id='resultContainer'>
