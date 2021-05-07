@@ -10,7 +10,7 @@
     // Initial Variables, get database connection, get page template class
     // Get the id of the job being displayed
     $conn = getConnection();
-    $page = new pageTemplate('Logged In Home');
+    $page = new pageTemplate('Service Inner');
     $jobId = $_REQUEST['id'];
 
     // If user is not logged in, redirect to signinpage
@@ -52,13 +52,12 @@ if(!isset($_SESSION['recentlyViewed'])) {
 
 // Main content
     $page->addPageBodyItem("
-    <input type='text' id='jobId' name='{$jobId}' style='display: none;'>
-    <input type='text' id='userEmail' name='{$_SESSION['email']}' style='display: none;'>
-    <div class='pageContainer'>
-        <a id='serviceBack' class='back clickable' onclick='openPage(`loggedinHome.php`)'>< Back to list</a>
-        <div id='resultContainer'>
-            <div id='serviceResult' class='resultChild'>");
-
+        <input type='text' id='jobId' name='{$jobId}' style='display: none;'>
+        <input type='text' id='userEmail' name='{$_SESSION['email']}' style='display: none;'>
+        <div class='pageContainer'>
+            <a id='serviceBack' class='back clickable' onclick='openPage(`loggedinHome.php`)'>< Back to list</a>
+            <div id='resultContainer'>
+                <div id='serviceResult' class='resultChild'>");
 
 // Get the details of the current jobId
 $jobs = getJobDetails($conn, $jobId);
@@ -98,7 +97,7 @@ for ($i = 0; $i < 5; $i++) {
     //Enquire form popup
         $page->addPageBodyItem("
             <div class='popup' id='popup-1' style='display: none;'>
-                <div class='overlay'></div>
+                <div id='overlay-1' class='overlay clickable'></div>
                     <form class='popupForm' method='post' action='message.php'>
                         <div id='tab1'>
                             <h2>Enquire Form</h2>
@@ -114,7 +113,7 @@ for ($i = 0; $i < 5; $i++) {
     //Refer a friend popup
         $page->addPageBodyItem("
             <div class='popup' id='popup-2' style='display: none;'>
-                <div class='overlay'></div>        
+                <div id='overlay-2' class='overlay clickable'></div>        
                     <form class='popupForm' method='post' action='message.php'>
                         <div id='tab1'>
                             <h2>Refer a Friend</h2>

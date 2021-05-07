@@ -28,6 +28,12 @@ window.onload = () => {
         event.preventDefault();
     });
 
+    let closeForm = document.getElementById('overlay');
+    closeForm.addEventListener('click', (event) => {
+        document.getElementById('popup-3').style.display = 'none';
+        event.preventDefault();
+    });
+
 }
 
 const showEditJobDetails = (jobId) => {

@@ -1,28 +1,28 @@
 <?php
 
-    // Requires
-    require('../pageTemplate.php');
-    require('../db_connector.php');
-    require('../database_functions.php');
+// Requires
+require('../pageTemplate.php');
+require('../db_connector.php');
+require('../database_functions.php');
 
-    // If the user is not logged in, redirect the user to the homepage
-    if(!$_SESSION['loggedin']) { header('Location: signin.php'); }
+// If the user is not logged in, redirect the user to the homepage
+if(!$_SESSION['loggedin']) { header('Location: signin.php'); }
 
-    // Initial variables, get database connection, get page template class
-    $conn = getConnection();
-    $page = new pageTemplate('Home');
+// Initial variables, get database connection, get page template class
+$conn = getConnection();
+$page = new pageTemplate('Search');
 
-    // Add CSS
-    $page->addCSS("<link rel=\"stylesheet\" href=\"./css/styling.css\">");
-    $page->addCSS("<link rel=\"stylesheet\" href=\"./css/footerStyling.css\">");
-    $page->addCSS("<link rel=\"stylesheet\" href=\"./css/headerStyling.css\">");
+// Add CSS
+$page->addCSS("<link rel=\"stylesheet\" href=\"./css/styling.css\">");
+$page->addCSS("<link rel=\"stylesheet\" href=\"./css/footerStyling.css\">");
+$page->addCSS("<link rel=\"stylesheet\" href=\"./css/headerStyling.css\">");
 
-    // Add JS
-    $page->addJavaScript("<script src=\"./js/navBar.js\"></script>");
-    $page->addJavaScript("<script src=\"./js/notificationServer.js\"></script>");
+// Add JS
+$page->addJavaScript("<script src=\"./js/navBar.js\"></script>");
+$page->addJavaScript("<script src=\"./js/notificationServer.js\"></script>");
 
-    // Main content
-    $page->addPageBodyItem("
+// Main content
+$page->addPageBodyItem("
     <div class='pageContainer'>
     <div id='refineContainer'>
         <form id='searchForm' method='get' action='search.php'>
@@ -42,7 +42,7 @@ for($jobIndex = 0; $jobIndex < sizeof($jobCodes); $jobIndex++) {
     $page->addPageBodyItem("<option id='{$jobNames[$jobIndex]}' name='{$jobCodes[$jobIndex]}'>{$jobNames[$jobIndex]}</option>");
 }
 
-                $page->addPageBodyItem("
+$page->addPageBodyItem("
                 </select>
             </div>
         <button type='submit' class='clickable'><i id='magGlass' class='fa fa-search'></i>Search</button>
@@ -103,19 +103,15 @@ if($jobInfo != null) {
     } // End of while loop
 }
 
-    if($items == 0) {
-        $page->addPageBodyItem("<p>No Jobs to Show</p>");
-    }
+if($items == 0) {
+    $page->addPageBodyItem("<p>No Jobs to Show</p>");
+}
 
 
-    $page->addPageBodyItem("
+$page->addPageBodyItem("
     </div>
 </div>");
 
-    $page->displayPage();
+$page->displayPage();
 
 ?>
-
-<!--    <img src='assets/appStore.svg' alt='App Store'>-->
-<!--    <img src='assets/googlePlay.svg' alt='App Store'>-->
-
