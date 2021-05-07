@@ -1,58 +1,58 @@
 window.onload = () => {
-
-    // TODO change the intervals to use websockets (on new user update other users)
-
+    
     let interval;
     let intervalListPage;
 
-    const checkUserStatus = () => {
-        let target_id = document.getElementById('otherUserId').getAttribute('name');
+    const checkUserStatus = (index) => {
+        let chat_users = document.getElementsByClassName('message_users');
 
         $.ajax({
             url: './handlers/checkUserOnline.php',
             method: 'POST',
             data: {
-                target_id: target_id
+                target_id: chat_users[index].getAttribute('name')
             },
             success: (data) => {
-                if(data.trim().includes('online') && (document.getElementById('onlineStatus').innerText !== 'Online')) {
+                if (data.trim().includes('online')) {
                     document.getElementById('onlineStatus').innerText = 'Online';
-                } else if(!data.trim().includes('online') && (document.getElementById('onlineStatus').innerText !== 'Offline')) {
+                } else if (!data.trim().includes('online')) {
                     document.getElementById('onlineStatus').innerText = 'Offline';
                 }
             }
         });
-    };
-
-    const checkUserStatusListPage = () => {
-        let users = document.getElementsByClassName('message_users');
-        for(let i = 0; i < users.length; i++) {
-            $.ajax({
-                url: './handlers/checkUserOnline.php',
-                method: 'POST',
-                data: {
-                    target_id: users[i].getAttribute('name')
-                },
-                success: (data) => {
-                    if (data.trim().includes('online') && (document.getElementById('onlineStatusListPage').innerText !== 'Online')) {
-                        document.getElementById('onlineStatusListPage').innerText = 'Online';
-                    } else if (!data.trim().includes('online') && (document.getElementById('onlineStatusListPage').innerText !== 'Offline')) {
-                        document.getElementById('onlineStatusListPage').innerText = 'Offline';
-                    }
-                }
-            });
-        }
     }
 
-    checkUserStatusListPage();
-    intervalListPage = setInterval(() => {
-        checkUserStatusListPage();
-    }, 1000);
+    const checkUserStatusListPage = (index) => {
+        let users = document.getElementsByClassName('message_users');
+
+        $.ajax({
+            url: './handlers/checkUserOnline.php',
+            method: 'POST',
+            data: {
+                target_id: users[index].getAttribute('name')
+            },
+            success: (data) => {
+
+                let chatUsers = users[index].getElementsByTagName('div')[0];
+
+                if (data.trim().includes('online')) {
+                    chatUsers.innerText = 'Online';
+                } else if (!data.trim().includes('online')) {
+                    chatUsers.innerText = 'Offline';
+                }
+            }
+        });
+    }
 
     let messageUsers = document.getElementsByClassName('message_users');
     let email = document.getElementById('email').value;
 
     for(let i = 0; i < messageUsers.length; i++) {
+
+        checkUserStatusListPage(i);
+        intervalListPage = setInterval(() => {
+            checkUserStatusListPage(i);
+        }, 3000);
 
         //working
         $.ajax({
@@ -77,6 +77,13 @@ window.onload = () => {
 
         messageUsers[i].addEventListener('click', () => {
             clearInterval(intervalListPage);
+
+            checkUserStatus(i);
+
+            let interval = setInterval(() => {
+                checkUserStatus(i);
+            }, 3000);
+
             document.getElementById('messagesTitle').setAttribute('name', messageUsers[i].getAttribute('name'));
             document.getElementById('messagesList').style.display = 'none';
             document.getElementById('messagesTitle').style.display = 'block';
@@ -139,11 +146,6 @@ window.onload = () => {
                         }
                     }
                     document.getElementById('messages').scrollTop = document.getElementById('messages').scrollHeight;
-                    checkUserStatus();
-
-                    let interval = setInterval(() => {
-                        checkUserStatus();
-                    }, 1000);
                 }
             });
         });
@@ -154,7 +156,6 @@ window.onload = () => {
     backToMessageList.addEventListener('click', (e) => {
         e.preventDefault();
         clearInterval(interval);
-        intervalListPage;
 
         while(document.getElementById('messages').lastElementChild) {
             document.getElementById('messages').removeChild(document.getElementById('messages').lastElementChild);

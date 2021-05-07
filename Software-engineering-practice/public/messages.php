@@ -56,6 +56,8 @@
         }
 
         $name = array();
+        $fullName = array();
+        $online = array();
         foreach($chatIds as $chatId) {
             $statement = $conn->prepare("
                 SELECT sep_user_info.user_fname, sep_user_info.user_lname, sep_users.user_online
@@ -64,7 +66,10 @@
             ");
             $statement->execute();
             $result = $statement->fetchObject();
-            array_push($name, "{$result->user_fname} {$result->user_lname}");
+            array_push($name, "{$result->user_fname}");
+            array_push($fullName, "{$result->user_fname} {$result->user_lname}");
+            array_push($online, $result->user_online);
+
         }
 
         $i = 0;
@@ -73,7 +78,8 @@
             $statement = $conn->prepare("
                 SELECT sep_messages.message, sep_messages.created_on, sep_messages.job_id, sep_messages.user_id
                 FROM sep_messages 
-                WHERE (sep_messages.user_id = {$chatId} OR sep_messages.other_user_id = {$chatId})
+                WHERE (sep_messages.user_id = {$chatId} AND sep_messages.other_user_id = {$userId})
+                    OR (sep_messages.other_user_id = {$chatId} AND sep_messages.user_id = {$userId})
                 GROUP BY sep_messages.message_id
                 ORDER BY sep_messages.created_on DESC
             ");
@@ -86,8 +92,8 @@
                 $r = $statement->fetchObject();
 
                 $page->addPageBodyItem("<div class='message_users' id='{$row->job_id}' name='$chatId' style='margin: 5px;'>
-                    <h1 style='margin-top: 5px;'>{$name[$i]}<i>- {$r->job_title} position</i></h1><div id='onlineStatusListPage' style='margin-bottom: 5px;'>");
-                if ($result->user_online == true) {
+                    <h1 style='margin-top: 5px;'>{$fullName[$i]}<i>- {$r->job_title} position</i></h1><div id='onlineStatusListPage' style='margin-bottom: 5px;'>");
+                if ($online[$i] == true) {
                     $page->addPageBodyItem("Online");
                 } else {
                     $page->addPageBodyItem("Offline");
@@ -97,7 +103,7 @@
                 if($userId == $row->user_id) {
                     $page->addPageBodyItem("<p>You: {$row->message}</p>");
                 } else {
-                    $page->addPageBodyItem("<p>{$result->user_fname}: {$row->message}</p>");
+                    $page->addPageBodyItem("<p>{$name[$i]}: {$row->message}</p>");
                 }
                 $page->addPageBodyItem("<p>{$row->created_on}</p>
                 </div><hr>");
