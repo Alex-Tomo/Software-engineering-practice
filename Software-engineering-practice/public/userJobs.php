@@ -66,7 +66,7 @@ foreach($jobsArray as $job) {
                 <img src='assets/job_images/{$job['jobImage']}'>
             </div>
             <div class='resultText'>
-                <img class='personIcon' src='assets/person.svg'>
+                <img class='personIcon' src='assets/{$job['userImage']}' style='border-radius: 25px'>
                 <h2>{$job['userFname']} {$job['userLname']}</h2>
                 <h3>{$job['jobName']}</h3>
                 <p>{$job['jobDesc']}</p>");

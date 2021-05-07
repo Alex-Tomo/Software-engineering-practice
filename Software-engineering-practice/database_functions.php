@@ -82,6 +82,7 @@ function getRecommendedJobs($connection, $choicesArray) {
               SELECT sep_user_info.user_id, 
                      sep_user_info.user_fname, 
                      sep_user_info.user_lname, 
+                     sep_user_info.user_image, 
                      sep_available_jobs.job_id,
                      sep_available_jobs.job_title,
                      sep_available_jobs.job_desc,
@@ -113,6 +114,11 @@ function getRecommendedJobs($connection, $choicesArray) {
                 $arr[$index]['jobPrice'] = sanitizeData($row->job_price);
                 $arr[$index]['jobDate'] = sanitizeData($row->job_date);
                 $arr[$index]['jobImage'] = sanitizeData($row->job_image);
+                if($row->user_image != null) {
+                    $arr[$index]['userImage'] = 'user_images/' . sanitizeData($row->user_image);
+                } else {
+                    $arr[$index]['userImage'] = 'person.svg';
+                }
                 $index++;
             }
         }
@@ -157,6 +163,7 @@ function getRecentJobs($connection) {
                 SELECT sep_user_info.user_id, 
                     sep_user_info.user_fname, 
                     sep_user_info.user_lname,
+                    sep_user_info.user_image,
                     sep_available_jobs.job_id,
                     sep_available_jobs.job_title,
                     sep_available_jobs.job_desc,
@@ -183,6 +190,11 @@ function getRecentJobs($connection) {
                 $arr[$index]['jobPrice'] = sanitizeData($row->job_price);
                 $arr[$index]['jobDate'] = sanitizeData($row->job_date);
                 $arr[$index]['jobImage'] = sanitizeData($row->job_image);
+                if($row->user_image != null) {
+                    $arr[$index]['userImage'] = 'user_images/' . sanitizeData($row->user_image);
+                } else {
+                    $arr[$index]['userImage'] = 'person.svg';
+                }
                 $index++;
             }
         }
@@ -252,6 +264,7 @@ function getJobDetails($connection, $jobId) {
             SELECT sep_user_info.user_id, 
                 sep_user_info.user_fname, 
                 sep_user_info.user_lname,
+                sep_user_info.user_image,
                 sep_available_jobs.job_id,
                 sep_available_jobs.job_title,
                 sep_available_jobs.job_desc,
@@ -274,6 +287,11 @@ function getJobDetails($connection, $jobId) {
             $arr[$index]['jobPrice'] = sanitizeData($row->job_price);
             $arr[$index]['jobDate'] = sanitizeData($row->job_date);
             $arr[$index]['jobImage'] = sanitizeData($row->job_image);
+            if($row->user_image != null) {
+                $arr[$index]['userImage'] = 'user_images/' . sanitizeData($row->user_image);
+            } else {
+                $arr[$index]['userImage'] = 'person.svg';
+            }
             $index++;
         }
     }
@@ -294,6 +312,7 @@ function getUsersJobs($connection, $email)
                         SELECT sep_user_info.user_id, 
                             sep_user_info.user_fname, 
                             sep_user_info.user_lname,
+                            sep_user_info.user_image,
                             sep_available_jobs.job_id,
                             sep_available_jobs.job_title,
                             sep_available_jobs.job_desc,
@@ -318,6 +337,11 @@ function getUsersJobs($connection, $email)
             $arr[$index]['jobPrice'] = sanitizeData($row->job_price);
             $arr[$index]['jobDate'] = sanitizeData($row->job_date);
             $arr[$index]['jobImage'] = sanitizeData($row->job_image);
+            if($row->user_image != null) {
+                $arr[$index]['userImage'] = 'user_images/' . sanitizeData($row->user_image);
+            } else {
+                $arr[$index]['userImage'] = 'person.svg';
+            }
             $index++;
         }
     }
@@ -414,6 +438,7 @@ function searchJobInfo($connection, $categoriesCodes, $keyword) {
     $query = "SELECT sep_user_info.user_id, 
             sep_user_info.user_fname, 
             sep_user_info.user_lname, 
+            sep_user_info.user_image, 
             sep_available_jobs.job_id,
             sep_available_jobs.job_title,
             sep_available_jobs.job_desc,
@@ -459,6 +484,11 @@ function searchJobInfo($connection, $categoriesCodes, $keyword) {
             $arr[$index]['jobPrice'] = sanitizeData($row->job_price);
             $arr[$index]['jobDate'] = sanitizeData($row->job_date);
             $arr[$index]['jobImage'] = sanitizeData($row->job_image);
+            if($row->user_image != null) {
+                $arr[$index]['userImage'] = 'user_images/' . sanitizeData($row->user_image);
+            } else {
+                $arr[$index]['userImage'] = 'person.svg';
+            }
             $index++;
         }
         return $arr;

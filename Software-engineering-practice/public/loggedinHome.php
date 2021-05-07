@@ -139,7 +139,7 @@ try{
                             <img src='assets/job_images/{$recommender['jobImage']}'>
                         </div>
                         <div class='resultText'>
-                            <img class='personIcon' src='assets/person.svg'>
+                            <img class='personIcon' src='assets/{$recommender['userImage']}' style='border-radius: 25px'>
                             <h2>{$recommender['userFname']} {$recommender['userLname']}</h2>
                             <h3>{$recommender['jobTitle']}</h3>
                             <p>{$recommender['jobDesc']}</p>");
@@ -181,7 +181,7 @@ foreach($recents as $recent) {
                         <img src='assets/job_images/{$recent['jobImage']}'>
                     </div>
                     <div class='resultText'>
-                        <img class='personIcon' src='assets/person.svg'>
+                        <img class='personIcon' src='assets/{$recent['userImage']}' style='border-radius: 25px'>
                         <h2>{$recent['userFname']} {$recent['userLname']}</h2>
                         <h3>{$recent['jobTitle']}</h3>
                         <p>{$recent['jobDesc']}</p>");

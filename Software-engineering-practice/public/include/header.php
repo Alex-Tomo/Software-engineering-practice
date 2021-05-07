@@ -25,30 +25,44 @@ function getHeader() {
     }
 
     // Desktop Navbar
+    $conn = getConnection();
 
-    if (!$_SESSION['loggedin']) {
-        $header .= "<div id='desktop_container'>
+
+        if (!$_SESSION['loggedin']) {
+            $header .= "<div id='desktop_container'>
             <h1 class='clickable' onclick='openPage(`home.php`)'>skip</h1><h1 class='clickable' id='logoText2' onclick='openPage(`home.php`)'>CV</h1>
                 <nav>
                     <button class='clickable' onclick='openPage(`register.php`)' id='signUp'>Sign Up</button >
                     <button class='clickable' onclick='openPage(`signin.php`)' id ='login'><a class='links'>Login</a ></button>";
-    } else {
-        $header .= "<div id='desktop_container'>
+        } else {
+            $header .= "<div id='desktop_container'>
             <h1 class='clickable' onclick='openPage(`loggedinHome.php`)'>skip</h1><h1 class='clickable' id='logoText2' onclick='openPage(`loggedinHome.php`)'>CV</h1>
                 <nav>
                     <div id='dropdown'>
                     <button id='dropbtn'>";
-        $conn = getConnection();
-        $sqlQuery = $conn->query("SELECT user_fname FROM sep_user_info 
+            $src = '';
+            try {
+                $sqlQuery = $conn->query("SELECT sep_user_info.user_fname, sep_user_info.user_image 
+                                  FROM sep_user_info 
                                   INNER JOIN sep_users ON sep_user_info.user_id = sep_users.user_id 
-                                  WHERE user_email = '".$_SESSION['email']."'");
-        if($sqlQuery){
-            while($name = $sqlQuery->fetchObject()) {
-                $header .= "<div>Hi, {$name->user_fname} <i class='fa fa-caret-down'></i></div>";
+                                  WHERE user_email = '" . $_SESSION['email'] . "'");
+                if ($sqlQuery) {
+                    while ($name = $sqlQuery->fetchObject()) {
+                        $header .= "<div>Hi, {$name->user_fname} <i class='fa fa-caret-down'></i></div>";
+                        if ($name->user_image != null) {
+                            $src = "assets/user_images/{$name->user_image}";
+                        } else {
+                            $src = "assets/navPerson.svg";
+                        }
+                    }
+                }
+            } catch(Exception $e) {
+                $header .= "<div>Hi, there! <i class='fa fa-caret-down'></i></div>";
+                $src = "assets/navPerson.svg";
+                logError($e);
             }
-        }
-        $header .= "</button>
-                                    <img src='assets/navPerson.svg'>
+            $header .= "</button>
+                                    <img src='{$src}' style='border-radius: 25px'>
                                     <div id='dropdown_content'>
                                         <a class='links clickable' onclick='openPage(`userProfile.php`)'>My Profile</a>
                                         <a class='links clickable' onclick='openPage(`userJobs.php`)'>My Jobs</a>

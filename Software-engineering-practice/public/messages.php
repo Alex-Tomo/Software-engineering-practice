@@ -44,6 +44,7 @@
             SELECT sep_messages.user_id, sep_messages.other_user_id
             FROM sep_messages
             WHERE sep_messages.user_id = {$userId} OR sep_messages.other_user_id = {$userId}
+            ORDER BY sep_messages.created_on DESC
         ");
         $statement->execute();
         $chatIds = array();
@@ -58,18 +59,23 @@
         $name = array();
         $fullName = array();
         $online = array();
+        $userImages = array();
         foreach($chatIds as $chatId) {
             $statement = $conn->prepare("
-                SELECT sep_user_info.user_fname, sep_user_info.user_lname, sep_users.user_online
+                SELECT sep_user_info.user_fname, sep_user_info.user_lname, sep_users.user_online, sep_user_info.user_image
                 FROM sep_user_info JOIN sep_users ON sep_user_info.user_id = sep_users.user_id
-                WHERE sep_user_info.user_id = {$chatId}
+                WHERE (sep_user_info.user_id = {$chatId})
             ");
             $statement->execute();
             $result = $statement->fetchObject();
             array_push($name, "{$result->user_fname}");
             array_push($fullName, "{$result->user_fname} {$result->user_lname}");
             array_push($online, $result->user_online);
-
+            if($result->user_image != null) {
+                array_push($userImages, 'user_images/' . $result->user_image);
+            } else {
+                array_push($userImages, 'person.svg');
+            }
         }
 
         $i = 0;
@@ -91,21 +97,25 @@
                 $statement->execute();
                 $r = $statement->fetchObject();
 
-                $page->addPageBodyItem("<div class='message_users' id='{$row->job_id}' name='$chatId' style='margin: 5px;'>
-                    <h1 style='margin-top: 5px;'>{$fullName[$i]}<i>- {$r->job_title} position</i></h1><div id='onlineStatusListPage' style='margin-bottom: 5px;'>");
                 if ($online[$i] == true) {
-                    $page->addPageBodyItem("Online");
+                    $onlineColour = '#03AC13';
                 } else {
-                    $page->addPageBodyItem("Offline");
+                    $onlineColour = '#FF0000';
                 }
+
+                $page->addPageBodyItem("<div class='message_users' id='{$row->job_id}' name='$chatId' style='margin: 5px;'>
+                    <img class='personIcon' src='assets/{$userImages[$i]}' style='border-radius: 25px; float: left;'>
+                    <div style='position: absolute; background-color: {$onlineColour}; height: 10px; width: 10px; margin-top: 30px; margin-left: 30px; border-radius: 25px;'></div>
+                    <h1 style='padding-top: 8px; margin: 0;'>{$fullName[$i]}<i> - '{$r->job_title}' position</i></h1><br>
+                    <div id='onlineStatusListPage' style='margin-bottom: 5px;'>");
                 $page->addPageBodyItem("</div>");
 
                 if($userId == $row->user_id) {
-                    $page->addPageBodyItem("<p>You: {$row->message}</p>");
+                    $page->addPageBodyItem("<p style='display: inline;'>You: {$row->message}</p>");
                 } else {
-                    $page->addPageBodyItem("<p>{$name[$i]}: {$row->message}</p>");
+                    $page->addPageBodyItem("<p style='display: inline;'>{$name[$i]}: {$row->message}</p>");
                 }
-                $page->addPageBodyItem("<p>{$row->created_on}</p>
+                $page->addPageBodyItem("<p style='display: inline; float: right; margin: 0; font-size: smaller;'><i>{$row->created_on}</i></p>
                 </div><hr>");
             }
             $i++;
@@ -114,9 +124,10 @@
             $page->addPageBodyItem("</div>
             
             <div id='messagesTitle' style='background-color: #EEEEEE; position: absolute; width: 100%; display: none; padding-bottom: 10px'>
-                <a id='backToMessageList' style='margin: 5px; display: block'>--- back to chat</a>
-                <h1 id='messagingName' style='margin: 5px; display: inline; width: fit-content;'></h1>
-                <p id='onlineStatus' style='display: inline'></p>
+                <a id='backToMessageList' style='margin: 5px; display: block'>--- back to chat</a> 
+                <img class='personIcon' id='messagingImage' src='' style='border-radius: 25px; float: left; margin-left: 10px;'>
+                <div id='userOnline' style='position: absolute; background-color: {$onlineColour}; height: 10px; width: 10px; margin-top: 30px; margin-left: 38px; border-radius: 25px;'></div>
+                <h1 id='messagingName' style='margin: 5px; display: inline-block; width: fit-content; margin-top: 8px;'></h1>
             </div>
             <div id='messages' style='overflow-y: scroll; height:500px; display: none;'>
             </div>

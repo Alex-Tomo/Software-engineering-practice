@@ -13,11 +13,16 @@
     $messages = [];
 
     $statement = $conn->prepare("
-        SELECT user_fname, user_lname FROM sep_user_info WHERE user_id = {$otherUserId}
+        SELECT user_fname, user_lname, user_image FROM sep_user_info WHERE user_id = {$otherUserId}
     ");
     $statement->execute();
     $result = $statement->fetchObject();
     $targetUserName = "{$result->user_fname} {$result->user_lname}";
+    if($result->user_image != null) {
+        $targetUserImage = "assets/user_images/{$result->user_image}";
+    } else {
+        $targetUserImage = "assets/person.svg";
+    }
 
     $statement = $conn->prepare("
         SELECT user_id FROM sep_users WHERE user_email = '{$email}'
@@ -47,6 +52,6 @@
         $messages = null;
     }
 
-    echo json_encode(array($targetUserName, $messages));
+    echo json_encode(array($targetUserName, $targetUserImage, $messages));
 
 ?>

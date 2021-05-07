@@ -13,10 +13,11 @@ window.onload = () => {
                 target_id: chat_users[index].getAttribute('name')
             },
             success: (data) => {
+
                 if (data.trim().includes('online')) {
-                    document.getElementById('onlineStatus').innerText = 'Online';
+                    document.getElementById('messagesTitle').getElementsByTagName('div')[0].style.backgroundColor = '#03AC13';
                 } else if (!data.trim().includes('online')) {
-                    document.getElementById('onlineStatus').innerText = 'Offline';
+                    document.getElementById('messagesTitle').getElementsByTagName('div')[0].style.backgroundColor = '#FF0000';
                 }
             }
         });
@@ -36,9 +37,9 @@ window.onload = () => {
                 let chatUsers = users[index].getElementsByTagName('div')[0];
 
                 if (data.trim().includes('online')) {
-                    chatUsers.innerText = 'Online';
+                    chatUsers.style.backgroundColor = '#03AC13';
                 } else if (!data.trim().includes('online')) {
-                    chatUsers.innerText = 'Offline';
+                    chatUsers.style.backgroundColor = '#FF0000';
                 }
             }
         });
@@ -111,12 +112,13 @@ window.onload = () => {
                 success: (d) => {
                     let data = JSON.parse(d);
                     document.getElementById('messagingName').innerText = `${data[0]}`;
+                    document.getElementById('messagingImage').src = `${data[1]}`;
 
-                    for(let i = 0; i < data[1].length; i++) {
-                        if(data[1][i].userId !== otherUserId) {
+                    for(let i = 0; i < data[2].length; i++) {
+                        if(data[2][i].userId !== otherUserId) {
 
                             let p = document.createElement('div');
-                            p.innerHTML = '<b>You</b> - ' + data[1][i].messages + '<br><i style=\'float:right; font-size: xx-small; margin-top: 5px;\'>sent - ' + data[1][i].createdOn + '</i>';
+                            p.innerHTML = '<b>You</b> - ' + data[2][i].messages + '<br><i style=\'float:right; font-size: xx-small; margin-top: 5px;\'>sent - ' + data[2][i].createdOn + '</i>';
                             p.style.backgroundColor = '#DADADA';
                             p.style.width = '60%';
                             p.style.marginLeft = '10px';
@@ -131,7 +133,7 @@ window.onload = () => {
                         } else {
 
                             let p = document.createElement('div');
-                            p.innerHTML = '<b>' + data[0] + '</b> - ' + data[1][i].messages + '<br><i style=\'float: right; font-size: xx-small; margin-top: 5px;\'>recieved - '+ data[1][i].createdOn +'</i>';
+                            p.innerHTML = '<b>' + data[0] + '</b> - ' + data[2][i].messages + '<br><i style=\'float: right; font-size: xx-small; margin-top: 5px;\'>recieved - '+ data[2][i].createdOn +'</i>';
                             p.style.backgroundColor = '#4BA4FE';
                             p.style.width = '60%';
                             p.style.marginLeft = 'auto';
