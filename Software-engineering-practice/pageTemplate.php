@@ -62,19 +62,26 @@ class pageTemplate {
         array_push($this->bodyItem, $item);
     }
 
+    private function pageNotifications() {
+        include $this->includePath.'public/include/notifications.php';
+        return getNotifications();
+    }
+
+    private function pageFooter() {
+        include $this->includePath.'public/include/footer.php';
+        return getFooter();
+    }
+
     private function pageBody() {
         $this->body = $this->pageHeader();
         $this->body .= "<body>";
 
         foreach ($this->bodyItem as $item) { $this->body .= "\n".$item; }
 
-        $this->body .= "</body>";
+        $this->body .= $this->pageNotifications();
         $this->body .= $this->pageFooter();
+        $this->body .= "</body>";
         return $this->body;
-    }
-
-    private function pageFooter() {
-        return file_get_contents ($this->includePath.'public/include/footer.html');
     }
 
     public function addJavaScript($jsScriptTag) {
