@@ -7,10 +7,6 @@
     // Get the page template class
     $page = new pageTemplate('Home');
 
-    if($_SESSION['loggedin']) {
-        header('Location: loggedinHome.php');
-    }
-
     // Add CSS
     $page->addCSS("<link rel=\"stylesheet\" href=\"./css/styling.css\">");
     $page->addCSS("<link rel=\"stylesheet\" href=\"./css/footerStyling.css\">");
@@ -54,26 +50,7 @@
 
         <div id='container'>
             <div id='benefitsSec'>
-                <div id='text'>
-                    <h3>Easy to use</h3>
-                    <h4>Easily find a job or employees for your job</h4>
-                    <p>Startups, small companies and teams, hard workers and similar people. Better stories.</p>
-                </div>
-                    <img id='downIcons' src='assets/download_icons.png' alt='Download icons'>
-        
-                <div id='text2'>
-                    <h3>Completely free</h3>
-                    <h4>Hire people and work completely free of fees</h4>
-                    <p>Startups, small companies and teams, hard workers and similar people. Better stories.</p>
-                </div>
-                    <img id='clipCalc' src='assets/clip_calculating.png' alt='Clip calculating'>
-        
-                <div id='text3'>
-                    <h3>Communicate better</h3>
-                    <h4>Built for people in need of a job or employees</h4>
-                    <p id='bottomPara'>More and more people are searching how to spend their spare time meaningfully. This platform solves the problem.</p>
-                </div>
-                    <img id='clipDone' src='assets/clip_done.png' alt='Clip done'>
+                <iframe id='videoContainer' src='https://www.youtube.com/embed/1niK4K-Kwts' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>
             </div>
         
             <div id='swipeSecMob'>
