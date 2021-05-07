@@ -63,7 +63,7 @@ body{
 #mobileImg{
     width: 100%;
     height: auto;
-    margin-bottom: 0;
+    display: block;
 }
 
 #desktopImg{
@@ -92,7 +92,6 @@ body{
 
 #infoSec p{
     margin: 10px 0 35px 0;
-    font-weight: bold;
 }
 
 #startupLith{
@@ -108,53 +107,56 @@ body{
     background-color: white;
 }
 
-#benefitsSec{
-    background: white;
-    padding: 20px 30px 0 30px;
-    margin-bottom: 50px;
-}
-
-#benefitsSec h3{
-    color: #805DF6;
-    text-transform: uppercase;
-    text-align: center;
-    margin-bottom: 5px;
-    font-size: 1em;
-}
-
-#benefitsSec h4{
-    text-align: center;
-    margin-top: 0;
-    margin-bottom: 5px;
-    color: #017EFC;
-    font-size: 1.3em;
-}
-
-#benefitsSec p{
-    color: #191D20;
-    text-align: center;
-    margin-top: 0;
-    margin-bottom: 10px;
-    font-size: 0.85em;
-}
-
-#downIcons{
-    width: 80%;
-    height: auto;
+#videoContainer{
+    padding: 50px 0;
     display: block;
-    margin: 20px auto 20px auto;
+    margin-left: auto;
+    margin-right: auto;
+    width: 95%;
+    height: 300px;
 }
 
-#clipCalc{
-    width: 50%;
-    height: auto;
-    display: block;
-    margin: 20px auto 20px auto;
-}
+/*#benefitsSec h3{*/
+/*    color: #805DF6;*/
+/*    text-transform: uppercase;*/
+/*    text-align: center;*/
+/*    margin-bottom: 5px;*/
+/*    font-size: 1em;*/
+/*}*/
 
-#clipDone{
-    display: none;
-}
+/*#benefitsSec h4{*/
+/*    text-align: center;*/
+/*    margin-top: 0;*/
+/*    margin-bottom: 5px;*/
+/*    color: #017EFC;*/
+/*    font-size: 1.3em;*/
+/*}*/
+
+/*#benefitsSec p{*/
+/*    color: #191D20;*/
+/*    text-align: center;*/
+/*    margin-top: 0;*/
+/*    margin-bottom: 10px;*/
+/*    font-size: 0.85em;*/
+/*}*/
+
+/*#downIcons{*/
+/*    width: 80%;*/
+/*    height: auto;*/
+/*    display: block;*/
+/*    margin: 20px auto 20px auto;*/
+/*}*/
+
+/*#clipCalc{*/
+/*    width: 50%;*/
+/*    height: auto;*/
+/*    display: block;*/
+/*    margin: 20px auto 20px auto;*/
+/*}*/
+
+/*#clipDone{*/
+/*    display: none;*/
+/*}*/
 
 
 
@@ -311,8 +313,8 @@ q{
 
 
 
-/*Popup Form*/
-.popup .overlay {
+/*Logged in home popup form*/
+.overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -412,6 +414,17 @@ q{
     border-radius: 10px;
     border: 1px #828282 solid;
     outline: none;
+}
+
+.chosenJob {
+    background-color: #017EFC;
+    color: #FFFFFF;
+    font-size: small;
+    font-weight: normal;
+    width: fit-content;
+    padding: 10px;
+    margin: 2px 5px 2px 0;
+    border-radius: 5px;
 }
 
 
@@ -705,16 +718,17 @@ q{
 }
 
 .applyBtn{
+    display: block;
     text-align: center;
     background: #017EFC;
     padding: 10px;
-    width: 100%;
+    width: 45%;
     border: 1px solid #017EFC;
     border-radius: 5px;
     font-weight: bold;
     color: white;
     font-size: 1.2em;
-    margin-bottom: 10px;
+    margin: 30px auto;
 }
 
 #desc{
@@ -754,7 +768,6 @@ q{
 
 
 /* Added by Alex for Search page */
-
 .searchPageContainer {
     margin: 20px 15px;
 }
@@ -765,8 +778,13 @@ q{
     color: #017EFC;
 }
 
-/* Added by Alex My Profile page */
 
+
+
+
+
+
+/* Added by Alex My Profile page */
 #passwordTab label,input{
     display: block;
 }
@@ -799,6 +817,11 @@ q{
 
 
 /*User profile*/
+#userProfile{
+    text-align: center;
+    width: 100%;
+}
+
 .backLink{
     border: 2px solid #017EFC;
     background-color: white;
@@ -928,6 +951,8 @@ q{
 
 
 /* Edit jobs */
+
+
 #userJobHeader{
     text-align: center;
 }
@@ -935,20 +960,6 @@ q{
 #userJob{
     padding-bottom: 60px;
     height: 460px;
-}
-
-#updateJobForm {
-    padding: 15px;
-    position: relative;
-    top: 0;
-    background-color: white;
-    width: auto;
-    height: auto;
-    text-align: center;
-    box-sizing: border-box;
-    border-radius: 5px;
-    left: 0;
-    right: 0;
 }
 
 #updateJobForm input[type="text"] {
@@ -959,11 +970,17 @@ q{
     float: left;
     width: 100%;
     color: #017EFC;
+    margin: 10px 0;
 }
 
 #updateJobForm textarea {
     resize: none;
-    margin: 10px 0;
+    width: 97%;
+}
+
+#jobImage{
+    width: 100%;
+    margin: 10px auto;
 }
 
 #updateJobForm input[type="text"] ::-webkit-input-placeholder {
@@ -1011,13 +1028,17 @@ q{
         margin-bottom: 0;
     }
 
-    #benefitsSec{
-        padding: 30px 90px 700px 90px;
+    #videoContainer{
+        height: 400px;
     }
 
-    #benefitsSec p{
-        font-size: 0.85em;
-    }
+    /*#benefitsSec{*/
+    /*    padding: 30px 90px 700px 90px;*/
+    /*}*/
+
+    /*#benefitsSec p{*/
+    /*    font-size: 0.85em;*/
+    /*}*/
 
     #text{
         width: 50%;
@@ -1141,15 +1162,15 @@ q{
 }
 
 @media only screen and (min-width: 874px) {
-    #benefitsSec{
-        padding-bottom: 750px;
-    }
+    /*#benefitsSec{*/
+    /*    padding-bottom: 750px;*/
+    /*}*/
 }
 
 @media only screen and (min-width: 922px) {
-    #benefitsSec{
-        padding-bottom: 850px;
-    }
+    /*#benefitsSec{*/
+    /*    padding-bottom: 850px;*/
+    /*}*/
 
     #text{
         margin-bottom: 150px;
@@ -1226,14 +1247,19 @@ q{
         padding-right: 120px;
     }
 
-    #benefitsSec h4 {
-        font-size: 1.6em;
+    #videoContainer{
+        width: 70%;
+        height: 650px;
     }
 
-    #benefitsSec {
-        padding-left: 120px;
-        padding-right: 120px;
-    }
+    /*#benefitsSec h4 {*/
+    /*    font-size: 1.6em;*/
+    /*}*/
+
+    /*#benefitsSec {*/
+    /*    padding-left: 120px;*/
+    /*    padding-right: 120px;*/
+    /*}*/
 
     #swipeSecDes {
         display: block;
@@ -1345,9 +1371,9 @@ q{
         margin-bottom: 180px;
     }
 
-    #benefitsSec{
-        padding-bottom: 950px;
-    }
+    /*#benefitsSec{*/
+    /*    padding-bottom: 950px;*/
+    /*}*/
 }
 
 @media only screen and (min-width: 1200px) {
@@ -1378,11 +1404,11 @@ q{
         padding-right: 150px;
     }
 
-    #benefitsSec{
-        padding-left: 150px;
-        padding-right: 150px;
-        padding-bottom: 950px;
-    }
+    /*#benefitsSec{*/
+    /*    padding-left: 150px;*/
+    /*    padding-right: 150px;*/
+    /*    padding-bottom: 950px;*/
+    /*}*/
 }
 
 @media only screen and (min-width: 1222px) {
@@ -1401,9 +1427,9 @@ q{
         width: 50%;
     }
 
-    #benefitsSec{
-        padding-bottom: 1150px;
-    }
+    /*#benefitsSec{*/
+    /*    padding-bottom: 1150px;*/
+    /*}*/
 
     #postJobForm {
         margin: 0 130px 50px 130px;
@@ -1446,10 +1472,10 @@ q{
         padding-left: 50px;
     }
 
-    #benefitsSec{
-        padding-right: 250px;
-        padding-left: 250px;
-    }
+    /*#benefitsSec{*/
+    /*    padding-right: 250px;*/
+    /*    padding-left: 250px;*/
+    /*}*/
 
     #text{
         width: 45%;
