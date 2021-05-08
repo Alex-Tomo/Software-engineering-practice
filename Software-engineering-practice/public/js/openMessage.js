@@ -79,6 +79,8 @@ window.onload = () => {
         messageUsers[i].addEventListener('click', () => {
             clearInterval(intervalListPage);
 
+
+
             checkUserStatus(i);
 
             let interval = setInterval(() => {
@@ -100,6 +102,19 @@ window.onload = () => {
 
             let jobId = document.getElementById('jobId').getAttribute('name');
             let otherUserId = document.getElementById('otherUserId').getAttribute('name');
+
+            $.ajax({
+                url: "./handlers/updateMessageRead.php",
+                method: "POST",
+                data: {
+                    jobId: jobId,
+                    email: email
+                },
+                success: (d) => {
+                    console.log(d);
+                }
+            });
+
 
             //working
             $.ajax({

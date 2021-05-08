@@ -42,12 +42,13 @@ function getHeader() {
                     <button id='dropbtn'>";
         $src = '';
         try {
-            $sqlQuery = $conn->query("SELECT sep_user_info.user_fname, sep_user_info.user_image 
+            $sqlQuery = $conn->query("SELECT sep_user_info.user_fname, sep_user_info.user_image, sep_users.user_id 
                                   FROM sep_user_info 
                                   INNER JOIN sep_users ON sep_user_info.user_id = sep_users.user_id 
                                   WHERE user_email = '".$_SESSION['email']."'");
         if($sqlQuery){
             while($name = $sqlQuery->fetchObject()) {
+                $userId = $name->user_id;
                 $header .= "<div>Hi, {$name->user_fname} <i class='fa fa-caret-down'></i></div>";
                     if ($name->user_image != null) {
                         $src = "assets/user_images/{$name->user_image}";
@@ -69,8 +70,91 @@ function getHeader() {
                         <a class='links clickable' onclick='openPage(`logout.php`)'>Logout</a>
                     </div>
                  </div>
-                 <ul>
-                    <a class='links clickable' onclick='openPage(`messages.php`)'><img class='navIcon' src='assets/mail.svg'></a>
+                 <ul>";
+
+        try {
+            $statement = $conn->prepare("SELECT message_read
+                                               FROM sep_read_messages
+                                               WHERE sep_read_messages.user_id = {$userId}
+                                               AND sep_read_messages.message_read = FALSE
+                                               GROUP BY job_id
+                                                ");
+            $statement->execute();
+            $k = 0;
+            while($result = $statement->fetchObject()) {
+                $k++;
+            }
+        } catch(Exception $e) { logError($e); }
+
+        $header .= "<a class='links clickable' onclick='openPage(`messages.php`)'>";
+
+        if($k > 0) {
+            $header .= "<p id='numberOfNotifications' style='padding: 2.5px; font-size: 8px; border-radius: 10px; text-align: center; float: right; background-color: #FF0000; margin-top: 10px;'>{$k}</p>";
+            $header .= "<img class='navIcon' src='assets/mail-red.svg'>";
+        } else {
+            $header .= "<img class='navIcon' src='assets/mail.svg'>";
+        }
+
+
+        $header .= "</a><a class='links clickable'>";
+
+        $statement = $conn->prepare("
+            SELECT sep_notifications.notification_message, notification_read, sep_notifications.sent_on, sep_available_jobs.job_title, sep_user_info.user_fname, sep_user_info.user_lname
+            FROM sep_notifications JOIN sep_available_jobs
+            ON sep_notifications.job_id = sep_available_jobs.job_id
+            JOIN sep_users
+            ON sep_available_jobs.user_id = sep_users.user_id
+            JOIN sep_user_info
+            ON sep_user_info.user_id = sep_notifications.user_id
+            WHERE sep_users.user_email = '{$_SESSION['email']}'
+            GROUP BY sep_notifications.job_id, sep_notifications.user_id
+            ORDER BY sep_notifications.sent_on DESC
+            LIMIT 5  
+        ");
+        $statement->execute();
+        $j = 0;
+        $h = '';
+        if($statement->rowCount() > 0) {
+            while ($result = $statement->fetchObject()) {
+                if($result->notification_read == FALSE) {
+                    $j++;
+                }
+                $message = str_split($result->notification_message);
+                $shortDesc = '';
+                for ($i = 0; $i < sizeof($message); $i++) {
+                    if ($i <= 50) {
+                        $shortDesc .= $message[$i];
+                    } else if ($i > 50) {
+                        $shortDesc .= '...';
+                        break;
+                    }
+                }
+
+                $h .= "<p style='padding:10px;'>{$result->user_fname} {$result->user_lname} sent you a message regarding '{$result->job_title}'<br>{$shortDesc}<br>{$result->sent_on}</p><hr>";
+            }
+            if($j > 0) {
+                $header .= "<p id='numberOfNotifications' style='padding: 2.5px; font-size: 8px; border-radius: 10px; text-align: center; float: right; background-color: #FF0000; margin-top: 10px;'>{$j}</p>
+                        <img class='navIcon' id='notifications' src='assets/bell-red.svg' height='45px'>
+                        <div id='notificationsDiv' style='position: absolute; display: none; background-color: #017EFC; min-width: 190px;'>";
+                $header .= $h;
+            } else {
+                $header .= "<p id='numberOfNotifications' style='padding: 2.5px; font-size: 8px; border-radius: 10px; text-align: center; float: right; background-color: #FF0000; margin-top: 10px; display:none;'></p>
+                <img class='navIcon' id='notifications' src='assets/bell.svg' height='45px'>
+                <div id='notificationsDiv' style='position: absolute; display: none; background-color: #017EFC; min-width: 190px;'>";
+                $header .= $h;
+            }
+
+        } else {
+            $header .= "<p id='numberOfNotifications' style='padding: 2.5px; font-size: 8px; border-radius: 10px; text-align: center; float: right; background-color: #FF0000; margin-top: 10px; display:none;'></p>
+                <img class='navIcon' id='notifications' src='assets/bell.svg' height='45px'>
+                <div id='notificationsDiv' style='position: absolute; display: none; background-color: #017EFC; min-width: 190px;'>";
+
+            $header .= "<p id='noNotifications' style='padding:10px;'>No notifications</p>";
+        }
+
+
+        $header .= "</div>
+                    </a>
                     <li><a class='links clickable' onclick='openPage(`postJob.php`)'>Post a Job</a></li>
                 </ul>";}
     $header .= "</nav>
@@ -100,10 +184,16 @@ function getHeader() {
         }
         $header .= "<a class='mobLinks clickable' onclick='openPage(`userProfile.php`)'>My Profile</a><br>
                                     <a class='mobLinks clickable' onclick='openPage(`userJobs.php`)'>My Jobs</a>
-                                    <a class='mobLinks clickable' onclick='openPage(`postJob.php`)'>Post a Job</a>
-                                    <a class='mobLinks clickable' onclick='openPage(`messages.php`)'>Messages</a>
-                                    <a class='mobLinks clickable' onclick='openPage(``)'>Notifications</a>
-                                    <button class='clickable' onclick='openPage(`logout.php`)' id='logout'>Logout</button>";
+                                    <a class='mobLinks clickable' onclick='openPage(`postJob.php`)'>Post a Job</a>";
+
+        if($k > 0) {
+            $header .= "<a class='mobLinks clickable' onclick='openPage(`messages.php`)'>Messages ({$k})</a>";
+        } else {
+            $header .= "<a class='mobLinks clickable' onclick='openPage(`messages.php`)'>Messages</a>";
+        }
+
+
+        $header .= "<button class='clickable' onclick='openPage(`logout.php`)' id='logout'>Logout</button>";
     }
     $header .= "</div>
                 <a href='javascript:void(0);' class='icon' onclick='hambgrMenu()'>

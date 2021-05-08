@@ -18,6 +18,9 @@ $statement->bindParam(2, $otherUserId);
 $statement->bindParam(3, $jobId);
 $statement->bindParam(4, $message);
 $statement->bindParam(5, $datetime);
+$statement->execute();
+
+$statement = $conn->prepare("INSERT INTO sep_read_messages (job_id, user_id) VALUES ({$jobId}, {$userId}), ({$jobId}, {$otherUserId})");
 if($statement->execute()) {
     echo 'true';
 }

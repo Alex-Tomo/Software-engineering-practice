@@ -14,8 +14,6 @@ socket.onmessage = (e) => {
         }
     }
 
-    console.log(data);
-
     $.ajax({
         url: "./handlers/checkIfUser.php",
         method: "POST",
@@ -25,34 +23,66 @@ socket.onmessage = (e) => {
             jobId: data.jobId
         },
         success: (d) => {
-            console.log(d);
             if(d) {
-                let existingPs = document.getElementById('notificationsDiv').getElementsByTagName('p');
-                if(existingPs.length >= 5) {
-                    document.getElementById('notificationsDiv').removeChild(document.getElementById('notificationsDiv').lastElementChild);
-                }
 
-                let p = document.createElement('p');
-                let hr = document.createElement('hr');
-                p.innerText = data.name + " sent you a message regarding '" + data.jobTitle + "'\n" + shortDesc + "\n" + data.dt;
-                p.style.padding = '10px';
+                if(window.innerWidth <= 768) {
 
-                document.getElementById('notificationsDiv').insertBefore(hr, existingPs[0]);
-                document.getElementById('notificationsDiv').insertBefore(p, hr);
+                    let existingPs = document.getElementById('floatingNotificationsDiv').getElementsByTagName('p');
+                    if (existingPs.length >= 5) {
+                        document.getElementById('floatingNotificationsDiv').removeChild(document.getElementById('floatingNotificationsDiv').lastElementChild);
+                    }
 
-                if(document.body.contains(document.getElementById('noNotifications'))) {
-                    document.getElementById('notificationsDiv').removeChild(document.getElementById('notificationsDiv').lastElementChild);
-                }
+                    let p = document.createElement('p');
+                    let hr = document.createElement('hr');
+                    p.innerText = data.name + " sent you a message regarding '" + data.jobTitle + "'\n" + shortDesc + "\n" + data.dt;
+                    p.style.padding = '10px';
 
-                document.getElementById('notifications').src = 'assets/bell-red.svg';
-                document.getElementById('numberOfNotifications').style.display = 'inline';
-                document.getElementById('numberOfNotifications').innerText = ''+(document.getElementById('notificationsDiv').getElementsByTagName('p').length);
+                    document.getElementById('floatingNotificationsDiv').insertBefore(hr, existingPs[0]);
+                    document.getElementById('floatingNotificationsDiv').insertBefore(p, hr);
 
-                let notifications = document.getElementById('notificationsDiv').getElementsByTagName('p');
-                for(let i = 0; i < notifications.length; i++) {
-                    notifications[i].addEventListener('click', () => {
-                       openPage('messages.php');
-                    });
+                    if (document.body.contains(document.getElementById('noNotifications'))) {
+                        document.getElementById('floatingNotificationsDiv').removeChild(document.getElementById('floatingNotificationsDiv').lastElementChild);
+                    }
+
+                    document.getElementById('floatingNotifications').src = 'assets/bell-red.svg';
+                    document.getElementById('floatingNumberOfNotifications').style.display = 'inline';
+                    document.getElementById('floatingNumberOfNotifications').innerText = '' + d;
+
+                    let notifications = document.getElementById('floatingNotificationsDiv').getElementsByTagName('p');
+                    for (let i = 0; i < notifications.length; i++) {
+                        notifications[i].addEventListener('click', () => {
+                            openPage('messages.php');
+                        });
+                    }
+
+                } else {
+
+                    let existingPs = document.getElementById('notificationsDiv').getElementsByTagName('p');
+                    if (existingPs.length >= 5) {
+                        document.getElementById('notificationsDiv').removeChild(document.getElementById('notificationsDiv').lastElementChild);
+                    }
+
+                    let p = document.createElement('p');
+                    let hr = document.createElement('hr');
+                    p.innerText = data.name + " sent you a message regarding '" + data.jobTitle + "'\n" + shortDesc + "\n" + data.dt;
+                    p.style.padding = '10px';
+
+                    document.getElementById('notificationsDiv').insertBefore(hr, existingPs[0]);
+                    document.getElementById('notificationsDiv').insertBefore(p, hr);
+
+                    if (document.body.contains(document.getElementById('noNotifications'))) {
+                        document.getElementById('notificationsDiv').removeChild(document.getElementById('notificationsDiv').lastElementChild);
+                    }
+
+                    document.getElementById('notifications').src = 'assets/bell-red.svg';
+                    document.getElementById('numberOfNotifications').style.display = 'inline';
+                    document.getElementById('numberOfNotifications').innerText = '' + d;
+                    let notifications = document.getElementById('notificationsDiv').getElementsByTagName('p');
+                    for (let i = 0; i < notifications.length; i++) {
+                        notifications[i].addEventListener('click', () => {
+                            openPage('messages.php');
+                        });
+                    }
                 }
             }
         }

@@ -51,6 +51,9 @@
             $statement->bindParam(4, $desc);
             $statement->execute();
 
+            $statement = $conn->prepare("INSERT INTO sep_read_messages (job_id, user_id) VALUES ({$jobId}, {$userId}), ({$jobId}, {$otherUserId})");
+            $statement->execute();
+
             $statement = $conn->prepare("
                 INSERT INTO sep_notifications (job_id, user_id, notification_message, sent_on) VALUES
                 (?, ?, ?, now())

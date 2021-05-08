@@ -16,12 +16,7 @@ function getFooter()
 
     include_once $path;
 
-    $footer = "<footer>";
-
-    if (isset($_SESSION['email'])) {
-        $footer .= "<input type='text' id='usersEmailAddress' name='{$_SESSION['email']}' style='display: none;'>";
-    }
-
+    $footer = '';
 
     $footer .= "<footer>
             <div class='footerLinks'>

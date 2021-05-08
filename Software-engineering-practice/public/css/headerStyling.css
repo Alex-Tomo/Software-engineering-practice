@@ -116,8 +116,11 @@ header h1{
 /*    color: black;*/
 /*}*/
 
-
 @media only screen and (min-width: 768px){
+    #notificationLink {
+        display: none;
+    }
+
     header {
         margin: 0 90px 0 90px;
         display: inline;
@@ -234,6 +237,7 @@ header h1{
 }
 
 @media only screen and (min-width: 1024px) {
+
     header {
         margin: 0 120px 0 120px;
         display: inline;

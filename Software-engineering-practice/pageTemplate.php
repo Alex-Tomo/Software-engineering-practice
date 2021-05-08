@@ -73,8 +73,8 @@ class pageTemplate {
     }
 
     private function pageBody() {
-        $this->body = $this->pageHeader();
         $this->body .= "<body>";
+        $this->body .= $this->pageHeader();
 
         foreach ($this->bodyItem as $item) { $this->body .= "\n".$item; }
 

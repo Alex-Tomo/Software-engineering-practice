@@ -9,6 +9,7 @@
     // Get the page template class
     $page = new pageTemplate('Home');
     $conn = getConnection();
+    $onlineColour = '';
 
     if(!$_SESSION['loggedin']) { header('location: signin.php'); }
 
@@ -97,6 +98,16 @@
                 $statement->execute();
                 $r = $statement->fetchObject();
 
+                $statement = $conn->prepare("SELECT COUNT(sep_read_messages.message_read) as count 
+                                                   FROM sep_read_messages JOIN sep_messages 
+                                                   ON sep_read_messages.job_id = sep_messages.job_id 
+                                                   WHERE sep_read_messages.user_id = {$userId}
+                                                   AND sep_read_messages.job_id = {$row->job_id}
+                                                   AND sep_read_messages.message_read = FALSE");
+                $statement->execute();
+                $messageRead = $statement->fetchObject();
+
+                $onlineColour = '#FF0000';
                 if ($online[$i] == true) {
                     $onlineColour = '#03AC13';
                 } else {
@@ -113,7 +124,11 @@
                 if($userId == $row->user_id) {
                     $page->addPageBodyItem("<p style='display: inline;'>You: {$row->message}</p>");
                 } else {
-                    $page->addPageBodyItem("<p style='display: inline;'>{$name[$i]}: {$row->message}</p>");
+                    if($messageRead->count > 0) {
+                        $page->addPageBodyItem("<p style='display: inline;'>{$name[$i]}: {$row->message} - <i><b>unread</b></i></p>");
+                    } else {
+                        $page->addPageBodyItem("<p style='display: inline;'>{$name[$i]}: {$row->message}</p>");
+                    }
                 }
                 $page->addPageBodyItem("<p style='display: inline; float: right; margin: 0; font-size: smaller;'><i>{$row->created_on}</i></p>
                 </div><hr>");
