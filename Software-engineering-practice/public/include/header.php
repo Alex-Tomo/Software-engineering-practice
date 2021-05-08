@@ -84,7 +84,6 @@ function getHeader() {
             while($result = $statement->fetchObject()) {
                 $k++;
             }
-        } catch(Exception $e) { logError($e); }
 
         $header .= "<a class='links clickable' onclick='openPage(`messages.php`)'>";
 
@@ -152,6 +151,15 @@ function getHeader() {
             $header .= "<p id='noNotifications' style='padding:10px;'>No notifications</p>";
         }
 
+        } catch(Exception $e) {
+            $header .= "<p id='numberOfNotifications' style='padding: 2.5px; font-size: 8px; border-radius: 10px; text-align: center; float: right; background-color: #FF0000; margin-top: 10px; display:none;'></p>
+                <img class='navIcon' id='notifications' src='assets/bell.svg' height='45px'>
+                <div id='notificationsDiv' style='position: absolute; display: none; background-color: #017EFC; min-width: 190px;'>";
+
+            $header .= "<p id='noNotifications' style='padding:10px;'>No notifications</p>";
+            logError($e);
+        }
+
 
         $header .= "</div>
                     </a>
@@ -186,10 +194,16 @@ function getHeader() {
                                     <a class='mobLinks clickable' onclick='openPage(`userJobs.php`)'>My Jobs</a>
                                     <a class='mobLinks clickable' onclick='openPage(`postJob.php`)'>Post a Job</a>";
 
-        if($k > 0) {
-            $header .= "<a class='mobLinks clickable' onclick='openPage(`messages.php`)'>Messages ({$k})</a>";
-        } else {
+        try {
+            if ($k > 0) {
+                $header .= "<a class='mobLinks clickable' onclick='openPage(`messages.php`)'>Messages ({$k})</a>";
+            } else {
+                $header .= "<a class='mobLinks clickable' onclick='openPage(`messages.php`)'>Messages</a>";
+            }
+        } catch(Exception $e) {
             $header .= "<a class='mobLinks clickable' onclick='openPage(`messages.php`)'>Messages</a>";
+
+            logError($e);
         }
 
 
