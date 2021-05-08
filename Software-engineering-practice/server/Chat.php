@@ -21,7 +21,8 @@ class Chat implements MessageComponentInterface {
         $this->users[$conn->resourceId] = $conn;
     }
 
-    public function onMessage(ConnectionInterface $from, $msg) {
+    public function onMessage(ConnectionInterface $from, $msg)
+    {
         $databaseConnection = getConnection();
 
         $data = json_decode($msg, true);
@@ -30,28 +31,28 @@ class Chat implements MessageComponentInterface {
         // $data['msg']; <- the message itself
         // $data['otherUserId']; <- the message itself
 
-        $result = $databaseConnection->query("
-            SELECT user_fname, user_lname, sep_user_info.user_id FROM sep_user_info
-            JOIN sep_users ON sep_user_info.user_id = sep_users.user_id
-            WHERE user_email = '{$data['email']}' 
-        ");
-        $name = $result->fetchObject();
+            $result = $databaseConnection->query("
+                SELECT user_fname, user_lname, sep_user_info.user_id FROM sep_user_info
+                JOIN sep_users ON sep_user_info.user_id = sep_users.user_id
+                WHERE user_email = '{$data['email']}' 
+            ");
+            $name = $result->fetchObject();
 
-        $d['userId'] = $name->user_id; // emma
-        $d['otherUserId'] = $data['otherUserId'];
-        $d['jobId'] = $data['jobId'];
-        $d['msg'] = $data['msg']; // alex
-        $d['datetime'] = date('Y-m-d H:i:s');
+            $d['userId'] = $name->user_id; // emma
+            $d['otherUserId'] = $data['otherUserId'];
+            $d['jobId'] = $data['jobId'];
+            $d['msg'] = $data['msg']; // alex
+            $d['datetime'] = date('Y-m-d H:i:s');
 
-        foreach($this->clients as $client) {
-            if($from == $client) {
-                $d['from'] = 'You';
-            } else {
-                $d['from'] = "{$name->user_fname}";
+            foreach ($this->clients as $client) {
+                if ($from == $client) {
+                    $d['from'] = 'You';
+                } else {
+                    $d['from'] = "{$name->user_fname}";
+                }
+                $client->send(json_encode($d));
             }
-            $client->send(json_encode($d));
         }
-    }
 
     public function onClose(ConnectionInterface $conn) {
     }

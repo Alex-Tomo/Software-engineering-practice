@@ -127,7 +127,7 @@ for($jobIndex = 0; $jobIndex < sizeof($jobCodes); $jobIndex++) {
 try{
     // Get the recommended job details from the database
     $choiceArray = selectUsersChosenCategories($conn, $_SESSION['email']);
-    $recommenders = getRecommendedJobs($conn, $choiceArray);
+    $recommenders = getRecommendedJobs($conn, $choiceArray, $_SESSION['email']);
     $price = 0;
     if(!empty($recommenders)) {
         foreach($recommenders as $recommender) {
@@ -139,7 +139,7 @@ try{
                             <img src='assets/job_images/{$recommender['jobImage']}' alt='Job image'>
                         </div>
                         <div class='resultText'>
-                            <img class='personIcon' src='assets/{$recommender['userImage']}' alt='User icon'>
+                            <img class='personIcon' src='assets/{$recommender['userImage']}' style='border-radius: 25px' alt='User icon'>
                             <h2>{$recommender['userFname']} {$recommender['userLname']}</h2>
                             <h3>{$recommender['jobTitle']}</h3>
                             <p>{$recommender['jobDesc']}</p>");
@@ -170,7 +170,7 @@ try{
                 <h1>Recently Added</h1>");
 
 // Get the most recently posted jobs from the database
-$recents = getRecentJobs($conn);
+$recents = getRecentJobs($conn, $_SESSION['email']);
 $price = 0;
 foreach($recents as $recent) {
     $price = $recent['jobPrice'];
@@ -181,7 +181,7 @@ foreach($recents as $recent) {
                         <img src='assets/job_images/{$recent['jobImage']}' alt='Job image'>
                     </div>
                     <div class='resultText'>
-                        <img class='personIcon' src='assets/{$recent['userImage']}' alt='User icon'>
+                        <img class='personIcon' src='assets/{$recent['userImage']}' style='border-radius: 25px' alt='User icon'>
                         <h2>{$recent['userFname']} {$recent['userLname']}</h2>
                         <h3>{$recent['jobTitle']}</h3>
                         <p>{$recent['jobDesc']}</p>");

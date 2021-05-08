@@ -72,7 +72,7 @@ function selectUsersChosenCategories($connection, $usersEmail) {
     }
 }
 
-function getRecommendedJobs($connection, $choicesArray) {
+function getRecommendedJobs($connection, $choicesArray, $email) {
 
     $arr = array();
     $index = 0;
@@ -98,6 +98,7 @@ function getRecommendedJobs($connection, $choicesArray) {
               ON sep_available_jobs.job_id = sep_jobs_categories.job_id
               WHERE sep_available_jobs.job_availability = '1'
               AND sep_jobs_categories.job_code IN (" . implode(',', $choicesArray) . ")
+              AND sep_users.user_email != '{$email}'
               GROUP BY job_id
               ORDER BY sep_available_jobs.job_date DESC
               LIMIT 3");
@@ -153,7 +154,7 @@ function getStarRating($connection, $jobId) {
     else return array(0, 0);
 }
 
-function getRecentJobs($connection) {
+function getRecentJobs($connection, $email) {
 
     $arr = array();
     $index = 0;
@@ -173,7 +174,10 @@ function getRecentJobs($connection) {
                 FROM sep_user_info
                 INNER JOIN sep_available_jobs
                 ON sep_user_info.user_id = sep_available_jobs.user_id
+                INNER JOIN sep_users
+                ON sep_user_info.user_id = sep_users.user_id
                 WHERE sep_available_jobs.job_availability = '1'
+                AND sep_users.user_email != '{$email}'
                 GROUP BY sep_user_info.user_id
                 ORDER BY sep_available_jobs.job_date DESC
                 LIMIT 3");
