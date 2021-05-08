@@ -396,7 +396,7 @@ q{
     display: block;
 }
 
-#tab1 label{
+#popup-1 label{
     text-align: left;
     font-size: 0.9em;
     width: 200px;
@@ -1058,6 +1058,57 @@ q{
 
 
 
+
+
+
+/*Messages Page*/
+#paymentForm h1{
+    margin-top: 10px;
+}
+
+#showPaymentBtn{
+    float: right;
+    margin-right: 20px;
+    margin-top: 0;
+}
+
+#jobPrice{
+    display: flex;
+    padding-bottom: 10px;
+    float: left;
+    width: 100%;
+    margin-top: 0;
+}
+
+#paymentForm label{
+    float: left;
+    padding: 10px 0;
+}
+
+#paymentForm input[type="number"] {
+    padding: 10px 0;
+    border: 1px solid #828282;
+    border-radius: 8px;
+    opacity: 0.5;
+    float: left;
+    width: 100%;
+    color: #017EFC;
+}
+
+#calcTotal{
+    margin: 0 auto;
+}
+
+#total{
+    font-weight: bold;
+    color: #16a416;
+    display: block;
+}
+
+#payPalBtn{
+    margin: 0 auto;
+    padding-top: 20px;
+}
 
 
 /*Media queries*/

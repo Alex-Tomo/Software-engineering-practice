@@ -1,31 +1,31 @@
 <?php
 
-    // TODO FIX THIS, ITS NOT UPLOADING THE JOB ANYMORE. AGAIN!
+// TODO FIX THIS, ITS NOT UPLOADING THE JOB ANYMORE. AGAIN!
 
-    // Requires
-    require('../pageTemplate.php');
-    require('../db_connector.php');
-    require('../database_functions.php');
+// Requires
+require('../pageTemplate.php');
+require('../db_connector.php');
+require('../database_functions.php');
 
-    // If the user is not logged in, then redirect the user to the login page
-    if(!$_SESSION['loggedin']) { header('Location: signin.php'); }
+// If the user is not logged in, then redirect the user to the login page
+if(!$_SESSION['loggedin']) { header('Location: signin.php'); }
 
-    // Initial Variables, get database connection, get page template class
-    $conn = getConnection();
-    $page = new pageTemplate('My Job(s)');
+// Initial Variables, get database connection, get page template class
+$conn = getConnection();
+$page = new pageTemplate('My Job(s)');
 
-    // Add CSS
-    $page->addCSS("<link rel=\"stylesheet\" href=\"./css/styling.css\">");
-    $page->addCSS("<link rel=\"stylesheet\" href=\"./css/footerStyling.css\">");
-    $page->addCSS("<link rel=\"stylesheet\" href=\"./css/headerStyling.css\">");
+// Add CSS
+$page->addCSS("<link rel=\"stylesheet\" href=\"./css/styling.css\">");
+$page->addCSS("<link rel=\"stylesheet\" href=\"./css/footerStyling.css\">");
+$page->addCSS("<link rel=\"stylesheet\" href=\"./css/headerStyling.css\">");
 
-    // Add JS
-    $page->addJavaScript("<script src=\"./js/navBar.js\"></script>");
-    $page->addJavaScript("<script src=\"./js/myJobs.js\"></script>");
-    $page->addJavaScript("<script src=\"./js/selectPostJobsList.js\"></script>");
-    $page->addJavaScript("<script src=\"./js/notificationServer.js\"></script>");
+// Add JS
+$page->addJavaScript("<script src=\"./js/navBar.js\"></script>");
+$page->addJavaScript("<script src=\"./js/myJobs.js\"></script>");
+$page->addJavaScript("<script src=\"./js/selectPostJobsList.js\"></script>");
+$page->addJavaScript("<script src=\"./js/notificationServer.js\"></script>");
 
-    $page->addPageBodyItem("
+$page->addPageBodyItem("
     <div class='pageContainer'>
         <h1 id='userJobHeader'>My Job(s)</h1>
         <div id='resultContainer'>
@@ -38,7 +38,7 @@
                         <textarea rows='10' cols='40' name='desc' id='desc' placeholder='Job Description...'></textarea>
                         <input name='price' id='price' type='text' placeholder='Job Price... i.e. £12.99/h'>
                         <input id='image' name='image' type='file' value='Add Image'>
-                        <img id='jobImage' src=''>
+                        <img id='jobImage' src='' alt='Job image'>
                         <input id='jobsListInput' list='searchJobsList' placeholder='Job Category(s)' onchange='selectJob()'>
                         <datalist id='searchJobsList'>
                             <option name='0'>Job Category(s)</option>");
@@ -49,7 +49,7 @@ for($jobIndex = 0; $jobIndex < sizeof($jobCodes); $jobIndex++) {
     $page->addPageBodyItem("<option value='{$jobNames[$jobIndex]}' id='{$jobNames[$jobIndex]}' name='{$jobCodes[$jobIndex]}'>");
 }
 
-                    $page->addPageBodyItem("
+$page->addPageBodyItem("
                     </datalist>
                     <div id='suggestion'></div>
                     <button id='updateJobBtn' class='clickable nextLink' type='submit'>Update Job</button> 
@@ -60,30 +60,30 @@ for($jobIndex = 0; $jobIndex < sizeof($jobCodes); $jobIndex++) {
 $jobsArray = getUsersJobs($conn, $_SESSION['email']);
 foreach($jobsArray as $job) {
 
-        $page->addPageBodyItem("
+    $page->addPageBodyItem("
         <div id='userJob' class='resultChild'>
             <div class='topImg'>
-                <img src='assets/job_images/{$job['jobImage']}'>
+                <img src='assets/job_images/{$job['jobImage']}' alt='Job image'>
             </div>
             <div class='resultText'>
-                <img class='personIcon' src='assets/{$job['userImage']}' style='border-radius: 25px'>
+                <img class='personIcon' src='assets/{$job['userImage']}' style='border-radius: 25px' alt='User icon'>
                 <h2>{$job['userFname']} {$job['userLname']}</h2>
                 <h3>{$job['jobName']}</h3>
                 <p>{$job['jobDesc']}</p>");
 
 // get star rating for each job
-list($sum, $total) = getStarRating($conn, $job['jobId']);
-for($i = 0; $i < 5; $i++) {
+    list($sum, $total) = getStarRating($conn, $job['jobId']);
+    for($i = 0; $i < 5; $i++) {
 
-            if($i < $sum) {
-                $page->addPageBodyItem("<span class='fa fa-star checked'></span>");
-            } else {
-                $page->addPageBodyItem("<span class='fa fa-star'></span>");
-            }
+        if($i < $sum) {
+            $page->addPageBodyItem("<span class='fa fa-star checked'></span>");
+        } else {
+            $page->addPageBodyItem("<span class='fa fa-star'></span>");
+        }
 
-} // end of for loop
+    } // end of for loop
 
-                $page->addPageBodyItem("
+    $page->addPageBodyItem("
                 ({$total})<p class='price'>£{$job['jobPrice']}/h</p>
                 <div id='btnContainer'>
                 <button type='button' id='{$job['jobId']}' class='clickable removeJob jobEditBtn'>Delete Job</button>
@@ -94,10 +94,10 @@ for($i = 0; $i < 5; $i++) {
 
 } // end of foreach loop
 
-    $page->addPageBodyItem("
+$page->addPageBodyItem("
     </div>
 </div>");
 
-    $page->displayPage();
+$page->displayPage();
 
 ?>

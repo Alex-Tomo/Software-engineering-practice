@@ -1,34 +1,34 @@
 <?php
 
-    // TODO remove the recentlyViewed and put into separate file/method
+// TODO remove the recentlyViewed and put into separate file/method
 
-    // Requires
-    require('../pageTemplate.php');
-    require('../db_connector.php');
-    require('../database_functions.php');
+// Requires
+require('../pageTemplate.php');
+require('../db_connector.php');
+require('../database_functions.php');
 
-    // Initial Variables, get database connection, get page template class
-    // Get the id of the job being displayed
-    $conn = getConnection();
-    $page = new pageTemplate('Service Inner');
-    $jobId = $_REQUEST['id'];
+// Initial Variables, get database connection, get page template class
+// Get the id of the job being displayed
+$conn = getConnection();
+$page = new pageTemplate('Service Inner');
+$jobId = $_REQUEST['id'];
 
-    // If user is not logged in, redirect to signinpage
-    if(!$_SESSION['loggedin']) { header('Location: signin.php'); }
+// If user is not logged in, redirect to signinpage
+if(!$_SESSION['loggedin']) { header('Location: signin.php'); }
 
-    // Checks if the jobId actually exists, otherwise redirect to loggedinHome
-    $availableJobIds = checkJobIdExists($conn);
-    if(!in_array($jobId, $availableJobIds)) { header('Location: loggedinHome.php'); }
+// Checks if the jobId actually exists, otherwise redirect to loggedinHome
+$availableJobIds = checkJobIdExists($conn);
+if(!in_array($jobId, $availableJobIds)) { header('Location: loggedinHome.php'); }
 
-    // Add CSS
-    $page->addCSS("<link rel=\"stylesheet\" href=\"./css/styling.css\">");
-    $page->addCSS("<link rel=\"stylesheet\" href=\"./css/footerStyling.css\">");
-    $page->addCSS("<link rel=\"stylesheet\" href=\"./css/headerStyling.css\">");
+// Add CSS
+$page->addCSS("<link rel=\"stylesheet\" href=\"./css/styling.css\">");
+$page->addCSS("<link rel=\"stylesheet\" href=\"./css/footerStyling.css\">");
+$page->addCSS("<link rel=\"stylesheet\" href=\"./css/headerStyling.css\">");
 
-    // Add JS
-    $page->addJavaScript("<script src=\"./js/navBar.js\"></script>");
-    $page->addJavaScript("<script src=\"./js/notificationServer.js\"></script>");
-    $page->addJavaScript("<script src=\"./js/enquireForm.js\"></script>");
+// Add JS
+$page->addJavaScript("<script src=\"./js/navBar.js\"></script>");
+$page->addJavaScript("<script src=\"./js/notificationServer.js\"></script>");
+$page->addJavaScript("<script src=\"./js/enquireForm.js\"></script>");
 
 // Adds the current jobId to the recentlyViewed session
 if(!isset($_SESSION['recentlyViewed'])) {
@@ -51,7 +51,7 @@ if(!isset($_SESSION['recentlyViewed'])) {
 }
 
 // Main content
-    $page->addPageBodyItem("
+$page->addPageBodyItem("
         <input type='text' id='jobId' name='{$jobId}' style='display: none;'>
         <input type='text' id='userEmail' name='{$_SESSION['email']}' style='display: none;'>
         <div class='pageContainer'>
@@ -64,29 +64,29 @@ $jobs = getJobDetails($conn, $jobId);
 foreach ($jobs as $job) {
     $price = $job['jobPrice'];
 
-                $page->addPageBodyItem("
+    $page->addPageBodyItem("
                 <div class='topImg'>
-                    <img src='assets/job_images/{$job['jobImage']}'>
+                    <img src='assets/job_images/{$job['jobImage']}' alt='Job image'>
                 </div>
                 <div class='resultText'>
-                    <img class='personIcon' src='assets/{$job['userImage']}' style='border-radius: 25px'>
+                    <img class='personIcon' src='assets/{$job['userImage']}' style='border-radius: 25px' alt='User image'>
                     <h2>{$job['userFname']} {$job['userLname']}</h2>
                     <h3>{$job['jobName']}</h3>
                     <p>{$job['jobDesc']}</p>");
 
 // Get the star rating for the job
-list($sum, $total) = getStarRating($conn, $jobId);
-for ($i = 0; $i < 5; $i++) {
+    list($sum, $total) = getStarRating($conn, $jobId);
+    for ($i = 0; $i < 5; $i++) {
 
-                if ($i < $sum) {
-                    $page->addPageBodyItem("<span class='fa fa-star checked'></span>");
-                } else {
-                    $page->addPageBodyItem("<span class='fa fa-star'></span>");
-                }
+        if ($i < $sum) {
+            $page->addPageBodyItem("<span class='fa fa-star checked'></span>");
+        } else {
+            $page->addPageBodyItem("<span class='fa fa-star'></span>");
+        }
 
-} // end of for loop
+    } // end of for loop
 
-                    $page->addPageBodyItem("
+    $page->addPageBodyItem("
                     ({$total})<p class='price'>£{$price}/h</p>
                     <button class='applyBtn clickable' id='enquireBtn'>Enquire</button>
                     <a class='clickable' id='referBtn'>Refer a friend</a>
@@ -94,8 +94,8 @@ for ($i = 0; $i < 5; $i++) {
             </div>");
 }
 
-    //Enquire form popup
-        $page->addPageBodyItem("
+//Enquire form popup
+$page->addPageBodyItem("
             <div class='popup' id='popup-1' style='display: none;'>
                 <div id='overlay-1' class='overlay clickable'></div>
                     <form class='popupForm' method='post' action='message.php'>
@@ -110,8 +110,8 @@ for ($i = 0; $i < 5; $i++) {
                 </div>
         ");
 
-    //Refer a friend popup
-        $page->addPageBodyItem("
+//Refer a friend popup
+$page->addPageBodyItem("
             <div class='popup' id='popup-2' style='display: none;'>
                 <div id='overlay-2' class='overlay clickable'></div>        
                     <form class='popupForm' method='post' action='message.php'>
@@ -126,7 +126,7 @@ for ($i = 0; $i < 5; $i++) {
                 </div>
         ");
 
-        $page->addPageBodyItem("
+$page->addPageBodyItem("
         </div>
     
         <div id='recViewedParent'>
@@ -142,12 +142,12 @@ if(isset($_SESSION['recentlyViewed'])) {
         }
 
 // Get the recentlyViewed details
-list($jobTitle, $jobPrice, $jobImage) = getRecentlyViewed($conn, $_SESSION['recentlyViewed'][$i]);
+        list($jobTitle, $jobPrice, $jobImage) = getRecentlyViewed($conn, $_SESSION['recentlyViewed'][$i]);
 
-            $page->addPageBodyItem("
+        $page->addPageBodyItem("
             <div class='recViewedChild clickable' onclick='openPage(`serviceInner.php?id=`+{$_SESSION['recentlyViewed'][$i]})'>
                 <div class='recViewedImg'>
-                    <img src='assets/job_images/{$jobImage}'>
+                    <img src='assets/job_images/{$jobImage}' alt='Job image'>
                 </div>
                 <div class='recViewedText'>
                     <h4>{$jobTitle}</h4>
@@ -158,10 +158,10 @@ list($jobTitle, $jobPrice, $jobImage) = getRecentlyViewed($conn, $_SESSION['rece
     } // end of for loop
 } // end of if(isset($_SESSION['recentlyViewed']))
 
-        $page->addPageBodyItem("
+$page->addPageBodyItem("
         </div>
     </div>");
 
-    $page->displayPage();
+$page->displayPage();
 
 ?>
