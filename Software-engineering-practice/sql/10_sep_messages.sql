@@ -1,3 +1,8 @@
+# The messages between each user in the chat webpage
+
+# user id is the currently logged in user
+# other user id is the person you are talking to
+
 CREATE TABLE IF NOT EXISTS sep_messages (
     message_id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT NOT NULL,

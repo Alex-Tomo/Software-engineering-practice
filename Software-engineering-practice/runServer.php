@@ -1,21 +1,30 @@
 <?php
 
-use Ratchet\Server\IoServer;
-use Ratchet\Http\HttpServer;
-use Ratchet\WebSocket\WsServer;
-use MyApp\Chat;
+    // Uses Ratchet websockets library
 
-require dirname( __FILE__ ) . '/vendor/autoload.php';
+    // Chat server, run before starting the website
+    // uses websockets to automatically update the users chat messages
+    // and display the messages to the relevant users
 
-$server = IoServer::factory(
-    new HttpServer(
-        new WsServer(
-            new Chat()
-        )
-    ),
-    3001,
-    '127.0.0.1'
-);
+    // Runs on port 3001 on localhost
 
-$server->run();
+    use Ratchet\Server\IoServer;
+    use Ratchet\Http\HttpServer;
+    use Ratchet\WebSocket\WsServer;
+    use MyApp\Chat;
 
+    require dirname( __FILE__ ) . '/vendor/autoload.php';
+
+    $server = IoServer::factory(
+        new HttpServer(
+            new WsServer(
+                new Chat()
+            )
+        ),
+        3001,
+        '127.0.0.1'
+    );
+
+    $server->run();
+
+?>

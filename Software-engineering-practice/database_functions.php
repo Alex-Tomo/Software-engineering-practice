@@ -1,5 +1,7 @@
 <?php
 
+// This file contains all functions for the sql for the php files which get displayed
+
 function sanitizeData($data) {
 
     if (gettype($data) == 'string') {

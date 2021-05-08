@@ -1,3 +1,9 @@
+# creates a rating between 0 and 5 for each job
+
+# job id is the job being rated
+# user id is the person rating the job
+# job rating is the rating the user gave to the job
+
 CREATE TABLE IF NOT EXISTS sep_job_rating (
     rating_id INT AUTO_INCREMENT PRIMARY KEY,
     job_id INT NOT NULL,

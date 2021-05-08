@@ -1,17 +1,22 @@
 <?php
 
+// This files gets the database connection via PDO and creates an
+// error logger by using try {} catch(Exception $e) { logError($e); }
+
     function getConnection() {
         // Newnumyspace data
-//        $serverName = 'localhost';
-//        $username = 'unn_w19007452';
-//        $password = 'Password';
-//        $databaseName = 'unn_w19007452';
+        // $serverName = 'localhost';
+        // $username = 'unn_w19007452';
+        // $password = 'Password';
+        // $databaseName = 'unn_w19007452';
 
         // Localhost (xampp)
-         $serverName = '';
-         $username = 'root';
-         $password = '';
-         $databaseName = 'software_engineering';
+        $serverName = '';
+        $username = 'root';
+        $password = '';
+        $databaseName = 'software_engineering';
+
+        // Try to connect to the database, if not log the error
         try {
             $conn = new PDO("mysql:host=$serverName;dbname=$databaseName",
                 $username, $password);
@@ -23,6 +28,8 @@
         }
     }
 
+    // Error logger, logs the error to an external file
+    // called error_log_file.log
     function exceptionHandler($e) {
         logError($e);
     }

@@ -1,3 +1,6 @@
+# Auto generates a user id, and stores the user email and
+# a hashed corresponding password
+
 CREATE TABLE IF NOT EXISTS sep_users (
     user_id int not null auto_increment unique primary key,
     user_email varchar(128) not null unique,

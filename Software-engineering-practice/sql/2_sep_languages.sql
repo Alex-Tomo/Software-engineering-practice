@@ -1,3 +1,5 @@
+# Stores all the available languages and languages codes
+
 CREATE TABLE IF NOT EXISTS sep_languages (
     language_code varchar(2) not null unique primary key,
     language_name varchar(32) not null unique

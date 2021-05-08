@@ -1,3 +1,5 @@
+# Stores all the users information
+
 CREATE TABLE IF NOT EXISTS sep_user_info (
     userinfo_id int not null auto_increment unique primary key,
     user_id int not null unique ,

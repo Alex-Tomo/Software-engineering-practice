@@ -1,3 +1,13 @@
+# this table lists all the jobs which have been posted
+
+# user id is the person whom posted the job
+# job title is the name of the job
+# job description is the description of the job
+# job price is the hourly rate given to the job
+# job availability is a TRUE or FALSE value stating whether the job is available or not
+# job date is the date the job was posted
+# job image is the name of the corresponding image
+
 CREATE TABLE IF NOT EXISTS sep_available_jobs (
     job_id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT NOT NULL,

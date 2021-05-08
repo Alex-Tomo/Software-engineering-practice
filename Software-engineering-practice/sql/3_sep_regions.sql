@@ -1,3 +1,5 @@
+# Stores all the available regions and region codes
+
 CREATE TABLE IF NOT EXISTS sep_regions (
     region_code varchar(16) not null unique primary key,
     region_name varchar(32) not null unique

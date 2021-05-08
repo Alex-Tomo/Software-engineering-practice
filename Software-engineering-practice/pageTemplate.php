@@ -4,10 +4,20 @@
 //ini_set("session.save_path", __DIR__."/sessionData");
 session_start();
 
-//Checks if the user is logged in, if not sets the loggedin SESSION to false
+// Checks if the user is logged in, if not sets the loggedin SESSION to false
 if(!isset($_SESSION['loggedin'])) {
     $_SESSION['loggedin'] = false;
 }
+
+// Page template for all the php files, displays the header
+// and footer and allows the user to add javascript, css, body items etc
+// use as follows:
+
+// $page = new pageTemplate("Some page title");
+// $page->addCSS(<Link/ To/ CSS/ File>);
+// $page->addJavaScript(<Link/ To/ JavaScript/ File>);
+// $page->addBodyItem("Some body item");
+// $page->displayPage();
 
 class pageTemplate {
 
@@ -22,6 +32,8 @@ class pageTemplate {
     function __construct($title) {
         $this->title = $title;
 
+        // Gets the path to the Software-engineering-practice folder
+        // dynamically so it doesnt matter where the user is on the website
         $arr = explode("\\", __DIR__);
         foreach ($arr as $a) {
             $this->includePath .= $a.'/';

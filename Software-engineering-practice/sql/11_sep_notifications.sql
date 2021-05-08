@@ -1,3 +1,8 @@
+# contains information about the notifications
+
+# user_id is the currently logged in user
+# notification_read is changed to TRUE when the notification is read
+
 CREATE TABLE IF NOT EXISTS sep_notifications (
     notification_id INT AUTO_INCREMENT PRIMARY KEY,
     job_id INT NOT NULL,
@@ -9,5 +14,3 @@ CREATE TABLE IF NOT EXISTS sep_notifications (
     FOREIGN KEY (user_id) REFERENCES sep_users(user_id)
 
 );
-
-# user_id is who sent the notification

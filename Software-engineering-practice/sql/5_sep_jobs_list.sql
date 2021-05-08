@@ -1,3 +1,8 @@
+# list of all the available job types
+
+# job code is the number created for the job
+# job name is the name of the job category
+
 CREATE TABLE IF NOT EXISTS sep_jobs_list (
     job_code int(9) not null unique primary key,
     job_name varchar(64) not null

@@ -1,3 +1,8 @@
+-- lists the users interested categories
+
+-- user id is the id of the user
+-- job code is the categories the user is interested in (minimum of 3)
+
 CREATE TABLE IF NOT EXISTS sep_users_interested_jobs (
     user_id int not null,
     job_code int(9) not null,

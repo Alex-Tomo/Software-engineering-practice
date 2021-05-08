@@ -1,3 +1,8 @@
+# similar categories to the job being posted
+
+# job id is the job being posted
+# job code are the similar categories
+
 CREATE TABLE IF NOT EXISTS sep_jobs_categories (
     job_id INT not null,
     job_code INT(9) not null,
