@@ -42,10 +42,11 @@
             </div>
         </div>
 
-        <div id='startupLith'>
-    
-            <!--    Add image-->
-    
+        <div id='logoContainer'>
+            <img id='logo2' src='assets/logo1.png' alt='Logo'>
+            <img id='logo1' src='assets/logo2.png' alt='Logo'>
+            <img id='logo3' src='assets/logo3.png' alt='Logo'>
+            <img id='logo4' src='assets/logo4.png' alt='Logo'>
         </div>
 
         <div id='container'>
@@ -54,34 +55,34 @@
             </div>
         
             <div id='swipeSecMob'>
-                <img src='assets/swipe_left.svg'>
+                <img src='assets/swipe_left.svg' alt='Swipe left icon'>
                 <h4>Swipe left</h4>
                 <p>We provide the templated CV for you to fill out and place in the platform</p>
     
-                <img src='assets/swipe_right.svg'>
+                <img src='assets/swipe_right.svg' alt='Swipe right icon'>
                 <h4>Swipe right</h4>
                 <p>Browse through offers, engage and wait until someone messages you</p>
     
-                <img src='assets/comment2.svg'>
+                <img src='assets/comment2.svg' alt='Message icon'>
                 <h4>Message</h4>
                 <p>When you get the message, show the best of yourself!</p>
             </div>
         
             <div id='swipeSecDes'>
                 <div id='swipeChild'>
-                    <img src='assets/swipe_left.svg'>
+                    <img src='assets/swipe_left.svg' alt='Swipe left icon'>
                     <h4>Fill out CV</h4>
                     <p>We provide the templated CV for you to fill out and place in the platform</p>
                 </div>
     
                 <div id='swipeChild2'>
-                    <img src='assets/swipe_right.svg'>
+                    <img src='assets/swipe_right.svg' alt='Swipe right icon'>
                     <h4>Browse through offers</h4>
                     <p>Browse through offers, engage and wait until someone messages you</p>
                 </div>
     
                 <div id='swipeChild3'>
-                    <img src='assets/comment2.svg' alt=''>
+                    <img src='assets/comment2.svg' alt='Message icon'>
                     <h4>Message</h4>
                     <p>When you get the message, show the best of yourself!</p>
                 </div>
@@ -107,8 +108,8 @@
                     <p class='jobDes'>Director</p>
                 </div>
                    
-                <a class='prev'><img src='assets/leftArrow.svg'></a>
-                <a class='next'><img src='assets/rightArrow.svg'></a>
+                <a class='prev'><img src='assets/leftArrow.svg' alt='Left arrow'></a>
+                <a class='next'><img src='assets/rightArrow.svg' alt='Right arrow'></a>
             </div>
                 
             <div class='dot-container'>
@@ -123,7 +124,4 @@
     $page->displayPage();
 
 ?>
-
-<!--    <img src='assets/appStore.svg' alt='App Store'>-->
-<!--    <img src='assets/googlePlay.svg' alt='App Store'>-->
 

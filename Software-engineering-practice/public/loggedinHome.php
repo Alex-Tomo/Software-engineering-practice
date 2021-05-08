@@ -136,10 +136,10 @@ try{
             $page->addPageBodyItem("
                     <div class='resultChild clickable' onclick='openPage(`serviceInner.php?id={$recommender['jobId']}`)'>
                         <div class='topImg'>
-                            <img src='assets/job_images/{$recommender['jobImage']}'>
+                            <img src='assets/job_images/{$recommender['jobImage']}' alt='Job image'>
                         </div>
                         <div class='resultText'>
-                            <img class='personIcon' src='assets/{$recommender['userImage']}' style='border-radius: 25px'>
+                            <img class='personIcon' src='assets/{$recommender['userImage']}' alt='User icon'>
                             <h2>{$recommender['userFname']} {$recommender['userLname']}</h2>
                             <h3>{$recommender['jobTitle']}</h3>
                             <p>{$recommender['jobDesc']}</p>");
@@ -178,10 +178,10 @@ foreach($recents as $recent) {
                 $page->addPageBodyItem("
                 <div class='resultChild clickable' onclick='openPage(`serviceInner.php?id={$recent['jobId']}`)'>
                     <div class='topImg'>
-                        <img src='assets/job_images/{$recent['jobImage']}'>
+                        <img src='assets/job_images/{$recent['jobImage']}' alt='Job image'>
                     </div>
                     <div class='resultText'>
-                        <img class='personIcon' src='assets/{$recent['userImage']}' style='border-radius: 25px'>
+                        <img class='personIcon' src='assets/{$recent['userImage']}' alt='User icon'>
                         <h2>{$recent['userFname']} {$recent['userLname']}</h2>
                         <h3>{$recent['jobTitle']}</h3>
                         <p>{$recent['jobDesc']}</p>");
@@ -235,7 +235,7 @@ if(isset($_SESSION['recentlyViewed'])) {
                 $page->addPageBodyItem("
                 <div class='recViewedChild clickable' onclick='openPage(`serviceInner.php?id=`+{$_SESSION['recentlyViewed'][$i]})'>
                     <div class='recViewedImg'>
-                        <img src='assets/job_images/{$jobImage}'>
+                        <img src='assets/job_images/{$jobImage}' alt='Job image'>
                     </div>
                     <div class='recViewedText'>
                         <h4>{$jobTitle}</h4>
@@ -254,6 +254,3 @@ if(isset($_SESSION['recentlyViewed'])) {
     $page->displayPage();
 
 ?>
-
-<!--    <img src='assets/appStore.svg' alt='App Store'>-->
-<!--    <img src='assets/googlePlay.svg' alt='App Store'>-->
