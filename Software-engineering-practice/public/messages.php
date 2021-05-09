@@ -92,10 +92,6 @@ try {
 
     } // end of outer foreach loop
 
-} catch(Exception $e) {
-    logError($e);
-} // end of try catch block
-
 
 $page->addPageBodyItem("
                 </div>
@@ -144,12 +140,18 @@ foreach($jobsArray as $job) { // start of outer foreach loop
 
 } // end of foreach loop
 
+} catch(Exception $e) {
+    $page->addPageBodyItem("<h1>No messages</h1>");
+    logError($e);
+} // end of try catch block
+
 // Displays all the users messages
 $page->addPageBodyItem("
-                <div id='messages' display: none;'></div>
-                <div id='sendMessages' style='display: none;'>
-                    <input id='msg' type='text' placeholder='Type Here...'>
-                    <button class='clickable nextLink' id='send' name=''>Send!</button>
+                </div>
+                <div id='messages' style='display: none;'></div>
+                <div id='sendMessages' style='display: none; background-color: white;'>
+                    <input id='msg' type='text' placeholder='Type Here...' style='display: inline; width: 70%; margin: 0;;'>
+                    <button class='clickable nextLink' id='send' name='' style='margin: 5px 0 5px 0; width: 25%;'>Send!</button>
                     <input id='jobId' style='display: none;'>
                     <input id='otherUserId' style='display: none;'>
                     </div>

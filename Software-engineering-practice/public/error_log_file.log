@@ -1,0 +1,13 @@
+Error date: Mon May 10 0:34:18 CEST 2021' | Error details: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ')          AND sep_users.user_email != 'randomEmail@email.com'          G...' at line 19
+Error date: Mon May 10 0:34:18 CEST 2021' | Error details: Undefined variable $userId
+Error date: Mon May 10 0:34:18 CEST 2021' | Error details: Undefined variable $userId
+Error date: Mon May 10 0:34:18 CEST 2021' | Error details: Undefined variable $unreadMessages
+Error date: Mon May 10 0:35:26 CEST 2021' | Error details: Undefined variable $onlineColour
+Error date: Mon May 10 0:36:29 CEST 2021' | Error details: Undefined variable $onlineColour
+Error date: Mon May 10 0:37:30 CEST 2021' | Error details: Undefined variable $onlineColour
+Error date: Mon May 10 0:39:52 CEST 2021' | Error details: Undefined array key "email"
+Error date: Mon May 10 0:57:45 CEST 2021' | Error details: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ')          AND sep_users.user_email != 'hopethisworks@email.com'         ...' at line 19
+Error date: Mon May 10 0:57:45 CEST 2021' | Error details: Undefined variable $userId
+Error date: Mon May 10 0:57:45 CEST 2021' | Error details: Undefined variable $userId
+Error date: Mon May 10 0:57:45 CEST 2021' | Error details: Undefined variable $unreadMessages
+Error date: Mon May 10 0:58:11 CEST 2021' | Error details: Undefined variable $onlineColour

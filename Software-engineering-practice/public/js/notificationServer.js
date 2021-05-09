@@ -1,9 +1,12 @@
+// start the websocket for notifications
 let socket = new WebSocket('ws://127.0.0.1:3002');
 
+// when the server sends a message
 socket.onmessage = (e) => {
     let data = JSON.parse(e.data);
     let email = document.getElementById('usersEmailAddress').getAttribute('name');
 
+    //trim the message so it doesnt overflow (max of 50 characters)
     let shortDesc = '';
     for(let i = 0; i < data.desc.length; i++) {
         if(i <= 50) {
@@ -14,6 +17,7 @@ socket.onmessage = (e) => {
         }
     }
 
+    //  check if the user exists
     $.ajax({
         url: "./handlers/checkIfUser.php",
         method: "POST",
@@ -25,8 +29,10 @@ socket.onmessage = (e) => {
         success: (d) => {
             if(d) {
 
+                //if mobile view
                 if(window.innerWidth <= 768) {
 
+                    // load the notifications into the div
                     let existingPs = document.getElementById('floatingNotificationsDiv').getElementsByTagName('p');
                     if (existingPs.length >= 5) {
                         document.getElementById('floatingNotificationsDiv').removeChild(document.getElementById('floatingNotificationsDiv').lastElementChild);
@@ -55,8 +61,10 @@ socket.onmessage = (e) => {
                         });
                     }
 
+                    // desktop
                 } else {
 
+                    //load the notifications into the div
                     let existingPs = document.getElementById('notificationsDiv').getElementsByTagName('p');
                     if (existingPs.length >= 5) {
                         document.getElementById('notificationsDiv').removeChild(document.getElementById('notificationsDiv').lastElementChild);

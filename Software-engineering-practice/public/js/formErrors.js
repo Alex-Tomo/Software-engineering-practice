@@ -6,9 +6,9 @@ window.onload = () => {
 
     //Checks to see if password is smaller than 8 characters
     password.addEventListener('keydown', (e) => {
-        if (password.value.length <= 8) {
+        if (password.value.length <= 7) {
             passwordLength.style.display = 'block';
-            passwordLength.innerHTML = 'Password must be more than 8 characters.';
+            passwordLength.innerHTML = 'Password must be 8 or more characters.';
         } else {
             passwordLength.style.display = 'none';
         }

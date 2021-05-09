@@ -1,6 +1,3 @@
-// TODO: use an object for the styling
-// TODO: get a selectPostJobs method to do the AJAX part
-
 selectedJobsArray = [];
 
 window.onload = () => {
@@ -53,9 +50,9 @@ const showEditJobDetails = (jobId) => {
             jobId: jobId
         },
         success: (data) => {
-            let result = $.parseJSON(data);
+            let result = JSON.parse(data);
             document.getElementById('title').value = result[0];
-            document.getElementById('desc').innerText = result[1];
+            document.getElementById('description').innerText = result[1];
             document.getElementById('price').value = result[2];
             document.getElementById('jobImage').src = './assets/job_images/' + result[3];
 

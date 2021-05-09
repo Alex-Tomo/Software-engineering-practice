@@ -1,10 +1,12 @@
 const displayEditProfile = () => {
 
+    //stops the form from submitting, hides popup 2
     const closeInfoForm = (e) => {
         e.stopImmediatePropagation();
         document.getElementById('popup-2').style.display = 'none';
     }
 
+    // displays popup the form
     let popup = document.getElementById('popup-2');
     popup.style.display = 'block';
 
@@ -26,7 +28,7 @@ const displayEditProfile = () => {
     let fname, lname, gender, lang, region, jobType, category;
 
     nextButtonTab1.addEventListener('click', () => {
-        //     // Get tab 1 info
+        // Get tab 1 info
 
         fname = document.getElementById('fname').value;
         lname = document.getElementById('lname').value;
@@ -34,6 +36,7 @@ const displayEditProfile = () => {
         lang = document.getElementById('lang').value;
         region = document.getElementById('reg').value;
 
+        // check everything is not empty, otherwise alert the user
         if((fname !== '') && (lname !== '') && (gender !== null) &&
             (lang !== null) && (region !== null)) {
             tab1.style.display = 'none';
@@ -43,8 +46,10 @@ const displayEditProfile = () => {
         }
     });
 
+    // on click next show the next tab
     nextButtonTab2.addEventListener('click', () => {
         // Get tab 2 info
+        //make sure the user has selected 3 jobs
         let jobsArray = localStorage.getItem("jobsArray").split(",");
         if(jobsArray.length < 3) {
             alert('Must choose at least 3!');

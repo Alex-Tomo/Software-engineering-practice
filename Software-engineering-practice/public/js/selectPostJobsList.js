@@ -1,10 +1,5 @@
 let selectedJobsArray = [];
 
-// TODO: Use an object to make the styles simpler
-// TODO: Integrate this into selectJobsList.js
-
-
-// Added by Alex
 // filterJobsList() checks if the user input is in the li list
 // if not, then the list removes all these results.
 const filterJobsList = () => {
@@ -23,7 +18,6 @@ const filterJobsList = () => {
     }
 }
 
-// Added by Alex
 // Set some styling and disable the suggestion from the datalist
 const selectJob = () => {
     let jobsList = document.getElementById('searchJobsList').getElementsByTagName('option');
@@ -70,7 +64,6 @@ const selectJob = () => {
     localStorage.setItem("jobsArray", selectedJobsArray);
 }
 
-// Added by Alex
 // Remove the option from the suggestion div and enable it in the datalist
 
 const getSelectedJob = () => {

@@ -1,10 +1,9 @@
-window.onresize = () => {
-    x = document.getElementById('notifications').getBoundingClientRect().x;
-    y = document.getElementById('notifications').getBoundingClientRect().y;
-    document.getElementById('notificationsDiv').style.left = (x-160)+'px';
-    document.getElementById('notificationsDiv').style.top = (y+y+25)+'px';
-}
-$(document).ready(() => {
+// put in a function so it can be used on window.resize and document.ready
+// makes both the mobile and desktop notification buttons work
+
+// gets the latest notifications and loads them into the relevant div
+const notificationMenu = () => {
+
     if(window.innerWidth <= 768) {
         document.getElementById('notificationsDiv').style.display = 'none'; //Hide nav bar if screen smaller than 768px
 
@@ -134,6 +133,19 @@ $(document).ready(() => {
             document.getElementById('notificationsDiv').style.display = 'none';
         });
     }
+}
+
+window.onresize = () => {
+    //position the notification div
+    x = document.getElementById('notifications').getBoundingClientRect().x;
+    y = document.getElementById('notifications').getBoundingClientRect().y;
+    document.getElementById('notificationsDiv').style.left = (x-160)+'px';
+    document.getElementById('notificationsDiv').style.top = (y+y+25)+'px';
+    notificationMenu();
+}
+
+$(document).ready(() => {
+    notificationMenu();
 });
 
 

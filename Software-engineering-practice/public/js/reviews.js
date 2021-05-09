@@ -9,7 +9,6 @@ window.onload = function() {
     showSlides(slideIndex);
     carousel();
 
-    // Added by alex, removed the home.php onclicks, use these instead (more dynamic).
     nextSlideAnchor[0].addEventListener("click", function() { plusSlides(1); });
     prevSlideAnchor[0].addEventListener("click", function() { plusSlides(-1); });
     dotAnchor1[0].addEventListener("click", function() { currentSlide(1); });
