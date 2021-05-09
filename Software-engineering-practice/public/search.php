@@ -58,30 +58,41 @@ for($jobIndex = 0; $jobIndex < sizeof($jobCodes); $jobIndex++) { // start of out
                 <h1>Search Page</h1>");
 
 
+try {
 // Get all the jobs with a specific category
 // otherwise set the code to null
-if($_REQUEST['categories'] != 'all') {
-    $_REQUEST['categories'] = sanitizeData($_REQUEST['categories']);
-    $categoriesCodes = searchCategories($conn, $_REQUEST['categories']);
+    if ($_REQUEST['categories'] != 'all') {
+        $_REQUEST['categories'] = sanitizeData($_REQUEST['categories']);
+        $categoriesCodes = searchCategories($conn, $_REQUEST['categories']);
 
-    if(!in_array($_REQUEST['categories'], $jobNames)) {
-        $_REQUEST['categories'] = null;
+        if (!in_array($_REQUEST['categories'], $jobNames)) {
+            $_REQUEST['categories'] = null;
+        }
+
+    } else {
+        $categoriesCodes = null;
     }
-
-} else {
+} catch(Exception $e) {
     $categoriesCodes = null;
+    logError($e);
 }
 
+try {
 // Check if the user searched using a unique value, if so sanitize the data
-if(isset($_REQUEST['keyword']) && !empty($_REQUEST['keyword'])) {
-    $_REQUEST['keyword'] = sanitizeData($_REQUEST['keyword']);
+    if (isset($_REQUEST['keyword']) && !empty($_REQUEST['keyword'])) {
+        $keyword = sanitizeData($_REQUEST['keyword']);
+    } else {
+        $keyword = null;
+    }
+} catch(Exception $e) {
+    $keyword = null;
+    logError($e);
 }
-
 
 $jobResults = 0; // use this to check if there are any result
 
 // get all the jobs using the search info
-$jobInfo = searchJobInfo($conn, $categoriesCodes, $_REQUEST['keyword']);
+$jobInfo = searchJobInfo($conn, $categoriesCodes, $keyword);
 
 // if the query above worked then loop through the results and display the results
 if($jobInfo != null) { // start of outer if statement

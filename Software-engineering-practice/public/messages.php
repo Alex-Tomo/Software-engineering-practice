@@ -115,28 +115,27 @@ foreach($jobsArray as $job) { // start of outer foreach loop
     $page->addPageBodyItem("          
                     <div class='popup' id='popup-5' style='display: none'>
                         <div id='overlay' class='clickable overlay'></div>    
-                            <form class='popupForm' id='paymentForm' action='https://www.paypal.com/cgi-bin/webscr' method='post' target='_top'>          
-                                <div id='tab1'>
-                                    <button class='clickable backLink' id='closePaymentBtn'>Cancel</button>
-                                    <h1>Payment Form</h1>
-                                    <label for='hours'>Enter how many hours</label><br>
-                                    <input type='number' id='hours' name='hours' placeholder='Hours'><br>
-                                    <label id='priceText' for='jobPrice'>Price per hour: </label><br><br>
-                                    <input type='hidden' id='jobPrice' name='{$job['jobPrice']}'><p id='jobPrice'>£{$job['jobPrice']}/h</p></input>
-                                    <button class='clickable nextLink' type='button' id='calcTotal'>Calculate Total</button>                           
-                                    <span id='total'></span>
-                                    <input type='hidden' name='cmd' value='_xclick'>
-                                    <input type='hidden' name='business' value='sb-qes1476153889@personal.example.com'>
-                                    <input type='hidden' name='lc' value='US'>
-                                    <input type='hidden' name='item_name' value='Job'>
-                                    <input type='hidden' name='button_subtype' value='services'>
-                                    <input type='hidden' name='no_note' value='0'>
-                                    <input type='hidden' name='currency_code' value='GBP'>
-                                    
-                                    <input type='hidden' id='amount' name='amount' value='0'>
-                                    <input type='image' id='payPalBtn' src='https://www.paypalobjects.com/en_US/i/btn/btn_paynowCC_LG.gif' border='0' name='submit' alt='PayPal - The safer, easier way to pay online!'>
-                                    <img alt='' border='0' src='https://www.paypalobjects.com/en_US/i/scr/pixel.gif' width='1' height='1'>
-                                </div>
+                        <form class='popupForm' id='paymentForm' action='https://www.paypal.com/cgi-bin/webscr' method='post' target='_top'>          
+                            <div id='tab1'>
+                                <button class='clickable backLink' id='closePaymentBtn'>Cancel</button>
+                                <h1>Payment Form</h1>
+                                <label for='hours'>Enter how many hours</label><br>
+                                <input type='number' id='hours' name='hours' placeholder='Hours'><br>
+                                <label id='priceText' for='jobPrice'>Price per hour: </label><br><br>
+                                <input type='hidden' id='jobPrice' name='{$job['jobPrice']}'><p id='jobPrice'>£{$job['jobPrice']}/h</p></input>
+                                <button class='clickable nextLink' type='button' id='calcTotal'>Calculate Total</button>                           
+                                <span id='total'></span>
+                                <input type='hidden' name='cmd' value='_xclick'>
+                                <input type='hidden' name='business' value='sb-qes1476153889@personal.example.com'>
+                                <input type='hidden' name='lc' value='US'>
+                                <input type='hidden' name='item_name' value='Job'>
+                                <input type='hidden' name='button_subtype' value='services'>
+                                <input type='hidden' name='no_note' value='0'>
+                                <input type='hidden' name='currency_code' value='GBP'>
+                                
+                                <input type='hidden' id='amount' name='amount' value='0'>
+                                <input type='image' id='payPalBtn' src='https://www.paypalobjects.com/en_US/i/btn/btn_paynowCC_LG.gif' border='0' name='submit' alt='PayPal - The safer, easier way to pay online!'>
+                                <img alt='' border='0' src='https://www.paypalobjects.com/en_US/i/scr/pixel.gif' width='1' height='1'>
                             </div>
                         </form>
                     </div>");
@@ -146,14 +145,15 @@ foreach($jobsArray as $job) { // start of outer foreach loop
 
     // Displays all the users messages
     $page->addPageBodyItem("
+                    </div>
+                </div>
                 <div id='messages' style='overflow-y: scroll; height:500px; display: none;'></div>
                 <div id='sendMessages' style='display: none;'>
                     <input id='msg' type='text' placeholder='Type Here...' style='padding: 10px; width: 80%;'>
                     <button id='send' name='' style='width: 20%;'>Send!</button>
                     <input id='jobId' style='display: none;'>
                     <input id='otherUserId' style='display: none;'>
-                </div>
-            </div>");
+                </div>");
     // last div is the closing div of the page container
 
     // Display the page

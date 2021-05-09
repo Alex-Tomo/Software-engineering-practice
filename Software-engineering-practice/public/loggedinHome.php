@@ -139,18 +139,19 @@ for($jobIndex = 0; $jobIndex < sizeof($jobCodes); $jobIndex++) { // start of for
                 <h1>Recommended for you</h1>");
 
 
+try {
 // Get the recommended job details from the database
-$choiceArray = selectUsersChosenCategories($conn, $_SESSION['email']);
-$recommenders = getRecommendedJobs($conn, $choiceArray, $_SESSION['email']);
-$price = 0; // initialize price variable
+    $choiceArray = selectUsersChosenCategories($conn, $_SESSION['email']);
+    $recommenders = getRecommendedJobs($conn, $choiceArray, $_SESSION['email']);
+    $price = 0; // initialize price variable
 
-if(!empty($recommenders)) { // start of outer if statement
+    if (!empty($recommenders)) { // start of outer if statement
 
-    foreach($recommenders as $recommender) { // start of outer foreach loop
-        $price = $recommender['jobPrice'];
+        foreach ($recommenders as $recommender) { // start of outer foreach loop
+            $price = $recommender['jobPrice'];
 
 
-        $page->addPageBodyItem("
+            $page->addPageBodyItem("
                 <div class='resultChild clickable' onclick='openPage(`serviceInner.php?id={$recommender['jobId']}`)'>
                     <div class='topImg'>
                         <img src='assets/job_images/{$recommender['jobImage']}' alt='Job image'>
@@ -162,28 +163,30 @@ if(!empty($recommenders)) { // start of outer if statement
                         <p>{$recommender['jobDesc']}</p>");
 
 
-list($ratingsSum, $totalRatings) = getStarRating($conn, $recommender['jobId']);
-for ($i = 0; $i < 5; $i++) { // start of inner for loop
+            list($ratingsSum, $totalRatings) = getStarRating($conn, $recommender['jobId']);
+            for ($i = 0; $i < 5; $i++) { // start of inner for loop
 
-    if ($i < $ratingsSum) {
-        $page->addPageBodyItem("<span class='fa fa-star checked'></span>");
-    } else {
-        $page->addPageBodyItem("<span class='fa fa-star'></span>");
-    }
+                if ($i < $ratingsSum) {
+                    $page->addPageBodyItem("<span class='fa fa-star checked'></span>");
+                } else {
+                    $page->addPageBodyItem("<span class='fa fa-star'></span>");
+                }
 
-} // end of inner for loop
+            } // end of inner for loop
 
 
-                    $page->addPageBodyItem("
+            $page->addPageBodyItem("
                     ({$totalRatings})<p class='price'>£{$price}/h</p>
                 </div>
             </div>");
 
 
-    } // end of outer foreach loop ($recommenders as $recommender)
+        } // end of outer foreach loop ($recommenders as $recommender)
 
-} // end of outer if statement (!empty($recommenders))
-
+    } // end of outer if statement (!empty($recommenders))
+} catch(Exception $e) {
+    logError($e);
+}
 
             $page->addPageBodyItem("
             </div>
@@ -192,15 +195,16 @@ for ($i = 0; $i < 5; $i++) { // start of inner for loop
                 <h1>Recently Added</h1>");
 
 
+try {
 // Get the most recently posted jobs from the database
-$recents = getRecentJobs($conn, $_SESSION['email']);
-$price = 0; // initialize the price variable
+    $recents = getRecentJobs($conn, $_SESSION['email']);
+    $price = 0; // initialize the price variable
 
-foreach($recents as $recent) { // start of outer foreach loop
-    $price = $recent['jobPrice'];
+    foreach ($recents as $recent) { // start of outer foreach loop
+        $price = $recent['jobPrice'];
 
 
-                $page->addPageBodyItem("
+        $page->addPageBodyItem("
                 <div class='resultChild clickable' onclick='openPage(`serviceInner.php?id={$recent['jobId']}`)'>
                     <div class='topImg'>
                         <img src='assets/job_images/{$recent['jobImage']}' alt='Job image'>
@@ -212,25 +216,27 @@ foreach($recents as $recent) { // start of outer foreach loop
                         <p>{$recent['jobDesc']}</p>");
 
 
-list($ratingsSum, $totalRatings) = getStarRating($conn, $recent['jobId']);
-for($i = 0; $i < 5; $i++) { // start of inner for loop
+        list($ratingsSum, $totalRatings) = getStarRating($conn, $recent['jobId']);
+        for ($i = 0; $i < 5; $i++) { // start of inner for loop
 
-    if($i < $ratingsSum) {
-        $page->addPageBodyItem("<span class='fa fa-star checked'></span>");
-    } else {
-        $page->addPageBodyItem("<span class='fa fa-star'></span>");
-    }
+            if ($i < $ratingsSum) {
+                $page->addPageBodyItem("<span class='fa fa-star checked'></span>");
+            } else {
+                $page->addPageBodyItem("<span class='fa fa-star'></span>");
+            }
 
-} // End of inner for loop
+        } // End of inner for loop
 
 
-                        $page->addPageBodyItem("
+        $page->addPageBodyItem("
                         ({$totalRatings})<p class='price'>£{$price}/h</p>
                     </div>
                 </div>");
 
-} // End of outer foreach loop ($recents as $recent)
-
+    } // End of outer foreach loop ($recents as $recent)
+} catch(Exception $e) {
+    logError($e);
+}
 
             $page->addPageBodyItem("
             </div>      
