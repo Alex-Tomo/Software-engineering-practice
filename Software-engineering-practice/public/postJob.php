@@ -21,18 +21,21 @@
     $page->addJavaScript("<script src=\"./js/navBar.js\"></script>");
     $page->addJavaScript("<script src=\"./js/selectPostJobsList.js\"></script>");
     $page->addJavaScript("<script src=\"./js/notificationServer.js\"></script>");
+    $page->addJavaScript("<script src=\"./js/descriptionCounter.js\"></script>");
 
     // Main content
     $page->addPageBodyItem("
             <div id='postJobContainer'>
                 <form id='postJobForm' enctype='multipart/form-data' method='post' action='./handlers/postJobHandler.php'>
+                    <p style='display:none;'>Job Submitted</p>
                     <h1>Post a Job</h1>
                     <label for='title'>Enter the job title</label><br>
                     <input name='title' id='title' type='text' placeholder='Job Title...'>
                     <label for='title'>Enter the job description</label><br>
-                    <textarea rows='10' cols='40' name='desc' placeholder='Job Description...'></textarea>
+                    <textarea id='description' rows='10' cols='40' maxlength='200' name='desc' onclick='checkWordCount()' placeholder='Job Description...' ></textarea>
+                    <span style='display: none' id='remaining'></span> 
                     <label for='title'>Enter the job price</label><br>            
-                    <input name='price' id='price' type='text' placeholder='Job Price... i.e. £12.99/h'>
+                    <input name='price' id='price' type='number' min='0' placeholder='Job Price... i.e. £12.99/h'>
                     <label for='title'>Choose a relevant image</label><br>   
                     <input type='file' name='file' id='file'>
                     <label for='title'>Choose a job category</label><br> 

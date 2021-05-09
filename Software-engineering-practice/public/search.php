@@ -105,10 +105,10 @@ if($jobInfo != null) { // start of outer if statement
         $page->addPageBodyItem("
             <div class='resultChild clickable' onclick='openPage(`serviceInner.php?id={$job['jobId']}`)'>
                 <div class='topImg'>
-                    <img src='assets/job_images/{$job['jobImage']}'>
+                    <img src='assets/job_images/{$job['jobImage']}' alt='Job image'>
                 </div>
                 <div class='resultText'>
-                    <img class='personIcon' src='assets/{$job['userImage']}' style='border-radius: 25px'>
+                    <img class='personIcon' src='assets/{$job['userImage']}' style='border-radius: 25px' alt='User icon'>
                     <h2>{$job['userFname']} {$job['userLname']}</h2>
                     <h3>{$job['jobName']}</h3>
                     <p>{$job['jobDesc']}</p>");

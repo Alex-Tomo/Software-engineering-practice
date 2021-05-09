@@ -22,8 +22,9 @@
     $page->addJavaScript("<script src=\"./js/myJobs.js\"></script>");
     $page->addJavaScript("<script src=\"./js/selectPostJobsList.js\"></script>");
     $page->addJavaScript("<script src=\"./js/notificationServer.js\"></script>");
+    $page->addJavaScript("<script src=\"./js/descriptionCounter.js\"></script>");
 
-    $page->addPageBodyItem("
+$page->addPageBodyItem("
         <div class='pageContainer'>
             <h1 id='userJobHeader'>My Job(s)</h1>
             <div id='resultContainer'>
@@ -33,8 +34,9 @@
                             <button class='clickable backLink' id='closePopup'>Close Window</button>
                             <input name='jobId' id='jobId' type='text' style='display: none;'>
                             <input name='title' id='title' type='text' placeholder='Job Title...'>
-                            <textarea rows='10' cols='40' name='desc' id='desc' placeholder='Job Description...'></textarea>
-                            <input name='price' id='price' type='text' placeholder='Job Price... i.e. £12.99/h'>
+                            <textarea id='description' rows='10' cols='40' maxlength='200' name='desc' onclick='checkWordCount()' placeholder='Job Description...' ></textarea>
+                            <span style='display: none' id='remaining'></span> 
+                            <input name='price' id='price' type='number' placeholder='Job Price... i.e. £12.99/h'>
                             <input id='image' name='image' type='file' value='Add Image'>
                             <img id='jobImage' src='' alt='Job image'>
                             <input id='jobsListInput' list='searchJobsList' placeholder='Job Category(s)' onchange='selectJob()'>
@@ -43,12 +45,12 @@
 
 
 // Get all jobs from the database
-list($jobCodes, $jobNames) = selectAll($conn, 'job_code', 'job_name', 'sep_jobs_list', 'job_name');
-for($jobIndex = 0; $jobIndex < sizeof($jobCodes); $jobIndex++) {
+    list($jobCodes, $jobNames) = selectAll($conn, 'job_code', 'job_name', 'sep_jobs_list', 'job_name');
+    for ($jobIndex = 0; $jobIndex < sizeof($jobCodes); $jobIndex++) {
 
-    $page->addPageBodyItem("<option value='{$jobNames[$jobIndex]}' id='{$jobNames[$jobIndex]}' name='{$jobCodes[$jobIndex]}'>");
+        $page->addPageBodyItem("<option value='{$jobNames[$jobIndex]}' id='{$jobNames[$jobIndex]}' name='{$jobCodes[$jobIndex]}'>");
 
-} // end of for loop
+    } // end of for loop
 
 
     $page->addPageBodyItem("
@@ -60,8 +62,8 @@ for($jobIndex = 0; $jobIndex < sizeof($jobCodes); $jobIndex++) {
 
 
 // Gets all the users jobs
-$jobsArray = getUsersJobs($conn, $_SESSION['email']);
-foreach($jobsArray as $job) { // outer foreach loop
+    $jobsArray = getUsersJobs($conn, $_SESSION['email']);
+    foreach ($jobsArray as $job) { // outer foreach loop
 
         $page->addPageBodyItem("
             <div id='userJob' class='resultChild'>
@@ -76,17 +78,16 @@ foreach($jobsArray as $job) { // outer foreach loop
 
 
 // get star rating for each job
-list($sum, $total) = getStarRating($conn, $job['jobId']);
-for($i = 0; $i < 5; $i++) { // inner for loop
+        list($sum, $total) = getStarRating($conn, $job['jobId']);
+        for ($i = 0; $i < 5; $i++) { // inner for loop
 
-    if($i < $sum) {
-        $page->addPageBodyItem("<span class='fa fa-star checked'></span>");
-    } else {
-        $page->addPageBodyItem("<span class='fa fa-star'></span>");
-    }
+            if ($i < $sum) {
+                $page->addPageBodyItem("<span class='fa fa-star checked'></span>");
+            } else {
+                $page->addPageBodyItem("<span class='fa fa-star'></span>");
+            }
 
-} // end of inner for loop
-
+        } // end of inner for loop
 
         $page->addPageBodyItem("
                     ({$total})<p class='price'>£{$job['jobPrice']}/h</p>
@@ -97,13 +98,11 @@ for($i = 0; $i < 5; $i++) { // inner for loop
                 </div>
             </div>");
 
-} // end of outer foreach loop
-
+    } // end of outer foreach loop
 
     $page->addPageBodyItem("
         </div>
     </div>");
-
     $page->displayPage();
 
 ?>

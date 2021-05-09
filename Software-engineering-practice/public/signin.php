@@ -14,9 +14,9 @@
     // Add JS
     $page->addJavaScript("<script src=\"./js/navBar.js\"></script>");
 
-    // Main content
+    // Displays sign in form
     $page->addPageBodyItem("
-    <div id='signinForm'>
+    <div>
         <form action='handlers/signinHandler.php' method='POST'>
             <h2>Login</h2>
             <label for='email'>Email</label><br>

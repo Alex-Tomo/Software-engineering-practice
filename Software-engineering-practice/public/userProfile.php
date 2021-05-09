@@ -156,9 +156,11 @@ for ($i = 0; $i < sizeof($chosenJobsName); $i++) {
                         <label for='oldPassword'>Old Password</label><br>
                         <input id='oldPassword' name='oldPassword' type='password'>            
                         <label for='newPassword'>New Password</label><br>      
-                        <input id='newPassword' name='newPassword' type='password'>
+                        <input id='newPassword' name='newPassword' type='password'><br>
+                        <div class='error'><p style='display: none;' id='passwordLength'></p></div>
                         <label for='repeatNewPassword'>Repeat New Password</label><br>
                         <input id='repeatNewPassword' name='repeatNewPassword' type='password'>
+                        <div class='error'><p style='display: none;' id='passwordMatch'></p></div>
                         <button class='clickable nextLink' id='submitPasswordForm' type='button'>Change Password</button>
                     </div>
                 </form>
