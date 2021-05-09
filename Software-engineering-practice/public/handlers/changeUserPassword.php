@@ -46,7 +46,7 @@
                 $updatePasswordStatement->execute();
 
                 // return (via AJAX) true if the password is changed and false if not
-                echo password_verify($oldPassword, $data['user_password']) ? 'true' : 'false';
+                echo 'true';
 
             } else {
                 echo 'false';

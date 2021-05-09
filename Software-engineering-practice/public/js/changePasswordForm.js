@@ -52,7 +52,7 @@ const changePassword = () => {
                 repeatNewPassword: repeatNewPassword
             },
             success: (data) => {
-                if (data === 'true') {
+                if (data.toString().includes('true')) {
                     document.getElementById('passwordForm').style.display = 'none';
                     alert('Password Changed');
                 } else {
