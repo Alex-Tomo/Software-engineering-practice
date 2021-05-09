@@ -67,7 +67,7 @@ function getNotifications() {
                         }
 
                         // put all notifications into a variable to display later
-                        $notificationMessage .= "<p style='padding:10px; color: white;'>{$notification->user_fname} {$notification->user_lname} 
+                        $notificationMessage .= "<p class='notificationMessage'>{$notification->user_fname} {$notification->user_lname} 
                                                 sent you a message regarding '{$notification->job_title}'<br>{$shortDesc}<br>{$notification->sent_on}</p><hr>";
 
                     } // end of for each loop
@@ -75,10 +75,9 @@ function getNotifications() {
                     if ($unreadNotifications > 0) { // start of if statement - 4
 
                         $notificationsText .= "
-                        <p id='floatingNumberOfNotifications' style='padding: 2px; font-size: 8px; border-radius: 10px; text-align: center; 
-                            float: right; background-color: #FF0000; margin-top: 10px;'>{$unreadNotifications}</p>
-                        <img class='navIcon' id='floatingNotifications' src='assets/bell-red.svg'>
-                        <div id='floatingNotificationsDiv' style='position: absolute; display: none; background-color: #017EFC; min-width: 250px;'>";
+                        <p class='numOfNotifications' id='floatingNumberOfNotifications'>{$unreadNotifications}</p>
+                        <img class='navIcon' id='floatingNotifications' src='assets/bell-red.svg' alt='Notifications icon with notifications'>
+                        <div class='notificationsDivBoth' id='floatingNotificationsDiv'>";
 
                         $notificationsText .= $notificationMessage;
 
@@ -87,10 +86,9 @@ function getNotifications() {
                     } else {
 
                         $notificationsText .= "
-                        <p id='floatingNumberOfNotifications' style='padding: 2.5px; font-size: 8px; border-radius: 10px; 
-                            text-align: center; float: right; background-color: #FF0000; margin-top: 10px; display:none;'></p>
-                        <img class='navIcon' id='floatingNotifications' src='assets/bell.svg'>
-                        <div id='floatingNotificationsDiv' style='position: absolute; display: none; background-color: #017EFC; min-width: 250px;'>";
+                        <p class='numOfNotifications' id='floatingNumberOfNotifications'></p>
+                        <img class='navIcon' id='floatingNotifications' src='assets/bell.svg' alt='Notifications icon without notifications'>
+                        <div class='notificationsDivBoth' id='floatingNotificationsDiv'>";
 
                         $notificationsText .= $notificationMessage;
 
@@ -101,10 +99,10 @@ function getNotifications() {
                 } else { // else of if statement - 3
 
                     $notificationsText .= "
-                    <p id='floatingNumberOfNotifications' style='padding: 2.5px; font-size: 8px; border-radius: 10px; text-align: center; float: right; background-color: #FF0000; margin-top: 10px; display:none;'></p>
-                    <img class='navIcon' id='floatingNotifications' src='assets/bell.svg'>
-                    <div id='floatingNotificationsDiv' style='position: absolute; display: none; background-color: #017EFC; min-width: 250px;'>
-                        <p id='noNotifications' style='padding:10px; color: white;'>No notifications</p>
+                    <p class='numOfNotifications' id='floatingNumberOfNotifications'></p>
+                    <img class='navIcon' id='floatingNotifications' src='assets/bell.svg' alt='Notifications icon without notifications'>
+                    <div class='notificationsDivBoth' id='floatingNotificationsDiv'>
+                        <p id='noNotifications'>No notifications</p>
                     </div></a> 
                 </div>";
 

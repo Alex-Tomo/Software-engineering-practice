@@ -65,7 +65,7 @@ function getHeader() {
         //Navigation links when hovering over the users name
         $header .= "
                     </button>
-                    <img src='{$src}' style='border-radius: 25px'>
+                    <img src='{$src}' alt='User profile picture'>
                     <div id='dropdown_content'>
                         <a class='links clickable' onclick='openPage(`userProfile.php`)'>My Profile</a>
                         <a class='links clickable' onclick='openPage(`userJobs.php`)'>My Jobs</a>
@@ -85,11 +85,10 @@ function getHeader() {
             // the number of unread messages, other wise display the white mail image
             // with no number
             if($unreadMessages > 0) {
-                $header .= "<p id='numberOfNotifications' style='padding: 2.5px; font-size: 8px; border-radius: 10px; text-align: center; float: right; 
-                    background-color: #FF0000; margin-top: 10px;'>{$unreadMessages}</p>";
-                $header .= "<img class='navIcon' src='assets/mail-red.svg'>";
+                $header .= "<p class='numOfNotifications' id='numberOfNotifications'>{$unreadMessages}</p>";
+                $header .= "<img class='navIcon' src='assets/mail-red.svg' alt='Mail icon with mail'>";
             } else {
-                $header .= "<img class='navIcon' src='assets/mail.svg'>";
+                $header .= "<img class='navIcon' src='assets/mail.svg' alt='Mail icon without mail'>";
             }
 
             $header .= "</a><a class='links clickable'>";
@@ -124,7 +123,7 @@ function getHeader() {
                         }
                     }
                     // put all notifications into a variable to display later
-                    $notificationMessage .= "<p style='padding:10px; color: white;'>{$notification->user_fname} {$notification->user_lname} 
+                    $notificationMessage .= "<p class='notificationMessage'>{$notification->user_fname} {$notification->user_lname}
                                                 sent you a message regarding '{$notification->job_title}'<br>{$shortDesc}<br>{$notification->sent_on}</p><hr>";
 
                 }
@@ -133,50 +132,46 @@ function getHeader() {
 
                     // display the red icon and number of unread notifications
                     $header .= "
-                        <p id='numberOfNotifications' style='padding: 2.5px; font-size: 8px; border-radius: 10px; 
-                            text-align: center; float: right; background-color: #FF0000; margin-top: 10px; display:none;'>{$unreadNotifications}</p>
-                        <img class='navIcon' id='notifications' src='assets/bell-red.svg'>
-                        <div id='notificationsDiv' style='position: absolute; display: none; background-color: #017EFC; min-width: 250px;'>";
+                        <p class='numOfNotifications' id='numberOfNotifications'>{$unreadNotifications}</p>
+                        <img class='navIcon' id='notifications' src='assets/bell-red.svg' alt='Notifications icon with notifications'>
+                        <div class='notificationsDivBoth' id='notificationsDiv'></div>";
 
                     $header .= $notificationMessage;
 
                 } else {
 
                     //display the notifications on click with a white icon
-                    $header .= "<p id='numberOfNotifications' style='padding: 2.5px; font-size: 8px; border-radius: 10px; text-align: center; 
-                        float: right; background-color: #FF0000; margin-top: 10px; display:none;'></p>
-                    <img class='navIcon' id='notifications' src='assets/bell.svg' height='45px'>
-                    <div id='notificationsDiv' style='position: absolute; display: none; background-color: #017EFC; min-width: 190px;'>";
+                    $header .= "<p class='numOfNotifications' id='numberOfNotifications'></p>
+                    <img class='navIcon' id='notifications' src='assets/bell.svg' alt='Notifications icon without notifications'>
+                    <div class='notificationsDivBoth' id='notificationsDiv'>";
                     $header .= $notificationMessage;
                 }
 
             } else {
 
                 // no notifications to display
-                $header .= "<p id='numberOfNotifications' style='padding: 2.5px; font-size: 8px; border-radius: 10px; text-align: center; 
-                        float: right; background-color: #FF0000; margin-top: 10px; display:none;'></p>
-                    <img class='navIcon' id='notifications' src='assets/bell.svg' height='45px'>
-                    <div id='notificationsDiv' style='position: absolute; display: none; background-color: #017EFC; min-width: 190px;'>";
+                $header .= "<p class='numOfNotifications' id='numberOfNotifications'></p>
+                    <img class='navIcon' id='notifications' src='assets/bell.svg' alt='Notifications icon without notifications'>
+                    <div class='notificationsDivBoth' id='notificationsDiv'>";
 
-                $header .= "<p id='noNotifications' style='padding:10px;'>No notifications</p>";
+                $header .= "<p id='noNotifications'>No notifications</p>";
             }
 
         } catch(Exception $e) {
 
             // no notifications to display on error
-            $header .= "<p id='numberOfNotifications' style='padding: 2.5px; font-size: 8px; border-radius: 10px; text-align: center; float: right; background-color: #FF0000; margin-top: 10px; display:none;'></p>
-                <img class='navIcon' id='notifications' src='assets/bell.svg' height='45px'>
-                <div id='notificationsDiv' style='position: absolute; display: none; background-color: #017EFC; min-width: 190px;'>";
+            $header .= "<p class='numOfNotifications' id='numberOfNotifications'></p>
+                <img class='navIcon' id='notifications' src='assets/bell.svg' alt='Notifications icon without notifications'>
+                <div class='notificationsDivBoth' id='notificationsDiv'>";
 
-            $header .= "<p id='noNotifications' style='padding:10px;'>No notifications</p>";
+            $header .= "<p id='noNotifications'>No notifications</p>";
             logError($e);
 
         }
 
-
         $header .= "</div>
                 </a>
-            <li><a class='links clickable' onclick='openPage(`postJob.php`)'>Post a Job</a></li>
+            <a class='clickable' id='postJobLink' onclick='openPage(`postJob.php`)'>+ Post a Job</a>
         </ul>";
     }
 

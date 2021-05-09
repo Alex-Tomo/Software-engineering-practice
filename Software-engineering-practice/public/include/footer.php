@@ -4,8 +4,7 @@ function getFooter() {
 
     $footer = '';
 
-    $footer .= "
-        <footer>
+    $footer .= "<footer>
             <div class='footerLinks'>
                 <h3>Platform</h3>
                 <ul>";
