@@ -1,7 +1,5 @@
 <?php
 
-    // TODO popup is not showing
-
     // Requires
     require('../db_connector.php');
     require('../pageTemplate.php');
@@ -51,11 +49,15 @@
                             <select id='lang' name='lang'>
                                 <option value='0'>Choose your language</option>");
 
+
 // Get all the available languages from the database
 list($languageCodes, $languageNames) = selectAll($conn, 'language_code', 'language_name', 'sep_languages', 'language_name');
-for($languageIndex = 0; $languageIndex < sizeof($languageCodes); $languageIndex++) {
+for($languageIndex = 0; $languageIndex < sizeof($languageCodes); $languageIndex++) { // start of for loop
+
     $page->addPageBodyItem("<option value='{$languageCodes[$languageIndex]}'>{$languageNames[$languageIndex]}</option>");
-}
+
+} // end of for loop
+
 
                             $page->addPageBodyItem("
                             </select>
@@ -63,11 +65,15 @@ for($languageIndex = 0; $languageIndex < sizeof($languageCodes); $languageIndex+
                                 <select id='reg' name='reg'>
                                     <option value='0'>Choose your region</option>");
 
+
 // Get all the available regions from the database
 list($regionCodes, $regionNames) = selectAll($conn, 'region_code', 'region_name', 'sep_regions', 'region_name');
-for($regionIndex = 0; $regionIndex < sizeof($regionCodes); $regionIndex++) {
+for($regionIndex = 0; $regionIndex < sizeof($regionCodes); $regionIndex++) { // start of for loop
+
     $page->addPageBodyItem("<option value='{$regionCodes[$regionIndex]}'>{$regionNames[$regionIndex]}</option>");
-}
+
+} // end of for loop
+
 
                                 $page->addPageBodyItem("
                                 </select>
@@ -81,11 +87,15 @@ for($regionIndex = 0; $regionIndex < sizeof($regionCodes); $regionIndex++) {
                                     <input id='jobsListInput' list='searchJobsList' placeholder='Search for jobs...' onkeyup='filterJobsList()' onchange='selectJob()'>       
                                     <datalist id='searchJobsList'>");
 
+
 // Get all the available job categories from the database
 list($jobCodes, $jobNames) = selectAll($conn, 'job_code', 'job_name', 'sep_jobs_list', 'job_name');
-for($jobIndex = 0; $jobIndex < sizeof($jobCodes); $jobIndex++) {
+for($jobIndex = 0; $jobIndex < sizeof($jobCodes); $jobIndex++) { // start of for loop
+
     $page->addPageBodyItem("<option value='{$jobNames[$jobIndex]}' id='{$jobNames[$jobIndex]}' name='{$jobCodes[$jobIndex]}'>");
-}
+
+} // end of for loop
+
 
                         $page->addPageBodyItem("
                         </datalist>   
@@ -108,11 +118,15 @@ for($jobIndex = 0; $jobIndex < sizeof($jobCodes); $jobIndex++) {
                         <select name='categories'>
                             <option value='all'>All Categories</option>");
 
+
 // Get all the available job categories from the database
 list($jobCodes, $jobNames) = selectAll($conn, 'job_code', 'job_name', 'sep_jobs_list', 'job_name');
-for($jobIndex = 0; $jobIndex < sizeof($jobCodes); $jobIndex++) {
+for($jobIndex = 0; $jobIndex < sizeof($jobCodes); $jobIndex++) { // start of for loop
+
     $page->addPageBodyItem("<option id='{$jobNames[$jobIndex]}' name='{$jobCodes[$jobIndex]}'>{$jobNames[$jobIndex]}</option>");
-}
+
+} // end of for loop
+
 
                         $page->addPageBodyItem("
                         </select>
@@ -124,44 +138,52 @@ for($jobIndex = 0; $jobIndex < sizeof($jobCodes); $jobIndex++) {
             <div id='recommendedContainer'>
                 <h1>Recommended for you</h1>");
 
-try{
-    // Get the recommended job details from the database
-    $choiceArray = selectUsersChosenCategories($conn, $_SESSION['email']);
-    $recommenders = getRecommendedJobs($conn, $choiceArray, $_SESSION['email']);
-    $price = 0;
-    if(!empty($recommenders)) {
-        foreach($recommenders as $recommender) {
-            $price = $recommender['jobPrice'];
 
-            $page->addPageBodyItem("
-                    <div class='resultChild clickable' onclick='openPage(`serviceInner.php?id={$recommender['jobId']}`)'>
-                        <div class='topImg'>
-                            <img src='assets/job_images/{$recommender['jobImage']}' alt='Job image'>
-                        </div>
-                        <div class='resultText'>
-                            <img class='personIcon' src='assets/{$recommender['userImage']}' style='border-radius: 25px' alt='User icon'>
-                            <h2>{$recommender['userFname']} {$recommender['userLname']}</h2>
-                            <h3>{$recommender['jobTitle']}</h3>
-                            <p>{$recommender['jobDesc']}</p>");
+// Get the recommended job details from the database
+$choiceArray = selectUsersChosenCategories($conn, $_SESSION['email']);
+$recommenders = getRecommendedJobs($conn, $choiceArray, $_SESSION['email']);
+$price = 0; // initialize price variable
 
-            list($sum, $total) = getStarRating($conn, $recommender['jobId']);
-            for ($i = 0; $i < 5; $i++) {
+if(!empty($recommenders)) { // start of outer if statement
 
-                if ($i < $sum) {
-                    $page->addPageBodyItem("<span class='fa fa-star checked'></span>");
-                } else {
-                    $page->addPageBodyItem("<span class='fa fa-star'></span>");
-                }
-        } // End of for loop
+    foreach($recommenders as $recommender) { // start of outer foreach loop
+        $price = $recommender['jobPrice'];
 
-                        $page->addPageBodyItem("
-                        ({$total})<p class='price'>£{$price}/h</p>
+
+        $page->addPageBodyItem("
+                <div class='resultChild clickable' onclick='openPage(`serviceInner.php?id={$recommender['jobId']}`)'>
+                    <div class='topImg'>
+                        <img src='assets/job_images/{$recommender['jobImage']}' alt='Job image'>
                     </div>
-                </div>");
+                    <div class='resultText'>
+                        <img class='personIcon' src='assets/{$recommender['userImage']}' style='border-radius: 25px' alt='User icon'>
+                        <h2>{$recommender['userFname']} {$recommender['userLname']}</h2>
+                        <h3>{$recommender['jobTitle']}</h3>
+                        <p>{$recommender['jobDesc']}</p>");
 
-    } // End of foreach($recommenders as $recommender)
-} // end of if(!empty($recommenders))
-} catch(Exception $e){ logError($e); }
+
+list($ratingsSum, $totalRatings) = getStarRating($conn, $recommender['jobId']);
+for ($i = 0; $i < 5; $i++) { // start of inner for loop
+
+    if ($i < $ratingsSum) {
+        $page->addPageBodyItem("<span class='fa fa-star checked'></span>");
+    } else {
+        $page->addPageBodyItem("<span class='fa fa-star'></span>");
+    }
+
+} // end of inner for loop
+
+
+                    $page->addPageBodyItem("
+                    ({$totalRatings})<p class='price'>£{$price}/h</p>
+                </div>
+            </div>");
+
+
+    } // end of outer foreach loop ($recommenders as $recommender)
+
+} // end of outer if statement (!empty($recommenders))
+
 
             $page->addPageBodyItem("
             </div>
@@ -169,11 +191,14 @@ try{
             <div id='recAddedContainer'>
                 <h1>Recently Added</h1>");
 
+
 // Get the most recently posted jobs from the database
 $recents = getRecentJobs($conn, $_SESSION['email']);
-$price = 0;
-foreach($recents as $recent) {
+$price = 0; // initialize the price variable
+
+foreach($recents as $recent) { // start of outer foreach loop
     $price = $recent['jobPrice'];
+
 
                 $page->addPageBodyItem("
                 <div class='resultChild clickable' onclick='openPage(`serviceInner.php?id={$recent['jobId']}`)'>
@@ -186,23 +211,26 @@ foreach($recents as $recent) {
                         <h3>{$recent['jobTitle']}</h3>
                         <p>{$recent['jobDesc']}</p>");
 
-list($sum, $total) = getStarRating($conn, $recent['jobId']);
-for($i = 0; $i < 5; $i++) {
 
-                    if($i < $sum) {
-                        $page->addPageBodyItem("<span class='fa fa-star checked'></span>");
-                    } else {
-                        $page->addPageBodyItem("<span class='fa fa-star'></span>");
-                    }
+list($ratingsSum, $totalRatings) = getStarRating($conn, $recent['jobId']);
+for($i = 0; $i < 5; $i++) { // start of inner for loop
 
-} // End of for loop
+    if($i < $ratingsSum) {
+        $page->addPageBodyItem("<span class='fa fa-star checked'></span>");
+    } else {
+        $page->addPageBodyItem("<span class='fa fa-star'></span>");
+    }
+
+} // End of inner for loop
+
 
                         $page->addPageBodyItem("
-                        ({$total})<p class='price'>£{$price}/h</p>
+                        ({$totalRatings})<p class='price'>£{$price}/h</p>
                     </div>
                 </div>");
 
-} // End of foreach($recents as $recent)
+} // End of outer foreach loop ($recents as $recent)
+
 
             $page->addPageBodyItem("
             </div>      
@@ -210,11 +238,15 @@ for($i = 0; $i < 5; $i++) {
             <div id='categories'>
                 <h1>Popular categories</h1>");
 
+
 // Get the most popular categories from the database
 $popularCategories = getPopularCategories($conn);
-foreach ($popularCategories as $popularCategory) {
+foreach ($popularCategories as $popularCategory) { // start of foreach loop
+
     $page->addPageBodyItem("<button class='clickable' onclick='openPage(`search.php?categories={$popularCategory}`)'>{$popularCategory}</button>");
-}
+
+} // end of foreach loop
+
 
             $page->addPageBodyItem("
             </div>  
@@ -223,14 +255,19 @@ foreach ($popularCategories as $popularCategory) {
             <div id='recViewedParent'>
                 <h1>Recently viewed</h1>");
 
+
 // If the user has view any jobs previously, get the job details and display them
-if(isset($_SESSION['recentlyViewed'])) {
-    for($i = 0; $i < sizeof($_SESSION['recentlyViewed']); $i++) {
+if(isset($_SESSION['recentlyViewed'])) { // start of outer if statement
+
+    for($i = 0; $i < sizeof($_SESSION['recentlyViewed']); $i++) { // start of outer for loop
+
         if($_SESSION['recentlyViewed'][$i] == null || $_SESSION['recentlyViewed'][$i] == 0) {
             continue;
         }
+
         list($jobTitle, $jobPrice, $jobImage) = getRecentlyViewed($conn, $_SESSION['recentlyViewed'][$i]);
-        if(isset($jobTitle) && isset($jobPrice) && isset($jobImage)) {
+        if(isset($jobTitle) && isset($jobPrice) && isset($jobImage)) { // start of inner if statement
+
 
                 $page->addPageBodyItem("
                 <div class='recViewedChild clickable' onclick='openPage(`serviceInner.php?id=`+{$_SESSION['recentlyViewed'][$i]})'>
@@ -243,9 +280,13 @@ if(isset($_SESSION['recentlyViewed'])) {
                     </div>
                 </div>");
 
-        } // end of if if(isset($jobTitle) && isset($jobPrice) && isset($jobImage))
-    } // End of for loop
-} // End of if(isset($_SESSION['recentlyViewed']))
+
+        } // end of inner if statement(isset($jobTitle) && isset($jobPrice) && isset($jobImage))
+
+    } // End of outer for loop
+
+} // End of outer if statement (isset($_SESSION['recentlyViewed']))
+
 
             $page->addPageBodyItem("
             </div>

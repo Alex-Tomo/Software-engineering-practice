@@ -47,15 +47,17 @@
                         <label for='gender'>Gender</label>
                         <select id='gender' name='gender'>");
 
-        for ($i = 0; $i < sizeof($gendersArray); $i++) {
+// get the genders from the gender array above
+for ($i = 0; $i < sizeof($gendersArray); $i++) {
 
-            if ($user['gender'] == $gendersArray[$i]) {
-                $page->addPageBodyItem("<option selected value='{$gendersArray[$i]}'>{$gendersValue[$i]}</option>");
-            } else {
-                $page->addPageBodyItem("<option value='{$gendersArray[$i]}'>{$gendersValue[$i]}</option>");
-            }
+    if ($user['gender'] == $gendersArray[$i]) {
+        $page->addPageBodyItem("<option selected value='{$gendersArray[$i]}'>{$gendersValue[$i]}</option>");
+    } else {
+        $page->addPageBodyItem("<option value='{$gendersArray[$i]}'>{$gendersValue[$i]}</option>");
+    }
 
-        } // end of for loop
+} // end of for loop
+
 
         $page->addPageBodyItem("
                         </select>
@@ -63,17 +65,19 @@
                         <select id='lang' name='lang'>
                             <option value='0'>Choose your language</option>");
 
-    // Get all languages from the database
-        list($languageCodes, $languageNames) = selectAll($conn, 'language_code', 'language_name', 'sep_languages', 'language_name');
-        for ($languageIndex = 0; $languageIndex < sizeof($languageCodes); $languageIndex++) {
 
-            if ($user['language'] == $languageCodes[$languageIndex]) {
-                $page->addPageBodyItem("<option selected value='{$languageCodes[$languageIndex]}'>{$languageNames[$languageIndex]}</option>");
-            } else {
-                $page->addPageBodyItem("<option value='{$languageCodes[$languageIndex]}'>{$languageNames[$languageIndex]}</option>");
-            }
+// Get all languages from the database
+list($languageCodes, $languageNames) = selectAll($conn, 'language_code', 'language_name', 'sep_languages', 'language_name');
+for ($languageIndex = 0; $languageIndex < sizeof($languageCodes); $languageIndex++) {
 
-        } // end of for loop
+    if ($user['language'] == $languageCodes[$languageIndex]) {
+        $page->addPageBodyItem("<option selected value='{$languageCodes[$languageIndex]}'>{$languageNames[$languageIndex]}</option>");
+    } else {
+        $page->addPageBodyItem("<option value='{$languageCodes[$languageIndex]}'>{$languageNames[$languageIndex]}</option>");
+    }
+
+} // end of for loop
+
 
         $page->addPageBodyItem("
                         </select>
@@ -81,17 +85,19 @@
                         <select id='reg' name='reg'>
                             <option value='0'>Choose your region</option>");
 
-    // Get all regions from the database
-        list($regionCodes, $regionNames) = selectAll($conn, 'region_code', 'region_name', 'sep_regions', 'region_name');
-        for ($regionIndex = 0; $regionIndex < sizeof($regionCodes); $regionIndex++) {
 
-            if ($user['region'] == $regionCodes[$regionIndex]) {
-                $page->addPageBodyItem("<option selected value='{$regionCodes[$regionIndex]}'>{$regionNames[$regionIndex]}</option>");
-            } else {
-                $page->addPageBodyItem("<option value='{$regionCodes[$regionIndex]}'>{$regionNames[$regionIndex]}</option>");
-            }
+// Get all regions from the database
+list($regionCodes, $regionNames) = selectAll($conn, 'region_code', 'region_name', 'sep_regions', 'region_name');
+for ($regionIndex = 0; $regionIndex < sizeof($regionCodes); $regionIndex++) {
 
-        } // end of for loop
+    if ($user['region'] == $regionCodes[$regionIndex]) {
+        $page->addPageBodyItem("<option selected value='{$regionCodes[$regionIndex]}'>{$regionNames[$regionIndex]}</option>");
+    } else {
+        $page->addPageBodyItem("<option value='{$regionCodes[$regionIndex]}'>{$regionNames[$regionIndex]}</option>");
+    }
+
+} // end of for loop
+
 
         $page->addPageBodyItem("
                         </select>
@@ -106,30 +112,33 @@
                         <input id='jobsListInput' list='searchJobsList' placeholder='Search for jobs...' onkeyup='filterJobsList()' onchange='selectJob()'>       
                         <datalist id='searchJobsList'>");
 
-    // Get all job categories from the database
-        list($jobCodes, $jobNames) = selectAll($conn, 'job_code', 'job_name', 'sep_jobs_list', 'job_name');
-        for ($jobIndex = 0; $jobIndex < sizeof($jobCodes); $jobIndex++) {
 
-            if (in_array($jobCodes[$jobIndex], $chosenJobsCode)) {
-                $page->addPageBodyItem("<option disabled value='{$jobNames[$jobIndex]}' id='{$jobNames[$jobIndex]}' name='{$jobCodes[$jobIndex]}'>");
-            } else {
-                $page->addPageBodyItem("<option value='{$jobNames[$jobIndex]}' id='{$jobNames[$jobIndex]}' name='{$jobCodes[$jobIndex]}'>");
-            }
+// Get all job categories from the database
+list($jobCodes, $jobNames) = selectAll($conn, 'job_code', 'job_name', 'sep_jobs_list', 'job_name');
+for ($jobIndex = 0; $jobIndex < sizeof($jobCodes); $jobIndex++) {
 
-        } // end of for loop
+    if (in_array($jobCodes[$jobIndex], $chosenJobsCode)) {
+        $page->addPageBodyItem("<option disabled value='{$jobNames[$jobIndex]}' id='{$jobNames[$jobIndex]}' name='{$jobCodes[$jobIndex]}'>");
+    } else {
+        $page->addPageBodyItem("<option value='{$jobNames[$jobIndex]}' id='{$jobNames[$jobIndex]}' name='{$jobCodes[$jobIndex]}'>");
+    }
+
+} // end of for loop
+
 
         $page->addPageBodyItem("
                         </datalist>   
                         <div id='suggestion'>");
 
-    // Add the users chosen jobs
-        for ($i = 0; $i < sizeof($chosenJobsName); $i++) {
 
-            $page->addPageBodyItem("
-                                <p onclick='removeJob(`{$chosenJobsCode[$i]}`, `{$chosenJobsName[$i]}`)' id='{$chosenJobsCode[$i]}' class='clickable chosenJob' 
-                                >{$chosenJobsName[$i]} X</p>");
+// Add the users chosen jobs
+for ($i = 0; $i < sizeof($chosenJobsName); $i++) {
 
-        } // end of for loop
+    $page->addPageBodyItem("<p onclick='removeJob(`{$chosenJobsCode[$i]}`, `{$chosenJobsName[$i]}`)' id='{$chosenJobsCode[$i]}' 
+                                    class='clickable chosenJob'>{$chosenJobsName[$i]} X</p>");
+
+} // end of for loop
+
 
         $page->addPageBodyItem("
                         <script> getSelectedJob(); </script>
@@ -165,12 +174,13 @@
                 <div>Region: {$user['region']}</div><br>
                 <h1>Favourite Categories</h1>");
 
-        foreach ($chosenJobsName as $jobName) {
 
-            $page->addPageBodyItem("
-                <div>{$jobName}</div>");
+foreach ($chosenJobsName as $jobName) {
 
-        } // end of foreach loop
+    $page->addPageBodyItem("<div>{$jobName}</div>");
+
+} // end of foreach loop
+
 
         $page->addPageBodyItem("
             </div>

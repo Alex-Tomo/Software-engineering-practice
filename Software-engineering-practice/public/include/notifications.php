@@ -2,6 +2,8 @@
 
 function getNotifications() {
 
+    // get the current URL, if on messages.php, do not show the
+    // floating notification button
     $messagingPage = false;
     $arr = explode("/", $_SERVER['PHP_SELF']);
     foreach ($arr as $a) {
@@ -11,84 +13,110 @@ function getNotifications() {
         }
     }
 
-    if(!$messagingPage) {
+    // if not on messages.php
+    if (!$messagingPage) { // start of if statement - 1
 
-        //Dynamic redirect
+        //Dynamic path to get the database connection
         $path = '';
         $arr = explode("\\", __DIR__);
         foreach ($arr as $a) {
             $path .= $a . '/';
             if ($a == 'Software-engineering-practice') {
-                $path .= 'db_connector.php';
                 break;
             }
         }
+        include_once $path . 'db_connector.php'; // include db_connector.php
+        include_once $path . 'database_functions.php'; // include database_functions.php
 
-        include_once $path;
+        try {
 
-        $notifications = "<div id='notificationLink'>";
+            $conn = getConnection(); //database connection variable
 
-        if ($_SESSION['loggedin']) {
-            $notifications .= "<a id='bell' class='clickable'>";
-            $conn = getConnection();
-            $statement = $conn->prepare("
-            SELECT sep_notifications.notification_message, notification_read, sep_notifications.sent_on, sep_available_jobs.job_title, sep_user_info.user_fname, sep_user_info.user_lname
-            FROM sep_notifications JOIN sep_available_jobs
-            ON sep_notifications.job_id = sep_available_jobs.job_id
-            JOIN sep_users
-            ON sep_available_jobs.user_id = sep_users.user_id
-            JOIN sep_user_info
-            ON sep_user_info.user_id = sep_notifications.user_id
-            WHERE sep_users.user_email = '{$_SESSION['email']}'
-            GROUP BY sep_notifications.job_id, sep_notifications.user_id
-            ORDER BY sep_notifications.sent_on
-            LIMIT 5
-        ");
-            $statement->execute();
-            $j = 0;
-            $h = '';
-            if ($statement->rowCount() > 0) {
-                while ($result = $statement->fetchObject()) {
-                    if ($result->notification_read == FALSE) {
-                        $j++;
-                    }
-                    $message = str_split($result->notification_message);
-                    $shortDesc = '';
-                    for ($i = 0; $i < sizeof($message); $i++) {
-                        if ($i <= 50) {
-                            $shortDesc .= $message[$i];
-                        } else if ($i > 50) {
-                            $shortDesc .= '...';
-                            break;
+            $notificationsText = "<div id='notificationLink'>";
+
+            if ($_SESSION['loggedin']) { // start of if statement - 2
+
+                $notificationsText .= "<a id='bell' class='clickable'>";
+
+                // get the notification details
+                $notifications = getNotificationDetails($conn, $_SESSION['email']);
+
+                // unread notifications and notfication messages to add
+                $unreadNotifications = 0;
+                $notificationMessage = '';
+
+                // if the user has notifications
+                if ($notifications != null) { // start of if statement - 3
+
+                    foreach ($notifications as $notification) { // start of for each loop
+
+                        if ($notification->notification_read == FALSE) {
+                            $unreadNotifications++;
                         }
-                    }
-                    $h .= "<p style='padding:10px; color: white;'>{$result->user_fname} {$result->user_lname} sent you a message regarding '{$result->job_title}'<br>{$shortDesc}<br>{$result->sent_on}</p><hr>";
-                }
-                if ($j > 0) {
-                    $notifications .= "<p id='floatingNumberOfNotifications' style='padding: 2px; font-size: 8px; border-radius: 10px; text-align: center; float: right; background-color: #FF0000; margin-top: 10px;'>{$j}</p>
-                <img class='navIcon' id='floatingNotifications' src='assets/bell-red.svg'>
-                <div id='floatingNotificationsDiv' style='position: absolute; display: none; background-color: #017EFC; min-width: 250px;'>";
-                    $notifications .= $h;
-                    $notifications .= "</div></a></div>";
-                } else {
-                    $notifications .= "<p id='floatingNumberOfNotifications' style='padding: 2.5px; font-size: 8px; border-radius: 10px; text-align: center; float: right; background-color: #FF0000; margin-top: 10px; display:none;'></p>
-                <img class='navIcon' id='floatingNotifications' src='assets/bell.svg'>
-                <div id='floatingNotificationsDiv' style='position: absolute; display: none; background-color: #017EFC; min-width: 250px;'>";
-                    $notifications .= $h;
-                    $notifications .= "</div></a></div>";
-                }
 
-            } else {
-                $notifications .= "<p id='floatingNumberOfNotifications' style='padding: 2.5px; font-size: 8px; border-radius: 10px; text-align: center; float: right; background-color: #FF0000; margin-top: 10px; display:none;'></p>
-            <img class='navIcon' id='floatingNotifications' src='assets/bell.svg'>
-            <div id='floatingNotificationsDiv' style='position: absolute; display: none; background-color: #017EFC; min-width: 250px;'>
-                <p id='noNotifications' style='padding:10px; color: white;'>No notifications</p>
-            </div></a> 
-        </div>";
-            }
+                        // cut the message down to 50 characters so it does not overfill the screen
+                        $message = str_split($notification->notification_message);
+                        $shortDesc = '';
+                        for ($i = 0; $i < sizeof($message); $i++) {
+                            if ($i <= 50) {
+                                $shortDesc .= $message[$i];
+                            } else if ($i > 50) {
+                                $shortDesc .= '...';
+                                break;
+                            }
+                        }
 
-            return $notifications;
-        }
-    }
-}
+                        // put all notifications into a variable to display later
+                        $notificationMessage .= "<p style='padding:10px; color: white;'>{$notification->user_fname} {$notification->user_lname} 
+                                                sent you a message regarding '{$notification->job_title}'<br>{$shortDesc}<br>{$notification->sent_on}</p><hr>";
+
+                    } // end of for each loop
+
+                    if ($unreadNotifications > 0) { // start of if statement - 4
+
+                        $notificationsText .= "
+                        <p id='floatingNumberOfNotifications' style='padding: 2px; font-size: 8px; border-radius: 10px; text-align: center; 
+                            float: right; background-color: #FF0000; margin-top: 10px;'>{$unreadNotifications}</p>
+                        <img class='navIcon' id='floatingNotifications' src='assets/bell-red.svg'>
+                        <div id='floatingNotificationsDiv' style='position: absolute; display: none; background-color: #017EFC; min-width: 250px;'>";
+
+                        $notificationsText .= $notificationMessage;
+
+                        $notificationsText .= "</div></a></div>";
+
+                    } else {
+
+                        $notificationsText .= "
+                        <p id='floatingNumberOfNotifications' style='padding: 2.5px; font-size: 8px; border-radius: 10px; 
+                            text-align: center; float: right; background-color: #FF0000; margin-top: 10px; display:none;'></p>
+                        <img class='navIcon' id='floatingNotifications' src='assets/bell.svg'>
+                        <div id='floatingNotificationsDiv' style='position: absolute; display: none; background-color: #017EFC; min-width: 250px;'>";
+
+                        $notificationsText .= $notificationMessage;
+
+                        $notificationsText .= "</div></a></div>";
+
+                    } // end of if statement - 4
+
+                } else { // else of if statement - 3
+
+                    $notificationsText .= "
+                    <p id='floatingNumberOfNotifications' style='padding: 2.5px; font-size: 8px; border-radius: 10px; text-align: center; float: right; background-color: #FF0000; margin-top: 10px; display:none;'></p>
+                    <img class='navIcon' id='floatingNotifications' src='assets/bell.svg'>
+                    <div id='floatingNotificationsDiv' style='position: absolute; display: none; background-color: #017EFC; min-width: 250px;'>
+                        <p id='noNotifications' style='padding:10px; color: white;'>No notifications</p>
+                    </div></a> 
+                </div>";
+
+                } // end of if statement 3
+
+                return $notificationsText;
+
+            } // end of if statement - 2
+
+        } catch (Exception $e) { logError($e);}
+    } // end of if statement - 1
+
+} // end of function
+
 ?>

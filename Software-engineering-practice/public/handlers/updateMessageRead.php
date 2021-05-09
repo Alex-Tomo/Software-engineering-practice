@@ -1,21 +1,34 @@
 <?php
 
-require('../../db_connector.php');
-$conn = getConnection();
+    // Updates the database to mark the messages as read when the user clicks on a message
 
-try {
-    $jobId = isset($_POST['jobId']) ? $_POST['jobId'] : null;
-    $email = isset($_POST['email']) ? $_POST['email'] : null;
+    // Require
+    require('../../db_connector.php');
 
-    $statement = $conn->prepare("SELECT user_id FROM sep_users WHERE user_email = '{$email}'");
-    $statement->execute();
-    $result = $statement->fetchObject();
-    $userId = $result->user_id;
+    // get the database connection
+    $conn = getConnection();
 
-    $statement = $conn->prepare("UPDATE sep_read_messages SET message_read = TRUE WHERE job_id = {$jobId} AND user_id = {$userId}");
-    $statement->execute();
+    try {
 
-    echo 'message read';
-} catch(Exception $e) { logError($e); }
+        // get the variables from the form
+        $jobId = isset($_POST['jobId']) ? $_POST['jobId'] : null;
+        $email = isset($_POST['email']) ? $_POST['email'] : null;
+
+        // get the user_id from the database using the users email
+        $selectUserIdStatement = $conn->prepare("SELECT user_id FROM sep_users WHERE user_email = ?");
+        $selectUserIdStatement->bindParam(1, $email);
+        $selectUserIdStatement->execute();
+        $selectUserIdResult = $selectUserIdStatement->fetchObject();
+        $userId = $selectUserIdResult->user_id;
+
+        // update the messages to show they have been read
+        $updateMessageReadStatement = $conn->prepare("UPDATE sep_read_messages SET message_read = TRUE WHERE job_id = ? AND user_id = ?");
+        $updateMessageReadStatement->bindParam(1, $jobId);
+        $updateMessageReadStatement->bindParam(2, $userId);
+        $updateMessageReadStatement->execute();
+
+    } catch(Exception $e) {
+        logError($e);
+    }
 
 ?>

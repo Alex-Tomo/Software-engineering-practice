@@ -1,19 +1,20 @@
 <?php
 
-// Requires
-require('../pageTemplate.php');
-require('../db_connector.php');
+    // Requires
+    require('../pageTemplate.php');
+    require('../db_connector.php');
 
-$conn = getConnection();
+    // get the database connection
+    $conn = getConnection();
 
-// remove the loggedin session
-$_SESSION['loggedin'] = null;
+    // remove the loggedin session
+    $_SESSION['loggedin'] = null;
 
-$statement = $conn->prepare(
-    "UPDATE sep_users SET user_online = false WHERE user_email = '{$_SESSION['email']}'");
-$statement->execute();
+    $logoutStatement = $conn->prepare("UPDATE sep_users SET user_online = false WHERE user_email = ?");
+    $logoutStatement->bindParam(1, $_SESSION['email']);
+    $logoutStatement->execute();
 
-// redirect the user to the homepage
-header('Location: home.php');
+    // redirect the user to the homepage
+    header('Location: home.php');
 
 ?>

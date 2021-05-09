@@ -1,5 +1,8 @@
 <?php
 
+    // inserts the new job details to the database
+    // renames and moves the image to the correct location
+
     // Require
     require('../../pageTemplate.php');
     require('../../db_connector.php');
@@ -17,26 +20,30 @@
     $userId = getUserId($conn);
     $jobId = getJobId($conn);
 
-    if (!empty($title) && !empty($desc) && !empty($price) && !empty($userId) && !empty($jobId)) {
+    // executes if all the data except the image and categoryIds are not empty
+    if(!empty($title) && !empty($desc) && !empty($price) && !empty($userId) && !empty($jobId)) { // start of outer if statement - 1
 
+        // Moves the image to the job_images folder and renames the image
         $renamedImage = moveAndRenameImage($jobId);
-        if ($renamedImage) {
+        if ($renamedImage) { // start of inner if statement - 2
 
-            $statement = $conn->prepare("
+            // if the image is successfully moved and renamed
+            $insertJobDetailsStatement = $conn->prepare("
             INSERT INTO sep_available_jobs (job_id, user_id, job_title, job_desc, job_price, job_availability, job_date, job_image)
             VALUES (?, ?, ?, ?, ?, TRUE, now(), ?)");
-            $statement->bindParam(1, $jobId);
-            $statement->bindParam(2, $userId);
-            $statement->bindParam(3, $title);
-            $statement->bindParam(4, $desc);
-            $statement->bindParam(5, $price);
-            $statement->bindParam(6, $renamedImage);
-            $statement->execute();
+            $insertJobDetailsStatement->bindParam(1, $jobId);
+            $insertJobDetailsStatement->bindParam(2, $userId);
+            $insertJobDetailsStatement->bindParam(3, $title);
+            $insertJobDetailsStatement->bindParam(4, $desc);
+            $insertJobDetailsStatement->bindParam(5, $price);
+            $insertJobDetailsStatement->bindParam(6, $renamedImage);
+            $insertJobDetailsStatement->execute();
 
+            // If the user has chosen categories then insert these categories
+            // use a for loop to add them dynamically
+            if (!empty($categoryIds)) { // start of if statement - 3
 
-            if (!empty($categoryIds)) {
                 $insertSimilarCategoriesQuery = "INSERT INTO sep_jobs_categories VALUES ";
-                echo sizeof($categoryIds);
                 for ($i = 0; $i < sizeof($categoryIds); $i++) {
                     if ($i == sizeof($categoryIds) - 1) {
                         $insertSimilarCategoriesQuery .= "(?, ?)";
@@ -44,40 +51,46 @@
                         $insertSimilarCategoriesQuery .= "(?, ?),";
                     }
                 }
-                echo $insertSimilarCategoriesQuery;
+
                 $statement = $conn->prepare($insertSimilarCategoriesQuery);
                 $j = 1;
+
                 for ($i = 0; $i < sizeof($categoryIds); $i++) {
                     echo $categoryIds[$i];
                     $statement->bindParam($j, $jobId);
                     $statement->bindParam(($j + 1), $categoryIds[$i]);
                     $j += 2;
                 }
+
                 $statement->execute();
-            }
-        }
-    } // End of if statement
+            } // end of inner if statement 3
+        } // end of inner if statement - 2
+    } // End of outer if statement - 1
 
     // Refresh the page
     header("Location: ../postJob.php");
 
+    // get the users id
     function getUserId($connection) {
-        $result = $connection->query("SELECT user_id FROM sep_users WHERE user_email = '{$_SESSION['email']}'");
-        if($result) {
-            $row = $result->fetchObject();
+        $getUserIdStatement = $connection->prepare("SELECT user_id FROM sep_users WHERE user_email = ?");
+        $getUserIdStatement->bindParam(1, $_SESSION['email']);
+        if($getUserIdStatement->execute()) {
+            $row = $getUserIdStatement->fetchObject();
             return sanitizeData($row->user_id);
         }
     }
 
+    //get the new jobs job id
     function getJobId($connection) {
-        $result = $connection->query("SELECT MAX(job_id)+1 AS jobId FROM sep_available_jobs");
-        if($result) {
-            $row = $result->fetchObject();
+        $getJobIdStatement = $connection->prepare("SELECT MAX(job_id)+1 AS jobId FROM sep_available_jobs");
+        if($getJobIdStatement->execute()) {
+            $row = $getJobIdStatement->fetchObject();
             return sanitizeData($row->jobId);
         }
     }
 
     function moveAndRenameImage($jobId) {
+        // get the path to the public folder
         $path = '';
         $arr = explode("\\", __DIR__);
         foreach ($arr as $a) {
@@ -87,11 +100,13 @@
             }
         }
 
+        // create the path to the target directory
         $targetDir = $path."\assets\job_images\\";
         $targetFile = $targetDir . basename($_FILES['file']['name']);
         $uploadOk = 1;
         $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
+        // check is the file is actually an image
         $check = getimagesize($_FILES['file']['tmp_name']);
         if ($check === false) {
             $uploadOk = 0;
@@ -99,6 +114,7 @@
             echo "File is not an image";
         }
 
+        // check if the file if less than 500000
         if ($_FILES['file']['size'] > 500000) {
             $uploadOk = 0;
             // files too big
@@ -109,6 +125,7 @@
             // Files not uploaded
             echo "File was not uploaded";
         } else {
+            // rename the file
             $newImage = 'image_'.$jobId.'.'.$imageFileType;
             // If the image was successfully uploaded then return the image name to update the database
             if(move_uploaded_file($_FILES['file']['tmp_name'], $targetDir.$newImage)) {
