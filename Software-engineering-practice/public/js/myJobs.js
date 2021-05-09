@@ -4,6 +4,7 @@
 selectedJobsArray = [];
 
 window.onload = () => {
+    //Deletes job
     let removeButtons = document.getElementsByClassName('removeJob');
     for (let i = 0; i < removeButtons.length; i++) {
         let id = removeButtons[i].id;
@@ -13,6 +14,7 @@ window.onload = () => {
         });
     }
 
+    //Edit job
     let editButtons = document.getElementsByClassName('editJob');
     for (let i = 0; i < editButtons.length; i++) {
         let id = editButtons[i].id;
@@ -22,12 +24,14 @@ window.onload = () => {
         });
     }
 
+    //Closes popup
     let closePopup = document.getElementById('closePopup');
     closePopup.addEventListener('click', (event) => {
         document.getElementById('popup-3').style.display = 'none';
         event.preventDefault();
     });
 
+    //Closes form
     let closeForm = document.getElementById('overlay');
     closeForm.addEventListener('click', (event) => {
         document.getElementById('popup-3').style.display = 'none';

@@ -1,36 +1,38 @@
 // Create a new WebSocket.
-let socket  = new WebSocket('ws://127.0.0.1:3001');
+try {
+    let socket = new WebSocket('ws://127.0.0.1:3001');
 
-$(document).ready(() => {
-    window.onresize = () => {
-        document.getElementById('messages').style.marginTop = document.getElementById('messagesTitle').offsetHeight + 'px';
-    }
-
-    document.getElementById('send').addEventListener('click', () => {
-        if(document.getElementById('msg').value.trim() !== '') {
-
-            let email = document.getElementById('usersEmailAddress').getAttribute('name');
-            let msg = document.getElementById('msg').value;
-            let jobId = document.getElementById('jobId').getAttribute('name');
-            let otherUserId = document.getElementById('otherUserId').getAttribute('name');
-
-            let data = {
-                email: email, // for the users id
-                msg: msg, // the actual message
-                jobId: jobId,
-                otherUserId: otherUserId
-            }
-
-            document.getElementById('msg').value = '';
-
-            console.log(data);
-
-            socket.send(JSON.stringify(data));
+    $(document).ready(() => {
+        window.onresize = () => {
+            // document.getElementById('messages').style.marginTop = document.getElementById('messagesTitle').offsetHeight + 'px';
         }
-    });
 
-    socket.onmessage = (e) => {
-        let data = JSON.parse(e.data);
+        document.getElementById('send').addEventListener('click', () => {
+
+            if (document.getElementById('msg').value.trim() !== '') {
+
+                let email = document.getElementById('usersEmailAddress').getAttribute('name');
+                let msg = document.getElementById('msg').value;
+                let jobId = document.getElementById('jobId').getAttribute('name');
+                let otherUserId = document.getElementById('otherUserId').getAttribute('name');
+
+                let data = {
+                    email: email, // for the users id
+                    msg: msg, // the actual message
+                    jobId: jobId,
+                    otherUserId: otherUserId
+                }
+
+                document.getElementById('msg').value = '';
+
+                console.log(data);
+
+                socket.send(JSON.stringify(data));
+            }
+        });
+
+        socket.onmessage = (e) => {
+            let data = JSON.parse(e.data);
 
             if (data.from == 'You') {
                 let p = document.createElement('div');
@@ -44,6 +46,7 @@ $(document).ready(() => {
                 p.style.borderRadius = '10px';
                 p.style.display = 'block';
                 p.style.wordWrap = 'break-word';
+                p.style.boxShadow = '4px 4px 6px 6px rgba(0, 0, 0, 0.05)';
                 document.getElementById('messages').appendChild(p);
 
                 let message = data.msg;
@@ -83,8 +86,12 @@ $(document).ready(() => {
                 p.style.borderRadius = '10px';
                 p.style.display = 'block';
                 p.style.wordWrap = 'break-word';
+                p.style.boxShadow = '4px 4px 6px 6px rgba(0, 0, 0, 0.05)';
                 document.getElementById('messages').appendChild(p);
             }
             document.getElementById('messages').scrollTop = document.getElementById('messages').scrollHeight;
         }
-});
+    });
+}catch (e) {
+    console.log('e');
+    }

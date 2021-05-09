@@ -14,16 +14,47 @@ window.onload = () => {
     document.getElementById('closePasswordWindow').addEventListener('click', () => { closeChangePassword(); });
     document.getElementById('submitPasswordForm').addEventListener('click', () => { changePassword(); })
     document.getElementById('overlay-2').addEventListener('click', () => { closeChangePassword(); });
+    document.getElementById('newPassword').addEventListener('keyup', () => { passwordLength(); });
+    document.getElementById('repeatNewPassword').addEventListener('keyup', () => { passwordMatch(); });
 }
 
+//Checks the password length
+const passwordLength = () => {
+    let passwordLength = document.getElementById('passwordLength');
+    let newP = document.getElementById('newPassword');
+
+    if (newP.value.length <= 8) {
+        passwordLength.style.display = 'block';
+        passwordLength.innerHTML = 'Password must be more than 8 characters.';
+    } else {
+        passwordLength.style.display = 'none';
+    }
+}
+
+//Checks if the new passwords match
+const passwordMatch = () => {
+    let passwordMatch = document.getElementById('passwordMatch');
+    let newP = document.getElementById('newPassword');
+    let repeatP = document.getElementById('repeatNewPassword');
+
+    if (newP.value != repeatP.value) {
+        passwordMatch.style.display = 'block';
+        passwordMatch.innerHTML = 'Passwords do not match.';
+    } else
+        passwordMatch.style.display = 'none';
+}
+
+//Closes form
 const closeChangePassword = () => {
     document.getElementById('passwordForm').style.display = 'none';
 }
 
+//Displays form
 const displayChangePassword = () => {
     document.getElementById('passwordForm').style.display = 'block';
 }
 
+//Changes the password
 const changePassword = () => {
     let oldPassword = document.getElementById('oldPassword').value;
     let newPassword = document.getElementById('newPassword').value;
@@ -36,6 +67,7 @@ const changePassword = () => {
         (email.trim() === '' || email.trim() === null)) {
 
         alert('Fields cannot be empty');
+
     } else {
 
         // Sends the data to changeUserPassword.php and if the response is 'true'

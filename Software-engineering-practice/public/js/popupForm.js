@@ -88,6 +88,7 @@ window.onload = () => {
                     }
                 });
 
+                //Hide tab2 and show tab1
                 prevButtonTab2.addEventListener('click', () => {
                     tab2.style.display = 'none';
                     tab1.style.display = 'inherit';

@@ -16,15 +16,17 @@ window.onload = function() {
     dotAnchor2[0].addEventListener("click", function() { currentSlide(2); });
     dotAnchor3[0].addEventListener("click", function() { currentSlide(3); });
 
-
+    //Shows the next slide
     function plusSlides(n) {
         showSlides(slideIndex += n);
     }
 
+    //Gets the current slide
     function currentSlide(n) {
         showSlides(slideIndex = n);
     }
 
+    //Shows the slides, when user clicks on back or forward or the dots the slides move on
     function showSlides(n) {
         let i;
         let slides = document.getElementsByClassName("mySlides");
@@ -41,6 +43,7 @@ window.onload = function() {
         dots[slideIndex-1].className += " active";
     }
 
+    //Slides move on their own after a certain amount of time
     function carousel() {
         let i;
         let x = document.getElementsByClassName("mySlides");

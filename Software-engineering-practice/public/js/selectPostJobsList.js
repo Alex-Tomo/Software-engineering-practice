@@ -25,7 +25,6 @@ const filterJobsList = () => {
 
 // Added by Alex
 // Set some styling and disable the suggestion from the datalist
-
 const selectJob = () => {
     let jobsList = document.getElementById('searchJobsList').getElementsByTagName('option');
 

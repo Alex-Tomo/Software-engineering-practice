@@ -1,5 +1,5 @@
 window.onload = () => {
-    
+
     let interval;
     let intervalListPage;
 
@@ -89,13 +89,13 @@ window.onload = () => {
 
             document.getElementById('messagesTitle').setAttribute('name', messageUsers[i].getAttribute('name'));
             document.getElementById('messagesList').style.display = 'none';
-            document.getElementById('messagesTitle').style.display = 'block';
+            document.getElementById('messagesTitle').style.display = 'inline-block';
             while(document.getElementById('messages').lastElementChild) {
                 document.getElementById('messages').removeChild(document.getElementById('messages').lastElementChild);
             }
             document.getElementById('messages').style.display = 'block';
-            document.getElementById('sendMessages').style.display = 'flex';
-            document.getElementById('messages').style.marginTop = document.getElementById('messagesTitle').offsetHeight + 'px';
+            document.getElementById('sendMessages').style.display = 'block';
+            document.getElementById('messages').style.marginTop = '0';
 
             document.getElementById('jobId').setAttribute('name', messageUsers[i].id);
             document.getElementById('otherUserId').setAttribute('name', messageUsers[i].getAttribute('name'));
@@ -143,6 +143,7 @@ window.onload = () => {
                             p.style.borderRadius = '10px';
                             p.style.display = 'block';
                             p.style.wordWrap = 'break-word';
+                            p.style.boxShadow = '4px 4px 6px 6px rgba(0, 0, 0, 0.05)';
                             document.getElementById('messages').appendChild(p);
 
                         } else {
@@ -159,6 +160,7 @@ window.onload = () => {
                             p.style.borderRadius = '10px';
                             p.style.display = 'block';
                             p.style.wordWrap = 'break-word';
+                            p.style.boxShadow = '4px 4px 6px 6px rgba(0, 0, 0, 0.05)';
                             document.getElementById('messages').appendChild(p);
                         }
                     }
