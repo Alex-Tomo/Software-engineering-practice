@@ -1,3 +1,4 @@
+/*Main CSS styling*/
 html{
     font-family: Arial;
 }
@@ -8,13 +9,12 @@ body{
     background: #017EFC;
 }
 
+/*Sets cursor to pointer for all links and buttons*/
 .clickable:hover {
     cursor: pointer;
 }
 
-
-
-/*Stick notification bell*/
+/*Sticky notification bell*/
 #notificationLink{
     position: -webkit-sticky;
     position: sticky;
@@ -35,16 +35,9 @@ body{
     padding-top: 12px;
 }
 
-/*#notifications{*/
-/*    padding-top: 10px;*/
-/*    width: 30px;*/
-/*    margin: 0 ;*/
-/*}*/
 
 
-
-
-/*Top Section*/
+/*home.php styling - top section*/
 #top{
     text-align: center;
     display: inline-block;
@@ -100,7 +93,7 @@ body{
 
 
 
-/*Info Section*/
+/*home.php styling - info section*/
 #infoSec{
     background: white;
     margin-top: 0;
@@ -149,9 +142,7 @@ body{
 
 
 
-
-
-/*Benefits Section*/
+/*home.php benefits section*/
 #container{
     background-color: white;
 }
@@ -165,52 +156,9 @@ body{
     height: 300px;
 }
 
-/*#benefitsSec h3{*/
-/*    color: #805DF6;*/
-/*    text-transform: uppercase;*/
-/*    text-align: center;*/
-/*    margin-bottom: 5px;*/
-/*    font-size: 1em;*/
-/*}*/
-
-/*#benefitsSec h4{*/
-/*    text-align: center;*/
-/*    margin-top: 0;*/
-/*    margin-bottom: 5px;*/
-/*    color: #017EFC;*/
-/*    font-size: 1.3em;*/
-/*}*/
-
-/*#benefitsSec p{*/
-/*    color: #191D20;*/
-/*    text-align: center;*/
-/*    margin-top: 0;*/
-/*    margin-bottom: 10px;*/
-/*    font-size: 0.85em;*/
-/*}*/
-
-/*#downIcons{*/
-/*    width: 80%;*/
-/*    height: auto;*/
-/*    display: block;*/
-/*    margin: 20px auto 20px auto;*/
-/*}*/
-
-/*#clipCalc{*/
-/*    width: 50%;*/
-/*    height: auto;*/
-/*    display: block;*/
-/*    margin: 20px auto 20px auto;*/
-/*}*/
-
-/*#clipDone{*/
-/*    display: none;*/
-/*}*/
 
 
-
-
-/*Swipe Section Mobile*/
+/*home.php swipe section mobile*/
 #swipeSecMob{
     background-color: #FAFAFA;
     padding: 30px;
@@ -239,8 +187,7 @@ body{
 
 
 
-
-/*Swipe Section Desktop*/
+/*home.php styling - swipe section desktop*/
 #swipeSecDes{
     display: none;
 }
@@ -273,11 +220,7 @@ body{
 
 
 
-
-
-
-/*Review Section*/
-/* Slideshow container */
+/*home.php styling - review section*/
 #slideshow_container{
     position: relative;
     height: 300px;
@@ -289,7 +232,6 @@ body{
     margin: 40px 0 0 0;
 }
 
-/* Slides */
 .mySlides{
     display: none;
     padding: 70px 80px 40px 80px;
@@ -300,7 +242,6 @@ body{
     width: 30px;
 }
 
-/* Next & previous buttons */
 .prev, .next{
     cursor: pointer;
     position: absolute;
@@ -310,20 +251,17 @@ body{
     padding: 25px;
 }
 
-/* Position the "next button" to the right */
 .next{
     position: absolute;
     right: 0;
     border-radius: 3px 0 0 3px;
 }
 
-/* The dot/bullet/indicator container */
 .dot-container{
     text-align: center;
     padding: 0 20px 20px 20px;
 }
 
-/* The dots/bullets/indicators */
 .dot{
     cursor: pointer;
     height: 15px;
@@ -336,18 +274,15 @@ body{
     transition: background-color 0.6s ease;
 }
 
-/* Add a background color to the active dot/circle */
 .active, .dot:hover{
     background-color: #017EFC;
     opacity: 100%;
 }
 
-/* Add an italic font style to all quotes */
 q{
     font-style: italic;
 }
 
-/* Add a blue color to the author */
 .author{
     font-weight: bold;
     margin: 25px 0 10px 0;
@@ -359,10 +294,8 @@ q{
 
 
 
-
-
-
-/*Logged in home popup form*/
+/*loggedinHome.php - user details popup form*/
+/*Overlay creates a dark background behind popup form*/
 .overlay {
     position: fixed;
     top: 0;
@@ -419,7 +352,6 @@ q{
 #tab1 input[type="text"]::-webkit-input-placeholder {
     padding-left: 10px;
 }
-
 
 #tab1 select{
     padding: 10px 0 10px 10px;
@@ -498,25 +430,7 @@ q{
 
 
 
-/*#popupForm{*/
-/*    display: none;*/
-/*}*/
-
-/*.popup{*/
-/*    display:none;*/
-/*}*/
-
-/*.overlay{*/
-/*    display: none*/
-/*}*/
-
-
-
-
-
-
-
-/*Logged in Homepage*/
+/*loggedinHome.php - homepage*/
 .pageContainer{
     background-color: #FFFFFF;
     padding-top: 20px;
@@ -524,8 +438,22 @@ q{
     width: 100%;
 }
 
+.pageContainer h1{
+    font-size: 1.3em;
+    margin-top: 40px;
+    color: #017EFC;
+}
+
 #refineContainer{
     margin: 20px 20px 0 20px;
+}
+
+#recommendedContainer{
+    margin: 0 15px;
+}
+
+#recAddedContainer{
+    margin: 0 15px;
 }
 
 .refineChild{
@@ -560,14 +488,6 @@ q{
     opacity: 1; /* Firefox */
 }
 
-/*:-ms-input-placeholder {*/
-/*    color: #017EFC;*/
-/*}*/
-
-/*::-ms-input-placeholder {*/
-/*    color: #017EFC;*/
-/*}*/
-
 .refineChild select option {
     background-color: white;
     color: #017EFC;
@@ -591,36 +511,30 @@ q{
 
 
 
+/*loggedinHome.php - search page container*/
+.searchPageContainer {
+    margin: 20px 15px;
+}
 
-
-
-
-
-/*Results*/
-.pageContainer h1{
+.searchPageContainer h1 {
     font-size: 1.3em;
-    margin-top: 40px;
+    margin-top: 20px;
     color: #017EFC;
 }
 
-#recommendedContainer{
-    margin: 0 15px;
-}
 
-#recAddedContainer{
-    margin: 0 15px;
-}
 
-.checked {
-    color: orange;
-}
-
+/*LoggedinHome.php - result child*/
 .resultChild{
     background: white;
     border-radius: 5px;
     margin-bottom: 15px;
     box-shadow: 4px 4px 6px 6px rgba(0, 0, 0, 0.05);
     height: 400px;
+}
+
+.checked {
+    color: orange;
 }
 
 .resultText{
@@ -661,23 +575,9 @@ q{
     margin-right: 7px;
 }
 
-/*.replaceWithImg2{*/
-/*    background-color: #D8D8D8;*/
-/*    height: 150px;*/
-/*    width: 100%;*/
-/*    !*float: left;*!*/
-/*}*/
-
-/*.resultChild img{*/
-/*    height: auto;*/
-/*    margin-right: 5px;*/
-/*}*/
 
 
-
-
-
-/*Categories*/
+/*loggedinHome.php - job categories*/
 #categories{
     margin: 15px;
     display: inline-block;
@@ -699,9 +599,7 @@ q{
 
 
 
-
-
-/*Recently Viewed*/
+/*loggedinHome.php - recently viewed*/
 #recViewedParent{
     margin: 0 15px;
     padding-bottom: 25px;
@@ -724,11 +622,6 @@ q{
     margin: 8px 0 9px 0;
 }
 
-/*#recViewedParent2 h4{*/
-/*    font-size: 0.8em;*/
-/*    margin: 8px 60px 9px 0;*/
-/*}*/
-
 .recViewedChild p{
     color: #099239;
     font-size: 1em;
@@ -742,9 +635,7 @@ q{
 
 
 
-
-
-/*Service Inner*/
+/*serviceInner.php - homepage*/
 #resultContainer{
     margin: 15px;
 }
@@ -799,9 +690,6 @@ q{
     margin-bottom: 30px;
 }
 
-/* Added by Alex */
-/* Sizes the person.svg image on loggedinHome and serviceInner */
-
 .resultText img {
     max-width: 50px;
     max-height: 50px;
@@ -814,58 +702,7 @@ q{
 
 
 
-
-
-/* Added by Alex for Search page */
-.searchPageContainer {
-    margin: 20px 15px;
-}
-
-.searchPageContainer h1 {
-    font-size: 1.3em;
-    margin-top: 20px;
-    color: #017EFC;
-}
-
-
-
-
-
-
-
-/* Added by Alex My Profile page */
-#passwordTab label,input{
-    display: block;
-}
-
-#passwordTab label{
-    text-align: left;
-    font-size: 0.9em;
-    width: 200px;
-    float: left;
-    font-weight: bold;
-    color: #017EFC;
-    margin: 13px 0 5px 0;
-}
-
-#passwordTab input[type="password"]{
-    padding: 10px 0;
-    border: 1px solid #828282;
-    border-radius: 8px;
-    opacity: 0.5;
-    float: left;
-    width: 100%;
-    color: #017EFC;
-}
-
-#passwordTab input[type="password"]::-webkit-input-placeholder {
-    padding-left: 10px;
-}
-
-
-
-
-/*User profile*/
+/*userProfile.php - change user details*/
 #userProfile{
     text-align: center;
     width: 100%;
@@ -911,15 +748,60 @@ q{
     margin: 15px 0 10px 0;
 }
 
+#popup-2 label{
+    text-align: left;
+    font-size: 0.9em;
+    width: 200px;
+    float: left;
+    font-weight: bold;
+    color: #017EFC;
+    margin: 13px 0 5px 0;
+}
 
 
 
+/*userProfile.php - change password form*/
+#passwordTab label,input{
+    display: block;
+}
+
+#passwordTab label{
+    text-align: left;
+    font-size: 0.9em;
+    width: 200px;
+    float: left;
+    font-weight: bold;
+    color: #017EFC;
+    margin: 13px 0 5px 0;
+}
+
+#passwordTab input[type="password"]{
+    padding: 10px 0;
+    border: 1px solid #828282;
+    border-radius: 8px;
+    opacity: 0.5;
+    float: left;
+    width: 100%;
+    color: #017EFC;
+}
+
+#passwordTab input[type="password"]::-webkit-input-placeholder {
+    padding-left: 10px;
+}
+
+#passwordLength{
+    margin-top: 50px;
+}
+
+.error{
+    padding-top: 55px;
+    color: red;
+    font-size: 0.85em;
+}
 
 
 
-
-/* Post a job */
-
+/*postJob.php - homepage*/
 #postJobContainer {
     background-color: #FFFFFF;
     padding-top: 20px;
@@ -957,7 +839,7 @@ q{
     margin: 20px 0 5px 0;
 }
 
-#postJobForm input[type="text"] {
+#postJobForm input[type="text"], [type="number"] {
     padding: 10px 0;
     border: 1px solid #828282;
     border-radius: 8px;
@@ -966,7 +848,7 @@ q{
     color: #017EFC;
 }
 
-#postJobForm textarea {
+textarea {
     resize: none;
     width: 100%;
     border: 1px solid #828282;
@@ -997,9 +879,16 @@ q{
     margin-top: 20px;
 }
 
+#remaining{
+    float: left;
+    color: #017EFC;
+    font-size: 0.9em;
+    font-weight: bold;
+}
 
 
-/* Edit jobs */
+
+/*userJobs.php - update job form*/
 #userJobHeader{
     text-align: center;
 }
@@ -1018,11 +907,6 @@ q{
     width: 100%;
     color: #017EFC;
     margin: 10px 0;
-}
-
-#updateJobForm textarea {
-    resize: none;
-    width: 97%;
 }
 
 #jobImage{
@@ -1057,11 +941,102 @@ q{
 
 
 
+/*messages.php - homepage*/
+#messagesTitle{
+    background-color: #EEEEEE;
+    width: 100%;
+    padding-bottom: 10px
+}
 
+#backToMessageList{
+    margin: 5px;
+    width: 160px;
+}
 
+#messagesList{
+    overflow-y: scroll;
+    height: 500px;
+}
 
+.message_users{
+    margin: 5px;
+}
 
-/*Messages Page*/
+.personIcon{
+    border-radius: 25px;
+    float: left;
+}
+
+#online{
+    position: absolute;
+    height: 10px;
+    width: 10px;
+    margin-top: 30px;
+    margin-left: 30px;
+    border-radius: 25px;
+}
+
+#name{
+    padding-top: 8px;
+    margin: 0;
+}
+
+#onlineStatusListPage{
+    margin-bottom: 5px;
+}
+
+#messageDetails{
+    display: inline;
+    float: right;
+    margin: 0;
+    font-size: smaller;
+}
+
+#backToMessageList{
+    display: block;
+}
+
+#messagingImage{
+    border-radius: 25px;
+    float: left;
+    margin-left: 10px;
+}
+
+#userOnline{
+    position: absolute;
+    height: 10px;
+    width: 10px;
+    margin-top: 30px;
+    margin-left: 38px;
+    border-radius: 25px;
+}
+
+#messagingName{
+    margin: 5px;
+    display: inline-block;
+    width: fit-content;
+}
+
+#messages{
+    overflow-y: scroll;
+    height:500px;
+    margin-top: 0;
+}
+
+#msg{
+    padding: 20px 4px;
+    width: 90%;
+    margin: 0 10px;
+    box-shadow: 4px 4px 6px 6px rgba(0, 0, 0, 0.05);
+    border: none;
+    border-radius: 5px;
+}
+
+#send{
+    float: right;
+    margin-right: 10px;
+}
+
 #paymentForm h1{
     margin-top: 10px;
 }
@@ -1111,17 +1086,19 @@ q{
 }
 
 
-/*Media queries*/
 
+/*Media query for styling at 768px onwards*/
 @media only screen and (min-width: 768px) {
     #infoSec{
         padding: 20px 90px 20px 90px;
     }
 
+    /*This only changes the margin of 1 of the info section divs*/
     #infoSec > p:nth-of-type(1){
         margin-bottom: 25px;
     }
 
+    /*This only changes the margin of 1 of the info section divs*/
     #infoSec > p:nth-of-type(2){
         margin-bottom: 0;
     }
@@ -1143,14 +1120,6 @@ q{
         width: 15%;
         height: auto;
     }
-
-    /*#benefitsSec{*/
-    /*    padding: 30px 90px 700px 90px;*/
-    /*}*/
-
-    /*#benefitsSec p{*/
-    /*    font-size: 0.85em;*/
-    /*}*/
 
     #text{
         width: 50%;
@@ -1271,19 +1240,14 @@ q{
     #userJob{
         margin: 5px;
     }
+
+    #msg{
+        width: 97%;
+    }
 }
 
-@media only screen and (min-width: 874px) {
-    /*#benefitsSec{*/
-    /*    padding-bottom: 750px;*/
-    /*}*/
-}
-
+/*Media query for styling at 922px onwards*/
 @media only screen and (min-width: 922px) {
-    /*#benefitsSec{*/
-    /*    padding-bottom: 850px;*/
-    /*}*/
-
     #text{
         margin-bottom: 150px;
     }
@@ -1293,6 +1257,7 @@ q{
     }
 }
 
+/*Media query for styling at 961px onwards*/
 @media only screen and (min-width: 961px) {
     #text2{
         margin-bottom: 150px;
@@ -1303,8 +1268,8 @@ q{
     }
 }
 
+/*Media query for styling at 1024px onwards*/
 @media only screen and (min-width: 1024px) {
-    /*Top Section*/
     #top {
         text-align: left;
         width: 100%;
@@ -1363,15 +1328,6 @@ q{
         width: 70%;
         height: 650px;
     }
-
-    /*#benefitsSec h4 {*/
-    /*    font-size: 1.6em;*/
-    /*}*/
-
-    /*#benefitsSec {*/
-    /*    padding-left: 120px;*/
-    /*    padding-right: 120px;*/
-    /*}*/
 
     #swipeSecDes {
         display: block;
@@ -1478,16 +1434,14 @@ q{
     }
 }
 
+/*Media query for styling at 1093px onwards*/
 @media only screen and (min-width: 1093px) {
     #text{
         margin-bottom: 180px;
     }
-
-    /*#benefitsSec{*/
-    /*    padding-bottom: 950px;*/
-    /*}*/
 }
 
+/*Media query for styling at 1200px onwards*/
 @media only screen and (min-width: 1200px) {
     h2{
         font-size: 1.9em;
@@ -1515,14 +1469,9 @@ q{
         padding-left: 150px;
         padding-right: 150px;
     }
-
-    /*#benefitsSec{*/
-    /*    padding-left: 150px;*/
-    /*    padding-right: 150px;*/
-    /*    padding-bottom: 950px;*/
-    /*}*/
 }
 
+/*Media query for styling at 1222px onwards*/
 @media only screen and (min-width: 1222px) {
     #text{
         margin-bottom: 200px;
@@ -1539,22 +1488,20 @@ q{
         width: 50%;
     }
 
-    /*#benefitsSec{*/
-    /*    padding-bottom: 1150px;*/
-    /*}*/
-
     #postJobForm {
         margin: 0 130px 50px 130px;
         padding: 20px 150px;
     }
 }
 
+/*Media query for styling at 1333px onwards*/
 @media only screen and (min-width: 1333px) {
     #text{
         margin-bottom: 250px;
     }
 }
 
+/*Media query for styling at 1440px onwards*/
 @media only screen and (min-width: 1440px) {
     #header2{
         margin: 170px 0 0 200px;
@@ -1584,18 +1531,12 @@ q{
         padding-left: 50px;
     }
 
-    /*#benefitsSec{*/
-    /*    padding-right: 250px;*/
-    /*    padding-left: 250px;*/
-    /*}*/
-
     #text{
         width: 45%;
         margin-bottom: 200px;
     }
 
     #text2{
-        /*margin-top: 350px;*/
         width: 45%;
     }
 
@@ -1615,10 +1556,6 @@ q{
     .resultChild{
         height: 450px
     }
-
-    /*.topImg{*/
-    /*    height: 230px;*/
-    /*}*/
 
     #recommendedContainer{
         display: block;
@@ -1645,13 +1582,6 @@ q{
     #recViewedParent{
         margin-left: 0;
     }
-
-    /*#categories{*/
-    /*    margin: 0 0 30px 0;*/
-    /*    padding: 0;*/
-    /*    width: 25%;*/
-    /*    float: right;*/
-    /*}*/
 
     #categories h1{
         margin-top: 10px;

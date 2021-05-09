@@ -1,3 +1,4 @@
+/*Styling for the header bar, including logo and navbar*/
 .clickable {
     cursor: pointer;
 }
@@ -7,6 +8,7 @@ header{
     text-align: center;
 }
 
+/*Logo styling*/
 header h1{
     float: left;
     margin-top: 15px;
@@ -18,6 +20,7 @@ header h1{
     margin-right: 50%;
 }
 
+/*Containers for desktop or mobile view*/
 #desktop_container{
     display: none;
 }
@@ -28,6 +31,7 @@ header h1{
     color: black;
 }
 
+/*Navbar stying and links*/
 #topnav {
     overflow: hidden;
     background-color: #017EFC;
@@ -52,14 +56,6 @@ header h1{
     font-size: 1em;
 }
 
-/*.mobLinks{*/
-/*    color: white;*/
-/*    margin-bottom: 20px;*/
-/*    text-decoration: none;*/
-/*    font-size: 1em;*/
-/*    display: block;*/
-/*}*/
-
 #signUpMob{
     background: white;
     width: 35%;
@@ -79,6 +75,18 @@ header h1{
     width: 35%;
     border: 1px solid white;
     border-radius: 5px;
+}
+
+#postJobLink{
+    background: white;
+    width: 17%;
+    font-size: 1em;
+    padding: 10px;
+    border: 1px solid white;
+    border-radius: 5px;
+    color: #017EFC;
+    float: right;
+    margin-top: 10px;
 }
 
 #logout{
@@ -111,11 +119,40 @@ header h1{
     background-color: #017EFC;
 }
 
-/*.active {*/
-/*    background-color: #4CAF50;*/
-/*    color: black;*/
-/*}*/
+/*Notifications styling*/
+.numOfNotifications{
+    padding: 3px;
+    font-size: 8px;
+    border-radius: 10px;
+    text-align: center;
+    float: right;
+    background-color: #FF0000;
+    margin-top: 10px;
+    display:none;
+}
 
+.notificationMessage{
+    padding: 10px;
+    color: white;
+}
+
+.notificationsDivBoth{
+    position: absolute;
+    display: none;
+    background-color: #017EFC;
+    min-width: 250px;
+}
+
+#noNotifications{
+    padding: 10px;
+    color: white;
+}
+
+#notifications{
+    height: 45px
+}
+
+/*Media query for footer at 768px onwards*/
 @media only screen and (min-width: 768px){
     #notificationLink {
         display: none;
@@ -151,6 +188,7 @@ header h1{
         height: 45px;
         float: right;
         margin: 7px 0 0 25px;
+        border-radius: 25px;
     }
 
     .navIcon{
@@ -188,6 +226,7 @@ header h1{
         float: right;
     }
 
+    /*Displays dropdown content when user hovers over*/
     #dropdown_content {
         display: none;
         position: absolute;
@@ -236,6 +275,7 @@ header h1{
     }
 }
 
+/*Media query for footer at 1024px onwards*/
 @media only screen and (min-width: 1024px) {
 
     header {
@@ -250,14 +290,20 @@ header h1{
     nav li{
         width: 10%;
     }
+
+    #postJobLink {
+        width: 13%;
+    }
 }
 
+/*Media query for footer at 1200px onwards*/
 @media only screen and (min-width: 1200px) {
     header{
         margin: 0 150px 0 150px;
     }
 }
 
+/*Media query for footer at 1440px onwards*/
 @media only screen and (min-width: 1440px) {
     header{
         margin: 0 200px 0 200px;
@@ -273,6 +319,10 @@ header h1{
 
     nav li{
         width: 8%;
+    }
+
+    #postJobLink {
+        width: 10%;
     }
 }
 

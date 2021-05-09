@@ -1,13 +1,14 @@
-/*Footer*/
+/*Styling for footer*/
 .clickable {
     cursor: pointer;
 }
 
 footer{
-    padding-top: 20px;
+    padding-top: 30px;
     width: 100%;
     color: white;
     text-align: center;
+    display: inline-block;
 }
 
 footer h3{
@@ -49,6 +50,14 @@ footer p{
     margin: 20px 30px 30px 30px;
 }
 
+/*Media query for footer at 768px onwards*/
+@media only screen and (min-width: 768px) {
+    footer{
+        padding-top: 30px;
+    }
+}
+
+/*Media query for footer at 1024px onwards*/
 @media only screen and (min-width: 1024px) {
     .footerLinks{
         float: right;
