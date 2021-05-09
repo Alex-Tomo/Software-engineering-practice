@@ -88,7 +88,7 @@
         $page->addCSS("<link rel=\"stylesheet\" href=\"../css/footerStyling.css\">");
         $page->addCSS("<link rel=\"stylesheet\" href=\"../css/headerStyling.css\">");
         $page->addJavaScript("<script src=\"../js/navBar.js\"></script>");
-        $page->addPageBodyItem("<div id='registerForm'>
+        $page->addPageBodyItem("<div>
             <form action='./signinHandler.php' method='POST'>
             <h2>Login</h2>");
 

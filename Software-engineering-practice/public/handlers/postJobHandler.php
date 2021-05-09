@@ -39,6 +39,9 @@
             $insertJobDetailsStatement->bindParam(6, $renamedImage);
             $insertJobDetailsStatement->execute();
 
+            if($insertJobDetailsStatement){
+                echo "<p>Job successfully posted.</p>";
+            }
             // If the user has chosen categories then insert these categories
             // use a for loop to add them dynamically
             if (!empty($categoryIds)) { // start of if statement - 3
@@ -69,6 +72,8 @@
 
     // Refresh the page
     header("Location: ../postJob.php");
+
+
 
     // get the users id
     function getUserId($connection) {

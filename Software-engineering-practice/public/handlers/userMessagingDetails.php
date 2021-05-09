@@ -18,6 +18,7 @@
     $messages = [];
 
     // get the users name and corresponding image (if any)
+    // get the users name and corresponding image (if any)
     $selectUserDetailsStatement = $conn->prepare("SELECT user_fname, user_lname, user_image FROM sep_user_info WHERE user_id = ?");
     $selectUserDetailsStatement->bindParam(1, $otherUserId);
     $selectUserDetailsStatement->execute();

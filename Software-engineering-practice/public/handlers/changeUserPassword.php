@@ -1,5 +1,4 @@
 <?php
-
     // changes the users password in the database
 
     // Require
