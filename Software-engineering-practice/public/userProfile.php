@@ -20,7 +20,7 @@
     // Add JS
     $page->addJavaScript("<script src=\"./js/navBar.js\"></script>");
     $page->addJavaScript("<script src=\"./js/editProfile.js\"></script>");
-    $page->addJavaScript("<script src=\"./js/selectJobsList.js\"></script>");
+    $page->addJavaScript("<script src=\"./js/selectPostJobsList.js\"></script>");
     $page->addJavaScript("<script src=\"./js/changePasswordForm.js\"></script>");
     $page->addJavaScript("<script src=\"./js/notificationServer.js\"></script>");
 
@@ -134,14 +134,13 @@ for ($jobIndex = 0; $jobIndex < sizeof($jobCodes); $jobIndex++) {
 // Add the users chosen jobs
 for ($i = 0; $i < sizeof($chosenJobsName); $i++) {
 
-    $page->addPageBodyItem("<p onclick='removeJob(`{$chosenJobsCode[$i]}`, `{$chosenJobsName[$i]}`)' id='{$chosenJobsCode[$i]}' 
-                                    class='clickable chosenJob'>{$chosenJobsName[$i]} X</p>");
+    $page->addPageBodyItem("<input onclick='removeJobProfile(`{$chosenJobsCode[$i]}`, `{$chosenJobsName[$i]}`)' id='{$chosenJobsCode[$i]}' 
+                                    class='clickable chosenJob' value='{$chosenJobsName[$i]} X' style='background-color: rgb(1, 126, 252); color: rgb(255, 255, 255); font-size: small; font-weight: normal; width: fit-content; padding: 10px; margin: 2.5px 5px 2.5px 0px; border-radius: 5px; text-align: center;'>");
 
 } // end of for loop
 
 
-        $page->addPageBodyItem("
-                        <script> getSelectedJob(); </script>
+        $page->addPageBodyItem("<script>getSelectedJob()</script>
                         </div>
                     <button class='clickable nextLink' type='button' id='nextProfileBtn2'>Save Changes</button><br>
                     <button class='clickable backLink' type='button' id='prevProfileBtn2'>Back</button>

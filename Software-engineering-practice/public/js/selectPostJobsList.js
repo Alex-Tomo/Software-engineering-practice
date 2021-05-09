@@ -77,6 +77,20 @@ const getSelectedJob = () => {
     localStorage.setItem("jobsArray", selectedJobsArray);
 }
 
+const removeJobProfile = (id, job, hiddenP) => {
+    document.getElementById(id).remove();
+    // hiddenP.remove();
+    let jobsList = document.getElementById('searchJobsList').getElementsByTagName('option');
+    for(let i = 0; i < jobsList.length; i++) {
+        if(jobsList[i].value === job) {
+            jobsList[i].disabled = false;
+        }
+    }
+
+    selectedJobsArray = selectedJobsArray.filter(job => job !== id);
+    localStorage.setItem("jobsArray", selectedJobsArray);
+}
+
 const removeJob = (id, job, hiddenP) => {
     document.getElementById(id).remove();
     hiddenP.remove();

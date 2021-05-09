@@ -70,8 +70,8 @@
         } // end of inner if statement - 2
     } // End of outer if statement - 1
 
-    // Refresh the page
-    header("Location: ../postJob.php");
+    // Redirect to the job
+    header("Location: ../serviceInner.php?id={$jobId}");
 
 
 

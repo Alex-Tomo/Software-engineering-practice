@@ -11,3 +11,4 @@ Error date: Mon May 10 0:57:45 CEST 2021' | Error details: Undefined variable $u
 Error date: Mon May 10 0:57:45 CEST 2021' | Error details: Undefined variable $userId
 Error date: Mon May 10 0:57:45 CEST 2021' | Error details: Undefined variable $unreadMessages
 Error date: Mon May 10 0:58:11 CEST 2021' | Error details: Undefined variable $onlineColour
+Error date: Mon May 10 1:36:08 CEST 2021' | Error details: Undefined array key "email"
