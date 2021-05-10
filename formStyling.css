@@ -1,0 +1,115 @@
+/*Form styling*/
+html{
+    font-family: Arial;
+}
+
+body{
+    margin: 20px 0;
+    padding: 0;
+    text-align: center;
+    background-color: #017EFC;
+    width: 100%;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+form{
+    display: inline-block;
+    width: 210px;
+    background-color: white;
+    border-radius: 10px;
+    margin: 30px 20px 0 20px;
+    padding: 10px 30px 30px 30px;
+}
+
+h2{
+    color: #017EFC;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+label,input{
+    display: block;
+}
+
+label{
+    text-align: left;
+    font-size: 0.9em;
+    width: auto;
+    float: left;
+    font-weight: bold;
+    color: #017EFC;
+}
+
+input[type="text"],[type="email"],[type="password"],[type="date"]{
+    padding: 10px;
+    border: 1px solid #828282;
+    border-radius: 8px;
+    opacity: 0.5;
+    float: left;
+    width: 190px;
+    margin-bottom: 20px;
+}
+
+#password2{
+    margin-bottom: 20px;
+}
+
+#loginBtn{
+    margin-top: 20px;
+    display: inline-block;
+}
+
+input[type="submit"]{
+    background: #017EFC;
+    padding: 15px;
+    width: 70%;
+    margin: 0 auto;
+    border: 1px solid #017EFC;
+    border-radius: 5px;
+    font-weight: bold;
+    color: white;
+    font-size: 1.2em;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+
+#submit:hover{
+    color: black;
+}
+
+.para{
+    font-size: 0.9em;
+    width: 100%;
+    text-align: center;
+    display: block;
+    color: #017EFC;
+    margin-bottom: 0;
+}
+
+#tandc{
+    color: black;
+    text-decoration: underline;
+}
+
+form a{
+    color: #017EFC;
+    font-weight: bold;
+}
+
+#passwordLength{
+    margin-top: 5px;
+}
+
+.error{
+    margin-top: 0;
+    padding-top: 15px;
+    color: red;
+    font-size: 0.85em;
+}
+
+
+
