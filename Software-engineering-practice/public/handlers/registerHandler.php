@@ -75,12 +75,12 @@
         foreach($errors as $error) { $page->addPageBodyItem($error); }
 
         $page->addPageBodyItem("<label for='email'>Email</label><br>
-                <input type='email' id='email' name='email' placeholder='Your email'><br>
+                <input required type='email' id='email' name='email' placeholder='Your email'><br>
                 <label for='password'>Password</label><br>
-                <input type='password' id='password' name='password' placeholder='Create password'><br>
+                <input required type='password' id='password' name='password' placeholder='Create password'><br>
                 <div class='error'><p style='display: none;' id='passwordLength'></p></div>
                 <label for='password2'>Repeat password</label><br>
-                <input type='password' id='password2' name='password2' placeholder='Repeat password'><br>
+                <input required type='password' id='password2' name='password2' placeholder='Repeat password'><br>
                 <div class='error'><p style='display: none;' id='passwordMatch'></p></div>
                 <input class='clickable' type='submit' value='Sign Up'>
                 <p class='para'>Creating the account you agree with our</p>

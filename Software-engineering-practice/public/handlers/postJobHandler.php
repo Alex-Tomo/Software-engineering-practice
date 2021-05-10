@@ -20,7 +20,7 @@
     $userId = getUserId($conn);
     $jobId = getJobId($conn);
 
-    // executes if all the data except the image and categoryIds are not empty
+// executes if all the data except the image and categoryIds are not empty
     if(!empty($title) && !empty($desc) && !empty($price) && !empty($userId) && !empty($jobId)) { // start of outer if statement - 1
 
         // Moves the image to the job_images folder and renames the image
@@ -72,8 +72,6 @@
 
     // Redirect to the job
     header("Location: ../serviceInner.php?id={$jobId}");
-
-
 
     // get the users id
     function getUserId($connection) {
