@@ -57,7 +57,7 @@
             <div class='pageContainer'>
                 <a id='serviceBack' class='back clickable' onclick='openPage(`loggedinHome.php`)'>< Back to list</a>
                 <div id='resultContainer'>
-                    <div id='serviceResult' class='resultChild'>");
+                    <div id='serviceResult'>");
 
 
 // Get the details of the current jobId
