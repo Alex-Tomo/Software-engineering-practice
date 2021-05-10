@@ -33,11 +33,11 @@ $page->addPageBodyItem("
                         <form class='popupForm' id='updateJobForm' enctype='multipart/form-data' method='post' action='./handlers/updateJob.php'>
                             <button class='clickable backLink' id='closePopup'>Close Window</button>
                             <input name='jobId' id='jobId' type='text' style='display: none;'>
-                            <input name='title' id='title' type='text' placeholder='Job Title...'>
-                            <textarea id='description' rows='10' cols='40' maxlength='200' name='desc' onclick='checkWordCount()' placeholder='Job Description...' ></textarea>
+                            <input required name='title' id='title' type='text' placeholder='Job Title...'>
+                            <textarea required id='description' rows='10' cols='40' maxlength='200' name='desc' onclick='checkWordCount()' placeholder='Job Description...' ></textarea>
                             <span style='display: none' id='remaining'></span> 
-                            <input name='price' id='price' type='number' placeholder='Job Price... i.e. £12.99/h'>
-                            <input id='image' name='image' type='file' value='Add Image'>
+                            <input required name='price' id='price' type='number' min='0' max='100' placeholder='Job Price... i.e. £12.99/h'>
+                            <input required id='image' name='image' type='file' value='Add Image'>
                             <img id='jobImage' src='' alt='Job image'>
                             <input id='jobsListInput' list='searchJobsList' placeholder='Job Category(s)' onchange='selectJob()'>
                             <datalist id='searchJobsList'>

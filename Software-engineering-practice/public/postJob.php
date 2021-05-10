@@ -30,15 +30,15 @@
                     <p style='display:none;'>Job Submitted</p>
                     <h1>Post a Job</h1>
                     <label for='title'>Enter the job title</label><br>
-                    <input name='title' id='title' type='text' placeholder='Job Title...'>
-                    <label for='title'>Enter the job description</label><br>
-                    <textarea id='description' rows='10' cols='40' maxlength='200' name='desc' onclick='checkWordCount()' placeholder='Job Description...' ></textarea>
+                    <input required name='title' id='title' type='text' placeholder='Job Title...'>
+                    <label for='desc'>Enter the job description</label><br>
+                    <textarea required id='description' rows='10' cols='40' maxlength='200' name='desc' onclick='checkWordCount()' placeholder='Job Description...' ></textarea>
                     <span style='display: none' id='remaining'></span> 
-                    <label for='title'>Enter the job price</label><br>            
-                    <input name='price' id='price' type='number' min='0' placeholder='Job Price... i.e. £12.99/h'>
-                    <label for='title'>Choose a relevant image</label><br>   
-                    <input type='file' name='file' id='file'>
-                    <label for='title'>Choose a job category</label><br> 
+                    <label for='price'>Enter the job price</label><br>            
+                    <input required name='price' id='price' type='number' min='0' max='100' placeholder='Job Price... i.e. £12.99/h'>
+                    <label for='file'>Choose a relevant image</label><br>   
+                    <input required type='file' name='file' id='file'>
+                    <label>Choose a job category</label><br> 
                     <input id='jobsListInput' list='searchJobsList' placeholder='Job Category(s)' onkeyup='filterJobsList()' onchange='selectJob()'>
                     <datalist id='searchJobsList'>
                         <option name='0'>Job Category(s)</option>");
