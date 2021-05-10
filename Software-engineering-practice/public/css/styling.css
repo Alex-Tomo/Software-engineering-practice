@@ -533,6 +533,10 @@ q{
     height: 400px;
 }
 
+.resultChild:hover{
+    background: #b4c6e7;
+}
+
 .checked {
     color: orange;
 }
@@ -655,6 +659,23 @@ q{
 #serviceResult{
     width: 100%;
     height: auto;
+    background: white;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    box-shadow: 4px 4px 6px 6px rgba(0, 0, 0, 0.05);
+}
+
+#serviceResult h2{
+    font-size: 1em;
+    margin-bottom: 25px;
+}
+
+#serviceResult h3{
+    font-size: 1em;
+}
+
+#serviceResult p{
+    margin-top: 0;
 }
 
 .applyBtn{
@@ -1557,6 +1578,12 @@ textarea {
         height: 450px
     }
 
+    #serviceResult{
+        width: 48.5%;
+        float: left;
+        margin-right: 100px;
+    }
+
     #recommendedContainer{
         display: block;
         width: 73%;
@@ -1602,6 +1629,7 @@ textarea {
     #serviceResult{
         width: 70%;
         height: 550px;
+        display: inline-block;
     }
 
     #serviceResult h2{
