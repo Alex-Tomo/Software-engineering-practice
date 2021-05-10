@@ -107,7 +107,7 @@ for ($i = 0; $i < 5; $i++) { // start of inner for loop
                             <div id='tab1'>
                                 <h2>Enquire Form</h2>
                                 <h1>Send a message</h1>
-                                <textarea rows='10' cols='40' name='desc' id='desc' placeholder='Message...'></textarea>
+                                <textarea required rows='10' cols='40' name='desc' id='desc' placeholder='Message...'></textarea>
                                 <button class='clickable nextLink' type='button' id='submitEnquireBtn'>Submit</button><br>
                                 <button class='clickable backLink' id='closeEnquireBtn'>Cancel</button>
                             </div>
@@ -123,7 +123,7 @@ for ($i = 0; $i < 5; $i++) { // start of inner for loop
                             <div id='tab1'>
                                 <h2>Refer a Friend</h2>
                                 <h1>Send an email</h1>
-                                <input type='text' id='email' placeholder='Email'>
+                                <input required type='text' id='email' placeholder='Email'>
                                 <button class='clickable nextLink' type='button' id='submitReferBtn'>Submit</button><br>
                                 <button class='clickable backLink' id='closeReferBtn'>Cancel</button>
                             </div> 
