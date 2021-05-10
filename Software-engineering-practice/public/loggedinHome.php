@@ -256,8 +256,7 @@ foreach ($popularCategories as $popularCategory) { // start of foreach loop
 
             $page->addPageBodyItem("
             </div>  
-           
-                
+                         
             <div id='recViewedParent'>
                 <h1>Recently viewed</h1>");
 
