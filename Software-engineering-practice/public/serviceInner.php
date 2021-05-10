@@ -28,24 +28,26 @@
     $page->addJavaScript("<script src=\"./js/notificationServer.js\"></script>");
     $page->addJavaScript("<script src=\"./js/enquireForm.js\"></script>");
 
-    // Adds the current jobId to the recentlyViewed session
-    if(!isset($_SESSION['recentlyViewed'])) {
-        $_SESSION['recentlyViewed'] = array();
-        array_push($_SESSION['recentlyViewed'], $_REQUEST['id']);
-    } else {
-        $newArray = array();
-        array_push($newArray, $_REQUEST['id']);
-        for($i = 0; $i < sizeof($_SESSION['recentlyViewed']); $i++) {
-            if(in_array($_SESSION['recentlyViewed'][$i], $newArray) || ($_SESSION['recentlyViewed'][$i] == null)) {
-                continue;
-            } else {
-                array_push($newArray, $_SESSION['recentlyViewed'][$i]);
+    if(in_array($jobId, $availableJobIds)) {
+        // Adds the current jobId to the recentlyViewed session
+        if (!isset($_SESSION['recentlyViewed'])) {
+            $_SESSION['recentlyViewed'] = array();
+            array_push($_SESSION['recentlyViewed'], $_REQUEST['id']);
+        } else {
+            $newArray = array();
+            array_push($newArray, $_REQUEST['id']);
+            for ($i = 0; $i < sizeof($_SESSION['recentlyViewed']); $i++) {
+                if (in_array($_SESSION['recentlyViewed'][$i], $newArray) || ($_SESSION['recentlyViewed'][$i] == null)) {
+                    continue;
+                } else {
+                    array_push($newArray, $_SESSION['recentlyViewed'][$i]);
+                }
+                if ($i == 3) {
+                    break;
+                }
             }
-            if($i == 3) {
-                break;
-            }
+            $_SESSION['recentlyViewed'] = $newArray;
         }
-        $_SESSION['recentlyViewed'] = $newArray;
     }
 
     // Main content

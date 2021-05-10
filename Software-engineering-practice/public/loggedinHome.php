@@ -24,6 +24,7 @@
     $page->addJavaScript("<script src=\"./js/selectJobsList.js\"></script>");
     $page->addJavaScript("<script src=\"./js/notificationServer.js\"></script>");
 
+
     // Main content
     $page->addPageBodyItem("
         <div class='pageContainer'>
@@ -261,18 +262,19 @@ foreach ($popularCategories as $popularCategory) { // start of foreach loop
             <div id='recViewedParent'>
                 <h1>Recently viewed</h1>");
 
+try {
 
 // If the user has view any jobs previously, get the job details and display them
-if(isset($_SESSION['recentlyViewed'])) { // start of outer if statement
+    if (isset($_SESSION['recentlyViewed'])) { // start of outer if statement
 
-    for($i = 0; $i < sizeof($_SESSION['recentlyViewed']); $i++) { // start of outer for loop
+        for ($i = 0; $i < sizeof($_SESSION['recentlyViewed']); $i++) { // start of outer for loop
 
-        if($_SESSION['recentlyViewed'][$i] == null || $_SESSION['recentlyViewed'][$i] == 0) {
-            continue;
-        }
+            if ($_SESSION['recentlyViewed'][$i] == null || $_SESSION['recentlyViewed'][$i] == 0) {
+                continue;
+            }
 
-        list($jobTitle, $jobPrice, $jobImage) = getRecentlyViewed($conn, $_SESSION['recentlyViewed'][$i]);
-        if(isset($jobTitle) && isset($jobPrice) && isset($jobImage)) { // start of inner if statement
+            list($jobTitle, $jobPrice, $jobImage) = getRecentlyViewed($conn, $_SESSION['recentlyViewed'][$i]);
+            if (isset($jobTitle) && isset($jobPrice) && isset($jobImage)) { // start of inner if statement
 
 
                 $page->addPageBodyItem("
@@ -287,11 +289,14 @@ if(isset($_SESSION['recentlyViewed'])) { // start of outer if statement
                 </div>");
 
 
-        } // end of inner if statement(isset($jobTitle) && isset($jobPrice) && isset($jobImage))
+            } // end of inner if statement(isset($jobTitle) && isset($jobPrice) && isset($jobImage))
 
-    } // End of outer for loop
+        } // End of outer for loop
 
-} // End of outer if statement (isset($_SESSION['recentlyViewed']))
+    } // End of outer if statement (isset($_SESSION['recentlyViewed']))
+} catch(Exception $e) {
+
+}
 
 
             $page->addPageBodyItem("

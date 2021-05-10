@@ -413,7 +413,7 @@ function checkJobIdExists($connection) {
     $statement = $connection->prepare("SELECT job_id FROM sep_available_jobs WHERE job_availability = TRUE");
     if($statement->execute()) {
         while ($row = $statement->fetchObject()) {
-            array_push($availableJobIds, sanitizeData($row->job_id));
+            array_push($availableJobIds, $row->job_id);
         }
     }
     return $availableJobIds;

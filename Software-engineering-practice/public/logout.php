@@ -9,6 +9,7 @@
 
     // remove the loggedin session
     $_SESSION['loggedin'] = null;
+    $_SESSION['recentlyViewed'] = null;
 
     $logoutStatement = $conn->prepare("UPDATE sep_users SET user_online = false WHERE user_email = ?");
     $logoutStatement->bindParam(1, $_SESSION['email']);
